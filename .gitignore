@@ -1,5 +1,5 @@
-.swp
-.log
-.aux
-.out
-.gz
+*.swp
+*.log
+*.aux
+*.out
+*.gz
