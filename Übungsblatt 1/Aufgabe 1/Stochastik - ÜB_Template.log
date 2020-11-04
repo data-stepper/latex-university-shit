@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.4)  4 NOV 2020 00:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.4)  4 NOV 2020 03:24
 entering extended mode
 **"c:/Users/A/Desktop/latex-university-shit/Übungsblatt 1/Aufgabe 1/Stochastik - ÜB_Template.tex"
 ("c:/Users/A/Desktop/latex-university-shit/Übungsblatt 1/Aufgabe 1/Stochastik - ÜB_Template.tex"
@@ -212,8 +212,7 @@ Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count274
 \l__pdf_internal_box=\box97
-)
-No file "Stochastik - ÜB_Template".aux.
+) ("Stochastik - ÜB_Template.aux")
 \openout1 = `"Stochastik - ÜB_Template.aux"'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -230,6 +229,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 14.
 LaTeX Font Info:    ... okay on input line 14.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -290,19 +290,19 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/A/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] ("Stochastik - ÜB_Template.aux") ) 
+{C:/Users/A/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] ("Stochastik - ÜB_Template.aux") ) 
 Here is how much of TeX's memory you used:
- 3097 strings out of 479799
- 42704 string characters out of 2871623
- 320392 words of memory out of 3000000
- 20067 multiletter control sequences out of 15000+200000
+ 3100 strings out of 479799
+ 42836 string characters out of 2871623
+ 328383 words of memory out of 3000000
+ 20068 multiletter control sequences out of 15000+200000
  542692 words of font info for 59 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,8n,72p,289b,213s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on "Stochastik - ÜB_Template.pdf" (1 page, 74221 bytes).
+ 66i,15n,72p,289b,213s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/A/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on "Stochastik - ÜB_Template.pdf" (2 pages, 133452 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
+ 53 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
