@@ -45,7 +45,7 @@ Schließlich folgt mit der \textbf{$\sigma$-Additivität} und \textbf{1.10a)}:
 
 (c) \textit{Behauptung: $0 \leq P(A) \leq 1$}
 \begin{proof}[Beweis]
-Setze $\Omega = \mathop{\dot\bigcup}\limits_{j=1}^{n} A_j$, d.h. zerlege $\Omega$ in disjunkte Teilmengen. 
+Setze $\Omega = \mathop{\dot\bigcup}\limits_{j=1}^{n} A_j$, d.h. zerlege $\Omega$ in $n$ disjunkte Teilmengen. 
 \begin{align*}
     1 \stackrel{(2)}{=} P(\Omega) = P\left( \mathop{\dot\bigcup}\limits_{j=1}^{n} A_j \right) \stackrel{(b)}{=} \sum\limits_{j=1}^{n} P(A_j)
 \end{align*}
@@ -79,7 +79,7 @@ Setze $B = A \cup (B\backslash A)$. Nach (3) ist dann $P(B) = P(A) + P(B\backsla
 
 (g) \textit{Behauptung: $P(A \cup B) = P(B) + P(A) - P(A \cap B)$}
 \begin{proof}[Beweis]
-Zunächst wird gezeigt, dass $P(A\backslash B) \stackrel{(\star)}{=} P(A) - P(A \cap B)$: Setze $A = (A\backslash B) \cup (A \cap B)$
+Zunächst wird gezeigt, dass $P(A\backslash B) \stackrel{(\star)}{=} P(A) - P(A \cap B)$: Setze $A = (A\backslash B) \cup (A \cap B)$, dann ist 
 \begin{align*}
     P(A) = P((A\backslash B)\cup(A \cup B)) \stackrel{(3)}{=} P(A\backslash B) + P(A\cap B)
 \end{align*}
