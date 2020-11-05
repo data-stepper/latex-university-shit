@@ -81,13 +81,13 @@ Setze $B = A \cup (B\backslash A)$. Nach (3) ist dann $P(B) = P(A) + P(B\backsla
 \begin{proof}[Beweis]
 Zunächst wird gezeigt, dass $P(A\backslash B) \stackrel{(\star)}{=} P(A) - P(A \cap B)$: Setze $A = (A\backslash B) \cup (A \cap B)$, dann ist 
 \begin{align*}
-    P(A) = P((A\backslash B)\cup(A \cup B)) \stackrel{(3)}{=} P(A\backslash B) + P(A\cap B)
+    P(A) = P((A\backslash B)\cup(A \cup B)) \stackrel{(b)}{=} P(A\backslash B) + P(A\cap B)
 \end{align*}
 
 Die Behauptung folgt direkt nach Umstellen nach $P(A\backslash B)$. \\
 Nun setze $A\cup B = (A\backslash B) \cup B$. Es folgt: 
 \begin{align*}
-    P(A \cup B) = P((A\backslash B) \cup B) \stackrel{(3)}{=} P(A\backslash B) + P(B) \stackrel{(\star)}{=} P(A) - P(A \cap B) + P(B)
+    P(A \cup B) = P((A\backslash B) \cup B) \stackrel{(b)}{=} P(A\backslash B) + P(B) \stackrel{(\star)}{=} P(A) - P(A \cap B) + P(B)
 \end{align*}
 
 \end{proof}
