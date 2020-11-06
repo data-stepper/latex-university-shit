@@ -22,7 +22,7 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 
 \end{Aufgabe}
 
-(a) \textit{Seien $A, B$ und $C$ drei Ereignisse in einem Warscheinlichkeitsraum, für die gelte: $P(A \cap (B \cup C)) = 0$.}
+(a) \textit{Seien $A, B$ und $C$ drei Ereignisse in einem Wahrscheinlichkeitsraum, für die gelte: $P(A \cap (B \cup C)) = 0$.}
 \textit{So ist zu zeigen, dass dann immer gilt: $P(A \cup B \cup C) = P(A) + P(B) + P(C) - P(B \cap C)$}
 \begin{proof}[Beweis]
 Wir verwenden ganz einfach die Siebformel für zwei Mengen, indem wir die Menge $(B \cup C)$ als eine Menge betrachten, wie folgt:
@@ -44,22 +44,23 @@ P(A \cup B \cup C) &= P(A \cup (B \cup C)) = P(A) + P(B \cup C) - \underbrace{ P
 \begin{proof}[Beweis]
 Uns fällt direkt auf, dass wir super den Aufgabenteil (a) verwenden können, indem wir einfach die Mengen wie folgt setzen.
 
-\indent \text{ $A$ sind die nicht-trinker }
+\indent \text{ $A$ ist die Menge der nicht-trinker. }
 
-\indent \text{ $B$ sind die Bier-trinker }
+\indent \text{ $B$ ist die Menge der Bier-trinker. }
 
-\indent \text{ $C$ sind die Wein-trinker }
+\indent \text{ $C$ ist die Menge der Wein-trinker. }
 
-Und direkt sehen wir, dass $A \cap (B \cup C) = \emptyset$, da es ja nicht möglich ist Wein/Bier zu trinken und gleichzeitig ein nicht-trinker zu sein.
+Und direkt sehen wir, dass $A \cap (B \cup C) = \emptyset$, da es nicht möglich ist Wein/Bier zu trinken und gleichzeitig ein nicht-trinker zu sein.
 
 \begin{align*}
 P(A \cup B \cup C) &= P(A) + P(B) + P(C) - P(B \cap C) \text{ $= 1$ (da das alle Befragten sind.)} \\
-&\Rightarrow P(B \cap C) = P(A) + P(B) + P(C) - 1 \\
-&= \frac{55}{230} + \frac{167}{230} + \frac{108}{230} - 1 \approx 0,43478 \ldots \; \hat{=}\; 43,478 \; \% \\
-&\Rightarrow 230 \cdot 0,43478 \ldots \approx 99,99\ldots \approx 100
+\Leftrightarrow P(B \cap C) &= P(A) + P(B) + P(C) - 1 \\
+&= \frac{55}{230} + \frac{167}{230} + \frac{108}{230} - 1 \\
+&= \frac{330}{230} + \frac{230}{330} \\
+&= \frac{100}{230}
 \end{align*}
 
-Wohlgemerkt ist die Menge $(B \cap C)$ genau die gesuchten Befragten. Und die Brüche (z.B. $\frac{55}{230}$ hier die Warscheinlichkeit ein nicht-trinker zu sein) jeweils die Warscheinlichkeiten ($P(A)$, ...) aus der Gleichung darüber.
+Wohlgemerkt ist die Menge $(B \cap C)$ genau die gesuchten Befragten. Und die Brüche (z.B. $\frac{55}{230}$, hier die Wahrscheinlichkeit ein nicht-trinker zu sein) jeweils die Wahrscheinlichkeiten ($P(A)$, ...) aus der Gleichung darüber.
 
 Es wird also erwartet, dass $100$ der Befragten sowohl Wein als auch Bier trinken.
 \end{proof}
