@@ -61,7 +61,7 @@ Sei $k\in\{1,...,n\}$ beliebig, dann
 \begin{proof}[Beweis]
 Setze $\Omega = A \cup A^c$. 
 \begin{align*}
-    1 = P(\Omega) = P(A \cup A^c) \stackrel{(3)}{=} P(A) + P(A^c)
+    1 = P(\Omega) = P(A \cup A^c) \stackrel{(b)}{=} P(A) + P(A^c)
 \end{align*}
 
 Nach Subtraktion von $P(A)$ auf beiden Seiten folgt die Behauptung.
@@ -70,7 +70,7 @@ Nach Subtraktion von $P(A)$ auf beiden Seiten folgt die Behauptung.
 
 (e) \textit{Behauptung: } Aus $A \subseteq B$ folgt $P(A) \leq P(B)$
 \begin{proof}[Beweis]
-Setze $B = A \cup (B\backslash A)$. Nach (3) ist dann $P(B) = P(A) + P(B\backslash A)$ und 
+Setze $B = A \cup (B\backslash A)$. Nach (b) ist dann $P(B) = P(A) + P(B\backslash A)$ und 
 \begin{align*}
     P(A) = P(B) - \underbrace{P(B/A)}_\text{$\geq 0$ nach (1)} \leq P(B)
 \end{align*}
