@@ -35,7 +35,7 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 		\end{itemize} \\
 	\State $x_1 := b_1/a_{11}$ \\
 	\For{i in 2,...,n} 
-		\State $x_i = (b_i-\sum_{j=1}^{i-1}a_{ij}*x_j)/a_{ii}$ 
+		\State $x_i = \left(b_i-\sum_{j=1}^{i-1}a_{ij}*x_j\right)/a_{ii}$ 
 	\EndFor \\
 
 	\State Output: $\textbf{x} = (x_i)_{i=1}^{n}$
