@@ -1,0 +1,45 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+\usepackage[]{algorithmicx}
+\usepackage{algpseudocode}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{ \textbf{Numerische Mathematik - Übungsblatt \#1} }
+
+\author{Amir Miri Lavasani (7310114, Gruppe 2), Bent Müller (7302332, Gruppe 2), \\ 
+Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
+
+ 
+\begin{Aufgabe}{4}
+	Implementierung der Vorwärts- und Rückwärtssubstitution
+\end{Aufgabe}
+
+\textbf{4.1} Algorithmus der Vorwärtssubstitution: Pseudocode \\
+
+\begin{algorithmic}
+	\State Input: 
+		\begin{itemize}
+			\item Untere Dreiecksmatrix \textbf{A} mit $det(A) \neq 0$,
+			\item Vektor \textbf{b}. 
+		\end{itemize} \\
+	\State $x_1 := b_1/a_{11}$ \\
+	\For{i in 2,...,n} 
+		\State $x_i = (b_i-\sum_{j=1}^{i-1}a_{ij}*x_j)/a_{ii}$ 
+	\EndFor \\
+
+	\State Output: $\textbf{x} = (x_i)_{i=1}^{n}$
+
+\end{algorithmic}
+
+\end{document}
