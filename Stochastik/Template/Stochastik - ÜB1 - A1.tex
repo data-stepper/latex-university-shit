@@ -1,0 +1,95 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{ \textbf{Mathematische Stochastik - Übungsblatt \#1} }
+
+\author{Amir Miri Lavasani (7310114, Gruppe 6), Bent Müller (7302332, Gruppe 6), \\ 
+Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
+
+ 
+\begin{Aufgabe}{1}
+    Satz 1.10 - Folgerungen aus den Axiomen
+\end{Aufgabe}
+
+(b) \textit{ Behauptung: $ P\left( \bigcup\limits_{j=1}^{n} A_j \right) = \sum\limits_{j=1}^{n} P(A_j) $ }
+\begin{proof}[Beweis]
+Setze  
+\begin{align*}
+    \bigcup\limits_{j=1}^{\infty} A_j = \left( \bigcup\limits_{k=1}^{n} A_k \right) \cup \left( \bigcup\limits_{i=n+1}^{\infty} A_i \right),
+\end{align*}
+
+wobei $A_i = \emptyset $ für alle $i\in\{n+1,n+2,...\}$. Die Vereinigung ist nach wie vor disjunkt, da für alle Mengen $X$ (auch $X=\emptyset$) gilt 
+$\emptyset \cap X = \emptyset$. Außerdem gilt $ \bigcup\limits_{j=1}^{\infty} A_j = \bigcup\limits_{j=1}^{n} A_j $. \\
+Schließlich folgt mit der \textbf{$\sigma$-Additivität} und \textbf{1.10a)}:
+\begin{align*}
+    P\left( \bigcup\limits_{j=1}^{n} A_j \right) &= P\left( \bigcup\limits_{j=1}^{\infty} A_j \right) \\
+                                                 &\stackrel{\sigma-Add.}{=} \sum\limits_{j=1}^{\infty} P(A_j) \\
+                                                 &= \sum\limits_{j=1}^{n} P(A_j) + \sum\limits_{i=n+1}^{\infty} P(A_i) \\
+                                                 &= \sum\limits_{j=1}^{n} P(A_j) + \sum\limits_{i=n+1}^{\infty} P(\emptyset) \\ 
+                                                 &\stackrel{(a)}{=} \sum\limits_{j=1}^{n} P(A_j) 
+\end{align*}
+
+\end{proof}
+
+(c) \textit{Behauptung: $0 \leq P(A) \leq 1$}
+\begin{proof}[Beweis]
+Setze $\Omega = \mathop{\dot\bigcup}\limits_{j=1}^{n} A_j$, d.h. zerlege $\Omega$ in $n$ disjunkte Teilmengen. 
+\begin{align*}
+    1 \stackrel{(2)}{=} P(\Omega) = P\left( \mathop{\dot\bigcup}\limits_{j=1}^{n} A_j \right) \stackrel{(b)}{=} \sum\limits_{j=1}^{n} P(A_j)
+\end{align*}
+
+Sei $k\in\{1,...,n\}$ beliebig, dann
+\begin{align*}
+    P(A_k) = 1 - \underbrace{(P(A_1) +...+ P(A_k-1) + P(A_k+1) +...+ P(A_n))}_\text{$\geq 0$ nach (1)} \leq 1
+\end{align*}
+
+\end{proof}
+
+(d) \textit{Behauptung: $P(A^c) = 1 - P(A)$}
+\begin{proof}[Beweis]
+Setze $\Omega = A \cup A^c$. 
+\begin{align*}
+    1 = P(\Omega) = P(A \cup A^c) \stackrel{(b)}{=} P(A) + P(A^c)
+\end{align*}
+
+Nach Subtraktion von $P(A)$ auf beiden Seiten folgt die Behauptung.
+
+\end{proof}
+
+(e) \textit{Behauptung: } Aus $A \subseteq B$ folgt $P(A) \leq P(B)$
+\begin{proof}[Beweis]
+Setze $B = A \cup (B\backslash A)$. Nach (b) ist dann $P(B) = P(A) + P(B\backslash A)$ und 
+\begin{align*}
+    P(A) = P(B) - \underbrace{P(B/A)}_\text{$\geq 0$ nach (1)} \leq P(B)
+\end{align*}
+
+\end{proof}
+
+(g) \textit{Behauptung: $P(A \cup B) = P(B) + P(A) - P(A \cap B)$}
+\begin{proof}[Beweis]
+Zunächst wird gezeigt, dass $P(A\backslash B) \stackrel{(\star)}{=} P(A) - P(A \cap B)$: Setze $A = (A\backslash B) \cup (A \cap B)$, dann ist 
+\begin{align*}
+    P(A) = P((A\backslash B)\cup(A \cup B)) \stackrel{(b)}{=} P(A\backslash B) + P(A\cap B)
+\end{align*}
+
+Die Behauptung folgt direkt nach Umstellen nach $P(A\backslash B)$. \\
+Nun setze $A\cup B = (A\backslash B) \cup B$. Es folgt: 
+\begin{align*}
+    P(A \cup B) = P((A\backslash B) \cup B) \stackrel{(b)}{=} P(A\backslash B) + P(B) \stackrel{(\star)}{=} P(A) - P(A \cap B) + P(B)
+\end{align*}
+
+\end{proof}
+
+\end{document}
