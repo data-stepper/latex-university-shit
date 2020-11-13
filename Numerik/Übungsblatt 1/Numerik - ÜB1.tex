@@ -29,29 +29,50 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 	aus Aufgabe 2 durch elementare Zeilenumformungen zu realisieren.
 
 	Wir gehen Aufgabe 2 noch einmal Schritt für Schritt durch:
+	Pro Zeilenumformungen benötigen wir also bei unserer 3x3 Matrix
+	jeweils genau 3 Subtraktionen mit gegebenfalls noch jeweils
+	3 Multiplikationen falls wir eine Zeile mehrfach subtrahieren.
 
-	\begin{math}
-	$A =  $
-	\begin{pmatrix}
-		1 & 4 & 5 \\
-		1 & 6 & 11 \\
-		2 & 12 & 31 \\
-	\end{pmatrix}
+	\begin{align}
+		A = A^{(1)} &=
+		\begin{pmatrix}
+			1 & 4 & 5 \\
+			1 & 6 & 11 \\
+			2 & 12 & 31
+		\end{pmatrix} \\
+		A^{(2)} = L^{(1)} A^{(1)} &= 
+		\begin{pmatrix}
+			1 & 0 & 0 \\
+			-1 & 1 & 0 \\
+			-2 & 0 & 1 
+		\end{pmatrix}
+		\begin{pmatrix}
+			1 & 4 & 5 \\
+			1 & 6 & 11 \\
+			2 & 12 & 31
+		\end{pmatrix} \\
+		A^{(3)} = L^{(2)} A^{(2)} &=
+		\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & -2 & 1
+		\end{pmatrix}
+		\begin{pmatrix}
+			1 & 4 & 5 \\
+			0 & 2 & 6 \\
+			0 & 4 & 21
+		\end{pmatrix} 
+		= R \\
+		L &= (L^{(1)})^{-1} (L^{(2)})^{-1}
+	\end{align}
 
-	$A^{(2)} = L^{(2)} A^{(1)} = $
-	\begin{pmatrix}
-		1 & 0 & 0 \\
-		-1 & 1 & 0 \\
-		-2 & 0 & 1 \\
-	\end{pmatrix}
+	Nun brauchen wir nur noch die Anzahl an Zeilenumformungen zählen und dann haben wir auch schon den Rechenaufwand der LR-Zerlegung.
 
-	\begin{pmatrix}
-		1 & 4 & 5 \\
-		1 & 6 & 11 \\
-		2 & 12 & 31 \\
-	\end{pmatrix}
+	In der ersten Operation (1) haben wir einmal die erste Zeile von der mittleren abgezogen und zweimal die erste von der letzten.
+	Das macht für diesen Schritt genau: 0 + 3 Multiplikationen und 3 + 3 Subtraktionen also insgesamt 3 Multiplikationen und 6 Subtraktionen. Wohlgemerkt haben wir das selbe für die Matrix $A^{(2)}$.
 
-	\end{math}
+	Im nächsten Schritt (2) haben wir 
+
 \end{proof}
 
 \textbf{(b)}
