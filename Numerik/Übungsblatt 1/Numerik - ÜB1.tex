@@ -17,7 +17,6 @@
 
 \author{Amir Miri Lavasani (7310114, Gruppe 6), Bent Müller (7302332, Gruppe 6), \\ 
 Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
-
  
 \begin{Aufgabe}{3}
 	Rechenaufwand
@@ -29,7 +28,30 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 	Anzugeben war der notwendige Rechenaufwand um die LR-Zerlegung der Matrix A 
 	aus Aufgabe 2 durch elementare Zeilenumformungen zu realisieren.
 
-	Hier muss ich nochmal die schritte durchgehen
+	Wir gehen Aufgabe 2 noch einmal Schritt für Schritt durch:
+
+	\begin{math}
+	$A =  $
+	\begin{pmatrix}
+		1 & 4 & 5 \\
+		1 & 6 & 11 \\
+		2 & 12 & 31 \\
+	\end{pmatrix}
+
+	$A^{(2)} = L^{(2)} A^{(1)} = $
+	\begin{pmatrix}
+		1 & 0 & 0 \\
+		-1 & 1 & 0 \\
+		-2 & 0 & 1 \\
+	\end{pmatrix}
+
+	\begin{pmatrix}
+		1 & 4 & 5 \\
+		1 & 6 & 11 \\
+		2 & 12 & 31 \\
+	\end{pmatrix}
+
+	\end{math}
 \end{proof}
 
 \textbf{(b)}
@@ -49,7 +71,7 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 		2 & 3 & 1 \\
 	\end{pmatrix}
 
-\end{center}
+	\end{center}
 	Nun können wir das Gleichungssystem iterativ lösen:
 
 	Aus der erste Gleichung wissen wir direkt: $c_1 = L_{1,1} \cdot y_1$
