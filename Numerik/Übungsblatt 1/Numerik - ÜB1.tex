@@ -68,10 +68,26 @@ Johan Kattenhorn (7310602, Gruppe 7)} \maketitle
 
 	Nun brauchen wir nur noch die Anzahl an Zeilenumformungen zählen und dann haben wir auch schon den Rechenaufwand der LR-Zerlegung.
 
-	In der ersten Operation (1) haben wir einmal die erste Zeile von der mittleren abgezogen und zweimal die erste von der letzten.
-	Das macht für diesen Schritt genau: 0 + 3 Multiplikationen und 3 + 3 Subtraktionen also insgesamt 3 Multiplikationen und 6 Subtraktionen. Wohlgemerkt haben wir das selbe für die Matrix $A^{(2)}$.
+	Wir beobachten in der ersten Operationen (1) zwei Zeilenumformungen wobei einer
+	vorher mit einer Multiplikation verbunden ist. Das macht also 6 Subtraktionen und
+	3 Multiplikation hier (pro Matrix) also insgesamt 18 Operationen.
+	Des weiteren müssen wir eine Matrixmultiplikation durchführen
+	und die Matrix $A^{(2)}$ zu ermitteln, diese kostet uns 9 Skalarprodukte welche
+	jeweils 3 Multiplikationen und 2 Additionen kosten. Für diesen Schritt brauchen wir also
+	insgesamt: 30 Additionen/Subtraktionen und 27 Multiplikationen
 
-	Im nächsten Schritt (2) haben wir 
+	In dem nächsten Schritt gehen wir im Grunde genau gleich vor, nur dass wir jetzt statt
+	2 Zeilenumformungen nur eine machen und wir dort also nur 6 Multiplikationen und
+	4 Subtraktionen benötigen, also insgesamt 2 Subtraktionen weniger als vorher, denn
+	die Matrixmultiplikation müssen wir genau wie vorher durchführen.
+	Insgesamt sind es hier also 28 Additionen/Subtraktionen und 27 Multiplikationen.
+
+	Schließlich müssen wir noch eine letzte Matrix multiplikation durchführen um die Matrix
+	$L$ zu berechnen. Diese kostet uns wieder 21 Multiplikationen und 18 Additionen.
+
+	Für die gesamte LR-Zerlegung dieser beiden Matrizen brauchten wir also:
+	75 Multiplikationen und 76 Additionen/Subtraktionen
+
 
 \end{proof}
 
