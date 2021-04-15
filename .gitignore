@@ -5,5 +5,7 @@
 *.gz
 *.bbl
 *.blg
+*.fls
+*.fdb_latexmk
 *.pdf
 *.DS_Store
