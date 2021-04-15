@@ -6,6 +6,7 @@
 *.bbl
 *.blg
 *.fls
+*.toc
 *.fdb_latexmk
 *.pdf
 *.DS_Store
