@@ -1,4 +1,4 @@
-\documentclass[10pt]{article}
+\documentclass[a4paper]{article}
  
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
@@ -24,6 +24,139 @@
 
 \author{Amir Miri Lavasani (7310114), Bent Müller (7302332)} \maketitle
 
+\begin{Aufgabe}{1}
+Medikamenten-Aufnahme im Körper
+\end{Aufgabe}
+
+\textbf{a)} Wir wissen direkt, da 4 Bedingungen gegeben sind, dass die Summe der Grade beider Polynome 3 
+sein muss. Also wählen wir für den Zähler ein Polynom 3. Grades und für den
+Zähler das konstante 1 Polynom. Wir erhalten folgende Funktionen:
+\[
+	p(x) = a_3 x^{3} + a_2 x ^{2} + a_1 x + a_0 ,\;\;\; 
+	p'(x) = 3 a_3 x ^{2} + 2 a_2 x + a_1 ,\;\;\; 
+	p''(x) = 6 a_3 x + 2 a_2
+.\] 
+
+Jetzt erhalten wir folgende Gleichungen:
+
+\[
+	p(0) = 0,\;\;\; 
+	p(18) = 15,\;\;\; 
+	p(480) = 2,\;\;\; 
+	p'(18) = 0,\;\;\; 
+	p''(18) < 0,
+\] 
+
+Zuerst bemerken wir, dass $a_0 = 0$ (nach Gleichung 1) und wir
+können ebenfalls unsere Bedingung aus der Ableitung benutzen. Also
+stellen wir folgendes lineares Gleichungssystem auf in Form einer erweiterten Koeffizientenmatrix
+mit Einträgen:
+
+\begin{align*}
+	& \left(\begin{array}{ccc|c}  
+		18 ^3 & 18 ^2 & 18 & 15\\
+		480 ^3 & 480 ^2 & 480 & 2\\
+		3 \cdot 18 ^2 & 2 \cdot 18 & 1 & 0\\
+	\end{array}\right)
+	\sim 
+	\left(\begin{array}{ccc|c}  
+		5832 & 324 & 18 & 15\\
+		110592000 & 230400 & 480 & 2\\
+		972 & 36 & 1 & 0\\
+	\end{array}\right) \\
+	&\sim 
+	\left(\begin{array}{ccc|c}  
+		1 & \frac{ 1 }{ 480 } & \frac{ 1 }{ 480 ^2 } & \frac{ 2 }{ 480 ^3 }\\
+		5832 & 324 & 18 & 15\\
+		972 & 36 & 1 & 0\\
+	\end{array}\right)
+	\sim 
+	\left(\begin{array}{ccc|c}  
+		1 & \frac{ 1 }{ 480 } & \frac{ 1 }{ 480 ^2 } & \frac{ 2 }{ 480 ^3 }\\
+		0 & \frac{ 6237 }{ 20 } & \frac{ 57519 }{ 3200 } & \frac{ 3839973 }{ 256000 } \\
+		972 & 36 & 1 & 0\\
+	\end{array}\right)
+\end{align*}
+
+Jetzt können wir schon erkennen, dass alle Zeilen unserer quadratischen Koeffizientenmatrix linear unabhängig
+sind und, somit eine eindeutige Lösung für unsere Koeffizienten $a_3, a_2, a_1, \text{ und } a_0$ existiert.
+
+\\ \phantom{a} \\
+\textbf{b)} Hier ging es um die selben Datenpunkte welche aber mit Hilfe einer exponentiellen Funktion
+approximiert werden sollen.
+
+\[
+	g(x) = \theta_1 x e ^{-( \theta_2 x + \theta_3 x ^{ 2 } )},\;\;\; 
+	g'(x) = \theta_1 \left( 
+		1 - \theta_2 x - 2 \theta_3 x ^2
+	\right) e ^{-( \theta_2x + \theta_3 x ^2 )}
+\] 
+
+Nach Aufgabenstellung haben wir wieder folgende Bedingungen gegeben:
+
+\[
+	g(0) = 0, \;\;\;
+	g(18) = 15,\;\;\;
+	g(480) = 2,\;\;\;
+	g'(18) = 0,\;\;\;
+	g''(18) < 0,
+\] 
+
+Direkt sehen wir, dass $\theta_1 \neq 0$, da wir sonst die konstante 0-Funktion erhalten
+welche keine der anderen Bedingungen erfüllen kann.
+Zuerst bemerken wir, dass Bedingung \#1 keine richtige Bedingung ist, da diese für alle
+Parameter $\theta_1, \theta_2, \theta_3$ gilt. Wir fangen an mit Bedingung 4, welche
+wir aus der Ableitung wissen:
+
+\begin{align*}
+	g'(x) = 0 &\Leftrightarrow \theta_1 \left( 
+		1 - \theta_2 x - 2 \theta_3 x ^2
+	\right) = 0 \text{ ( da $e ^{a} \neq 0 $ für alle $a$ )} \\
+			   &\Leftrightarrow
+		1 - 2 \theta_3 x ^2
+	 = \theta_2 x
+	 \overset{ \text{setze } x=18 } \Longleftrightarrow
+	 \theta_2 = \frac{ 1 }{ 18 } - 36 \; \theta_3 \;\;\;\;\; \qquad \hspace{1cm} \text{ ( I ) }
+	 \\ \\
+		g(18) = 15 &= 18 \theta_1 e ^{ - (18 \theta_2 + 324 \theta_3) }
+		\Leftrightarrow \ln \left( 
+			\frac{ 15 }{ 18 \theta_1 }
+		\right) = - \left( 
+		18 \theta_2 + 324 \theta_3
+	\right) \text{ benutze ( I ) } \\
+				   &= - \left( 
+					   18 \left( 
+						   \frac{ 1 }{ 18 } - 36 \; \theta_3
+					   \right) 
+					   + 324 \theta_3
+				   \right) 
+				   = \ln \left( \frac{ 15 }{ 18 } \right)  - \ln (\theta_1)
+\end{align*}
+
+Diese Gleichung stellen wir jetzt nach $\theta_1$ um und erhalten:
+
+\begin{align*}
+	& \theta_1 = \frac{ 15 }{ 18 } \; e ^{ 1 - 324\; \theta_3 }
+	\qquad \qquad \text{ (II) }
+	\\ \\
+	g(480) = 2 &= 480 \; \theta_1 e ^{ - \left( 
+			\frac{ 80 }{ 3 } + 213120 \theta_3
+	\right)  }
+	\text{ direkt nach ( I ) } \\
+			   &= 400 \; e ^{ 1 - 324 \theta_3 }
+			   e ^{ - (\frac{ 80 }{ 3 } + 213120 \theta_3)}
+			   \text{ nach ( II ) } \\
+	&= 400 e ^{ - ( \frac{ 77 }{ 3 } + 213444 \theta_3 ) } = 2 \\
+	&\Leftrightarrow \frac{ 77 }{ 3 } + 213444 \theta_3 = \ln \left( 
+		200
+	\right)  \\
+	&\Leftrightarrow \theta_3 = \frac{ \ln (200) - \frac{ 77 }{ 3 } }{ 
+		213444
+	}
+	\approx -0,00009542713 \\
+	&\Rightarrow \theta_2 \approx 0,0589909324\\
+	&\Rightarrow \theta_1 \approx 2,336366243 \text{ (beide durch einsetzen) }
+\end{align*}
  
 \begin{Aufgabe}{2}
     Wunschgeschwindigkeit, Populationsverlauf
