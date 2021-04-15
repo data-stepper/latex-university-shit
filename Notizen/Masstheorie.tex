@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\theoremstyle{definition}
+
+% Use this if \subsection's are used instead of \section
+% for enumerating contents
+% \newtheorem{theorem}{Satz}[subsection]
+% \newtheorem{theorem}{Satz}[section]
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{example}[theorem]{Beispiel}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{ \textbf{Maßtheorie - Notizen} }
+\author{Bent Müller}
+\date{15. April 2021}
+\maketitle
+\tableofcontents
+\pagebreak
+
+\section{Maßräume}
+
+\subsection{Maße und Mengensysteme}
+
+\begin{theorem} % Sigma-Algebra
+	\subsubsection{$\sigma$-Algebra}
+
+	Sei $\Omega$ ein Grundraum.
+	Wir nennen ein Mengensystem $A \subset 2^{\Omega}$ eine $\sigma$-Algebra 
+	falls es folgende Eigenschaften erfüllt:
+	\begin{itemize}
+		\item[(i)] $\Omega \in A$
+		\item[(ii)] $B \in A$ \Rightarrow $B^{c} \in A$
+		\item[(iii)] $B_n \in A \forall n \in \N$ \; \Longrightarrow \;
+			$\bigcup_{n\in \N} B_n \in A$
+	\end{itemize}
+
+	Dann nennen wir das Tupel $(\Omega, A)$ einen Messraum (aufpassen
+	Messraum $\neq$ Maßraum).
+\end{theorem}
+
+\begin{theorem} % Maß
+	\subsubsection{Maß}
+	Sei $(\Omega, A)$ ein Messraum, so definieren wir eine Abbildung
+	$\mu : A \longrightarrow [0, \infty]$ und nennen diese ein \textbf{Maß},
+	falls sie folgende Eigenschaften besitzt:
+	\begin{itemize}
+		\item[(i)] $\mu (\emptyset) = 0$
+		\item[(ii)] Für alle disjunkten Mengen $B_n \in A, n \in \N$ gilt
+			$\mu \left( 
+				\bigcup_{n\in \N} B_n = \sum_{n\in \N} \mu (B_n)
+			\right) $
+	\end{itemize}
+
+	Jetzt nennen wir das Tupel $(\Omega, A, \mu)$ einen Maßraum.
+\end{theorem}
+
+\begin{theorem} % Erzeugenden-System
+	\subsubsection{Erzeugenden-System}
+	$C \subset 2 ^{\Omega}$ wir nennen das Mengensystem
+	\[
+		\sigma(C) := \underset{A \subset 2^{\Omega}, A \; \sigma-Algebra, C \subset A}
+		\bigcap A
+	\] 
+	die kleinste $C$ umfassende $\sigma$-Algebra oder auch die von $C$ erzeugte
+	$\sigma$-Algebra. Somit nennen wir $C$ ein Erzeugenden-System von $\sigma(C)$.
+\end{theorem}
+
+\end{document}
