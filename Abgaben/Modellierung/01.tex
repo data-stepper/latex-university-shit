@@ -1,1 +1,181 @@
-Hello World
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Mathematische Modellierung - Übungsblatt \#1} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332)} \maketitle
+
+ 
+\begin{Aufgabe}{2}
+    Wunschgeschwindigkeit, Populationsverlauf
+\end{Aufgabe}
+
+\textbf{(a)} \beh Die rationale Funktion $V_{2,2}(x) = \frac{x^2}{x^2 + 1}$ erfüllt die Bedingungen (i)-(vi).
+\begin{proof}[Beweis]
+    Die Bedingungen (i), (iv) und (v) sind klar. Für (ii): 
+    \begin{align*}
+        \lim_{x\to\infty} V_{2,2}(x) = 1 \,. 
+    \end{align*}
+    Der Grenzwert existiert also und ist invertierbar. 
+    Bedingung (iii) besagt: Für $x_0\in\R$ gilt
+    \begin{align*}
+        V_{2,2}^{\prime\prime}(x_0) = 0 \quad\Longrightarrow\quad V_{2,2}^{\prime\prime\prime}(x_0) \neq 0\,.
+    \end{align*}
+
+    Wir berechnen zunächst $V_{2,2}^{\prime}$: 
+    \begin{align*}
+        V_{2,2}^{\prime}(x) = \frac{2x(x^2+1)-2x^3}{(x^2+1)^2} = \frac{2x}{(x^2+1)} \,. \\
+    \end{align*}
+
+    Nun $V_{2,2}^{\prime\prime}$:
+    \begin{align*}
+        V_{2,2}^{\prime\prime}(x) = \frac{2(x^2+1)^2 - 2x\cdot 2 (x^2+1)\cdot 2x}{(x^2+1)^4} 
+                                  = \frac{2-6x^2}{(x^2+1)^3} \,. 
+    \end{align*}
+    
+    Und schließlich $V_{2,2}^{\prime\prime\prime}$:
+    \begin{align*}
+        V_{2,2}^{\prime\prime\prime}(x) = \frac{-6(x^2+1)^3 - (2-6x^2)\cdot 3(x^2 + 1)\cdot 2x}{(x^2+1)^6} 
+                                        = \frac{24x(x^2-1)}{(x^2+1)^4} \,.
+    \end{align*}
+
+    Die Nullstellen von $V_{2,2}^{\prime\prime}$ sind gegeben durch:
+    \begin{align*}
+        2 - x_0^2 = 0 \Longleftrightarrow x_0 = \pm\frac{1}{\sqrt{3}} \,.
+    \end{align*}
+
+    Setzen wir $x_0$ in $V_{2,2}^{\prime\prime\prime}$ ein erhalten wir:
+    \begin{align*}
+        V_{2,2}^{\prime\prime\prime}(x_0) = \pm \frac{24}{\sqrt{3}}\left(\frac{1}{3} - 1\right) \neq 0.
+    \end{align*}
+
+    Also erfüllt $V_{2,2}$ auch die Bedingung (iii). \\
+    Bedingung (vi) ist auch erfüllt, denn setzen wir einen der drei Koeffizienten in $V_{2,2}$ auf Null, 
+    so würde damit einer oder mehrere der anderen Bedingungen verletzt werden: 
+    \begin{enumerate}
+        \item[(1)] Setze den Koeffizienten von $x^2$ im Zähler auf Null $\Longrightarrow$ Bedingung (ii) wird verletzt (u.a.),
+        \item[(2)] Setze den Koeffizienten von $x^2$ im Nenner auf Null $\Longrightarrow$ Bedingung (v) wird verletzt (u.a.),
+        \item[(3)] Setze die $1$ im Nenner auf Null $\Longrightarrow$ Bedingung (iv) wird verletzt (u.a.).
+    \end{enumerate}
+    Somit hat $V_{2,2}$ die 
+    geringste Anzahl an Koeffizienten die eine rationale Funktion haben kann, um diese 6 Bedingungen zu erfüllen.
+\end{proof}
+
+
+\begin{Aufgabe}{3}
+    Rationale Interpolation
+\end{Aufgabe}
+
+\textbf{(a)} \beh Die Aufgabe die Stützstellen $(-1; 2), (1; 3)$ und $(2; 3)$ durch eine rationale Funktion
+mit $m = 1 = n$ zu interpolieren, besitzt keine Lösung.
+
+\begin{proof}[Beweis]
+
+    Wir betrachten die rationale Funktion $V_{1,1}(x) = \frac{a_0 + a_1\,x}{b_0 + b_1\,x}$\,. Es soll gezeigt werden,
+    dass keine solche Funktion existiert, welche die Eigenschaften
+    \begin{itemize}
+        \item[(a)] $V_{1,1}(-1) =  2$,
+        \item[(b)] $V_{1,1}(1) =  3$,
+        \item[(c)] $V_{1,1}(2) =  3$.
+    \end{itemize}
+    erfüllt. Um dies zu tun, nehme an, dass $V_{1,1}$ die Eigenschaften (a) und (b) erfüllt. Nun wird gezeigt, dass diese Funktion dann
+    nicht Eigenschaft (c) erfüllen kann. Es gibt drei Möglichkeiten für die Steigung von $V_{1,1}$ im Punkt $(1;3)$:
+    \begin{itemize}
+        \item[(1)] $V_{1,1}^\prime(1) = 0$,
+        \item[(2)] $V_{1,1}^\prime(1) > 0$,
+        \item[(3)] $V_{1,1}^\prime(1) < 0$.
+    \end{itemize}
+
+    Betrachte Möglichkeit (1). Dafür berechnen wir zunächst die Ableitung von $V_{1,1}$ mit der Quotientenregel:
+    \begin{align*}
+        V_{1,1}^\prime(x) \quad&=\quad \frac{a_1x\cdot (b_0 + b_1x) - (a_0 + a_1x)b_1}{(b_0 + b_1x)^2} \\\\
+                          \quad&=\quad \frac{a_1b_1x + a_1b_1x^2 - a_0b_1 - a_1b_1x^2}{(b_0 + b_1x)^2} 
+                          \quad=\quad \frac{a_1b_0 - a_0b_1}{(b_0 + b_1x)^2}.
+    \end{align*}
+    Nun bestimmen wir die Nullstellen von $V_{1,1}^\prime$:
+    \begin{align*}
+        0 &= V_{1,1}^\prime(x) \\
+          &= \frac{a_1b_0 - a_0b_1}{(b_0 + b_1x)^2} \\
+          &\Leftrightarrow a_1b_0 - a_0b_1 = 0.
+    \end{align*}
+
+    Daraus folgt, dass die Nullstellen der Ableitung nicht von $x$ abhängen. Hat $V_{1,1}^\prime$ also \textit{eine} 
+    Nullstelle, so ist sie bereits \textit{überall} konstant $0$. Das würde aber bedeuten, dass $V_{1,1}$ konstant wäre, was aber
+    nicht sein kann, denn $V_{1,1}$ geht n.V. durch die Punkte $(-1; 2)$ und $(1; 3)$. Möglichkeit (1) trifft also nicht zu.\par
+    Betrachten wir nun Möglichkeit (2). Ist $V_{1,1}^\prime(1) > 0$, so ist die Steigung von $V_{1,1}$ an der Stelle $1$ positiv.
+    Das heißt also, es gibt $\epsilon>0$ und $\delta>0$, sodass $V_{1,1}(1+\epsilon) = V_{1,1}(1) + \delta = 3 + \delta$.
+    Um Eigenschaft (c) zu erfüllen, muss $V_{1,1}$ also wieder fallen. Das bedeutet $V_{1,1}^\prime$ muss auf dem Intervall 
+    $(1,2)$ negativ werden. Da $V_{1,1}^\prime$ aber stetig ist, folgt aber aus dem Zwischenwertsatz, dass es ein $x_0\in (1,2)$ geben muss, sodass 
+    $V_{1,1}^\prime(x_0) = 0$. Wir haben aber eben bereits gezeigt, dass dies nicht möglich ist. Also trifft auch Eigenschaft (b) nicht zu.
+    Analog folgt, dass auch Eigenschaft (c) nicht zutrifft. Somit folgt die Behauptung.
+\end{proof}
+
+\textbf{(b)} Wir berechnen die Koeffizienten von $V_{0,2}(x) = \frac{a_0}{b_0+b_1x+b_2x^2}$\,, sodass 
+    \begin{itemize}
+        \item[(a)] $V_{0,2}(-1) = 2$, 
+        \item[(b)] $V_{0,2}(1) = 3$,
+        \item[(c)] $V_{0,2}(2) = 3$. 
+    \end{itemize}
+
+    Aus den Voraussetzungen (a)-(c) erhalten wir folgende Gleichungen:
+    \begin{itemize}
+        \item[(1)] $\frac{a_0}{b_0-b_1+b_2} = 2  \Longleftrightarrow  b_0 - b_1 + b_2 = \frac{1}{2}a_0$,
+        \item[(2)] $\frac{a_0}{b_0+b_1+b_2} = 3  \Longleftrightarrow  b_0 + b_1 + b_2 = \frac{1}{3}a_0$,
+        \item[(3)] $\frac{a_0}{b_0+2b_1+4b_2} = 3 \Longleftrightarrow b_0 + 2b_1 + 4b_2 = \frac{1}{3}a_0$.  
+    \end{itemize}
+
+    Wir haben also drei linear unabhängige Gleichungen und $4$ Variablen. Also besitzt das Gleichungssystem einen 
+    Freiheitsgrad. Diesen setzen wir als $a_0$ fest. Nun überführen wir das LGS in eine erweiterte Koeffizientenmatrix und
+    lösen diese:
+    \begin{align*}
+        \begin{amatrix}{3}
+            1 & -1 & 1 & \frac{a_0}{2} \\
+            1 & 1  & 1 & \frac{a_0}{3} \\
+            1 & 2  & 4 & \frac{a_0}{3}
+        \end{amatrix}
+        &\stackrel{Z2-Z1, Z3-Z1}{\rightsquigarrow}  
+        \begin{amatrix}{3}
+            1 & -1 &  1 & \frac{a_0}{2} \\
+            0 &  2 &  0 & -\frac{a_0}{6} \\
+            0 &  3 &  3 & -\frac{a_0}{6}
+        \end{amatrix} \\
+        &\stackrel{Z2/2, Z3/3}{\rightsquigarrow} \hspace*{0.6cm}
+        \begin{amatrix}{3}
+            1 & -1 &  1 & \frac{a_0}{2}  \\
+            0 &  1 &  0 & -\frac{a_0}{12}  \\
+            0 &  1 &  1 & -\frac{a_0}{18} 
+        \end{amatrix} 
+        \stackrel{Z3-Z2, Z1+Z2, Z1-Z3}{\rightsquigarrow}
+        \begin{amatrix}{3}
+            1 &  0 &  0 & \frac{7a_0}{18}   \\
+            0 &  1 &  0 & -\frac{a_0}{12}  \\
+            0 &  0 &  1 & \frac{a_0}{36} 
+        \end{amatrix}.
+    \end{align*}     
+    Die gesuchte rationale Interpolante ist somit gegeben durch
+    \begin{align*}
+        V_{0,2}(x) &= \frac{a_0}{\frac{7a_0}{18} -\frac{a_0}{12}x + \frac{a_0}{36}x^2} \\
+                &= \frac{1}{\frac{7}{18} -\frac{1}{12}x + \frac{1}{36}x^2}\,.
+    \end{align*}
+    für $0 \neq a_0\in\R$.
+
+\end{document}
