@@ -5,4 +5,5 @@
 *.gz
 *.bbl
 *.blg
+*.pdf
 *.DS_Store
