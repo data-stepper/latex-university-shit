@@ -214,6 +214,137 @@ Diese Gleichung stellen wir jetzt nach $\theta_1$ um und erhalten:
     geringste Anzahl an Koeffizienten die eine rationale Funktion haben kann, um diese 6 Bedingungen zu erfüllen.
 \end{proof}
 
+\textbf{b)} Im Folgenden konstruieren die Menge von Funktionen die Bedingungen (i)-(v) erfüllen:
+\begin{proof}[Beweis]
+	Wir können aus den Bedingungen (ii) und (v) direkt die Form unserer Funktionen ablesen. Denn aus (ii)
+	folgt direkt, dass die Grade der jeweiligen Polynome gleich sein muss, da die Funktion ansonsten
+	divergieren bzw. gegen $0$  konvergieren würde. Jetzt wissen wir also mit (v), dass auch $n = 4$ sein
+	muss. Also sieht unsere Funktion wie folgt aus:
+	\[
+		R_{m, n} (t) = \frac{ 
+			350 \cdot b_4 x ^{4} + a_3 x ^{3} + a_2 x ^2 + a_1 x + a_0
+			}{ 
+			b_4 x ^{4} + b_3 x ^3 + b_2 x ^2 + b_1 x + b_0
+		}
+		= \frac{ p(x) }{ q(x) }
+	\] 
+
+	Außerdem wissen wir auch aus (ii) dass $a_4 = 350 \cdot b_4$ welche wir hier schon direkt eingesetzt haben.
+	Des weiteren sehen wir auch sofort, dass aus Bedingung (i) direkt $a_0 = 2$ folgt.
+	Nun erkennen wir für die weiteren Bedingungen, dass diese alle genau dann erfüllt sind, wenn jeweils 
+	der Zähler unserer rationalen Funktion jeweils gleich 0 ist.
+	\begin{align*}
+		R_{m, n}'(0) &= 0 \Leftrightarrow p'(0)q(0) = p(0)q'(0) \text{ (nach Quotientenregel)} \\
+				  &\Leftrightarrow (a_1)(b_0) = (a_0)(b_1)
+				  \Leftrightarrow a_1 = 2 b_1
+	\end{align*}
+	Nun wenden wir die selbe Strategie auf die zweite Ableitung an:
+	\begin{align*}
+		R_{m, n} '' (0) &= 0 \Leftrightarrow \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' q ^2 (0) = \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) (2 q' (0)) \\
+			&\Leftrightarrow \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' = 0
+			\Leftrightarrow \left(
+				p'(0)q(0)
+			\right) ' = \left(
+				p(0)q'(0)
+			\right) ' \\
+			&\Leftrightarrow {
+				p''(0)q(0) + p'(0)q'(0)
+			} = {
+				p'(0)q'(0) + p(0)q''(0)
+			} \\
+			& \Leftrightarrow 2 a_2 + a_1 b_1 = a_1 b_1 + a_0 b_2
+			\Rightarrow a_2 = b_2
+	\end{align*}
+	Im oberen haben wir benutzt, dass in der ersten Gleichung der rechte Faktor $p'(0)q(0) - p(0)q'(0)$
+	nach der vorherigen Aufgabe 0 war und somit das gesamte Produkt auf der rechten Seite 0 wird.
+	Bei der dritten Ableitung gehen wir analog vor:
+	\begin{align*}
+		R_{m, n} '''(0) &= 0 \Leftrightarrow \left(
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' q ^2 (0) - \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) (2 q' (0))
+		\right) ' q ^{4} (0) \\
+		&= \left(
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' q ^2 (0) - \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) (2 q' (0))
+		\right) \cdot 4 q ^3 (0) \\
+		& \Leftrightarrow \left(
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' q ^2 (0) - \left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) (2 q' (0))
+		\right) ' = 0 \\
+		&\Leftrightarrow
+		\left(
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' q ^2 (0)
+		\right) '
+		=  \left(
+			p'(0)q(0) - p(0)q'(0)
+			(2 q' (0)) \;
+		\right) ' \\
+		&\Leftrightarrow 
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) '' q ^2 (0) + 
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' 2 q' (0) \\
+		&= 
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) ' 2 q' (0) + 
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) 2 q'' (0) \\
+		&\Leftrightarrow 
+			\left(
+				p'(0)q(0) - p(0)q'(0)
+			\right) '' 1 ^2 = 0
+		\Leftrightarrow 
+		\left(
+			p'(0)q(0) 
+		\right) ''
+			=
+		\left(
+			p(0)q'(0)
+		\right) '' \\
+		&\Leftrightarrow 
+			\left(
+			p''(0)q(0) + p'(0)q'(0)
+			\right) '
+		=
+			\left(
+			p'(0)q'(0) + p(0)q''(0)
+			\right) ' \\
+		&\Leftrightarrow 
+		{
+			p'''(0)q(0) + p''(0)q'(0)
+		}
+		=
+		{
+			p'(0)q''(0) + p(0)q'''(0)
+		} \\
+		&\Leftrightarrow
+			6 a_3 + 2 a_2 b_1 = a_1 2 b_2 + 2 \cdot 6 b_3
+		\Leftrightarrow
+			6 a_3 + 2 a_2 b_1 = 4 b_1 a_2 + 2 \cdot 6 b_3
+	\end{align*}
+\end{proof}
+
 
 \begin{Aufgabe}{3}
     Rationale Interpolation
