@@ -1,1 +1,265 @@
-Hello World
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{\textbf{Mathematische Statistik-Blatt #1}}
+\author{Steven Zinger, Ferdinand Cramm und Bent Müller}
+\date{14. April 2021}
+\maketitle
+
+\Aufgabe{1}
+Aufgabe war es die Dichte der F-Verteilung zu berechnen, welche wie folgt definiert ist:
+\[
+	X \sim \chi^2_m, Y \sim \chi^2_n, F = \frac{nX}{mY}
+\] 
+Und wir erinnern uns, dass eine Zufallsvariable $A \sim \chi^2_k, k \in \mathbb{N}$ die Dichte
+\[
+	f_A(y) = y^{\frac{n}{2} - 1} e^{-\frac{y}{2}} \cdot
+	\frac{1}{
+		\Gamma(\frac{n}{2}) 2^{\frac{n}{2}}
+	}
+\]
+besitzt.
+Nun berechnen wir die Dichte von $a \cdot A, a \in \mathbb{R}_{>0}$ per Dichtetransformation wie folgt:
+
+Wir setzen:
+$
+	g(x) = a \cdot x,
+	g'(x) = a,
+	g ^{-1} (y) = \frac{y}{a},
+	|g' (g ^{-1} (y))| = |a| = a
+$
+
+\begin{align*}
+	f_{a\cdot A}(y) &= \frac{ f_A ( g ^{-1} (y)) }{ | g' ( g ^{-1} (y) ) | }
+	= \frac{ 1 }{ a } \left( \frac{ y }{ a } \right) ^{ \frac{ k }{ 2 } - 1 }
+	e ^{- \frac{ y }{ 2a }} \frac{ 1 }{ \Gamma(\frac{ k }{ 2 }) 2 ^{\frac{ k }{ 2 }}}\\
+					&= \frac{y ^{ \frac{ k }{ 2 } -1} e ^{ - \frac{ y }{ 2a }}}{
+						a ^{ \frac{ k }{ 2 } } \Gamma(\frac{ k }{ 2 }) 2 ^{ \frac{ k }{ 2 } }
+					}
+\end{align*}
+
+Also wissen wir die Dichten von $nX$ und $mY$:
+\[
+	f_{nX}(y) = \frac{ y ^{ \frac{ m }{ 2 } -1} e ^{ - \frac{ y }{ 2n }} }{ 
+		n ^{ \frac{ m }{ 2 } } \Gamma(\frac{ m }{ 2}) 2 ^{\frac{ m }{ 2 }}
+	},\;\;\;\;\;\;
+	f_{mY}(y) = \frac{ y ^{ \frac{ n }{ 2 } -1} e ^{ - \frac{ y }{ 2m }} }{ 
+		m ^{ \frac{ n }{ 2 } } \Gamma(\frac{ n }{ 2}) 2 ^{\frac{ n }{ 2 }}
+	}
+\] 
+
+Jetzt berechnen wir die gemeinsame Dichte $f(x, y)$ von $(nX, mY)$
+
+\begin{align*}
+	f(x, y) &= f_{nX}(x) \cdot f_{mY}(y) \;\;\;\;\; \textit{(Produktdichte)} \\
+			&= \frac{ 
+				\left( x ^{\frac{ m }{ 2 }-1} e ^{- \frac{ x }{ 2n }} \right) 
+				\left( y ^{\frac{ n }{ 2 }-1} e ^{- \frac{ y }{ 2m }} \right) 
+				}{  
+				\left( n ^{\frac{ m }{ 2 }} \Gamma(\frac{ m }{ 2 }) 2 ^{\frac{ m }{ 2 }} \right) 
+				\left( m ^{\frac{ n }{ 2 }} \Gamma(\frac{ n }{ 2 }) 2 ^{\frac{ n }{ 2 }} \right)
+			}
+			= \frac{ 
+				x ^{\frac{ m }{ 2 } - 1} y ^{\frac{ n }{ 2 }-1} e ^ {-\frac{ x }{ 2n } -\frac{ y }{ 2m }}
+				}{  
+				\Gamma(\frac{ m }{ 2 }) \Gamma(\frac{ n }{ 2 })
+				2 ^{\frac{ m+n }{ 2 }} 
+				n ^{\frac{ m }{ 2 }} m ^{\frac{ n }{ 2 }}
+			}
+\end{align*}
+
+Nach Satz A.2 berechnen wir endlich die Dichte von $\frac{nX}{mY}$
+
+\begin{align*}
+	f_{ \frac{nX}{mY} }(z) &= \int_{0}^{\infty} f(z \cdot t, t) | t | \;\; dt
+	= \int_{0}^{\infty} 
+			 \frac{ 
+				\left( zt \right)  ^{\frac{ m }{ 2 } - 1} t ^{\frac{ n }{ 2 }-1} e ^ {-\frac{ zt }{ 2n } -\frac{ t }{ 2m }}
+				}{  
+				\Gamma(\frac{ m }{ 2 }) \Gamma(\frac{ n }{ 2 })
+				2 ^{\frac{ m+n }{ 2 }} 
+				n ^{\frac{ m }{ 2 }} m ^{\frac{ n }{ 2 }}
+			} \; |t| \;\; dt \\
+	&= \frac{ z ^{\frac{ m }{ 2 }-1} }{ 
+		\Gamma(\frac{ m }{ 2 }) \Gamma(\frac{ n }{ 2 })
+		2 ^{\frac{ m+n }{ 2 }} 
+		n ^{\frac{ m }{ 2 }} m ^{\frac{ n }{ 2 }}
+	}
+	\int_{0}^{\infty} t ^{ \frac{m+n}{2} - 1} e ^{ - \frac{ zt }{ 2n } - \frac{ t }{ 2m } } \;\; dt \\
+\end{align*}
+
+Substituiere wie folgt:
+\begin{align*}
+	u &= \frac{ zt }{ 2n } + \frac{ t }{ 2m } = t\left( \frac{ z }{ 2n } + \frac{ 1 }{ 2m } \right) ,
+	t = \frac{ u }{ \left( \frac{ z }{ 2n } + \frac{ 1 }{ 2m } \right)},\\
+	du &=   \left(
+		\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+	\right)  dt, \;
+	dt = \frac{ du }{ \left( \frac{ z }{ 2n } + \frac{ 1 }{ 2m } \right) }
+\end{align*}
+
+Wohlgemerkt ändern sich hier keine Integralgrenzen, da die substituierte Funktion an den
+betroffenen Stellen die selben Werte annimmt wie die vorherige Funktion.
+Somit erhalten wir folglich:
+
+\begin{align*}
+	\int_{0}^{\infty} t ^{ \frac{m+n}{2} - 1} e ^{ - \frac{ zt }{ 2n } - \frac{ t }{ 2m } } \;\; dt
+	&= \int_{0}^{\infty} \left( 
+		\frac{ u }{ 
+			\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+		}
+		\right) ^{\frac{m+n}{2} -1} e ^{-u} \;\; \frac{ du }{ 
+		\left(  
+		\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+		\right) 
+	}\\
+	&= \left( 
+		\frac{ 1 }{ 
+			\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+		}
+		\right) ^{
+		\frac{ m+n }{2}
+	}
+	\int_{0}^{\infty}  u ^{ \frac{ m+n }{ 2 } -1} e^{ -u }\;\; du\\
+	&= \left( 
+		\frac{ 1 }{ 
+			\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+		}
+		\right) ^{
+		\frac{ m+n }{2}
+	} \cdot \Gamma \left( 
+	\frac{ m+n }{ 2 }
+\right) 
+\end{align*}
+
+Wenn wir das jetzt in die vorherige Gleichung einsetzen, bekommen wir:
+
+\begin{align*}
+	f_{ \frac{nX}{mY} }(z) &= \frac{
+		\Gamma \left( 
+	\frac{ m+n }{ 2 }
+\right) z ^{\frac{ m }{ 2 }-1} }{ 
+				\Gamma(\frac{ m }{ 2 }) \Gamma(\frac{ n }{ 2 })
+						2 ^{\frac{ m+n }{ 2 }} 
+								n ^{\frac{ m }{ 2 }} m ^{\frac{ n }{ 2 }}
+									}
+									\left( 
+												\frac{ 1 }{ 
+																\frac{ z }{ 2n } + \frac{ 1 }{ 2m }
+																		}
+																				\right) ^{
+																						\frac{ m+n }{2}
+																							} \\
+	&= \frac{
+		\Gamma \left( 
+	\frac{ m+n }{ 2 }
+\right) z ^{\frac{ m }{ 2 }-1} }{ 
+				\Gamma(\frac{ m }{ 2 }) \Gamma(\frac{ n }{ 2 })
+								n ^{\frac{ m }{ 2 }} m ^{\frac{ n }{ 2 }}
+									}
+								\left( 
+									\frac{ 1 }{ 
+								\frac{ z }{ n } + \frac{ 1 }{ m }
+							}
+						\right) ^{
+					\frac{ m+n }{2}
+				} \Bigg \vert \cdot \left( \frac{ \frac{ m }{ n } }{ \frac{ m }{ n } } \right) ^{\frac{ m }{ 2 }}\\
+	&= \frac{ z ^{ \frac{ m }{ 2 } -1} \left( 
+			\frac{ m }{ n }
+			\right) ^{ \frac{ m }{ 2 } }  }{ B \left( 
+	\frac{ m }{ 2 }, \frac{ n }{ 2 }\right) \left( 
+	1+ \frac{ m }{ n }z
+	\right) ^{ \frac{ m+n }{ 2 } } } \\
+\end{align*}
+
+	\begin{description}
+			\item{\textbf{Aufgabe 1} (b)\\ Seien $X \thicksim \mathcal{N}(0,1), \quad Y \thicksim \chi_n^2$ \;unabhängig und $T = \frac{\sqrt{n}X}{\sqrt{Y}}.$
+			}
+			\item{\textit{Behauptung}\\ $T$ hat die Dichte $$f(t) = \frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2})\sqrt{n\pi}} \,\Big(1 + \frac{t^2}{n}\Big)^{-\frac{n+1}{2}},\qquad t \in \R.$$
+			}
+			\item{\textit{Beweis}\\ Sei $A := \sqrt{n}\cdot X$. \quad $f_X (x) = \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}}$.\\Wende die Dichtetransformation (Satz 10.10, Math. Stoch.) für $A$ an: $$h: \R \longrightarrow \R,\quad h(x) = \sqrt{n}\cdot x,\quad h^{-1} (x) = \frac{x}{\sqrt{n}}, \quad (h^{-1}(x))^{'} = \frac{1}{\sqrt{n}} \quad (n\in \N)$$ 
+			\begin{equation*}\begin{split}\Longrightarrow\qquad f_A(a) &= f_X(h^{-1}(a)) \;\Big|\det D(h^{-1}) (a)  \Big| \;I_\R(a) 
+			\\&= \frac{1}{\sqrt{2\pi}} \exp\Big(-\frac{(\frac{a}{\sqrt{n}})^2}{2}\Big)\; \Big|\frac{1}{\sqrt{n}}  \Big| 
+			\\&= \frac{1}{\sqrt{2\pi n}} \exp\Big(-\frac{(\frac{a}{\sqrt{n}})^2}{2}\Big).
+			\end{split}\end{equation*}\\\\
+			Sei $B := \sqrt{Y}$. \quad $f_Y(y) = \frac{1}{2^{n/2} \Gamma(\frac{n}{2})} \;e^{-\frac{y}{2}} \;y^{\frac{n}{2}-1} \; I_{(0,\infty)} (y)$.
+			\\Wende die Dichtetransformation (Satz 10.10, Math. Stoch.) für $B$ an: $$g: \R_{\geq 0} \longrightarrow \R_{\geq 0},\quad g(x) = \sqrt{x},\quad g^{-1} (x) = x^2, \quad (g^{-1}(x))^{'} = 2x$$ 
+			\begin{equation*}\begin{split}\Longrightarrow\qquad f_B(b) &= f_Y(g^{-1}(b)) \;\Big|\det D(g^{-1}) (b)  \Big| \;I_{\R_{\geq 0}}(b) 
+			\\&= \frac{1}{2^{n/2} \Gamma(\frac{n}{2})} e^{-\frac{b^2}{2}} \,b^{2^{\frac{n}{2}-1}} \; \big|2b\big| \;I_{(0,\infty)}(b)
+			\\&= \frac{1}{2^{n/2} \Gamma(\frac{n}{2})} e^{-\frac{b^2}{2}} \,b^{n-2} \; \big|2b\big| \;I_{(0,\infty)}(b)
+			\\&= \frac{2}{2^{n/2} \Gamma(\frac{n}{2})} e^{-\frac{b^2}{2}} \,b^{n-1} \;  \;I_{(0,\infty)}(b).\\\\ 
+			\end{split}\end{equation*} 
+					\begin{equation*}\begin{split}
+							f_{A,B} (a,b) = f_A(a) \cdot f_B(b) &= \frac{1}{\sqrt{2\pi n}} \exp\Big(-\frac{(\frac{a}{\sqrt{n}})^2}{2}\Big) \cdot \frac{2}{2^{n/2} \Gamma(\frac{n}{2})} \exp\Big(-\frac{b^2}{2}\Big) \,b^{n-1} \;  \;I_{(0,\infty)}(b)
+							\\&= \frac{2}{\sqrt{2\pi n}\;2^{n/2}\; \Gamma(\frac{n}{2})} \cdot \exp\Big(-\frac{a^2}{2n}-\frac{b^2}{2}\Big) \cdot b^{n-1} \;I_{(0,\infty)}(b)
+					\end{split}\end{equation*} \\ Die Dichte von $T = \frac{\sqrt{n}X}{\sqrt{Y}}$ beträgt nach Satz 10.11 (c) (Math. Stoch.):
+			\begin{equation*}\begin{split}
+				k_T(z) &= \int_{\mathbb{R}} \; f_{A,B} (za,a)\;|a|\; da 
+					 \\&= \int_{\mathbb{R}} \frac{2}{\sqrt{2\pi n} \; 2^{n/2}\; \Gamma(\frac{n}{2})} \; \exp\Big(-\frac{(za)^2}{2n} -\frac{a^2}{2}  \Big) \; a^{n-1} |a| \; I_{(0,\infty)}\; da 
+					\\&= \frac{2}{\sqrt{2\pi n} \; 2^{n/2}\; \Gamma(\frac{n}{2})} \; \int_0^\infty \; \exp\Big(a^2\big(-\frac{z^2}{2n} -\frac{1}{2}\big) \Big)\; a^n \; da
+			\end{split}\end{equation*}
+			}
+	\end{description}
+
+Jetzt substituieren wir folgendermaßen:
+
+\begin{align*}
+	& u = a ^{2} \left(
+		\frac{z^2}{2n} + \frac{ 1 }{ 2 }
+	\right) \;,
+	a = \sqrt{ \frac{ u }{  \frac{z^2}{2n} + \frac{ 1 }{ 2 }} }\; ,
+	du = 2a \left(
+		\frac{z^2}{2n} + \frac{ 1 }{ 2 }
+	\right) da \\
+	&= \left(
+		\frac{ z^2 }{ n } + 1
+		\right) \sqrt{
+		\frac{ u }{ \frac{ z^2 }{ 2n } + \frac{ 1 }{ 2 } }
+	} \;\; da
+	\Leftrightarrow da = \frac{ du }{ \left(
+		\frac{ z^2 }{ n } + 1
+		\right) \sqrt{
+		\frac{ u }{ \frac{ z^2 }{ 2n } + \frac{ 1 }{ 2 } }
+	} } \text{ und erhalten } \\
+	k_T (z) &= \frac{ 2 }{ 
+		\sqrt{2 \pi n}\;  2 ^{\frac{ n }{ 2 }} \Gamma( \frac{ n }{ 2 } )
+	}
+	\int_{0}^{\infty} \left(
+		\sqrt{ \frac{ u }{ \frac{ z^2 }{ 2n } + \frac{ 1 }{ 2 } } } 
+	\right) ^{n}
+	e ^{-u}
+	\frac{ du }{ \left(
+		\frac{ z^2 }{ n } + 1
+		\right) \sqrt{\frac{ u }{ 
+			\frac{ z^2 }{ 2n } + \frac{ 1 }{ 2 }
+	}} 
+} \\
+	&= \frac{ \sqrt{
+			\frac{ z^2 }{ n } + 1
+		}  }{ 
+		\sqrt{\pi n}\;  2 ^{\frac{ n }{ 2 }} \Gamma( \frac{ n }{ 2 } )
+		\left(
+			\frac{ z^2 }{ n } + 1
+		\right) ^{\frac{ n }{ 2 } + 1}
+	}
+	\int_{0}^{\infty} u ^{\frac{u-1}{2}} e ^{-u} du \\
+	&= \frac{ 
+		\Gamma(\frac{n+1}{2})
+	}{ \sqrt{\pi n} \;\;  \Gamma(\frac{ n }{ 2 })}
+	\left(
+		\frac{ z^2 }{ n } + 1
+	\right) ^{ - 
+		\frac{n+1}{2}
+	} \qquad = f(z) \text{  (aus der Aufgabe)} \qed
+\end{align*}
+
+\end{document}
