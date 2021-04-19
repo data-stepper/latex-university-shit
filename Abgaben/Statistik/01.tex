@@ -1,22 +1,20 @@
-\documentclass[a4paper]{article}
-
-\usepackage[margin=1in]{geometry} 
-\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
-
-
-\pdfminorversion=7
-\pdfsuppresswarningpagegroup=1
-\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\title{Mathematische Statistik \\ Sommersemester 2021 \\ Abgabe Blatt 1 \\}
+\author{Bent Müller (7302332) \\ Steven Zinger (7309728) \\ Ferdinand Cramm (7318883)}
+\doublespace
+\newcommand{\notab}{\hspace*{-4em}}
+\newcommand{\tab}{\hspace*{-1em}}
+\newcommand{\dtab}{\hspace*{2em}}
+\newcommand{\ttab}{\hspace*{5em}}
+\newcommand{\n}{$\:$\\}
+\date{April 16, 2021}
+\setcounter{page}{1}
 \begin{document}
-\title{\textbf{Mathematische Statistik-Blatt #1}}
-\author{Steven Zinger, Ferdinand Cramm und Bent Müller}
-\date{14. April 2021}
 \maketitle
-
-\Aufgabe{1}
-Aufgabe war es die Dichte der F-Verteilung zu berechnen, welche wie folgt definiert ist:
+\textbf{Aufgabe 1} (a) \\\\Aufgabe war es die Dichte der F-Verteilung zu berechnen, welche wie folgt definiert ist:
 \[
 	X \sim \chi^2_m, Y \sim \chi^2_n, F = \frac{nX}{mY}
 \] 
@@ -182,7 +180,7 @@ Wenn wir das jetzt in die vorherige Gleichung einsetzen, bekommen wir:
 \end{align*}
 
 	\begin{description}
-			\item{\textbf{Aufgabe 1} (b)\\ Seien $X \thicksim \mathcal{N}(0,1), \quad Y \thicksim \chi_n^2$ \;unabhängig und $T = \frac{\sqrt{n}X}{\sqrt{Y}}.$
+			\item{\textbf{Aufgabe 1} (b)\\\\ Seien $X \thicksim \mathcal{N}(0,1), \quad Y \thicksim \chi_n^2$ \;unabhängig und $T = \frac{\sqrt{n}X}{\sqrt{Y}}.$
 			}
 			\item{\textit{Behauptung}\\ $T$ hat die Dichte $$f(t) = \frac{\Gamma(\frac{n+1}{2})}{\Gamma(\frac{n}{2})\sqrt{n\pi}} \,\Big(1 + \frac{t^2}{n}\Big)^{-\frac{n+1}{2}},\qquad t \in \R.$$
 			}
@@ -251,7 +249,7 @@ Jetzt substituieren wir folgendermaßen:
 			\frac{ z^2 }{ n } + 1
 		\right) ^{\frac{ n }{ 2 } + 1}
 	}
-	\int_{0}^{\infty} u ^{\frac{u-1}{2}} e ^{-u} du \\
+	\int_{0}^{\infty} u ^{\frac{n-1}{2}} e ^{-u} du \\
 	&= \frac{ 
 		\Gamma(\frac{n+1}{2})
 	}{ \sqrt{\pi n} \;\;  \Gamma(\frac{ n }{ 2 })}
@@ -262,4 +260,177 @@ Jetzt substituieren wir folgendermaßen:
 	} \qquad = f(z) \text{  (aus der Aufgabe)} \qed
 \end{align*}
 
+ \begin{description}
+                \item{\textbf{Aufgabe 2a}\\
+                Betrachte die Dichten der $N(\vartheta,\vartheta^2)$-Verteilung mit $\vartheta\in\R\,\setminus \{0\}$:
+                \begin{align*}
+                    f_{\vt}(x)=\frac{1}{\sqrt{2\pi\vt^2}}\exp\left(-\frac{(x-\vt)^2}{2\vt^2}\right) , \hspace{1mm} x\in\R
+                \end{align*}
+                }   
+                \item{\textit{Behauptung}\\
+                Die Familie von Dichten $\{f_{\vt}|\vt\in\Theta=\R\setminus\{0\}\}$ bildet eine $2$-parametrige Exponentielle Familie mit den Statistiken:
+                \begin{align*}
+                    T_1(x)=-x^2 \\
+                    T_2(x)=2x 
+                \end{align*}
+                und natürlichem Parameterraum $Z^*=\R_{+}\times\R$
+                }
+                \item{\textit{Beweis}\\
+            Wir setzen:
+            \begin{align*}
+                D(\vt)=\log\left(\frac{1}{\sqrt{2\pi\vt^2}}\right) \Rightarrow c(\vt)=\frac{1}{\sqrt{2\pi\vt^2}}
+            \end{align*}
+                Betrachten wir den Exponenten:
+                \begin{align*}
+                    -\frac{(x-\vt)^2}{2\vt^2}=-\frac{1}{2\vt}(x^2-2\vt x +\vt^2)=-\frac{1}{2\vt^2}x^2+\frac{1}{\vt}\cdot x-\frac{1}{2}
+                \end{align*}
+                Wir können setzen:
+                \begin{align*}
+                    Q_1(\vt)=\frac{1}{2\vt^2}  \hspace{4mm} Q_2(\vt)=\frac{1}{\vt} \\
+                    T_1(x)=-x^2  \hspace{4mm} T_2(x)=x  \hspace{4mm} S(x)=-\frac{1}{2}
+                \end{align*}
+                Und erhalten dann die Darstellung:
+                \begin{align*}
+                    f_{\vt}(x)=\exp\left(Q_1(\vt)T_1(\vt)+Q_2(\vt)T_2(\vt)+D(\vt)+S(x)\right) \\
+                    =\exp(D(\vt))\cdot \exp\left(Q_1(\vt)T_1(\vt)+Q_2(\vt)T_2(\vt)+S(x)\right) \\
+                    =\frac{1}{\sqrt{2\pi\vt^2}}\exp\left(-\frac{x^2}{2\vt^2}+\frac{x}{\vt}-\frac{1}{2}\right) 
+                    = \frac{1}{\sqrt{2\pi\vt^2}}\exp\left(-\frac{(x-\vt)^2}{2\vt^2}\right)
+                \end{align*}
+                Das Bild von $Q(\vt)=(Q_1(\vt),Q_2(\vt))$ ist $Q(\Theta)=(Q_1(\Theta),Q_2(\Theta))=(\R_{+}\times\R)\setminus\{(0,0)\}=Z$
+                \\Setze $A=\text{supp}(f_{\vt})=\R$. Wir wollen jetzt den natürlichen Parameteraum bestimmen, dafür betrachte:
+                \begin{align*}
+                    \frac{1}{c(\xi)}=\int_{A}\exp(S(x))\exp(\xi_1T_1(x)+\xi_2T_2(x))dx \\
+                    =\exp\left(-\frac{1}{2}\right)\int_{-\infty}^{\infty}\exp(-\xi_1x^2+\xi_2 x)dx \\
+                    =\exp\left(-\frac{1}{2}\right)\cdot \left(\left.\frac{1}{-2\xi_1x+\xi_2}\cdot\exp(-\xi_1x^2+\xi_2 x)\right|_{-\infty}^{\infty}\right) 
+                \end{align*}
+                Wir wollen jetzt also die 2 verschiedenen Grenzwerte $x\to\infty$ und $x\to-\infty$ ausrechnen:
+                \begin{align*}
+                    \lim_{x\to\infty}\frac{1}{-2\xi_1x+\xi_2}\cdot\exp(-\xi_1x^2+\xi_2 x) \\
+                    \lim_{x\to\infty}\frac{1}{-2\xi_1x+\xi_2}\cdot \lim_{x\to\infty}\exp(-\xi_1x^2+\xi_2x)
+                \end{align*}
+                Der erste Faktor konvergiert für $x\to\infty$ gegen $\frac{1}{\xi_2}$, weil $\frac{1}{x}\xrightarrow{x\to\infty}0$
+                \\ Also haben wir:
+                \begin{align*}
+                    \lim_{x\to\infty}\frac{1}{-2\xi_1x+\xi_2}\cdot \lim_{x\to\infty}\exp(-\xi_1x^2+\xi_2x) \\
+                    =\frac{1}{\xi_2}\lim_{x\to\infty}\exp(-\xi_1x^2) \cdot \lim_{x\to\infty}\exp(\xi_2x)
+                \end{align*}
+                Wir bemerken , dass $\exp(-\xi_1x^2)\to 0$ für $x\to \infty$ und $\exp(\xi_2x)\to \infty$ für $x\to\infty$. Da aber $x^2$ schneller wächst als $x$ ist das Produkt der Grenzwerte $0$ (also geht $\exp(-\xi_1x^2)$ schneller gegen $0$ als $\exp(\xi_2x)$ gegen $\infty$ geht)
+                \\ Betrachten wir jetzt den Fall $x\to-\infty$:
+                \begin{align*}
+                    \lim_{x\to-\infty}\frac{1}{-2\xi_1x+\xi_2}\cdot\exp(-\xi_1x^2+\xi_2 x)
+                \end{align*}
+                Beachte , dass wir auch $x\to\infty$ schreiben können , wenn wir jedes $x$ mit $-1$ multiplizieren,also:
+                \begin{align*}
+                    \lim_{x\to-\infty}\frac{1}{-2\xi_1x+\xi_2}\cdot\exp(-\xi_1x^2+\xi_2 x) \\
+                    =\lim_{x\to\infty}\frac{1}{2\xi_1 x+\xi_2}\cdot \lim_{x\to\infty}\exp(-\xi_1x^2-\xi_2x)
+                \end{align*}
+                Der erste Faktor geht, mit dem selben Argument wie davor, gegen $0$, also bleibt:
+                \begin{align*}
+                    \lim_{x\to\infty}\exp(-\xi_1x^2)\cdot\lim_{x\to\infty}\exp(-\xi_2x)
+                \end{align*}
+                beide Exponenten haben aber ein negatives Vorzeichen, weshalb auch hier jeder der Faktoren gegen $0$ konvergiert.
+                \\ Wir bemerken, dass die Konvergenz nur gewährleistet ist wenn $\xi_1>0$, weil sich sonst das Vorzeichen von $\exp(-\xi_1 x^2)$ ändern würde (was zur Divergenz führen würde).
+                \\ Alles in allem erhalten wir also:
+                \begin{align*}
+                    \frac{1}{c(\xi)}=\exp\left(-\frac{1}{2}\right)\int_{-\infty}^{\infty}\exp(-\xi_1x^2+\xi_2 x)dx<\infty
+                    \Leftrightarrow \xi_1>0 \hspace{2mm} \xi_2\in\R
+                \end{align*}
+                Damit ist unser natürlicher Parameterraum:
+                \begin{align*}
+                    Z^*=\{\xi=(\xi_1,\xi_2)\in\R^2|\frac{1}{c(\xi)}<\infty\}=\R_{+}\times\R\supset Z
+                \end{align*}
+                \xtab \qed\\\\\\
+                }
+        \end{description}
+        \begin{description}
+            \item{\textbf{Aufgabe 2b}\\
+            Betrachte die Dichtenfunktionen für $\vt>0$:
+            \begin{align*}
+                f_{\vt}(x)=I_{(0,\vt)}(x)\exp(-2\log(\vt)+log(2x)),\hspace{2mm} x\in\R 
+            \end{align*}
+            }
+            \item{\textit{Behauptung}\quad\\
+            Die Familie $\{f_{\vt}|\vt\in\Theta=(0,\infty)\}$ bildet keine exponentielle Familie.
+            }
+            \item{\textit{Beweis}\quad\\
+            Der Träger von $f_{\vt}$ ist gegeben durch:
+            \begin{align*}
+                A=\text{supp}(f_{\vt})=\{x\in\R|f_{\vt}(x)>0\}=\R\setminus(0,\vt)=(0,\vt)^C
+            \end{align*}
+            Das bedeutet aber, dass der Träger abhängig vom Parameter $\vt$ macht, also liegt hier keine exponentielle Familie vor.
+            \\ \xtab \qed
+            }
+            \item{\textbf{Aufgabe 2c}\\ Betrachte die Zähldichten der Multinomialverteilung $$P(X = x) = {N \choose x_1\, .\,.\,.\, x_n} \, \prod_{i = 1}^n \, p_i^{x_i},$$  $x = (x_1,\,.\,.\,., x_n), \quad x_i \in \N_0, \quad\sum_{i=1}^n \,x_i = N, \quad p_i \in (0,1), \quad \sum_{i=1}^n p_i = 1.$
+        }
+            \item{\textit{Behauptung} \\ Die Familie von Dichten $\{f_{\vt}\,|\,\vt\in\Theta = (0,1)^n\}$ bildet eine $n$-parametrige Exponentielle Familie mit den Statistiken $$T_i (x) = x_i$$
+        und natürlichem Parameterraum $Z^* = \R^n.$\\\\
+        }
+        \item{\textit{Beweis}
+        \begin{equation*}\begin{split} 
+        P_\vt(X = x) &= {N \choose x_1\, .\,.\,.\, x_n} \cdot (p_1^{x_1} \cdot p_2^{x_2} \,.\,.\,. \, \cdot p_n^{x_n}) \\&= \underbrace{\frac{N!}{x_1! \cdot x_2! \cdot \cdot \cdot x_n!}}_{=: K} \cdot (p_1^{x_1} \cdot p_2^{x_2} \,.\,.\,. \, \cdot p_n^{x_n}) \\&= \exp\Big(\log(K) + \log(p_1^{x_1} \cdot p_2^{x_2} \,.\,.\,. \, \cdot p_n^{x_n})\Big) \\&= \exp\Big(\log(K) + x_1 \log(p_1) + x_2 \log(p_2) + \,.\,.\,. \, + x_n \log(p_n)\Big) \\&=: \exp\Big( S(x) + T_1(x) Q_1(\vt) + T_2(x) Q_2(\vt) + \,.\,.\,. + T_n(x) Q_n(\vt) \Big),
+        \end{split}\end{equation*} mit \quad$S(x) = \log(K), \quad D(\vt) = 0, \quad T_i(x) = x_i,\quad Q_i(\vt) = \log(\vt_i), \;\;\vt_i \in (0,1).$ \\\\
+         $Q(\vt) = (Q_1(\vt), .\,.\,.\,, Q_n(\vt)) \,\Longrightarrow \, Q(\Theta) = (-\infty, 0)^n = Z \ni \xi.$\qquad(nat. Parameter) \\ $A = \{x \in \N_0 \, | \, \sum_{i=1}^n \,x_i = N\}.$ \qquad(Träger) 
+        \begin{equation*}\begin{split} {1 \over c(\xi)} &= \sum_{x \in A} \,h(x) \, \exp\Bigg(\sum_{i = 1}^n \,\xi_i \, T_i (x)\Bigg) \\&= \sum_{x \in A} \,{\rm e}^{\log(K)} \, \exp\Bigg(\sum_{i = 1}^n \,\xi_i \, x_i\Bigg) \\&= \sum_{x \in A} \, \underbrace{\frac{N!}{x_1! \cdot x_2! \cdot \cdot \cdot x_n!}}_{ K} \, \exp\Bigg(\sum_{i = 1}^n \,\xi_i \, x_i\Bigg) 
+        \end{split}\end{equation*} Beide Summen sind sichtbar endlich, wodurch also ${1 \over c(\xi)} < \infty$ gelten muss. Daraus folgt, dass $Z^\star = \R^n. \;$ $k$ ist sichtbar gleich $n$. \\\xtab\qed
+        }
+        \item{\textbf{Aufgabe 2d}\\ Betrachte die Dichten der Gamma-Verteilung $$\Gamma(\alpha,\sigma): f_{\alpha,\sigma} (x) = \frac{x^{\alpha -1}e^{-x/\sigma}}{\sigma^\alpha \Gamma(\alpha)} \,I\{x > 0\},\quad \alpha, \sigma > 0, \;\;\vt := (\alpha,\sigma).$$ 
+        }
+                \item{\textit{Behauptung} \\ Die Familie von Dichten $\{f_{\vt}\,|\,\vt\in\Theta = \R^+ \times \,\R^+ \}$ bildet eine $2$-parametrige Exponentielle Familie mit den Statistiken $$T_1 (x) = -x, \;\; T_2 (x) = \log(x)$$
+        und natürlichem Parameterraum $Z^* = \R^2.$
+        }
+        \item{\textit{Beweis} 
+        \begin{equation*}\begin{split}
+                f_{\alpha,\sigma} (x) &= \frac{x^{\alpha -1}e^{-x/\sigma}}{\sigma^\alpha \Gamma(\alpha)} \,I\{x > 0\} \\&= \frac{1}{\sigma^\alpha \Gamma(\alpha)} \exp\Bigg(-\frac{x}{\sigma} + \log(x^{\alpha -1}) \Bigg)\,I\{x > 0\} \\&= \exp\Bigg(-x \cdot \frac{1}{\sigma} + \underbrace{\log(x^{\alpha -1})}_{= (\alpha - 1)\log(x)}  + \log\Big(\frac{1}{\sigma^{\alpha}\Gamma(\alpha)}\Big)  \Bigg)\,I\{x > 0\} \\&=: \exp\Bigg(\sum_{i=1}^2 Q_i(\vt)T_i(x) + D(\vt) + S(x)  \Bigg),
+        \end{split}\end{equation*} mit \quad$S(x) = 0, \quad D(\vt) = \log\Big(\frac{1}{\sigma^{\alpha}\Gamma(\alpha)}\Big),\\ T_1(x) = -x, \quad T_2(x) = \log(x), \quad Q_1(\vt) =  \frac{1}{\sigma}, \quad Q_2(\vt) = \alpha - 1.$\\\\$A = \R^+$, aufgrund der Indikatorfunktion $I\{x > 0\}$ von $f_{\alpha,\sigma} (x). \;\;\; h(x) = e^{S(x)} = 1.$ 
+        \begin{equation*}\begin{split}
+                                {1 \over c(\xi)} &= \int_A h(x) \exp\Big(\sum_{i=1}^2 \xi_i T_i(x) \Big) dx 
+                                \\&= \int_0^\infty 1\cdot \exp\Big(-\xi_1 x + \xi_2 \log(x)   \Big) dx 
+                                \\&= \frac{1}{-\xi_1 +\xi_2 \frac{1}{x}} \exp\Big(-\xi_1 x + \xi_2 \log(x)   \Big) \Bigg|_0^\infty
+                                 \\&= \frac{1}{-\xi_1 +\xi_2 \frac{1}{x}} \exp\Big(-\xi_1 x\Big) x \exp\Big(\xi_2 \Big) \Bigg|_0^\infty \quad \longrightarrow 0 \; < \; \infty,
+        \end{split}\end{equation*} da $e^{x}$ schneller als $x$ gegen $\infty$ divergiert, konvergiert demnach $e^{-x}$ schneller gegen 0 als $x$ divergiert. Daraus folgt, dass $Z^\star = \R^2$.\; $k$ ist sichtbar gleich 2. \xtab\qed
+        }
+        \end{description}
+        \begin{description}
+                         \item{\textbf{Aufgabe 3}\\
+                                Sei $X$ eine diskrete Zufallsvariable mit Zähldichte $f\in\{f_{\vt}|\vt\in\Theta\}=\Sigma$ , wobei $\Sigma$ eine einparametrige exponentielle Familie bildet. 
+                                \\ $f$ ist von der Form:
+                                \begin{align*}
+                                        f(k)=P(X=k)=\exp(Q(\vt)T(x)+D(\vt)+S(x))
+                                \end{align*}
+                                Es bezeichne $A$ den Träger von $f$
+                                }
+                                \item{\textit{Behauptung}\\
+                                Die Zähldichten der diskreten Zufallsvariable $T(X)$ bilden eine einparametrige exponentielle Familie der Form:
+                                \begin{align*}
+                                        \exp(Q(\vt)x+D(\vt)+S^*(x))
+                                \end{align*}
+                                }
+                                \item{\textit{Beweis}\\
+                                Da $X$ diskret ist , ist insbesondere das Urbild von $T$ unter einem $k\in A$ eine diskrete Menge (endlich oder abzählbar unendlich) , da das Urbild aber nicht eindeutig ist (wir wissen nicht ob $T$ invertierbar ist) folgt für unsere Transformation: 
+                                \begin{align*}
+                                        P(T(X)=x)=P(X\in T^{-1}(x))=\sum_{k\in T^{-1}(x)}f(k) \\
+                                        =\sum_{k\in T^{-1}(x)} \exp(Q(\vt)T(k)+D(\vt)+S(k))
+                                \end{align*}
+                                Da wir über alle $k\in T^{-1}(x)$ summieren , ist insbesondere dann $T(k)=x$, weiter gilt dann also:
+                                \begin{align*}
+                                        P(T(X)=x)=\exp(Q(\vt)\cdot x+D(\vt)) \cdot \sum_{k\in T^{-1}(x)}\exp(S(k))
+                                \end{align*}
+                                Da $f$ eine Zähldichte ist und $A\supset T^{-1}(x)$, gilt insbesondere:
+                                \begin{align*}
+                                        \sum_{k\in A}f(x)=\sum_{k\in A}\exp(Q(\vt)T(k)+D(\vt)+S(k))=1\geq 
+                                \end{align*}
+                                und damit:
+                                \begin{align*}
+                                        \sum_{k\in T^{-1}(x)} \exp(Q(\vt)T(k)+D(\vt)+S(k)) \\
+                                        = \exp(Q(\vt)\cdot x+D(\vt)) \cdot \sum_{k\in T^{-1}(x)}\exp(S(k)) \leq 1
+                                \end{align*}
+                                also divergiert die Summe im Fall eines abzählbar unendlichen Urbildes nicht , setze:
+                                \begin{align*}
+                                        \delta(x)=\log\left(\sum_{k\in T^{-1}(x)}\exp(S(k)\right)
+                                \end{align*}
+                                und wir erhalten die gewünschte Darstellung, denn dann ist:
+                                \begin{align*}
+                                        P(T(X)=x)=\exp(Q(\vt)x+D(\vt)+\delta(x)).
+                                \end{align*}}
+                \end{description}
 \end{document}
