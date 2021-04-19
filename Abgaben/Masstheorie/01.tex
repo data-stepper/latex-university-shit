@@ -48,8 +48,8 @@ wohldefiniert ist, und in dem Fall gilt
   $f(\Omega) = \{ a_1,a_2,\dots \}$, d.\,h. wir können die Elemente von $f(\Omega)$  
   ordnen. Wir teilen die Menge auf in negative und nicht-negative Werte:
   \begin{align*}
-    f(\Omega)^{+} &= \{ a\in f(\Omega) \vert a\geq 0 \}, \\
-    f(\Omega)^{-} &= \{ a\in f(\Omega) \vert a < 0 \}.
+    f(\Omega)^{+} &= f(\Omega)\cap[0,\infty], \\
+    f(\Omega)^{-} &= f(\Omega)\cap[-\infty,0).
   \end{align*}
   
   Definiere:
@@ -68,12 +68,8 @@ wohldefiniert ist, und in dem Fall gilt
   auch diskret sind und wir daher die Elemente dieser Mengen indizieren können.  
   Als nächstes definieren wir folgende Elementarfunktionen:
   \begin{align*}
-      f^{+}_n(\omega) &:= \begin{cases} \sum_{i=1}^{n} a^+ \text{\textbf{1}}_{A^{+}_i}(\omega), &\quad \omega\in\Omega, \\
-                                        0                                       , &\quad \text{sonst.}
-                         \end{cases}   \\
-      f^{-}_n(\omega) &:= \begin{cases} \sum_{i=1}^{n} a^- \text{\textbf{1}}_{A^{-}_i}(\omega), &\quad \omega\in\Omega, \\
-                                        0                                       , &\quad \text{sonst.}
-                          \end{cases}           
+      f^{+}_n(\omega) &:= \sum_{i=1}^{n} a_i^+ \text{\textbf{1}}_{A^{+}_i}(\omega), \\                                                               
+      f^{-}_n(\omega) &:= \sum_{i=1}^{n} a_i^- \text{\textbf{1}}_{A^{-}_i}(\omega)                                    
   \end{align*}
 
   Dann gelten per Konstruktion:
@@ -105,13 +101,13 @@ wohldefiniert ist, und in dem Fall gilt
   \end{align*}
 
   wobei bei (3) benutzt wird, dass $f(\Omega)^+$ und $f(\Omega)^-$ die Menge $f(\Omega)$ disjunkt zerlegen.  \\
-  Aus dieser Darstellung folgt sofort, dass wenn $\int f\,d\mu$ wohldefiniert ist, dann auch
+  Aus dieser Darstellung folgt sofort, dass wenn $\int f\,d\mu$ $\mu-$integrierbar ist, dann auch
   $\sum_{a\in f(\Omega)} a \mu\{f = a\}$ es ist. Für die andere Implikationsrichtung können wir 
   nicht direkt davon ausgehen, dass die obige Gleichung gilt, da wir dies nur für den Fall gezeigt haben, 
-  wenn $\int f\,d\mu$ wohldefiniert ist. Was wir nun aber tun können, ist die Gleichungskette rückwerts 
-  hochzugehen. Da wir nun davon ausgehen, dass $\sum_{a\in f(\Omega)} a \mu\{f = a\}$ wohldefiniert ist 
-  können wir die Reihe ohne Probleme auseinanderziehen. Nun folgt wieder direkt, dass auch $\int f\,d\mu$ wohldefiniert ist. 
-  Damit ist die Behauptung schließlich gezeigt.
+  wenn $\int f\,d\mu$ $\mu-$integrierbar ist. Was wir nun aber tun können, ist die Gleichungskette rückwerts 
+  hochzugehen. Da wir nun davon ausgehen, dass $\sum_{a\in f(\Omega)} a \mu\{f = a\}$ wohldefiniert ist, 
+  können wir die Reihe ohne Probleme auseinanderziehen. Nun folgt wieder direkt, dass auch $\int f\,d\mu$ $\mu-$integrierbar ist. 
+  Damit ist die Behauptung bewiesen.
 \end{proof}
 
 
