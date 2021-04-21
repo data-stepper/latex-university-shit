@@ -236,22 +236,31 @@ mit
 $$
 f^{(n)} \coloneqq  \sum_{i=1}^{n2^n-1} i2^{-n} \mathbbm{1}_{\{i2^{-n} \leq f < (i+1)2^{-n}\}} + n\mathbbm{1}_{\{f \geq n\}}
 $$
-definieren.
-Gilt (i), also $\int f \; d\mu = 0$, dann folgt mit Satz 2.7 (iii) für alle $n \in \mathbb{N}$ auch $\int f^{(n)} \; d\mu = 0$, da $f^{(n)} \leq f$, also 
+definieren. \\
+Gilt (i), also $\int f \; d\mu = 0$, dann folgt mit Satz 2.7 (iii) (siehe Bemerkung unten) für alle $n \in \mathbb{N}$ auch $\int f^{(n)} \; d\mu = 0$, da $f^{(n)} \leq f$, also 
 $$
 \sum_{i=1}^{n2^n-1} i2^{-n} \mu\{i2^{-n} \leq f < (i+1)2^{-n}\} + n\mu\{f \geq n\} =  0
 $$ 
 für alle $n \in \mathbb{N}$. Diese Summe kann nur gleich Null sein, wenn alle beteiligten Maße gleich Null sind, da die anderen Faktoren in allen Termen positiv sind. Mit
-$$
+\begin{equation}
+\label{eq:Cups}
 \{f \neq 0\} = \bigcup_{n \in \mathbb{N}} \bigcup_{1 \leq i \leq n2^n-1} \{i2^{-n} \leq f < (i+1)2^{-n}\} \cup \{f \geq n\}
-$$ 
+\end{equation}
 und der $\sigma$-Subadditivität von $\mu$ folgt $\mu\{f \neq 0\} = 0$, also (ii). \\
-Es gelte jetzt (ii). Wir können die Funktion $f$ auch als Summe $f = f\mathbbm{1}_{\{f = 0\}} + f\mathbbm{1}_{\{f \neq 0\}}$ schreiben. Aus der Linearität des Integrals folgt
-$$
-\int f \; d\mu = \int f\mathbbm{1}_{\{f = 0\}} \; d\mu + \int f\mathbbm{1}_{\{f \neq 0\}} \; d\mu = 0
-$$
-da beide Summanden gleich Null sind. Für den Ersten ist es offensichtlich, beim Zweiten gilt es, da die elementare numerische Funktion $\omega \mapsto \mathbbm{1}{\{f \neq 0\}}(\omega) \cdot \infty$ eine Majorante mit Integral gleich Null ist. \\
+Es gelte jetzt (ii). Jede der vereinigten Mengen rechts in Gleichung \ref{eq:Cups} hat wegen der Montonie von $\mu$ das Maß Null. Dann ist $\int f^{(n)} \; d\mu = 0$ für alle $n \in \mathbb{N}$ und damit ist auch deren Supremum gleich Null, also $\int f \; d\mu = 0$, dh. es gilt (i).
+
 \end{proof} 
 
+\textit{Bemerkung. }  Möglicherweise ist Satz 2.7 aus dem Stoff der nächsten Woche. Aber es reicht auch Satz 2.5, der diese Woche dran war: \\
+Wir finden wegen $\int f \; d\mu = 0$ auf jeden Fall zu jedem $\epsilon > 0$ einen Index $n_\epsilon \in \mathbb{N}$, so dass  
+$$
+\int f^{(n_\epsilon)} \; d\mu = \sum_{i=1}^{n_\epsilon2^{n_\epsilon-1}} i2^{-n_\epsilon} \mu\{i2^{-n_\epsilon} \leq f < (i+1)2^{-n_\epsilon}\} + n_\epsilon \mu\{f \geq n_\epsilon\} < \epsilon
+$$
+da das Supremum dieser Ausdrücke für alle $n \in \mathbb{N}$ gleich Null ist. Aus Satz 2.5 folgt nun, dass für alle $n < n_\epsilon$ auch $\int f^{(n)} \; d\mu  \leq \int f^{(n_\epsilon)} \; d\mu < \epsilon$ gilt, da die Folge der Elementarfunktionen $f^{(n)}$ monoton aufsteigend ist. 
+Da $\epsilon$ beliebig war, sind diese Ausdrücke alle gleich Null und wir können oben weitermachen, so als hätten wir Satz 2.7 benutzt :-)
 
 \end{document}
+
+
+
+
