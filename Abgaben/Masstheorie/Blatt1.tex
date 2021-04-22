@@ -1,0 +1,138 @@
+\documentclass[11pt]{amsart}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\usepackage{mathtools}
+\usepackage{enumitem}   
+\usepackage[babel]{microtype}
+\usepackage[german]{babel} 
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+
+\geometry{left=25mm,right=25mm, top=22.5mm, bottom=22.5mm}  
+
+\setlength\parindent{0pt}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Maßtheoretische Konzepte der Stochastik - Übung 1}
+\author{Amir Miri Lavasani, Bent Müller, Michael Hermann}
+%\date{}                                           % Activate to display a given date or no date
+
+
+\begin{document}
+\maketitle
+
+\pagestyle{empty}
+
+\section{Aufgabe}
+\thispagestyle{empty}
+\textit{Die $\sigma$-Algebra $\mathcal{A} \coloneqq \{A \subset \mathbb{R} \;|\; A \text{ abzählbar oder } A^c \text{ abzählbar}\}$ wird vom Mengensystem  $\mathcal{C} \coloneqq  \{\{x\} \;|\; x \in \mathbb{R}\}$ erzeugt.}
+\begin{proof}
+Zu zeigen ist: $\mathcal{A}$ ist die kleinste $\sigma$-Algebra, die $\mathcal{C}$ enthält. \\
+Die Aussage $\mathcal{C} \subseteq \mathcal{A}$ ist klar, da $\mathcal{C}$ aus endlichen, also insbesondere abzählbaren Mengen besteht. \\
+Das Mengensystem $\mathcal{A}$ ist eine $\sigma$-Algebra, denn:
+\begin{itemize}
+\item da $\emptyset$ endlich ist, dh. abzählbar, ist auch $\mathbb{R} \in \mathcal{A}$
+\item ist $A \in \mathcal{A}$, dann ist entweder $A$ oder $A^c$ abzählbar, also ist auch $A^c \in \mathcal{A}$
+\item für $A_n \in \mathcal{A}$, $n \in \mathbb{N}$, gilt: Sind alle $A_n$ abzählbar, dann ist auch $\bigcup_{n \in \mathbb{N}} A_n$ abzählbar, also $\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{A}$. Falls mindetsens ein $A_k$ nicht abzählbar ist, dann ist $A_k^c$ abzählbar und damit auch $(\bigcup_{n \in \mathbb{N}} A_n)^c = \bigcap_{n \in \mathbb{N}} A_n^c \subseteq A_k^c$, also auch in diesem Fall $\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{A}$.
+\end{itemize}
+
+Andererseits gilt für jede $\sigma$-Algebra $\mathcal{B}$ mit $\mathcal{C} \subseteq \mathcal{B}$ auch  $\mathcal{A} \subseteq \mathcal{B}$, denn jede abzählbare Menge kann als abzählbare Vereinigung einelementiger Mengen, dh. der Mengen aus $\mathcal{C}$, geschrieben werden. Da $\mathcal{B}$ eine $\sigma$-Algebra ist, sind all diese Mengen sowie ihre Komplemente auch Elemente von $\mathcal{B}$. \\
+\end{proof} 
+
+\section{Aufgabe}
+\textit{Sei $(\Omega, \mathcal{A})$ ein Messraum und $\mu: \mathcal{A} \rightarrow [0, \infty]$ eine nulltreue, additive Abbildung. Betrachte folgende Eigenschaften von $\mu$:
+\begin{enumerate}[label=(\roman*)]
+\item $\mu$ ist $\sigma$-additiv \label{item:a1}
+\item $\mu$ ist $\sigma$-stetig von unten \label{item:a2}
+\item $\mu$ ist $\sigma$-stetig von oben \label{item:a3}
+\item $\mu$ ist $\emptyset$-stetig \label{item:a4}
+\end{enumerate}
+Dann gilt: 
+\begin{enumerate}[label=(\alph{enumi})]
+\item Es gilt \ref{item:a1} $\Rightarrow$  \ref{item:a2} $\Rightarrow$  \ref{item:a3} $\Rightarrow$  \ref{item:a4} 
+\item Falls $\mu(\Omega) < \infty$ sind die Aussagen \ref{item:a1} bis \ref{item:a4} äquivalent 
+\end{enumerate}
+}
+\begin{proof} $\;$
+\begin{enumerate}[label=(\alph{enumi})]
+\setlength\parindent{0pt}
+\item Es gelte \ref{item:a1}. Sei $A_n, n \in \mathbb{N}$ eine Mengenfolge in $\mathcal{A}$ mit $A_n \uparrow A$ für ein $A \in \mathcal{A}$. Wir konstruieren eine Folge $B_n$ in $\mathcal{A}$ durch $B_1 \coloneqq A_1$ und $B_n \coloneqq A_n \setminus A_{n-1}$ (da wir auch $B_n = (A_{n} \cap A_{n-1}^c) = (A_{n}^c \cup A_{n-1})^c$ schreiben können, ist tatsächlich $B_n \in \mathcal{A}$ für alle $n \in N$). Dann gilt $\bigcup_{i \leq n} B_i = A_n$ für jedes $n \in \mathbb{N}$ und da die Mengen $B_n$ paarweise disjunkt sind, ist  $\mu(A_n) = \sum_{i=1}^n \mu(B_i)$ mit der Additivität von $\mu$. Aus $\bigcup_{n \in \mathbb{N}} B_n = A$ folgt nun mit \ref{item:a1}:
+\begin{eqnarray*}
+\lim_{n \rightarrow \infty} \mu(A_n) &=& \lim_{n \rightarrow \infty} \sum_{i=1}^n \mu(B_i) \\ 
+&=& \sum_{n=1}^\infty \mu(B_n) \\ 
+&=& \mu(\bigcup_{n \in \mathbb{N}} B_n) = \mu(A)
+\end{eqnarray*}
+also gilt \ref{item:a2}. \\
+
+Wir betrachten jetzt die absteigende Mengenfolge $A_n \downarrow A$ in $\mathcal{A}$. Es gebe ein $m \in \mathbb{N}$ mit $\mu(A_m) < \infty$. Da die Folge absteigend ist, können wir oBdA. $m=1$ annehmen, ansonsten betrachte die Restfolge die bei Index $m$ startet. \\
+Es sei $B_n$ die Folge von Mengen in $\mathcal{A} $ definiert durch $B_n = A_1 \cap A_n^c = A_1 \setminus A_n$. Da $A_n \downarrow A$ eine absteigende Folge ist, ist $B_n$ aufsteigend mit $B_n \uparrow A_1 \setminus A$. Da $\mu$ additiv ist folgt aus $A_1 = A_n \cup B_n$ und $ A_n \cap B_n = \emptyset$ die Gleichung $\mu(A_1) = \mu(A_n) + \mu( B_n)$, bzw. $\mu( B_n) = \mu(A_1) - \mu(A_n)$ für alle $n \in \mathbb{N}$, da nach Annahme alle beteiligten Mengen endliches Maß haben. Mit Eigenschaft \ref{item:a2} gilt nun
+\begin{eqnarray*}
+\mu(A_1) - \lim_{n \rightarrow \infty} \mu(A_n) &=&  \lim_{n \rightarrow \infty}\mu(A_1) - \mu(A_n)  \\
+&=& \lim_{n \rightarrow \infty} \mu(B_n) \\
+&=& \mu( A_1 \setminus A) = \mu(A_1) - \mu(A)
+\end{eqnarray*} 
+Subtrahieren von $\mu(A_1)$ und Multiplizieren mit $-1$ zeigt die Gültigkeit von \ref{item:a3}. \\
+
+\ref{item:a4} folgt sofort aus \ref{item:a3}  und der Nulltreue von $\mu$. \\
+
+\item Es sei jetzt $\mu(\Omega) < \infty$. Aus der Additivität von $\mu$ folgt $\mu(\Omega) = \mu(A) + \mu(A^c)$ für jede Menge $A \in \mathcal{A}$ also ist $\mu$ endlich für jede Menge aus $\mathcal{A}$. Wir zeigen die Implikationskette rückwärts, dh. \ref{item:a4} $\Rightarrow$  \ref{item:a3} $\Rightarrow$  \ref{item:a2} $\Rightarrow$  \ref{item:a1}. \\
+
+Es gelte \ref{item:a4}.  Sei $A_n \downarrow A$ eine absteigende Mengenfolge in $\mathcal{A}$. Für die Folge $B_n \coloneqq A_n \setminus A$ gilt $B_n \downarrow \emptyset$. Da $\mu(\Omega) < \infty$ gilt $\mu(B_n) < \infty$ für alle $n \in \mathbb{N}$ und mit \ref{item:a4} folgt $\mu(B_n) \rightarrow 0$. Wegen der Additivität von $\mu$ gilt $\mu(A_n) = \mu(A) + \mu(B_n)$ und es folgt schliesslich $\lim_{n \rightarrow \infty} \mu(A_n) = \mu(A)$, also gilt  \ref{item:a3}.\\
+
+Sei jetzt $A_n \uparrow A$ eine aufsteigende Mengenfolge in $\mathcal{A}$. Da $\mathcal{A}$ eine $\sigma$-Algebra und $\mu(\Omega) < \infty$ ist $A_n^c \downarrow A^c$ eine absteigende Mengenfolge in $\mathcal{A}$, die die Voraussetzungen von \ref{item:a3} erfüllt. Es folgt 
+\begin{eqnarray*}
+\mu(\Omega) - \mu(A) &=& \mu(A^c) \\
+&=& \lim_{n \rightarrow \infty} \mu(A_n^c)  \\
+&=& \lim_{n \rightarrow \infty} \mu(\Omega) - \mu(A_n) \\
+&=& \mu(\Omega) -  \lim_{n \rightarrow \infty} \mu(A_n)
+\end{eqnarray*}
+und die Eigenschaft \ref{item:a2} gilt nach Umformung der Gleichung.\\
+
+Es seien $A_n \in \mathcal{A}$ für $n \in \mathbb{N}$ paarweise disjunkte Mengen und $A \coloneqq \bigcup_{n \in \mathcal{N}} A_n$. Da $\mathcal{A}$ eine $\sigma$-Algebra ist, ist $B_n \coloneqq \bigcup_{i \leq n} A_i$ eine aufsteigende Mengenfolge in $\mathcal{A}$ mit $B_n \uparrow A$ für eine Menge $A \coloneqq \bigcup_{n \in \mathcal{N}} A_n \in \mathcal{A}$. Da $\mu$ additiv ist, gilt $\mu(B_n) = \sum_{i=1}^n \mu(A_i)$ für alle $n \in \mathbb{N}$ und aus \ref{item:a2} folgt
+\begin{eqnarray*}
+\mu(A) &=& \lim_{n \rightarrow \infty} \mu(B_n) \\
+&=& \lim_{n \rightarrow \infty} \sum_{i=1}^n \mu(A_i) \\
+&=& \sum_{n=1}^\infty \mu(A_n)
+\end{eqnarray*}
+und somit gilt \ref{item:a1}.
+
+\end{enumerate}
+\end{proof}
+
+\section{Aufgabe}
+\textit{Die Eindeutigkeitsaussage der Maßfortsetzungssatzes gilt nicht mehr notwendigerweise, wenn keine Mengen $C_n \in \mathcal{C}, n \in \mathbb{N}$ existieren mit $\mu_1(C_n) < \infty$ und $\bigcup_{n \in \mathbb{N}} C_n = \Omega$.} 
+\begin{proof}
+Wir geben ein Gegenbeispiel basierend auf dem Erzeugendensystem $\mathcal{C}$ aus Aufgabe 1. Dort wurde gezeigt, dass dieses Mengensystem die $\sigma$-Algebra $\mathcal{A} \coloneqq \{A \subset \mathbb{R} \;|\; A \text{ abzählbar oder } A^c \text{ abzählbar}\}$ erzeugt. Das System $\mathcal{C}$, wie oben definiert, ist nicht $\cap$-stabil, deswegen definieren wir hier $\mathcal{C} \coloneqq  \{\{x\} \;|\; x \in \mathbb{R}\} \cup \{\emptyset\}$. An der Erzeugendeneigenschaft ändert sich dadurch natürlich nichts. Für ein Gegenbeipiel zur Eindeutigigkeit der Maßfortsetzung suchen wir also zwei Maße $\mu_1, \mu_2: \mathcal{A} \rightarrow [0, \infty]$ die sich irgendwo auf $\mathcal{A}$ unterscheiden, aber auf $\mathcal{C}$ übereinstimmen. \\ 
+Dies gilt zB. für das Nullmaß $\mu_1 \equiv 0$ und die Einschränkung des Lebesguemaßes auf $\mathcal{A}$, dh. für $\mu_2: \mathcal{A} \rightarrow [0, \infty]$ definiert durch 
+$$
+\mu_2(A) \coloneqq
+\begin{cases}
+0 &\text{ , falls } A \text{ abzählbar} \\ 
+\infty &\text{ , falls } A^c \text{ abzählbar} 
+\end{cases}
+$$
+Die Abbildung ist wohldefiniert, da für $A$ abzählbar das Komplement $A^c = \mathbb{R} \setminus A$ überabzählbar ist. Falls das Komplement einer Menge $A \in \mathcal{A}$ abzählbar ist, so ist $A$ überabzählbar. Andere Fälle kommen in $\mathcal{A}$ nicht vor.\\
+Die Mengen in $\mathcal{C}$ sind endlich, also insbesondere abzählbar und es gilt $\mu_1(A) = \mu_2(A) = 0$ für alle $A \in \mathcal{C}$. Das Komplement $A^c$ einer beliebigen Menge $A \in \mathcal{C}$ ist in $\mathcal{A}$ und nicht abzählbar, dh. es existiert eine Menge auf der sich die beiden Abbildungen unterscheiden. \\
+Wir verifizieren noch kurz die Maßeigenschaften von $\mu_2$, für $\mu_1$ sind sie trivialerweise erfüllt:
+\begin{itemize}
+\item Die Nulltreue ist klar, da wir die leere Menge als endlich und damit in unserem Sinne als abzählbar annehmen können.
+\item Seien $A_n, n \in \mathbb{N}$ disjunkte Menge aus $\mathcal{A}$. Sind alle Mengen $A_n$ abzählbar, dann ist auch ihre Vereinigung abzählbar und es gilt $\mu_2(\bigcup_{n \in \mathbb{N}} A_n) = \sum_{b \in \mathbb{N}} \mu_2(A_n) = 0$. \\
+Falls es ein $k \in \mathbb{N}$ gibt, so dass $\mu_2(A_k) = \infty$, dann ist $A_k^c$ abzählbar und wegen $(\bigcup_{n \in \mathbb{N}} A_n)^c = \bigcap_{n \in \mathbb{N}} A_n^c \subseteq A_k^c$ auch das Komplement der Vereinigung aller $A_n$ abzählbar. \\
+Somit gilt $\mu_2(\bigcup_{n \in \mathbb{N}} A_n) = \sum_{n \in \mathbb{N}} \mu_2(A_n) = \infty$.
+\end{itemize}
+
+
+
+
+\end{proof}
+
+\end{document}  
