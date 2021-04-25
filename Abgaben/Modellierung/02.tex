@@ -151,4 +151,57 @@
     \begin{align*}
       R_{2,1}(t) = \frac{2 - \frac{1}{12}t + \frac{1}{24}t^2}{1 + \frac{1}{12}t}\,.
     \end{align*}
+
+\begin{theorem} % Aufgabe #5
+\begin{Aufgabe}{5} % #5
+	Pade Approximation einer generellen Funktion $f(x)$ 
+\end{Aufgabe}
+
+\beh Zu berechnen war die Pade Approximation mit $m=n=1$ einer generellen
+Funktion mit Hilfe eines Taylor Polynoms 2. Grades $T_2(x)$.
+
+\begin{proof}[Beweis]
+	Zuerst berechnen wir die Koeffizienten $c_k$ unseres Taylor Polynoms $T_2(x)$.
+	\begin{align*}
+		T_2(x) &= f(x_0) + f' (x_0)(x-x_0) + \frac{ f'' (x_0) }{ 2 }(x-x_0) ^2 \\
+			   &= \frac{ f''(x_0) }{ 2 }x ^2
+			   + (f'(x_0) - x_0 f''(x_0)) x
+			   + \frac{ f ''(x_0) }{ 2 }x_0 ^2 - x_0 f'(x_0) + f(x_0)
+	\end{align*}
+	Nun finden wir die Koeffizienten unserer Rationalen Funktion der Pade Approximation
+	heraus welche wie folgt aus sieht:
+	\[
+		R(x) = \frac{ a_0 + a_1 x }{ 1 + b_1 x }
+	\]
+	Wir erhalten folgendes lineares Gleichungssystem:
+	\begin{align}
+		&\sum_{j=0}^{0} b_j c_{0-j} = a_0 \implies
+		c_0 = a_0 \\
+		&\sum_{j=0}^{1} b_{j} c_{1-j} = a_1 \implies
+		b_0 c_1 + b_1 c_0 = a_1 \\
+		&\sum_{j=0}^{1} b_{j} c_{1-j+1} = 0 \implies
+		b_0 c_2 + b_1 c_1 = 0
+	\end{align}
+	Nun können wir Folgerungen schließen:
+	\begin{align*}
+		a_1 &= f'(x_0) - x_0 f''(x_0) + b_1 \left(
+			\frac{ f ''(x_0) }{ 2 } x_0 ^2 - x_0 f'(x_0) + f(x_0)
+		\right) \\
+			&c_2 + b_1 c_1 = 0 \Leftrightarrow 
+			\frac{ f ''(x_0) }{ 2 } + b_1 \left(
+				f' (x_0) - x_0 f ''(x_0)
+			\right) = 0 \\
+			& \implies b_1 = 
+			- \frac{ f ''(x_0) }{ 2 \left(
+					f' (x_0) - x_0 f ''(x_0)
+			\right) } \\
+			& \implies a_1 = 
+			f' (x_0) - x_0 f ''(x_0) - \left(
+				\frac{ f ''(x_0) }{ 2 (f'(x_0) - x_0 f ''(x_0) ) }
+			\right) ( f'(x_0) - x_0 f ''(x_0) ) \\
+			&= f'(x_0) - x_0 f ''(x_0) - \frac{ f ''(x_0) }{ 2 }
+	\end{align*}
+\end{proof}
+\end{theorem}
+
 \end{document}
