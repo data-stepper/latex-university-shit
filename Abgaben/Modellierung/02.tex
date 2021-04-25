@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Mathematische Modellierung - Übungsblatt \#2} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332)} \maketitle
+
+ 
+\begin{Aufgabe}{4}
+    (Potenzreihen-Lösung einer Diff.gleichung)
+\end{Aufgabe}
+
+\textbf{(a)} Das Anfangswert-Problem ist 
+  \begin{align*}
+    y^\prime(t) = -\kappa(y(t) - y_a), \quad y(0) = 2.
+  \end{align*}
+  
+  Wir verwenden den Potenzreihen-Ansatz $y(t) = \sum_{k=0}^{\infty} c_k t^k$. Die Koeffizienten $c_k$ sollen 
+  für $k=0,\dots,3$ bestimmt werden. Die Potenzreihe von $y^\prime(t)$ ist gegeben durch 
+  \begin{align*}
+    y^\prime(t) = \sum_{k=0}^{\infty} c_{k+1}(k+1) t^k
+  \end{align*}
+
+  Durch Umformung der Differentialgleichung nach $y(t)$ und einsetzen der Potenzreihen erhalten wir:
+  \begin{align*}
+    \sum_{k=0}^{\infty} c_k t^k = -\frac{1}{\kappa} \sum_{k=0}^{\infty} c_{k+1}(k+1) t^k + y_a
+  \end{align*}
+
+  Schreiben wir die Summen bis $k=3$ aus erhalten wir:
+  \begin{align*}
+    c_0 + c_1t + c_2t^2 + c_3t^3 = -\frac{1}{\kappa}c_1 - \frac{2}{\kappa}c_2t 
+                                   - \frac{3}{\kappa}c_3t^2 - \frac{4}{\kappa}c_4t^3 + y_a  \qquad(\star)
+  \end{align*}
+
+  Durch Koeffizientenvergleich folgt:
+  \begin{itemize}
+    \item[-] $c_0 = y_a - \frac{1}{\kappa}c_1 \quad\Rightarrow\quad c_1 = \kappa(y_a - c_0)$
+    \item[-] $c_1 = -\frac{2}{\kappa}c_2 \quad\Rightarrow\quad c_2 = -\frac{\kappa}{2} c_1$
+    \item[-] $c_2 = -\frac{3}{\kappa} c_3 \quad\Rightarrow\quad c_3 = -\frac{\kappa}{3}c_2$ 
+  \end{itemize}
+
+  Einsetzen in $(\star)$ liefert
+  \begin{align*}
+    y(t) &= c_0 + \kappa(y_a - c_0) t - \frac{\kappa}{2} c_1 t^2 - \frac{\kappa}{3}c_2 t^3 \\
+  \end{align*}
+
+  Aus $y(t) = 2$ folgt $c_0 = 2$. Daraus folgt
+  \begin{itemize}
+    \item[-] $c_1 = \kappa(y_a - 2)$
+    \item[-] $c_2 = -\frac{\kappa}{2} (\kappa (y_a - 2)) = -\frac{k^2}{2}(y_a - 2)$ 
+    \item[-] $c_3 = -\frac{\kappa}{3}(-\frac{k^2}{2}(y_a - 2)) = \frac{\kappa^3}{6}(y_a - 2)$
+  \end{itemize}
+
+  Einsetzen in $(\star)$ liefert schließlich 
+  \begin{align*}
+    y(t) &= 2 + \kappa(y_a - 2)t - \frac{k^2}{2}(y_a - 2)t^2 + \frac{\kappa^3}{6}(y_a - 2)t^3 \\
+         &= 2 + (y_a - 2) \left( \kappa t - \frac{k^2}{2} t^2 + \frac{\kappa^3}{6} t^3 \right).
+  \end{align*}
+
+\end{document}
