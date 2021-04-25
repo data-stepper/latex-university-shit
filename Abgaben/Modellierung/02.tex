@@ -60,7 +60,7 @@
 
   Einsetzen in $(\star)$ liefert
   \begin{align*}
-    y(t) &= c_0 + \kappa(y_a - c_0) t - \frac{\kappa}{2} c_1 t^2 - \frac{\kappa}{3}c_2 t^3 \\
+    y(t) &= c_0 + \kappa(y_a - c_0) t - \frac{\kappa}{2} c_1 t^2 - \frac{\kappa}{3}c_2 t^3. \qquad (\star\star) \\
   \end{align*}
 
   Aus $y(t) = 2$ folgt $c_0 = 2$. Daraus folgt
@@ -70,10 +70,10 @@
     \item[-] $c_3 = -\frac{\kappa}{3}(-\frac{k^2}{2}(y_a - 2)) = \frac{\kappa^3}{6}(y_a - 2)$
   \end{itemize}
 
-  Einsetzen in $(\star)$ liefert schließlich 
+  Einsetzen in $(\star\star)$ liefert schließlich 
   \begin{align*}
     y(t) &= 2 + \kappa(y_a - 2)t - \frac{k^2}{2}(y_a - 2)t^2 + \frac{\kappa^3}{6}(y_a - 2)t^3 \\
-         &= 2 + (y_a - 2) \left( \kappa t - \frac{k^2}{2} t^2 + \frac{\kappa^3}{6} t^3 \right).
+         &= 2 + (y_a - 2) \left( \kappa t - \frac{k^2}{2} t^2 + \frac{\kappa^3}{6} t^3 \right). \qquad 
   \end{align*}
   
   \newpage 
@@ -110,5 +110,45 @@
     Somit gilt 
     \begin{align*}
       R_{1,1}(t) = \frac{2}{1+\frac{1}{8}t}\,.
+    \end{align*}
+
+    Nun seien $m=2, n=1$. Die zu bestimmende rationale Funktion hat die Gestalt
+    \begin{align*}
+      R_{2,1} = \frac{a_0 + a_1t + a_2t^2}{b_0 + b_1t},
+    \end{align*}
+
+    wobei wir wieder $b_0 = 1$ setzen. Folgendes Gleichungssystem muss gelöst werden:
+    \begin{enumerate}
+      \item[(1)] $\sum_{j=0}^{k} b_j c_{k-j} = a_k$. \quad $(k = 0,1,2)$
+      \item[(2)] $\sum_{j=0}^{k} b_j c_{2-j+k} = 0$. \quad $(k = 1)$
+    \end{enumerate}
+
+    Aus (1) erhalten wir folgende Gleichungen:
+    \begin{align*}
+      b_0c_0 &= a_0 \iff 2b_0 = a_0 \iff a_0 = 2   \\
+      b_0c_1 + b_1c_0 &= a_1 \iff a_1 = c_1 + b_1c_0 \iff a_1 = -\frac{1}{4} + 2b_1 \qquad (\star) \\
+      b_0c_2 + b_1c_1 + b_2c_0 &= a_2 \iff a_2 = 2\cdot \frac{2}{32} - \frac{1}{4}b_1 + 2\cdot 0
+                                      \iff a_2 = \frac{1}{16} - \frac{1}{4}b_1 \qquad (\star\star)
+    \end{align*}
+
+    Aus (2) erhalten wir:
+    \begin{align*}
+      b_0c_3 + b_1c_2 = 0 \iff -\frac{1}{384} + \frac{1}{32}b_1 = 0 \iff b_1 = \frac{1}{12}.
+    \end{align*}
+
+    Einsetzen in $(\star)$ liefert 
+    \begin{align*}
+      a_1 = -\frac{1}{4} + 2\cdot \frac{1}{12} = -\frac{1}{12}
+    \end{align*}
+
+    und schließlich erhalten wir durch einsetzen in $(\star\star)$
+    \begin{align*}
+      a_2 &= \frac{1}{16} - \frac{1}{4}\cdot \frac{1}{12}  \\
+          &= \frac{1}{24}.
+    \end{align*}
+
+    Insgesamt folgt
+    \begin{align*}
+      R_{2,1} = \frac{2 - \frac{1}{12}t + \frac{1}{24}t^2}{1 + \frac{1}{12}t}\,.
     \end{align*}
 \end{document}
