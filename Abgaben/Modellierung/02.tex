@@ -201,6 +201,17 @@ Funktion mit Hilfe eines Taylor Polynoms 2. Grades $T_2(x)$.
 			\right) ( f'(x_0) - x_0 f ''(x_0) ) \\
 			&= f'(x_0) - x_0 f ''(x_0) - \frac{ f ''(x_0) }{ 2 }
 	\end{align*}
+	Also können wir nun unsere Funktion $R(x)$ hinschreiben welche wie folgt aussieht:
+	\[
+		R(x) = \frac{ 
+			\frac{ f ''(x_0) }{ 2 }x_0 ^2 - x_0 f'(x_0) + f(x_0) +
+			\left(
+				f'(x_0) - (x_0 - \frac{ 1 }{ 2 }) f ''(x_0)
+			\right) x
+		}{ 1 - \frac{ f ''(x_0) }{ 2 \left(
+				f' (x_0) x_0 f ''(x_0)
+		\right)  } }
+	\] 
 \end{proof}
 \end{theorem}
 
