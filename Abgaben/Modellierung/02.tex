@@ -75,5 +75,40 @@
     y(t) &= 2 + \kappa(y_a - 2)t - \frac{k^2}{2}(y_a - 2)t^2 + \frac{\kappa^3}{6}(y_a - 2)t^3 \\
          &= 2 + (y_a - 2) \left( \kappa t - \frac{k^2}{2} t^2 + \frac{\kappa^3}{6} t^3 \right).
   \end{align*}
+  
+  \newpage 
 
+  \textbf{(b)} Seien $\kappa = \frac{1}{4}, y_a = 1$. Zunächst bestimmen wir die Pade-Approximation mit $m=n=1$. 
+    Die gesuchte rationale Funktion hat die Form 
+    \begin{align*}
+      R_{1,1}(t) = \frac{a_0 + a_1t}{b_0 + b_1t},
+    \end{align*}
+
+    wobei $b_0 = 1$.
+    Um die restlichen Koeffizienten nach der Pade-Approximation zu bestimmen, muss folgendes Gleichungssystem gelöst werden
+    \begin{enumerate}
+      \item[(1)] $\sum_{j=0}^{k} b_j c_{k-j} = a_k$. \quad $(k = 0,1)$
+      \item[(2)] $\sum_{j=0}^{k} b_j c_{1-j+k} = 0$. \quad $(k = 1)$ 
+    \end{enumerate}
+
+    Aus (1) erhalten wir folgende Gleichungen: 
+    \begin{align*}
+      b_0\cdot c_0 &= a_0 \iff a_0 = 2    \\
+      b_0\cdot c_1 + b_1\cdot c_0 &= a_1 \iff a_1 = -\frac{1}{4} + 2b_1   \\
+    \end{align*}
+
+    Aus (2) erhalten wir: 
+    \begin{align*}
+      b_0\cdot c_2 + b_1\cdot c_1 = 0 \iff \frac{1}{32} - \frac{1}{4}b_1 = 0 \iff b_1 = \frac{1}{8}
+    \end{align*}
+
+    Durch einsetzen erhalten wir schließlich:
+    \begin{align*}
+      a_1 = -\frac{1}{4} + 2\left(\frac{1}{8}\right) = 0.
+    \end{align*}
+
+    Somit gilt 
+    \begin{align*}
+      R_{1,1}(t) = \frac{2}{1+\frac{1}{8}t}\,.
+    \end{align*}
 \end{document}
