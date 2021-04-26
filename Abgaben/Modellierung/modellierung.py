@@ -1,4 +1,4 @@
-"""Python script für Modellierung (Zettel 2)."""
+"""Python script für Modellierung Zettel 2 Aufgabe 5c) ;)"""
 
 import numpy as np
 import scipy

@@ -1,0 +1,124 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{document}
+\maketitle
+
+%% Start aufgabe 1c
+
+\begin{theorem} % Aufgabe #1
+\begin{Aufgabe}{1} % #1
+	c)
+\end{Aufgabe}
+
+\beh $\hat{S_n} ^2 \overset{P}\longrightarrow Var (X_1)$ 
+
+\begin{proof}[Beweis]
+	Wir benutzen die Tschebyschev-Ungleichung aus 5.12 b) aus dem Stochastik Skript.
+	In dieser setzen wir $X = \hat{S_n ^2}$ und erhalten folgendes:
+	\[
+		P(| \hat{S_n ^2} - E \left[
+			\hat{S_n ^2} 
+			\right] | \geq \epsilon) \leq \frac{ 
+			Var (\hat{S_n ^2} )
+		}{ \epsilon ^2 }
+	\] 
+	Allerdings kennen wir aus der vorherigen Aufgabe (1b) $Var (\hat{S_n ^2} )$ und
+	wissen auch, dass diese bei $n \to \infty$ gegen $0$ geht. Also gilt:
+	\[
+		Var (\hat{S_n ^2} ) = \frac{ 1 }{ n } E \left[
+			(X_1 - E \left[
+				X_1
+			\right] ) ^{4}
+		\right] \frac{ 3-n }{ n(n-1) } (Var (X_1))^2
+	\] 
+	Und hier sehen wir eindeutig, dass dieser Term bei $n \to \infty$ gegen 0 geht, da
+	beide Summanden den Faktor $\frac{ 1 }{ n }$ haben. Also wissen wir aus der
+	Tschebyschev-Ungleichung, dass auch der linke Term der Ungleichung gegen 0
+	geht.
+	\[
+		P(| \hat{S_n ^2}  - E \left[
+			\hat{S_n ^2} 
+		\right] | \ge \epsilon) \le \frac{ 0 }{ \epsilon ^2 }
+		\text{ (bei $n \to  \infty$ ) }
+	\] 
+	Nun ist aber die Aussage von stochastischer Konvergenz genau die, dass
+	diese Warscheinlichkeit eben im Grenzfall $n \to  \infty$ genau 0 ist.
+	Somit ist die Behauptung bewiesen.
+\end{proof}
+\end{theorem}
+
+\begin{theorem} % Aufgabe #2
+\begin{Aufgabe}{2} % #2
+	Konvergenz in Verteilung des 4. Stichprobenmoments zeigen.
+\end{Aufgabe}
+
+\beh $\sqrt{n} (a_{4,n} - E \left[
+	X_1 ^{4}
+\right] ) \overset{D} \longrightarrow \mathcal{N} (0, \tau ^2)$
+
+\begin{proof}[Beweis]
+	Mit Hilfe des Zentralen Grenzwertsatzes und Korollar 14.2 aus dem Stochastik Skript
+	wissen wir direkt:
+	\begin{align}
+	\frac{ 1 }{ \sqrt{n}  }\left(
+		\sum_{i=1}^{n} X_i ^{4} - n E \left[
+			X_1 ^{4}
+		\right] 
+	\right) \overset{D} \longrightarrow \mathcal{N} (0, Var (X_1 ^{ 4 }))
+	\end{align}
+	Nun formen wir wie folgt um und erhalten:
+	\begin{align*}
+		&\frac{ 1 }{ \sqrt{n}  } \left(
+			\sum_{i=1}^{n} X_i ^{4} - n E \left[
+				X_1 ^{4}
+			\right] 
+		\right) \\
+		&= \frac{ 1 }{ \sqrt{n} }\; n \left(
+			\frac{ 1 }{ n } \sum_{i=1}^{n} X_i ^{4} - E \left[
+				X_1 ^{4}
+			\right] 
+		\right) \\
+		&= \sqrt{n} \left(
+			a_{4, n} - E \left[
+				X_1 ^{4}
+			\right] 
+		\right) 
+	\end{align*}
+	Nun wissen wir auch direkt aus Gleichung (1), dass $Var (X_1 ^{4}) = \tau ^2$.
+	Diese Gleichung können wir nun weiter umformen und erhalten:
+	\begin{align*}
+		\tau ^2 &= Var (X_1 ^{4}) = E \left[
+			X_1 ^{8}
+		\right] - E \left[
+			X_1 ^{4}
+		\right] ^2 \\
+			&= \mu ^{8} + 28 \mu ^{6} \sigma ^2 + 210 \mu ^{4} \sigma ^{4}
+			+ 420 \mu ^2 \sigma ^{6} + 105 \sigma ^{8}
+			- \left(
+				\mu ^{4} + 6 \mu ^2 \sigma ^2 + 3 \sigma ^{4}
+			\right) ^2 \\
+			&= 16 \mu ^{6} \sigma ^2 + 168 \mu ^{4} \sigma ^{4} + 384 \mu ^2
+			\sigma ^{6} + 96 \sigma ^{8}
+	\end{align*}
+\end{proof}
+\end{theorem}
+
+\end{document}
