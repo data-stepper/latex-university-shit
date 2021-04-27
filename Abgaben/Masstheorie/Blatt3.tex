@@ -1,0 +1,126 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ \usepackage{bbm, mathtools}
+ 
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Maßtheoretische Konzepte der Stochastik \\ -- Übungsblatt \#03 --} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332),
+        Michael Hermann (6981007)}
+\maketitle
+
+\begin{Aufgabe}{1} % #1
+Ist $\mu = \sum_{j=1}^\infty \alpha_j \epsilon_{\omega_j}$ mit $\alpha_j \in (0, \infty]$ und $\omega_j \in \Omega$ für alle $j \in \mathbb{N}$ ein diskretes Maß auf $(\Omega, \mathcal{A})$, wobei $\{\omega \} \in \mathcal{A}$ für alle $\omega \in \Omega$ gelte, 
+dann gilt für jede Funktion $f:(\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$
+\begin{equation}
+\label{eq: int}
+\int f \, d\mu = \sum_{j=1}^\infty \alpha_j f(\omega_j)
+\end{equation}
+falls die rechte Seite wohldefiniert ist. 
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+Sei $f:(\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ zuerst eine Elementarfunktion, dh. $f = \sum_{i=1}^n\beta_i \mathbbm{1}_{A_i}$ mit $A_i \in \mathcal{A}$ paarweise disjunkt und $\beta_i \in (0, \infty]$ für $1 \leq i \leq n$.
+Es gilt $\mu(A_i) = \sum_{j=1}^\infty  \alpha_j \mathbbm{1}_{A_i}(\omega_j)$ für alle $1 \leq i \leq n$, also ist
+$$
+\int f \, d\mu = \sum_{i=1}^n \beta_i \mu(A_i) =  \sum_{i=1}^n \beta_i  \sum_{j=1}^\infty \alpha_j \mathbbm{1}_{A_i}(\omega_j) = \sum_{j=1}^\infty  \alpha_j  \sum_{i=1}^n \beta_i \mathbbm{1}_{A_i}(\omega_j) = \sum_{j=1}^\infty  \alpha_j  f(\omega_j)
+$$
+da $f(\omega_j) =   \sum_{i=1}^n \beta_i \mathbbm{1}_{A_i}(\omega_j)$ ist. Wir dürfen die Summen vertauschen, da die unendliche Summe entweder einen endlichen Wert hat und damit absolut konvergent ist, oder unendlich ist, was dann auch den gesamten Ausdruck unendlich macht. \\
+
+Sei $f:(\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ jetzt eine beliebige nicht-negative Funktion. 
+Dann gibt es Elementarfunktionen $f^{(n)}:\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ so dass $f^{(n)} \uparrow f$ monoton für $n \rightarrow \infty$.
+Wir schreiben die Elementarfunktionen ähnlich wie oben
+$$
+f^{(n)} = \sum_{i=1}^{k_n} \beta^{(n)}_i \mathbbm{1}_{A^{(n)}_i}
+$$
+mit $A^{(n)}_i \in \mathcal{A}$ disjunkt, $ \beta^{(n)}_i \in (0,\infty]$ für $1 \leq i \leq k_n$ und $k_n \in \mathbb{N}$, jeweils für jedes $n \in \mathbb{N}$.
+Es gilt
+$$
+\int f \, d\mu = \lim_{n \rightarrow \infty} \int f^{(n)} \, d\mu = \lim_{n \rightarrow \infty} \sum_{j=1}^\infty \alpha_j f^{(n)}(\omega_j) = \sum_{j=1}^\infty \alpha_j f(\omega_j) 
+$$
+mit dem Satz von der monotonen Konvergenz für Reihen, da $\alpha_j f^{(n)}(\omega_j) \uparrow \alpha_j f(\omega_j)$ für alle $j \in \mathbb{N}$. \\
+
+Ist schliesslich $f:(\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ eine beliebige Funktion, dann schreiben wir $f = f^+ - f^-$ mit den nichtnegativen Funktionen $f^+ \coloneqq \max(f,0)$ und $f^- \coloneqq -\min(f,0)$.
+Wenn die Summe in (\ref{eq: int}) wohldefiniert ist, also $\sum_{j=1}^\infty \alpha_j f^+(\omega_j) < \infty$ oder $\sum_{j=1}^\infty \alpha_j f^-(\omega_j) < \infty$, dann gilt nun
+$$
+\sum_{j=1}^\infty \alpha_j f(\omega_j) = \sum_{j=1}^\infty \alpha_j f^+(\omega_j) - \sum_{j=1}^\infty \alpha_j f^-(\omega_j) = \int f^+ \, d\mu - \int f^- \, d\mu = \int f \, d\mu.
+$$
+\end{proof}
+
+\newpage
+
+\begin{Aufgabe}{2} % #1
+Seien $f,g : (\Omega,\alpha) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ $\mu$-integrierbar. Dann gilt:
+\begin{itemize}
+\item[(iii)] Gilt $f \leq g$, so folgt $\int f \; d\mu \leq \int g \; d\mu$.
+\item[(iv)] Ist $f \in \mathcal{L}_1$ und gilt $|h| \leq f$ für $h:(\Omega,\alpha) \rightarrow (\bar{\mathbb{R}},\bar{\mathbb{B}})$, so gilt auch $h, |h| \in \mathcal{L}_1$ und
+\begin{equation}
+\label{eq: ineq}
+\left| \int h \, d\mu \right| \leq \int \left| h \right| \, d\mu \leq \int f \, d\mu
+\end{equation}
+\end{itemize}
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+\begin{itemize}
+\item[(iii)] 
+Falls $h: (\Omega,\alpha) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ gegeben durch $h \coloneqq g-f$ wohldefiniert ist, dann ist $h \geq 0$ und direkt aus der Definition des Integrals für nicht-negative Funktionen folgt $\int h \, d\mu \geq 0$. 
+Aus der Linearität des Integrals (Satz 7.2 (i),(ii)) folgt
+$$
+\int g \, d\mu - \int f \, d\mu = \int h \, d\mu \geq 0
+$$
+Andernfalls ist die Funktion $h \coloneqq g-f$ genau dann nicht wohldefiniert, wenn eine der Mengen ${A \coloneqq \{ f = \infty \} \cap \{ g = \infty \} }$ oder  ${B \coloneqq  \{ f = -\infty \} \cap \{ g = -\infty  \}}$ nicht leer ist.
+In diesem Fall definieren wir
+\begin{eqnarray*}
+f_s \coloneqq \mathbbm{1}_{A^c \cap B^c} f, &\: f_A\coloneqq \mathbbm{1}_A f, &\; f_B\coloneqq \mathbbm{1}_B f, \\
+g_s \coloneqq \mathbbm{1}_{A^c \cap B^c} g, &\: g_A\coloneqq \mathbbm{1}_A g, &\; g_B \coloneqq \mathbbm{1}_B g
+\end{eqnarray*}
+Dann gilt  $f = f_s + f_A + f_B$  und $g = g_s + g_A + g_B$, da die Mengen $A,B, A^c \cap B^c$ eine Partition von $\Omega$ bilden, und mit der Linearität folgt
+\begin{eqnarray*}
+\int f \, d\mu &= \int f _s\, d\mu + \int f_A \, d\mu + \int f_B \, d\mu \\
+\int g \, d\mu &= \int g_s \, d\mu + \int g_A \, d\mu + \int  g_B \, d\mu
+\end{eqnarray*}
+Die Funktion $g_s - f_s$ ist auf ganz $\Omega$ wohldefiniert und nicht-negativ, dh. wie oben folgt ${\int f_s \, d\mu \leq \int g_s \, d\mu}$. Die Aussage folgt nun, da offensichtlich $f_A = g_A$, bzw. $f_B = g_B$.
+
+\item[(iv)] Es gilt $|h| \leq f \leq |f|$, also mit (iii) auch $\int |h| \, d\mu \leq \int f \, d\mu \leq \int |f| \, d\mu$ und falls $\int |f| \, d\mu \leq \left| \int f \, d\mu  \right|$ gilt, ist $h, |h| \in \mathcal{L}_1$ und damit auch die erste Ungleichung für $h$ klar.  \\
+Um diese zu zeigen, zerlegen wir $f$ in den positiven, ${f^+ \coloneqq \max(f, 0)}$, und negativen Teil, ${f^- \coloneqq  - \min(f,0)}$. Dann ist $f = f^+ - f^-$ und $|f| = f^+ + f^-$. Mit der Dreiecksungleichung für den Absolutbetrag und da $f^+$ und $f^-$ beide nicht-negativ sind, folgt mit der Linearität des Integrals
+\begin{eqnarray*}
+\left| \int f \, d\mu \right| &=& \left| \int f^+ \, d\mu  -  \int f^- \, d\mu \right| \\
+				     &\leq&  \left| \int f^+ \, d\mu \right| +  \left|  \int f^- \, d\mu \right| \\
+				     &=& \int f^+ \, d\mu + \int f^- \, d\mu = \int |f| \, d\mu
+\end{eqnarray*}
+
+\end{itemize}
+\end{proof}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
