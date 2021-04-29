@@ -1,0 +1,122 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{theorem} % Aufgabe #2
+\begin{Aufgabe}{2} % #2
+\end{Aufgabe}
+
+\textbf{a)}
+\beh $T \left(
+	X_1, ..., X_{n}
+\right) = \frac{ 6 }{ n( n+1 ) ( 2n +1 ) }
+\sum_{n=1}^{n} i ^2 X_{i}$ schätzt konsistent $\mu$.
+
+\begin{proof}[Beweis]
+	Aus dem Skript wissen wir, dass ein Schätzer genau dann konsistent ist wenn
+	er erwartungstreu (1) ist und seine Varianz im Grenzfall gegen $0$ geht (2).
+	\begin{align*}
+	E \left[
+		T \left(
+			X_1, ..., X_n
+		\right)
+	\right] &= E \left[
+	\frac{ 6 }{ n( n+1 )( 2n +1 ) }
+		\sum_{i=1}^{n} i ^2 X_i
+	\right] \\
+			&= \frac{ 6 }{n ( n+1 ) ( 2n +1)}
+			\sum_{i=1}^{n} i ^2 E \left[
+				X_i
+			\right] \\
+			&= \frac{ 6 }{ n( n+1 ) ( 2n +1) } E \left[
+				X_1
+			\right] \sum_{i=1}^{n} i ^2 \\
+			&= \frac{ 6 }{ n( n+1 ) ( 2n +1) } E \left[
+				X_1
+			\right] \left(
+			\frac{ n (n+ 1 ) ( 2n +1)}{ 6 }
+			\right) = \mu
+	\end{align*}
+	Oben haben wir die Gaußsche Summenformel für Quadrate benutzt. Nun ist nur noch zu
+	zeigen, dass die Varianz unseres Schätzers im Grenzfall gegen $0$ geht. Um dies zu
+	zeigen berechnen wir zuerst die Varianz selbst:
+	\begin{align*}
+		Var ( 
+		T \left(
+			X_1, ..., X_n
+		\right)
+		) &= E \left[
+			\left(
+				T \left(
+					X_1, ..., X_n
+				\right)
+			\right) ^2
+		\right] - E \left[
+			T \left(
+				X_1, ..., X_n
+			\right)
+		\right] ^2 \\
+		  &= E \left[
+		  	\left(
+				\frac{ 6 }{ n(n+1)(2n+1) }
+				\sum_{i=1}^{n} i ^2 X_i
+		  	\right) ^2
+		  \right] - \mu ^2 \\
+		  &= \frac{ 36 }{ n ^2 (n+1) ^2 (2n + 1) ^2 }
+		  E \left[
+		  	\left(
+		  		\sum_{i=1}^{n} i ^2 X_i
+		  	\right) ^2
+		  \right] - \mu ^2 \\
+		  \text{Bem.: } E \left[
+		  	\left(
+		  		\sum_{i=1}^{n} i ^2 X_i
+		  	\right) ^2
+		\right] &= E \left[
+			\left(
+				\sum_{i=1}^{n} i ^2 X_i
+			\right) 
+			\left(
+				\sum_{j=1}^{n} j ^2 X_j
+			\right) 
+		\right] \\
+				&= E \left[
+					\sum_{i=i}^{n} 
+					\sum_{j=1}^{n} i ^2 j ^2 X_i X_j
+				\right] \\
+				&= \sum_{i=i}^{n} 
+					\sum_{j=1}^{n} i ^2 j ^2 E \left[
+						X_i X_j
+					\right] \\
+				&= \frac{ n ^2 (n+1) ^2 (2n +1) ^2 }{ 36 } E \left[
+					X_1
+				\right]  ^2 \\
+				& \implies Var(
+					T \left(
+						X_1, ..., X_n
+					\right)
+				) = \mu ^2 - \mu ^2 = 0
+	\end{align*}
+	Nun sehen wir also, dass die Varianz unseres Schätzers sowieso $0$ ist. Also folgt
+	dies auch insbesondere im Grenzfall.
+\end{proof}
+\end{theorem}
+
+\end{document}
+

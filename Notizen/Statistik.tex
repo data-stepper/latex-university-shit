@@ -1,1 +1,56 @@
-Hello World
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\section{Dichten}
+\subsection{Die Exponentielle Familie}
+
+\begin{theorem} % Exponentielle Familie
+	\subsubsection{Exponentielle Familie}
+
+	Wir nennen eine Menge an Dichtefunktionen eine Exponentielle Familie genau dann wenn
+	es Abbildungen $Q_1, ..., Q_k, D \; : \Theta \to \mathbb{R}$ und Borel-messbare
+	Abbildungen $T_1, \ldots, T_k, S \; : \mathbb{R} ^{n} \to \mathbb{R}$ gibt, sodass wir
+	jede Dichte schreiben können als:
+	\[
+		f_{\vartheta} (x) = \exp \left(
+			\sum_{i=1}^{k} Q_i (\vartheta) T_i (x) + D(\vartheta) + S(x)
+		\right) 
+	\]
+	Man kann außerdem zeigen, dass nun die $T_i$ ebenfalls eine exponentielle Familie bilden.
+	Außerdem gelten die Aussagen aus 2.3 und 2.4 auch für k-parametrige exp. Familien.
+
+	Wir können die Darstellung auch umschreiben wie folgt:
+	\[
+		f_\vartheta (x) = c(\vartheta) h(x) \exp(\sum_{i=1}^{k} Q_i (\vartheta) T_i (x))
+	\] 
+	Im stetigen Fall können wir $c (\vartheta)$ als den Normierungsfaktor
+\end{theorem}
+
+\section{Stichproben}
+
+\begin{theorem} % Stichprobenmomente
+	\subsubsection{Stichprobenmomente}
+
+	Im Folgenden betrachten wir immer eine Zufallsvariable $X$ mit einer unbekannten
+	Dichte (oder Verteilung).
+\end{theorem}
+
+\end{document}
+
