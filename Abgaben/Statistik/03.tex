@@ -118,5 +118,87 @@
 \end{proof}
 \end{theorem}
 
+\begin{theorem} % Aufgabe #2
+\textbf{b)}
+
+\beh $S_n (X_1, ..., X_{n}) = \left(
+	\prod_{i=1}^{n} X_{i}
+\right) ^{\frac{ 1 }{ n }} $ ist konsistenter Schätzer
+für $\frac{ \vartheta }{ e }$ 
+
+\begin{proof}[Beweis]
+	Aus dem Skript wissen wir, dass es reicht die folgende Aussage zu zeigen:
+	\[
+		\left(
+			\prod_{i=1}^{n} X_{i}
+		\right) ^{\frac{ 1 }{ n }} 
+		= S_n (X ^{(n)}) \overset{P}
+		\to \psi(\vartheta) = \frac{ \vartheta }{ e }
+	\] 
+	Zuerst beobachten wir was mit unserem Schätzer passiert wenn wir diesen
+	logarithmieren:
+	\[
+		\log \left(
+			\left(
+				\prod_{i=1}^{n} X_{i}
+			\right) ^{\frac{ 1 }{ n }} 
+		\right) =
+			\frac{ 1 }{ n }
+			\sum_{i=1}^{n} \log(X_i)
+	\] 
+	Nun wissen wir aber nach dem Zentralen Grenzwertsatz gerade folgendes:
+	\[
+		\frac{ 1 }{ n } \sum_{i=1}^{n} \log(X_i)
+		\overset{P} \to E \left[
+			\log(X_1)
+		\right] 
+	\] 
+	Diesen Erwartungswert können wir jetzt einfach nach der Transformationsformel
+	berechnen, da wir ja wissen, dass unsere Zufallsvariable $X_1$ gleichverteilt ist:
+	\begin{align*}
+		E \left[
+			\log(X_1)
+		\right] &= \frac{ 1 }{ \vartheta }
+		\int_{0}^{\vartheta} \log(x) dx \\
+				&= \frac{ 1 }{ \vartheta }  \left[
+					x \log(x) - x
+				\right]_0 ^{\vartheta} \\
+				&= \frac{ 1 }{ \vartheta } \left(
+					\vartheta \log ( \vartheta ) - \vartheta
+				\right) \\
+				&= \log(\vartheta) - 1
+	\end{align*}
+	Jetzt können wir wie folgt den ursprünglichen Schätzer wieder konstruieren, indem
+	wir den logarithmierten Schätzer exponentieren:
+	\begin{align*}
+		\left(
+			\prod_{i=1}^{n} X_{i}
+		\right) ^{\frac{ 1 }{ n }} &=
+		\exp 
+			\left(
+				\log 
+				\left(
+					\left(
+						\prod_{i=1}^{n} X_{i}
+					\right) ^{\frac{ 1 }{ n }} 
+				\right) 
+			\right) \\
+								   &=
+		\exp \left(
+			\frac{ 1 }{ n } \sum_{i=1}^{n} \log(X_i)
+		\right) \overset{P} \to \exp(
+			E \left[
+				\log(X_1)
+			\right] 
+		) \\
+								   &=
+			\exp (\log (\vartheta) - 1) 
+			= \frac{ \vartheta }{ e }
+	\end{align*}
+	Das obige gilt offensichtlich, da exponentieren eine stetige Transformation ist.
+\end{proof}
+\end{theorem}
+
+
 \end{document}
 
