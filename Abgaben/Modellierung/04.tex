@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{document}
+\title{ \textbf{Modellierung - Blatt \#4} }
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332)}
+\date{14. April 2021}
+\maketitle
+\begin{Aufgabe}{12}
+	Optimierung auf einer Kreisscheibe.
+\end{Aufgabe}
+
+\textbf{(a)} Bestimmen sie alle stationären Punkte von $f(x_1, x_2)$ 
+auf dem Rand der Einheitskreisscheibe.
+\begin{proof}[]
+	Im Folgenden setzen wir der Einfachheit halber $x_1 = x, x_2 = y$ und bestimmen
+	nun die Lagrange Funktion welche wie folgt aussieht:
+	\[
+		L(x,y) = 4x ^2 - 2 x y + \lambda (x ^2 + y ^2 - 1) 
+	\]
+	Folglich berechnen wir die Einträge der Jakobi-Matrix, beziehungsweise die
+	partiellen Ableitungen unserer Lagrange Funktion bezüglich dessen
+	Parametern. Zusammen mit der Nebenbedingung, welche wir auch als die partielle
+	Ableitung nach $\lambda$ auffassen können erhalten wir nun ein nichtlineares
+	Gleichungssystem mit 3 Gleichungen, welches wie folgt aussehen:
+	\begin{align}
+		0 &= \frac{ \partial L(x,y) }{ \partial x } =
+		8x - 2y + 2 \lambda x \\
+		0 &= \frac{ \partial L(x,y) }{ \partial y } =
+		-2x + 2 \lambda y \\
+		0 &= \frac{ \partial L(x,y) }{ \partial \lambda  } =
+		x ^2 + y ^2 - 1
+	\end{align}
+
+	Dieses lösen wir nun wie folgt nach allen gesuchten Parametern auf:
+	\begin{align*}
+		(2) &\implies x = \lambda y
+		\overset{(3)} \implies \lambda ^2 y ^2 + y ^2 - 1 = 0
+			\implies (\lambda ^2 + 1) y ^2 - 1 = 0
+			\implies y ^2 = \frac{ 1 }{ 1 + \lambda ^2 } \\
+			& \overset{(1)} \implies 8 \lambda y - 2 y + 2 \lambda ^2 y = 0
+			\implies 8 \lambda y - 2 y + 2 \left(
+				\frac{ 1 }{ y ^2 } - 1
+			\right) y = 0 \\
+			& \overset{\cdot y} \implies
+			(8 \lambda  - 2) y ^2 + 2 - 2 y ^2 = 0
+			\implies y ^2 = \frac{ -1 }{ 4 \lambda - 2 }
+			\overset{(2)} = \frac{ 1 }{ 1 + \lambda ^2 } \\
+			& \implies 1 + \lambda ^2 = - (4 \lambda - 2)
+			\implies 0 = \lambda ^2 + 4 \lambda - 1
+			\implies \lambda = \pm \sqrt{5} - 2
+	\end{align*}
+\end{proof}
+\end{document}
