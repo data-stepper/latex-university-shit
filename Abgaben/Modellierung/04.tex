@@ -73,7 +73,6 @@ auf dem Rand der Einheitskreisscheibe.
 	Lösungen jeweils zwei verschiedene $y$ und $x$. Somit folgt,
 	dass wir zunächst 4 stationäre Punkte auf unserem Einheitskreis
 	gefunden haben welche alle zulässig sind.
-
 	Ohne großen Aufwand können wir diese Punkte auch noch einmal
 	explizit aufschreiben:
 	\begin{align*}
@@ -87,4 +86,47 @@ auf dem Rand der Einheitskreisscheibe.
 		x_4 = (\sqrt{5} - 2) \sqrt{-\frac{ 1 }{ - 4 \lambda - 2 }} \\
 	\end{align*}
 \end{proof}
+
+\textbf{(b)} Zeigen sie bei allen stationären Punkten aus (a), dass
+es sich bei diesen um lokale Extrema handelt.
+
+\begin{proof}[Beweis]
+	Um dies zu zeigen berechnen wir die Einträge der Hesse-Matrix, indem
+	wir einfach die partiellen Ableitungen aus der vorherigen Aufgabe
+	noch einmal jeweils nach $x$ bzw. $y$ ableiten.
+	\begin{align*}
+		\frac{ \partial L(x,y) }{ \partial x } &= 8 x - 2y + 2 \lambda x \\
+		\frac{ \partial L(x,y) }{ \partial y } &= -2x + 2 \lambda y
+	\end{align*}
+	Und diese beiden Ableitungen können wir jetzt noch einmal wie folgt jeweils nach
+	$x$ bzw $y$ ableiten und erhalten:
+	\begin{align*}
+		\frac{ \partial L(x,y) }{ \partial x ^2 } &= 8 + 2 \lambda \\
+		\frac{ \partial L(x,y) }{ \partial x \partial y } &= -2 \\
+		\frac{ \partial L(x,y) }{ \partial y \partial x } &= -2 \\
+		\frac{ \partial L(x,y) }{ \partial y ^2 } &= 2 \lambda \\
+	\end{align*}
+	Somit erhalten wir die Hesse-Matrix welche wie folgt aussieht:
+	\[
+		HL(x,y) = \begin{pmatrix} 
+			8 + 2 \lambda & -2 \\
+			-2 & 2 \lambda \\
+		\end{pmatrix} 
+	\]
+	Also berechnen wir im Folgenden das charakteristische Polynom der Hesse-Matrix.
+	Die gesuchten Eigenwerte sind nämlich die Nullstellen dieses Polynoms:
+	\begin{align*}
+		0 = \det (HL(x,y) - X \cdot I_2) &=
+		\det \begin{pmatrix} 
+			8+ 2 \lambda - X & -2 \\
+			-2 & 2 \lambda - X
+		\end{pmatrix} \\
+		 &= (8 + 2 \lambda - X) (2 \lambda - X) - 4 \\
+		 &= 16 \lambda  - 8 X + 4 \lambda ^2 - 2 \lambda X - 2 \lambda X + X ^2 - 4 \\
+		 &= X ^2 + (-8 - 4 \lambda) X - 4 + 4 \lambda ^2 + 16 \lambda \\
+		 & \implies X = \pm \sqrt{32 \lambda - 24} + 2 \lambda + 4
+	\end{align*}
+\end{proof}
+\end{theorem}
+
 \end{document}
