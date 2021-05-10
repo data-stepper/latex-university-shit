@@ -1,0 +1,157 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{theorem} % Aufgabe #2
+\begin{Aufgabe}{2} % #2
+\end{Aufgabe}
+
+\textbf{(a)} 
+\beh $(X_{(1)}, X_{(n)})$ ist suffizient aber nicht vollständig.
+
+\begin{proof}[Beweis]
+	Zuerst zeigen wir mit Hilfe des Faktorisierungskriteriums (Satz 5.5), dass unsere Statistik
+	suffizient ist. Hierfür müssen die Lebesgue-Dichte der Zufallsvariable schreiben
+	können als folgendes Produkt:
+	\[
+		f_\vartheta (x) = g_\vartheta (T(x)) h(x)
+	\] 
+	Wobei $T(x)$ hier unsere Statistik $(X_{(1)}, X_{(n)})$ ist. Wir wählen 
+	\[
+		g_\vartheta ( X_{(1)}, X_{(n)} ) = I_{ [
+			\vartheta - \frac{ 1 }{ 2 }, \vartheta + \frac{ 1 }{ 2 }
+		] }
+	\]
+	und dementsprechend $h(x) = 1$ konstant. So erhalten wir tatsächlich genau
+	die Lebesgue Dichte unserer Gleichverteilung welche aber einfach die konstante
+	1-Funktion auf der Indikatormenge ist. Wohlgemerkt ist die Dichtefunktion
+	konstant $1$ da die Breite des Intervalls 
+	$[\vartheta - \frac{ 1 }{ 2 }, \vartheta + \frac{ 1 }{ 2 }]$
+	ebenfalls $1$ ist.
+	Wir wissen jetzt also das unsere Statistik suffizient ist. Nun wollen wir wie folgt
+	zeigen dass diese nicht vollständig ist. Wir brauchen also eine Funktion die Werte
+	von unserer Statistik zuordnet. Diese soll dann Erwartungswert $0$ haben aber nicht
+	fast sicher $0$ sein.
+	Als Funktion wählen wir:
+	\[
+		g(x,y) = x - y - a \text{ mit } x, y = \max \{
+			X_1, ..., X_n
+		\}, \min \{
+			X_1, ..., X_n
+		\} 
+	\]
+	Jetzt suchen wir eine konstante $a$, sodass diese Funktion Erwartungswert $0$ hat.
+	\begin{align*}
+		E \left[
+			g(x,y)
+			\right] &= E \left[
+			x
+		\right] - E \left[
+			y
+		\right] - a
+	\end{align*}
+	Zuerst kennen wir aus Lemma 10.26 (Stochastik Skript) die Dichte nach Anwendung
+	eines Maximum:
+	\[
+		f(y) = n f(x) (F(x)) ^{n-1}
+		= n y ^{n-1}
+	\] 
+	Denn wir wissen, dass die Dichte unserer $X_i$ einfach die konstante 1-Funktion war.
+	Somit ist auch offensichtlich die Verteilungsfunktion die lineare Funktion $F(y) = y$.
+	Im Folgenden berechnen wir jetzt den Erwartungswert des Maximum:
+	\begin{align*}
+		E \left[
+			\max \{
+				X_1, ..., X_n
+			\} 
+		\right] &= \int f(y) \cdot y \cdot I_{[0,1]} dy 
+		= \int_{0}^{1} n y ^{n-1} \cdot y \; dy \\
+				&= \left[
+					\frac{ n }{ n+1 } y ^{n+1}
+				\right]_0^1 \\
+				&= \frac{ n }{ n+1 } \cdot 1 ^{n+1} - 0 \\
+				&= \frac{ n }{ n+1 }
+	\end{align*}
+	Da unsere Dichtefunktion symmetrisch ist gilt, dass $
+	E \left[
+		\max \{
+			X_1, ..., X_n
+		\} 
+	\right] - E \left[
+		\min \{
+			X_1, ..., X_n
+		\} 
+	\right] = 1
+	$ bzw. die Breite des Intervalls.
+	Nun können wir weiter den Erwartungswert von $g(x,y)$ berechnen:
+	\begin{align*}
+		0 = E \left[
+			g(T(X^{(n)}))
+		\right] &= E \left[
+			\max \{
+				X_1, ..., X_n
+			\} 
+		\right] - E \left[
+			\min \{
+				X_1, ..., X_n
+			\} 
+		\right] - a \\
+				&= \left(
+					\frac{ n }{ n+1 } + \left(
+						\vartheta + \frac{ 1 }{ 2 } - 1
+					\right)
+				\right) - \left(
+					\left(
+						1 - \frac{ n }{ n+1 }
+					\right) + \left(
+						\vartheta - \frac{ 1 }{ 2 }
+					\right) 
+				\right) - a \\
+				& \implies a = 1 - \frac{ 2 }{ n+1 }
+	\end{align*}
+	Somit erhalten wir also, dass der Erwartungswert von $g$ im Grenzfall gegen $0$ geht,
+	die Funktion selbst aber nicht überall $0$ ist. Also gilt insbesondere:
+	\[
+		P(g(T(X)) = 0) \neq 1
+	\] 
+\end{proof}
+\end{theorem}
+
+\textbf{(b)} 
+
+\begin{proof}[Beweis]
+	Die erste Behauptung können wir durch simples einsetzen in die Definition von Suffizienz
+	erkennen:
+	\begin{align*}
+		P_\vartheta (X=x \; | \; H \circ T(X) = t) &=
+		\frac{ P_\vartheta (X=x, H \circ T(X) = t) }{ P_\vartheta (H \circ T(X) = t) } \\
+		   & \overset{\text{H bij.}} = \frac{ P_\vartheta (X=x, T(X) = H ^{-1} (t)) }{ 
+				P_\vartheta (T(X) = H ^{-1} (t)) } \\
+		   &= P_\vartheta (X = x \; | \; T(X) = H ^{-1} (t))
+	\end{align*}
+	Hier sind wir fertig, da wir einfach als neues $T(X)$ die Verkettung $H \circ T(X)$
+	setzen können und dies uns immernoch genausoviel über die Zufallsvariable verrät
+	wie $T(X)$ selbst.
+
+	Bei der zweiten Behauptung müssen wir uns nur überlegen was mit unseren Nullmengen
+	passiert wenn wir diese bijektiv transformieren.
+\end{proof}
+\end{theorem}
+
+\end{document}
