@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{theorem} % Aufgabe #13
+\begin{Aufgabe}{13} % #13
+	Optimierung unter Gleichungsnebenbedingungen
+\end{Aufgabe}
+
+\textbf{(c)}  Bestimmen sie die Punkte auf der Parabel $x_2 = x_1 ^2 + 2$, die vom Ursprung
+den kürzesten Abstand haben
+
+\begin{proof}[Rechnung]
+	Wir benutzen wieder $x_1 = x$ und $x_2 = y$ und formulieren nun die Lagrange Funktion wie folgt:
+	\[
+		L(x,y) = \sqrt{x ^2 + y ^2} + \lambda ( x ^2 + 2 - y )
+	\] 
+	Wir sehen die zu minimierende Funktion ist der euklidische Abstand zum Ursprung. Nun bestimmen
+	wir die folgenden partiellen Ableitungen welche uns dann unser Gleichungssystem geben:
+	\begin{align}
+		\frac{ \partial L(x,y) }{ \partial x } &= - \frac{ 2 x }{ 2 \sqrt{x ^2 + y ^2}  } + 2 \lambda x
+		= - \frac{ x }{ \sqrt{x ^2 + y ^2}  } + 2 \lambda x = 0 \\
+		\frac{ \partial L(x,y) }{ \partial y } &= -\frac{ y }{ \sqrt{x ^2 + y ^2}  } - \lambda = 0 \\
+		\frac{ \partial L(x,y) }{ \partial \lambda } &= x ^2 + 2 - y = 0
+	\end{align}
+	Mit diesen drei Gleichungen lösen wir nun nach den Variablen $x, y, \lambda$ auf wie folgt:
+	\begin{align*}
+		(3) & \implies y = x ^2 + 2 \overset{(2)} \implies \frac{-( x ^2 + 2)}{
+			\sqrt{x ^2 + x ^4 + 4x ^2 + 4} 
+		} = \lambda \\
+		& \overset{(1)} \implies -\frac{ x }{ \sqrt{x ^2 + x ^{4} + 4 x ^2 + 4}  }
+		+ 2 x \left(
+			\frac{ - ( x ^2 + 2 ) }{ \sqrt{x ^{4} + 5 x ^2 + 4}  }
+		\right) = 0 \\
+		& \implies \frac{ - 2x (x ^2 + 2) }{ \sqrt{x ^{4} + 5 x ^2 + 4}  }
+		= \frac{ x }{ \sqrt{x ^{4} + 5 x ^2 + 4}  } \\
+		& \implies -2x ( x ^2 + 2 ) = x
+		\implies 2 ( x ^2 + 2 ) + 1 = 0
+		\text{ oder } x = 0
+	\end{align*}
+	Da $x$ aber eine reelle Zahl ist wissen wir dass von diesen beiden Gleichungen nur $x = 0$ funktionieren
+	kann. Somit können wir auch die anderen Parameter wie folgt berechnen:
+	\begin{align*}
+		y &= x ^2 + 2 = 0 ^2 + 2 = 2 \\
+		\lambda &= \frac{ -y }{ \sqrt{x ^2 + y ^2}  }
+		= \frac{ -2 }{ \sqrt{0 ^2 + 2 ^2}  } = -1
+	\end{align*}
+	Nun kennen wir auch den einzigen Punkt der unsere Gleichung erfüllt mit:
+	\[
+		(x,y) = (0, 2)
+	\] 
+\end{proof}
+\end{theorem}
+
+\end{document}
