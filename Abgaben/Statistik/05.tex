@@ -1,0 +1,241 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{theorem} % Aufgabe #2
+\begin{Aufgabe}{2} % #2
+\end{Aufgabe}
+
+(Teil 1)
+\beh $T(X) = \sum_{i=1}^{n} X_i ^2$ ist suffizient und vollständig für $\vartheta$
+
+\begin{proof}[Beweis]
+	Um die Suffizienz von $T(X)$ zu zeigen, wenden wir das Faktorisierungskriterium an wie folgt:
+	\begin{align*}
+		f_\vartheta (x) &= \frac{ x }{ \vartheta } x ^{ \frac{ - x ^2 }{ 2 \vartheta } }
+		I_{ ( 0, \infty ) } (x) \\
+			&= \left(
+				\frac{ 1 }{ \vartheta } e ^{ \frac{ 
+						\frac{ 1 }{ n } T(x)
+				}{ 2 \vartheta } }
+			\right) \cdot x \\
+		\text{mit } T(x) &= \sum_{i=1}^{n} x_i ^2
+	\end{align*}
+	Im Folgenden zeigen wir die Vollständigkeit von $T(X)$:
+	Als erstes berechnen wir die Dichte der Summanden in $T(X)$, also die Dichte von
+	$X_i ^2$:
+	Wir wenden also die Dichtetransformation aus A.1 an, indem wir folgendes setzen:
+	\[
+		g(x) = x ^2, g ^{-1} (y) = \sqrt{y} , g' (x) = 2 x,
+		\frac{ 1 }{ | g'(g ^{-1} (y)) | } = \frac{ 1 }{ | 2 \sqrt{y} | }
+	\] 
+	Wohlgemerkt ist $g(x) = x ^2$ ein Diffeomorphismus, da wir nur positive Werte für $x$ betrachten.
+	Da wir ja die Dichte $f_\vartheta (x)$ von $X$ selbst auch kennen, können die transformierte Dichte ermitteln:
+	\begin{align*}
+		h(y) & \overset{A.1} = f_\vartheta (g ^{-1} (y)) \cdot \frac{ 1 }{ | g' (g ^{-1} (y)) | }
+		= \frac{ \sqrt{y} }{ \vartheta } e ^{ - \frac{ \sqrt{y} ^2 }{ 2 \vartheta } }
+		I_{ ( 0, \infty ) } ( \sqrt{y} ) \cdot
+		\frac{ 1 }{ 2 \sqrt{y} } \\
+			 &= \frac{ 1 }{ 2 \vartheta } e ^{ - \frac{ y }{ 2 \vartheta } } I_{ ( 0, \infty ) } (y) 
+	\end{align*}
+	Jetzt berechnen wir rekursiv die Dichte von $T(X)$, indem wir zuerst die Dichte $p_{\vartheta, 2}(z)$
+	von $X_1 ^2 + X_2 ^2$ berechnen. Da $X_1 ^2$ und $X_2 ^2$ $iid$ sind ist die gemeinsame
+	Dichte von $(X_1 ^2, X_2 ^2)$ einfach die Produktdichte.
+	Hierzu können aus dem Anhang A.2 (a) verwenden:
+	\begin{align*}
+		p_{\vartheta, 2} (z) & \overset{A.2} = \int f(z - t, t) dt
+		= \int \left(
+			\frac{ 1 }{ 2 \vartheta } e ^{ \frac{ - (z - t) }{ 2 \vartheta } }
+			I_{ ( 0, \infty ) } (z - t) 
+		\right) \cdot
+		\left(
+			\frac{ 1 }{ 2 \vartheta } e ^{ - \frac{ t }{ 2 \vartheta } }
+			I_{ ( 0, \infty ) } (t) 
+		\right) dt \\
+			 &= \left(
+				\frac{ 1 }{ 2 \vartheta }
+			 \right) ^2
+			 \int \exp \left(
+				\frac{ 1 }{ 2 \vartheta } \left(
+					 - (z - t) - t
+			 \right)  )
+			 \right) 
+			 I_{ ( 0, \infty ) } (z - t) \cdot I_{ ( 0, \infty ) } (t) 
+			 \; dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			 \right) ^2 \int \exp 
+			 \left(
+				 \frac{ - z }{ 2 \vartheta } 
+			 \right) I_{ ( 0, \infty ) } (z - t) I_{ ( 0, \infty ) } (t) \; dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			\right) ^2 \exp \left(
+				\frac{ -z }{ 2 \vartheta }
+			\right) \int 1 \cdot \; I_{ ( 0, z ) } (t) \; dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			\right) ^2 \exp \left(
+				\frac{ -z }{ 2 \vartheta }
+			\right) \cdot z \cdot \; I_{ ( 0, \infty ) } (z) 
+	\end{align*}
+	Nun berechnen nach unserem rekursiven Ansatz die Dichte $p_{\vartheta, 3}$ von $X_1 ^2 + X_2 ^2 + X_3 ^2$.
+	Wohlgemerkt ist unser Zufallsvariablentupel hier $(X_3 ^2, X_1 ^2 + X_2 ^2)$, sodass wir
+	die im vorigen ermittelte Dichte verwenden können.
+	\begin{align*}
+		p_{\vartheta, 3} (z) &= \int \left(
+			\frac{ 1 }{ 2 \vartheta } e ^{ \frac{ - (z - t) }{ 2 \vartheta }}
+			I_{ ( 0, \infty ) } (z - t) 
+		\right) \cdot \left(
+			\left(
+				\frac{ 1 }{ 2 \vartheta }
+			\right) ^2
+			e ^{ \frac{ -t }{ 2 \vartheta } } \cdot t \cdot \;
+			I_{ ( 0, \infty ) } (t) 
+		\right) dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			 \right) ^3
+			 \int \exp \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+				( - (z - t) - t )
+			 \right) t \; \cdot I_{ ( 0, z ) } (t) \; dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			 \right) ^3 \cdot \exp \left(
+			 	\frac{ -z }{ 2 \vartheta }
+			 \right) \cdot \int t \cdot I_{ ( 0, z ) } (t) \; dt \\
+			 &= \left(
+			 	\frac{ 1 }{ 2 \vartheta }
+			 \right) ^3 \cdot \exp \left(
+			 	\frac{ -z }{ 2 \vartheta }
+			\right) \cdot \frac{ z ^2 }{ 2 } \cdot I_{ ( 0, \infty ) } (z) 
+	\end{align*}
+	Wir erkennen also, dass sich das Muster wiederholt und können so auch die Dichte bestimmen
+	wenn wir $n$ viele unserer $X_i ^2$ summieren. Worauf wir nun aber achten müssen ist, dass
+	obwohl zwar aus unseren Integralen alle Faktoren herausfallen immer einer übrig bleibt
+	über welchen wir dann integrieren. Dieser ist dann jeweils $t ^{k}$ (bei der Summe bis $k$)
+	und dessen Integral über den jeweiligen Indikator ist dann $\frac{ 1 }{ k+1 } z ^{k + 1}$.
+	Dieser Vorfaktor bleibt allerdings, sodass wir am Ende einen Vorfaktor von $\frac{ 1 }{ (n-1)! }$
+	erhalten, da wir ja alle vorherigen miteinander multiplizieren.
+	Folglich erhalten wir die Dichte $p_{\vartheta, n}$ von $T(X)$:
+	\[
+		p_{\vartheta, n} (z) = \left(
+			\frac{ 1 }{ 2 \vartheta }
+		\right) ^{n} \cdot \exp \left(
+			\frac{ -z }{ 2 \vartheta }
+		\right) \cdot \frac{ z ^{ n - 1 } }{ (n-1) ! } \cdot I_{ ( 0, \infty ) } (z) 
+	\] 
+	Nun wollen wir hiermit zeigen, dass $T(X)$ vollständig ist. Wir betrachten also:
+	\[
+	E \left[
+		g(T(X))
+	\right] = \left(
+		\frac{ 1 }{ 2 \vartheta }
+	\right) ^{n} \cdot \frac{ 1 }{ (n-1)! }
+	\int g(t) \exp \left(
+		\frac{ -t }{ 2 \vartheta }
+	\right) \cdot t ^{n-1} \, dt = 0
+	\] 
+	Dies muss für alle messbaren $g$ implizieren, dass $g$ jeweils überall $0$ ist.
+	Allerdings darf $g$ aber nicht von $\vartheta$ abhängen. Nehmen wir also an es gibt
+	ein $g \neq 0$ sodass die obige Bedingung erfüllt ist. Dann überlegen wir uns, dass
+	diese Funktion dann in irgendeiner Form periodisch sein muss, da ja die Dichte selbst
+	überall positiv ist. Außerdem müssen sich jeweils alle positiven Bereiche mit den
+	negativen ausgleichen. Die Höhe der Kurve wird aber unter anderem durch den
+	$\exp$ -Term bestimmt und somit auch durch $\vartheta$. Wir sehen also, dass die einzige
+	Möglichkeit für $g$ die Bedingung zu erfüllen und nicht von $\vartheta$ abzuhängen $g=0$ ist.
+\end{proof}
+
+(Teil 2) \textit{Bestimmen} sie einen für $\vartheta$ erwartungstreuen Schätzer der nur von
+$T$ abhängt.
+
+\begin{proof}[Berechnung]
+	Zuerst berechnen wir einen den Erwartungswert von $T(X)$, indem wir den Erwartungswert von
+	$X_i ^2$ berechnen per Transformationsformel:
+	\begin{align*}
+		E \left[
+			X_1 ^2
+		\right] &= \int x ^2 \left(
+			\frac{ x }{ \vartheta } \exp \left(
+				\frac{ -x ^2 }{ 2 \vartheta }
+			\right) 
+		\right) \cdot I_{ ( 0, \infty ) } (x) \; dx \\
+			&= \frac{ 1 }{ \vartheta } \int_{0}^{\infty} x ^3 \exp \left(
+				\frac{ -x ^2 }{ 2 \vartheta }
+			\right) dx
+	\end{align*}
+	Wir substituieren nun wie folgt:
+	\[
+	u = \frac{ -x ^2 }{ 2 \vartheta },\; du = \frac{ -x }{ \vartheta } dx,\;
+	dx = \frac{ \vartheta }{ -x } du,\; x = \sqrt{- 2 \vartheta u},\;
+	x ^2 = - 2\vartheta u
+	\] 
+	Nun erhalten wir aus dem vorigen:
+	\begin{align*}
+		E \left[
+			X_1 ^2
+		\right] &= \frac{ 1 }{ \vartheta }
+		\int_{0}^{- \infty} x \cdot (- 2 \vartheta u) \exp (u) \frac{ \vartheta }{ -x } du \\
+				&= 2 \vartheta \int_{0}^{- \infty} u \exp(u) \; du \\
+				&= 2 \vartheta \left(
+					- \int_{0}^{- \infty} \exp(u) \; du + \left[
+						u \exp(u)
+					\right]_0^{- \infty}
+				\right) \\
+				&= 2 \vartheta \left[
+					(u - 1) \exp(u)
+				\right]_0^{- \infty} \\
+				&= 2 \vartheta \left[
+					\left(
+						\frac{ - x ^2 }{ 2 \vartheta } - 1
+					\right) 
+					 \exp \left(
+						\frac{ -x ^2 }{ 2 \vartheta }
+					\right) 
+				\right]_0^{\infty} \\
+				&= 2 \vartheta
+	\end{align*}
+	Jetzt berechnen wir den Erwartungswert von $T(X)$:
+	\begin{align*}
+		E \left[
+			T(X)
+		\right] &= E \left[
+			\sum_{i=1}^{n} X_i ^2
+		\right] 
+		= \sum_{i=1}^{n} E \left[
+			X_i ^2
+		\right] \overset{iid.} = n \cdot E \left[
+			X_1 ^2
+		\right] = 2 \vartheta n
+	\end{align*}
+	Ganz simpel können wir jetzt $T(X)$ mit $\frac{ 1 }{ 2 n }$ multiplizieren und erhalten
+	so einen erwartungstreuen Schätzer für $\vartheta$.
+	\[
+		S (x) = \frac{ x }{ 2 n } \implies E \left[
+			S(T(X)) 
+		\right] = E \left[
+			\frac{ T(X) }{ 2 n }
+		\right] = \vartheta
+	\] 
+\end{proof}
+\end{theorem}
+
+\end{document}
+
