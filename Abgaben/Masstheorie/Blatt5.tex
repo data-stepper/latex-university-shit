@@ -1,0 +1,134 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ \usepackage{bbm, mathtools}
+ 
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Maßtheoretische Konzepte der Stochastik \\ -- Übungsblatt \#05 --} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332),
+        Michael Hermann (6981007)}
+\maketitle
+
+\begin{Aufgabe}{1} % #1
+Sei $\mu$ ein Maß auf einem Messraum $(\Omega, \mathcal{A})$, $f: (\Omega, \mathcal{A}) \rightarrow (\mathbb{R}, \mathbb{B})$ und  $T: [0, \infty) \rightarrow [0, \infty)$ eine streng monoton steigende Funktion. \\
+Dann gilt für alle $x > 0$ die Ungleichung
+$$
+\mu\{|f| \geq x \} \leq \frac{\int T(|f|) \, d\mu}{T(x)}
+$$
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+Es gilt für jedes $x > 0$
+\begin{eqnarray*}
+\int T(|f|) \, d\mu &\geq& \int T(|f|) \mathbbm{1}_{\{|f| \geq x\}} \, d\mu \\
+			 &\geq& \int T(x) \mathbbm{1}_{\{|f| \geq x\}} \, d\mu \\
+			 &=& T(x)  \int \mathbbm{1}_{\{|f| \geq x\}} \, d\mu \;\; =  \; T(x) \mu\{|f| \geq x\}
+\end{eqnarray*}
+Dabei folgen die Ungleichungen aus der Monotonie des Integrals, die erste, weil $T$ nicht-negativ ist und wir auf der rechten Seite über einen möglicherweise kleineren Bereich integrieren und die zweite, da $T$ streng monoton steigend ist. Die Gleichungen in der dritten Zeile gelten wegen der Linearität des Integrals und da $\mathbbm{1}_{\{|f| \geq x\}}$ eine Elementarfunktion ist.
+\end{proof}
+
+
+\begin{Aufgabe}{2} % #2
+Gilt für eine Folge von Funktionen $f_n:(\Omega, \mathcal{A}) \rightarrow (\bar{\mathbb{R}}, \bar{\mathbb{B}})$ und ein $\delta > 0$
+$$
+\sup_{n \in \mathbb{N}} \int |f_n|^{1+\delta} \, d\mu < \infty,
+$$
+so ist die Folge gleichgradig $\mu$-integrierbar.
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+Wir wollen zeigen, dass 
+\begin{equation}
+\label{eq:absStet}
+\lim_{a \rightarrow \infty} \sup_{n \in \mathbb{N}} \int |f_n| \mathbbm{1}_{\{|f_n| > a\}}  \, d\mu = 0
+\end{equation}
+gilt. Dazu betrachten wir die Funktion $T: [0, \infty) \rightarrow [0, \infty), x \mapsto x^{1+\delta}$. Diese ist streng monoton steigend und mit Aufgabe 1 gilt für jedes $n \in \mathbb{N}$
+$$
+\mu\{|f_n| > a\} \leq \mu\{|f_n| \geq a\} \leq \frac{\int |f_n|^{1+\delta } d\mu }{a^{1+\delta}} \;\; \longrightarrow 0
+$$
+für $a > 0$ und $a \rightarrow \infty$.
+Aus der Hölderungleichung folgt mit $p = 1+\delta$ und $q = \frac{1+\delta}{\delta}$ 
+\begin{eqnarray*}
+\int |f_n |\mathbbm{1}_{\{|f_n| > a\}} \, d\mu &\leq&  \left( \int |f_n|^{1+\delta} \, d\mu \right)^{\frac{1}{1+\delta}} \left( \int (\mathbbm{1}_{\{|f_n| > a\}})^{\frac{1+\delta}{\delta}} \, d\mu \right)^{\frac{\delta}{1+\delta}} \\
+						      &=& \left( \int |f_n|^{1+\delta} \, d\mu \right)^{\frac{1}{1+\delta}} \left( \mu\{|f_n| > a\} \right)^{\frac{\delta}{1+\delta}}  \;\;  \longrightarrow 0 \; \text{ für } a \rightarrow \infty
+\end{eqnarray*}
+für genügend großes $n \in \mathbb{N}$, da der erste Faktor dann nach Voraussetzung endlich ist. Damit folgt (\ref{eq:absStet}) und  die Folge ist gleichgradig $\mu$-integrierbar. 
+\end{proof}
+
+
+\begin{Aufgabe}{3} % #3
+Seien $f_n$ und $f$ nicht-negative Funktionen auf einem Maßraum $(\omega, \mathcal{A}, \mu)$. Konvergiert $f_n$ gegen $f$ $\mu$-fast-überall und gilt $\int f_n \, d\mu = \int f \, d\mu < \infty$, so folgt
+$$
+\lim_{n \rightarrow \infty} \int \left| f_n - f\right| \, d\mu = 0
+$$
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+Nach Blatt 4, Aufgabe 2 gilt wegen $\int f_n-f \, d\mu = \int f_n \, d\mu - \int f \, d\mu  = 0$ die Gleichung 
+$$
+\frac{1}{2} \int \left| f_n - f\right| \, d\mu  = \int (f_n - f)^+ \, d\mu = \int (f_n-f) \mathbbm{1}_{\{f_n > f\}} \, d\mu.
+$$
+Da $f_n \rightarrow f$ $\mu$-f.ü., gibt es ein $n_1 \in \mathbb{N}$, so dass $|f_n-f| \leq 1$ auf $\{f_n \neq f\}$ für $n \geq n_1$, also insbesondere $f_n-f \leq 1$ auf $\{f_n > f\}$. Mit der Monotonie des Integrals können wir dann
+$$
+ \int (f_n-f) \mathbbm{1}_{\{f_n > f\}} \, d\mu \leq \int  \mathbbm{1}_{\{f_n > f\}} =  \mu\{f_n > f\}
+$$
+für $n \geq n_1$ abschätzen. Wegen $\mu\{f_n < f\} + \mu\{f_n > f\} = \mu\{f_n \neq f\} \rightarrow 0$ für $n \rightarrow \infty$ gibt es zu jedem $\epsilon > 0$ ein $n_2 \geq n_1$, so dass insgesamt
+$$
+\int \left| f_n - f\right| \, d\mu \leq 2  \mu\{f_n > f\} \leq 2 \epsilon
+$$
+für $n \geq n_2$ gilt und die Aussage ist gezeigt.
+\end{proof}
+
+
+\begin{Aufgabe}{4} % #4
+Zu jeder Folge vom Wahrscheinlichkeitsmaßen $P_n, n \in \mathbb{N}$ auf einem Maßraum $(\Omega, \mathcal{A})$ existiert ein Wahrschenlichkeitsmaß $Q$, so dass alle $P_n$ eine $Q$-Dichte besitzen.
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+Nach dem Hinweis ist 
+$$
+Q \coloneqq \sum_{i=1}^\infty 2^{-n} P_n
+$$
+ein Maß auf $(\Omega, \mathcal{A})$. Wegen 
+$$
+Q(\Omega) = \sum_{i=1}^\infty 2^{-n} P_n(\Omega) = \sum_{i=1}^\infty 2^{-n} = -1 + \sum_{i=0}^\infty 2^{-n} = 1
+$$
+ist $Q$ sogar ein Wahrscheinlichkeitsmaß. Für $A \in \mathcal{A}$ gilt
+$$
+Q(A) = \sum_{i=1}^\infty 2^{-n} P_n(A) = 0 \; \Longleftrightarrow \; P_n(A) = 0 \;\; \forall n \in \mathbb{N}
+$$
+und damit ist jedes $P_n$ absolutstetig bzgl. $Q$. Da $Q$ als Wahrscheinlichkeitsmaß insbesondere $\sigma$-endlich ist, folgt aus dem Satz von Radon-Nikodym, dass jedes $P_n$ eine $Q$-Dichte besitzt.
+\end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
