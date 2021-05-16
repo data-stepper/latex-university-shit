@@ -1,0 +1,46 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+	\section{Die Markov-Eigenschaft:}
+	Die Markov-Eigenschaft beschreibt eine wichtige Klasse stochastischer Prozesse
+	die wir in oft in der Natur finden werden, diese sind die sogenannten Markovketten.
+
+	\vspace{\baselineskip}
+	\textbf{Definition 1.1:}
+	Sei $\{
+		X_n, \; n \in \mathbb{N}_0
+	\} $ ein stochastischer Prozess mit einem abzählbaren Zustandsraum $I$.
+	Als erstes fordern wir, dass
+	\[
+		P(X_0 = i_0, ..., X_n = i_n) > 0
+	\]
+	für Zustände $i_k \in I$. Dies ist wichtig, sodass später die bedingten Warscheinlichkeiten
+	wohldefiniert sind. Dann nennen wir den Prozess $\{
+		X_n, \; n \in \mathbb{N}_0 
+	\} $ eine Markovkette genau dann wenn dieser die folgende Eigenschaft erfüllt:
+	\[
+		P(X_{n+1} = i_{n+1} \; | \; X_0 = i_0, ..., X_n = i_n)
+		= P(X_{n+1} = i_{n+1} \; | \; X_n = i_n)
+	\] 
+	Bei einer Markovkette hängt also $P(X_{n+1} = i_{n+1})$ \textbf{nur} von $P(X_{n} = i_{n})$
+	und ist unabhängig von $P(X_k = i_k)$ für alle $k < n$.
+	\section{Markovketten in der Natur}
+	\section{Eigenschaften von Markovketten}
+	\section{Homogene Markovketten}
+	\section{Absorption}
+\end{document}
+
