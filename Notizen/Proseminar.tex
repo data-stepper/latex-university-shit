@@ -36,11 +36,32 @@
 		P(X_{n+1} = i_{n+1} \; | \; X_0 = i_0, ..., X_n = i_n)
 		= P(X_{n+1} = i_{n+1} \; | \; X_n = i_n)
 	\] 
-	Bei einer Markovkette hängt also $P(X_{n+1} = i_{n+1})$ \textbf{nur} von $P(X_{n} = i_{n})$
+	Bei einer Markovkette hängt also $P(X_{n+1} = i_{n+1})$ \textbf{nur} von $P(X_{n} = i_{n})$ ab
 	und ist unabhängig von $P(X_k = i_k)$ für alle $k < n$.
+
+	\vspace{\baselineskip}
+	Wir können die selbe Markov-Eigenschaft aber auch anders und ein wenig abstrakter 
+	formulieren mit folgendem Lemma:
+
+	\textbf{Lemma 1.2:} 
+	Seien $C_k$ disjunkte Ereignisse mit Vereinigung $C$ und gilt, dass
+	$p = P(A \, | \, B \, \cap \, C_k)$ unabhängig von $k$ ist, dann gilt auch:
+	\[
+		p = P(A \; | \; B \cap C)
+	\] 
 	\section{Markovketten in der Natur}
+	Unter anderem finden wir Markovketten immer dann wenn wir unseren stochastischen Prozess
+	umformulieren können, sodass wir \textbf{Summen von unabhängigen Zufallsvariablen} haben.
+
+	\vspace{\baselineskip}
+	Nehmen wir also an $X_k$ sind unabhängige Zufallsvariablen. Dann beobachten wir folgendes:
+	\[
+		\underbrace{\sum_{i=1}^{n} X_i}_{Y_n}
+		= \underbrace{\sum_{i=1}^{n-1} X_i}_{Y_{n-1}} + X_n
+	\]
+	Also sehen wir direkt, dass die neuen Zufallsvariablen $Y_k$ eine Markovkette bilden.
 	\section{Eigenschaften von Markovketten}
 	\section{Homogene Markovketten}
 	\section{Absorption}
-\end{document}
+	\end{document}
 
