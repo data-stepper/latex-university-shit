@@ -1,0 +1,172 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	\begin{theorem} % Aufgabe #1
+	\begin{Aufgabe}{1} % #1
+		Bestimme einen UMVU-Schätzer für $\vartheta$
+	\end{Aufgabe}
+
+	\begin{proof}[Beweis]
+		Als erstes bestimmen wir eine suffiziente und vollständige Statistik $T(X)$, aus welcher wir
+		dann unseren UMVU-Schätzer $\delta(X)$ konstruieren.
+		Setze:
+		\[
+			T(X) = \min \left(
+				X_1, ..., X_{n}
+			\right) 
+		\] 
+		Um die Suffizienz von $T(X)$ zu zeigen, verwenden wir das Faktorisierungskriterium wie folgt:
+		\[
+			f_\vartheta (x) = g_\vartheta (T(x)) h(x)
+			\; \text{  wobei  } \; x = (x_1, ..., x_{n})
+		\] 
+		Wir benötigen also zuerst die gemeinsame Dichte $f_\vartheta (x_1, ..., x_{n})$ unserer Zufallsvariablen
+		$X_{1}, ..., X_{n}$:
+		\begin{align*}
+			f_\vartheta ( x_1 ,..., x_{n}) &= \prod_{i=1}^{n} f_\vartheta (x_{i}) \\
+				   &= \exp \left(
+					   - \sum_{i=1}^{n} (x_{i} - \vartheta)
+				   \right) \cdot I_{[\vartheta, \infty)} (x) \\
+				   &= \exp \left(
+				   		n \vartheta - \sum_{i=1}^{n} x_{i}
+				   \right) 
+		\end{align*}
+		Also zeigen wir das Faktorisierungskriterium:
+		\begin{align*}
+			f_\vartheta (x_1 , ..., x_{n}) &= \exp \left(
+				n \vartheta - \sum_{i=1}^{n} x_{i}
+			\right) 
+			= g_\vartheta (T(x_1 , ..., x_{n})) h(x_1 , ..., x_{n}) \\
+			   &= \underbrace{ \exp (n \vartheta ) }_{ g_\vartheta (T(x_1 , ..., x_{n})) } \cdot \;\;
+			   \underbrace{ \exp \left(
+			   	- \sum_{i=1}^{n} x_{i}
+			   \right)  }_{ h(x_1 , ..., x_{n}) } \\
+			   &= \exp \left(
+					n \vartheta - \sum_{i=1}^{n} x_{i}
+			   \right) 
+		\end{align*}
+		Um die Vollständigkeit von $T(X)$ zu zeigen gehen wir wie folgt vor:
+		\begin{align*}
+			T(X) \text{ vollständig } & \Leftrightarrow 
+			\left(
+				E \left[
+					g(T(X))
+				\right] = 0
+				\implies g \text{ fast überall 0}
+			\right) \text{für alle messbaren Funktionen g}
+		\end{align*}
+		Nun sehen wir aber, dass wir um $E \left[
+			g(T(X))
+		\right] $ zu berechnen die Dichte $p(x)$ von $T(X)$ benötigen.
+		Hier können wir aus dem Stochastik Skript Satz 10.26 anwenden mit dessen wir folgendes wissen:
+		\begin{align*}
+			p(x) &= n f_\vartheta (x) (1 - F(x))^{n-1} \\
+				 &= n \cdot e ^{- (x - \vartheta)}  I_{ [ \vartheta , \infty ) } (x) 
+				 \left(
+					 1 - \int_{-\infty}^{x} e ^{- (x - \vartheta)} I_{ [ \vartheta , \infty ) } (t) \, dt
+				 \right) ^{n-1} \\
+				 &= n \cdot e ^{- (x - \vartheta)}  I_{ [ \vartheta , \infty ) } (x) 
+				 \left(
+				 	1 - e ^{\vartheta} \int_{\vartheta }^{x} e ^{-t} \, dt
+				 \right) ^{n-1} \\
+				 &= n \cdot e ^{- (x - \vartheta)}  I_{ [ \vartheta , \infty ) } (x) 
+				 \left(
+				 	1 - e ^{\vartheta} \left[
+						- e ^{-t}
+					\right]_{\vartheta}^{x}
+				 \right) ^{n-1} \\
+				 &= n \cdot e ^{- (x - \vartheta)}  I_{ [ \vartheta , \infty ) } (x) 
+				 \left(
+				 	1 + e ^{\vartheta}
+					\left(
+						e ^{-x} - e ^{-\vartheta}
+					\right) 
+				\right) ^{n-1} \\
+				 &= n e ^{- (x - \vartheta)}
+				 \left(
+					 e ^{- (x - \vartheta)}
+				 \right) ^{n-1}
+				 = n \cdot e ^{- n (x - \vartheta)} \cdot I_{ [ \vartheta , \infty ) } (x) 
+		\end{align*}
+		Wobei wir uns offensichtlich erinnern, dass $F(X)$ die Verteilungsfunktion der $X_i$ ist.
+		Also beobachten wir jetzt Folgendes:
+		\begin{align*}
+			E \left[
+				g(T(X))
+			\right] &= \int g(x) p(x) \, dx \\
+					&= \int g(x) \left(
+						n e ^{-n (x - \vartheta)}
+						I_{ [ \vartheta , \infty ) } (x) \, dx
+					\right) \\
+					&= n e ^{n \vartheta } \int_{\vartheta }^{\infty} g(x) e ^{- nx} \, dx
+		\end{align*}
+		Mit Hilfe des gegebenen Hinweises wissen wir aber, dass wenn dieses Integral für alle $\vartheta \in \mathbb{R}$
+		gleich $0$ ist, dass dann die integrierte Funktion auch $0$ war.
+		Da aber die integrierte Funktion ein Produkt war und $e ^{- n x } \neq 0, \forall x \in \mathbb{R}$
+		folgt direkt, dass $g(x) = 0$ war. Also ist unsere Statistik $T(X)$ auch vollständig.
+		Nun berechnen wir zuerst den Erwartungswert von $T(X)$ und danach konstruieren wir einen
+		erwartungstreuen Schätzer für $\vartheta$.
+		\begin{align*}
+			E \left[
+				T(X)
+			\right] &= \int x \cdot p(x) \, dx \\
+				&= \int x \cdot \left(
+					 n \cdot e ^{- n (x - \vartheta)} \cdot I_{ [ \vartheta , \infty ) } (x) 
+				\right) \, dx \\
+				&= n e^{n \vartheta}
+				\int_{\vartheta }^{\infty} x e ^{- n x} \, dx \\
+				&= n e ^{n \vartheta} \cdot \left(
+					- \int_{\vartheta }^{\infty} \frac{ -1 }{ n } e ^{-n x} \, dx 
+					+ \left[
+						\frac{ -x }{ n } e ^{-n x}
+					\right]_\vartheta^\infty
+				\right) \\
+				&= - e ^{n \vartheta} \cdot \left(
+					- \left[
+						\frac{ - 1 }{ n } e ^{-n x}
+					\right]_\vartheta^\infty + \left[
+						x e ^{- n x}
+					\right]_\vartheta^\infty
+				\right) \\
+				&= - e ^{n \vartheta} \cdot \left(
+					\frac{ 1 }{ n } 
+					\left(
+						\underbrace{ \; e ^{-n \infty} \; }_{ =0 }  - e ^{-n \vartheta}
+					\right) 
+					+ \left(
+						\underbrace{ \; \infty e ^{- n \infty} \; }_{ = 0 }
+						- \vartheta e ^{-n \vartheta}
+					\right) 
+				\right) \\
+				&= \frac{ 1 }{ n } + \vartheta
+		\end{align*}
+		Also können wir einfach unseren erwartungstreuen Schätzer konstruieren indem wir unsere Statistik nur um 
+		$\frac{ 1 }{ n }$ verschieben:
+		\[
+			\delta (x) = x - \frac{ 1 }{ n }
+			\implies E \left[
+				\delta (T(X))
+			\right] = \vartheta
+		\] 
+		Da jetzt der Schätzer $\delta$ nur von unserer suffizienten und vollständigen Statistik $T(X)$ abhängt wissen
+		wir nach Bemerkung 6.6 (a), dass dieser auch der UMVU-Schätzer von $\vartheta$ ist.
+	\end{proof}
+	\end{theorem}
+\end{document}
+
