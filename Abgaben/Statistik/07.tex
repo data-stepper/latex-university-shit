@@ -1,0 +1,90 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	\begin{theorem} % Aufgabe #1
+	\begin{Aufgabe}{1} % #1
+		Fahrkartenkontrolleur
+	\end{Aufgabe}
+
+	\textbf{(b)} 
+
+	\begin{proof}[Maximum-Likelihood-Schätzung]
+		Als erstes erinnern wir uns an die Dichtefunktion der geometrischen
+		Verteilung, welche wie folgt aussieht:
+		\[
+			P(X= k) = f_\vartheta (k) = \vartheta \cdot (1- \vartheta) ^{k}
+			\text{ wobei } k \in \mathbb{N}_0
+			\text{ und } \vartheta \in (0, 1)
+		\]
+		Als erstes bestimmen wir unseren Maximum-Likelihood-Schätzer.
+		Hierfür bestimmen wir die log-Likelihood-Funktion welche nämlich
+		wie folgt aussieht:
+		\begin{align*}
+			l (\vartheta, x_1, ..., x_{n}) &= \log \left(
+				\underbrace{ \prod_{i=1}^{n} \vartheta (1-\vartheta) ^{x_{i}}  }_{ \text{ gemeinsame Dichte } } 
+			\right) \\
+			   &= \log \left(
+				   \vartheta ^{n} (1 - \vartheta) ^{
+						   \sum_{i=1}^{n} x_{i}
+				   }
+			   \right) \\
+			   &= n \cdot \log (\vartheta) + 
+			   \left(
+				   \sum_{i=1}^{n} x_{i} 
+			   \right) \cdot \log (1 - \vartheta)
+		\end{align*}
+		Nun berechnen wir das Maximum dieser Funktion, indem wir sie ableiten:
+		\begin{align*}
+			\frac{ \partial l(\vartheta, x_1, ..., x_{n}) }{ \partial \vartheta } &= 
+			\frac{ \partial  }{ \partial \vartheta } \left(
+			   n \cdot \log (\vartheta) + 
+			   \left(
+				   \sum_{i=1}^{n} x_{i} 
+			   \right) \cdot \log (1 - \vartheta)
+			\right) \\
+			  &= \frac{ n }{ \vartheta } - \left(
+			  	\sum_{i=1}^{n} x_{i}
+			  \right) \cdot \frac{ 1 }{ 1 - \vartheta } \\
+			\frac{ \partial l(\vartheta, x_1, ..., x_{n}) }{ \partial \vartheta } = 0
+			  & \Leftrightarrow 
+			  \frac{ n }{ \vartheta } = \frac{ 1 }{ 1- \vartheta } \sum_{i=1}^{n} x_{i} \\
+			  & \Leftrightarrow \frac{ 1 - \vartheta }{ \vartheta }
+			  = \frac{ 1 }{ \vartheta  } - 1
+			  = \frac{ 1 }{ n } \sum_{i=1}^{n} x_{i} \\
+			  & \Leftrightarrow \vartheta = \frac{ 1 }{ 1 + \frac{ 1 }{ n } \sum_{i=1}^{n} x_{i} }
+		\end{align*}
+		Somit brauchen wir nur noch das Stichprobenmittel errechnen und dann in den obigen
+		Maximum-Likelihood-Schätzer einsetzen:
+		\[
+		\overline{X}_n = \frac{ 1 }{ 10 } \left(
+			48 + 46 + 42 + 68 + 36 + 30 + 64 + 40 + 50 + 42
+		\right) = 46,6
+		\] 
+		Also schätzen wir nun unseren Parameter $\vartheta$ wie folgt:
+		\[
+			\vartheta = \frac{ 1 }{ 1 + 46,6 }
+			\approx 0.021008403361344536...
+		\] 
+		Wir können jetzt also sagen, dass nach unserer Maximum-Likelihood-Schätzung der
+		Fahrkartenkontrolleur bei jeder Person mit einer Wahrscheinlichkeit von ca. $2.1\%$
+		erwarten kann, dass diese keine Fahrkarte besitzt.
+	\end{proof}
+	\end{theorem}
+\end{document}
+
