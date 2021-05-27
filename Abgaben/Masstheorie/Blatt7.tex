@@ -1,0 +1,120 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ \usepackage{bbm, mathtools}
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Maßtheoretische Konzepte der Stochastik \\ -- Übungsblatt \#07 --} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332),
+        Michael Hermann (6981007)}
+\maketitle
+
+\begin{Aufgabe}{1} % #1
+Sei $g(x,y) = (x+y)\varphi(x+y)$ für $x,y \in \mathbb{R}$ wobei $\varphi$ eine Lebesgue-Dichte der Standardnormalverteilung ist, und $f(x,y) = \mathbbm{1}_{(0,\infty)}(x)g(x,y)$.
+\begin{itemize}
+\item[(i)] Es gilt
+$$
+\int \int f(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) \neq \int \int f(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx),
+$$
+dh. $f$ kann nicht $\lambda^2$-integrierbar sein.
+\item[(ii)] Es gilt
+$$
+\int \int g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) = \int \int g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx).
+$$
+Die Funktion $g$ ist trotzdem nicht  $\lambda^2$-integrierbar.
+\end{itemize}
+\end{Aufgabe}
+
+\begin{proof}[Beweis]
+\begin{itemize}
+\item[(i)] Wir rechnen nach. Es gilt
+\begin{eqnarray*}
+\int \int f(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) &=& \int \int \mathbbm{1}_{(0,\infty)}(x)g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) \\
+											     &=& \int \mathbbm{1}_{(0,\infty)}(x) \int g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) \\
+											     &=& \int_{0}^{\infty} \int_{-\infty}^{\infty} (x+y)\varphi(x+y) \, dy \,dx \\
+											     &=& \int_{0}^{\infty}  \int_{-\infty}^{\infty} t \varphi(t) \,dt \, dx \;\; \text{ mit } \;\; t \coloneqq x+y, dt = dy \\
+											     &=& \int_{0}^{\infty} -\left[ \varphi(t)\right]_{-\infty}^{\infty} \, dy \\
+											     &=& 0,
+\end{eqnarray*}
+mit
+$$
+\left[ \varphi(t)\right]_{-\infty}^{\infty} = \lim_{a \to -\infty}  \lim_{b \to \infty} \left[ \varphi(t)\right]_{a}^{b} =  \lim_{a \to -\infty}  \lim_{b \to \infty} \varphi(b) - \varphi(a) = 0
+$$
+
+
+In umgekehrter Reihenfolge ergibt sich
+\begin{eqnarray*}
+\int \int f(x,y) \mathbbm{\lambda}(dx) \mathbbm{\lambda}(dy) &=& \int \int \mathbbm{1}_{(0,\infty)}(x)g(x,y) \mathbbm{\lambda}(dx) \mathbbm{\lambda}(dy) \\
+											     &=& \int_{-\infty}^{\infty} \int_{0}^{\infty} (x+y)\varphi(x+y) \, dx \,dy \\
+											     &=& \int_{-\infty}^{\infty}  \int_{y}^{\infty} t \varphi(t) \,dt \, dy \;\; \text{ mit } \;\; t \coloneqq x+y, dt = dx \\
+											     &=& \int_{-\infty}^{\infty} - \lim_{z \to \infty} \left[\varphi(t) \right]_{y}^{z} \,dy \\
+											     &=& \int_{-\infty}^{\infty} \varphi(y) - \lim_{z \to \infty} \varphi(z) \,dy \\
+											     &=& \int_{-\infty}^{\infty} \varphi(y)  \,dy \\
+											     &=& 1
+\end{eqnarray*}
+Damit kann insbesondere $f$ nicht $\lambda^2$-integrierbar sein, da die Gleichheit der beiden Ausdrücke notwendig wäre.
+
+\item[(ii)]
+Wir rechnen wieder nach. Es gilt
+\begin{eqnarray*}
+\int \int g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) &=& \int \int g(x,y) \mathbbm{\lambda}(dy) \mathbbm{\lambda}(dx) \\
+											     &=& \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} (x+y)\varphi(x+y) \, dy \,dx \\
+											     &=& \int_{-\infty}^{\infty}  \int_{-\infty}^{\infty} t \varphi(t) \,dt \, dx \;\; \text{ mit } \;\; t \coloneqq x+y, dt = dy \\
+											     &=& \int_{-\infty}^{\infty} \left[-\varphi(t) \right]_{-\infty}^{\infty} \,dx \\
+											     &=& 0
+\end{eqnarray*}
+Die Rechnung für $\int \int g(x,y) \mathbbm{\lambda}(dx) \mathbbm{\lambda}(dy)$ verläuft genauso, da wir die Variablen umbenennen können, ohne etwas zu verändern. \\
+Wir können daraus nicht die $\lambda^2$-Intergrierbarkeit von $g$ folgern. Es gilt:
+\begin{eqnarray*}
+g^+(x,y) &=&  (x+y)\varphi(x+y) \mathbbm{1}_{\{x \geq -y\}}(x) \;\; \text{ und } \\
+g^-(x,y) &=&  -(x+y)\varphi(x+y) \mathbbm{1}_{\{x \leq -y\}}(x).
+\end{eqnarray*}
+Für festes $y \in \mathbb{R}$ gilt ähnlich wie oben
+$$
+\int g^+(x,y) \lambda(dx) =  \int_{-y}^{\infty} (x+y)\varphi(x+y) \, dx = \int_{0}^{\infty} t \varphi(t) dt = \varphi(0),
+$$
+bzw. 
+$$
+\int g^-(x,y) \lambda(dx) =  \int_{-\infty}^{-y} -(x+y)\varphi(x+y) \, dx = \int_{-\infty}^{0} -t \varphi(t) dt = \varphi(0),
+$$
+Diese beiden Ausdrücke sind als Funktionen von $y$ jeweils konstant und positiv, dh. ihr Integral über die gesamte $y$-Achse ist unendlich. Nach Fubini-Tonelli gilt dann
+$$
+\int g^+(x,y) \, d\lambda^2 = \int g^-(x,y) \, d\lambda^2 = \infty
+$$
+da diese Funktionen $\mathbb{B} \otimes \mathbb{B}, \bar{\mathbb{B}}$-messbar und nichtnegativ sind. \\
+Es folgt, dass $g = g^+-g^-$ nicht $\lambda^2$-integrierbar ist.
+\end{itemize}
+\end{proof}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
