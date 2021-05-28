@@ -127,15 +127,15 @@ Es folgt, dass $g = g^+-g^-$ nicht $\lambda^2$-integrierbar ist.
 	um die Behauptung zu beweisen: \\
 	Sei $(\Omega,\A,\mu)$ ein Maßraum, $f,g\in\mathcal{L}_1(\mu)$. Dann sind äquivalent: 
 	\begin{itemize}
-		\item[(i)] $\int_{A} f \, d\mu = \int_{A} g \, d\mu$  für alle $A\in\A$
-		\item[(ii)] $f = g$ $\mu-$f.ü. 
+		\item[(i)] $\int_{A} f \, d\mu = \int_{A} g \, d\mu$  für alle $A\in\A$.
+		\item[(ii)] $f = g$ $\mu-$f.ü.
 	\end{itemize}
 
 	Hierfür betrachten wir zunächst folgende Rechnung: Seien $A_1\in\A_1$, $A_2\in\A_2$ beliebig, dann gilt
 	\begin{align*}
 		(Q\otimes K)(A_1 \times A_2) &\stackrel{Def.}{=} \int_{\Omega_1} K(\omega_1, (A_1\times A_2)_{\omega_1}) \, Q(d\omega_1) \\
 									 &= \int_{A_1} K(\omega_1, A_2) \, Q(d\omega_1)						    \\
-									 &= P^{(X,Y)}(A_1\times A_2) \hspace{0.35cm}\qquad (Q\otimes K = P^{(X,Y)})  			\\
+									 &= P^{(X,Y)}(A_1\times A_2) \hspace{0.7cm}\qquad (Q\otimes K = P^{(X,Y)})   \\
 									 &= (P^X \otimes P^Y)(A_1 \times A_2)  \qquad (X,Y \text{ unabhängig})  \\
 									 &= P^X(A_1) \cdot P^Y(A_2).											\\
 									 &= \int_{A_1} P^Y(A_2) P^X(d\omega_1).
@@ -149,7 +149,7 @@ Es folgt, dass $g = g^+-g^-$ nicht $\lambda^2$-integrierbar ist.
 	Es bleibt also noch zu zeigen, dass $Q = P^X$. Die Aussage ist intuitiv, aber leider konnten wir sie nicht beweisen.  \\
 	\textit{Bemerkung:} Wir betrachten in den oberen Rechnungen nur Mengen der Form $A_1 \times A_2$. Das genügt jedoch, da die 
 	Menge der Rechteckmengen ein Erzeugendensystem der Produkt-$\sigma$-Algebra $\A_1 \otimes \A_2$ ist. Nach dem Eindeutigkeitsteil
-	des Maßfortsetzungssatzes stimmen die Maße $(Q\otimes K)$ und $\int_{A_1} P^Y(A_2) P^X(d\omega_1)$ daher auch auf der gesamten 
+	des Maßfortsetzungssatzes stimmen die Maße $Q\otimes K$ und $\int_{A_1} P^Y(A_2) \, P^X(d\omega_1)$ daher auch auf der gesamten 
 	$\sigma$-Algebra überein.
 \end{proof}
 
