@@ -7,6 +7,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathcal{A}}
 \newcommand{\beh}{\textit{Behauptung. }}
 
 \setlength{\parindent}{0pt}
@@ -104,6 +105,53 @@ Es folgt, dass $g = g^+-g^-$ nicht $\lambda^2$-integrierbar ist.
 \end{itemize}
 \end{proof}
 
+
+\begin{Aufgabe}{2} % #2
+	Sei $Q$ ein Wahrscheinlichkeitsmaß auf $(\Omega_1, \A_1)$ und $K$ ein Markov-Kern von $(\Omega_1,\A_1)$ nach 
+	$(\Omega_2,\A_2)$. Sei $(X,Y)$ ein Zufallsvektor auf einem Wahrscheinlichkeitsraum $(\Omega,\A,P)$ mit Verteilung 
+	$Q\otimes K$, wobei $X$ $\Omega_1$-wertig und $Y$ $\Omega_2$-wertig sei. 
+\end{Aufgabe}
+
+\beh Sind $X$ und $Y$ stochastisch unabhängig, so gilt für alle $A_2\in \A_2$:
+	\begin{align*}
+		K(\omega_1, \cdot) = P^Y \quad\text{für $Q$-f.a. $\omega_1\in\Omega_1$}.
+	\end{align*}
+
+\begin{proof}[Beweis]
+	Die Idee ist es die Gleichung
+	\begin{align*}
+		\int_{A_1} K(\omega_1, A_2) \, Q(d\omega_1) = \int_{A_1} P^{Y}(A_2) \, Q(d\omega_1)
+	\end{align*}
+
+	für alle $A_1\in\A_1$, $A_2\in\A_2$ herzuleiten. Dann kann folgendes Ergebnis aus Präsenzblatt 2, Aufgabe 1 verwendet werden,
+	um die Behauptung zu beweisen: \\
+	Sei $(\Omega,\A,\mu)$ ein Maßraum, $f,g\in\mathcal{L}_1(\mu)$. Dann sind äquivalent: 
+	\begin{itemize}
+		\item[(i)] $\int_{A} f \, d\mu = \int_{A} g \, d\mu$  für alle $A\in\A$
+		\item[(ii)] $f = g$ $\mu-$f.ü. 
+	\end{itemize}
+
+	Hierfür betrachten wir zunächst folgende Rechnung: Seien $A_1\in\A_1$, $A_2\in\A_2$ beliebig, dann gilt
+	\begin{align*}
+		(Q\otimes K)(A_1 \times A_2) &\stackrel{Def.}{=} \int_{\Omega_1} K(\omega_1, (A_1\times A_2)_{\omega_1}) \, Q(d\omega_1) \\
+									 &= \int_{A_1} K(\omega_1, A_2) \, Q(d\omega_1)						    \\
+									 &= P^{(X,Y)}(A_1\times A_2) \hspace{0.35cm}\qquad (Q\otimes K = P^{(X,Y)})  			\\
+									 &= (P^X \otimes P^Y)(A_1 \times A_2)  \qquad (X,Y \text{ unabhängig})  \\
+									 &= P^X(A_1) \cdot P^Y(A_2).											\\
+									 &= \int_{A_1} P^Y(A_2) P^X(d\omega_1).
+	\end{align*}
+
+	Daraus folgt 
+	\begin{align*}
+		\int_{A_1} K(\omega_1, A_2) \, Q(d\omega_1) = \int_{A_1} P^Y(A_2) \, P^X(d\omega_1).
+	\end{align*}
+
+	Es bleibt also noch zu zeigen, dass $Q = P^X$. Die Aussage ist intuitiv, aber leider konnten wir sie nicht beweisen.  \\
+	\textit{Bemerkung:} Wir betrachten in den oberen Rechnungen nur Mengen der Form $A_1 \times A_2$. Das genügt jedoch, da die 
+	Menge der Rechteckmengen ein Erzeugendensystem der Produkt-$\sigma$-Algebra $\A_1 \otimes \A_2$ ist. Nach dem Eindeutigkeitsteil
+	des Maßfortsetzungssatzes stimmen die Maße $(Q\otimes K)$ und $\int_{A_1} P^Y(A_2) P^X(d\omega_1)$ daher auch auf der gesamten 
+	$\sigma$-Algebra überein.
+\end{proof}
 
 \end{document}
 
