@@ -1,0 +1,145 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	\begin{theorem} % Aufgabe #20
+	\begin{Aufgabe}{20} % #20
+		\textbf{a)} 
+		Diskretes logistisches Wachstum
+	\end{Aufgabe}
+
+	\begin{proof}[Rechnung]
+		Als erstes suchen wir die Gleichgewichtspunkte von unserem dynamischen System.
+		Wir suchen also die Punkte die im nächsten Zeitschritt gleich bleiben, also gilt für diese:
+		$x_{t+1} = x_{t}$. Diesen Punkten nennen wir im Folgenden einfach nur $x$.
+		\begin{align*}
+			x &= \alpha x (1 - x)
+			= \alpha \left(
+				x - x ^2
+			\right) \\
+			  & \Rightarrow x = 0 \text{ oder } 1 = \alpha ( 1 - x )
+			  \Rightarrow x = 1 - \frac{ 1 }{ \alpha }
+		\end{align*}
+		Offensichtlich ist für uns nur die Lösung $x = 1 - \frac{ 1 }{ \alpha }$ interessant.
+		Nun berechnen wir die Jacobian Matrix unserer Differenzengleichung, welche wie folgt aussieht.
+		\begin{align*}
+			J = \frac{ \partial  }{ \partial x } \left(
+				\alpha (x - x ^2)
+			\right) = \alpha \left(
+				1 - 2 x
+			\right) 
+		\end{align*}
+		Jetzt interessieren wir uns für die Jacobian aber nur genau am Gleichgewichtspunkt $x$, also setzen wir
+		die Lösung welche wir für diesen im obigen gefunden haben in die Jacobi Matrix ein und erhalten:
+		\begin{align*}
+			J_{x ^{\star}} = \alpha \left(
+				1 - 2 \left(
+					1 - \frac{ 1 }{ \alpha }
+				\right) 
+			\right) = \alpha - 2 \alpha + 2 = 2 - \alpha
+		\end{align*}
+		Nun müssen wir die Eigenwerte der Jacobi Matrix bestimmen. Da diese aber in unserem Fall nur eine 1x1 Matrix
+		ist, und die Eigenwerte immer genau die Nullstellen des charakteristischen Polynoms sind:
+		$P_\lambda (J_{x ^{\star}}) = \det (J_{x ^{\star}} - \lambda \cdot I_1)$
+		Nun sehen wir aber, dass die Eigenwerte allerdings schon genau in der obigen Gleichung stehen.
+		Jetzt wissen wir, dass unser dynamisches System genau dann stabil ist wenn der Betrag dieser Eigenwerte
+		kleiner als $1$ ist.
+		\begin{align*}
+			\text{System stabil} \Leftrightarrow
+			| 2 - \alpha | < 1
+			\overset{\alpha > 0} \Longleftrightarrow 1 < \alpha < 3
+		\end{align*}
+		Wir sehen also für die gegebenen Parameterbereiche:
+		\begin{align*}
+			\alpha \in (0, 1) & \Rightarrow \text{ System instabil } \\
+			\alpha \in (1, 3) & \Rightarrow \text{ System stabil }
+		\end{align*}
+	\end{proof}
+	\end{theorem}
+
+	\begin{theorem} % Aufgabe #21
+	\begin{Aufgabe}{21} % #21
+		\textbf{b)} Räuber und Beute
+	\end{Aufgabe}
+
+	\begin{proof}[Rechnung]
+		Wie bei Aufgabe 20 b) bestimmen wir zuerst die Gleichgewichtspunkte des Systems, also die Punkte
+		welche sich im nächsten Zeitschritt nicht verändert haben. Hier müssen wir allerdings beachten,
+		dass unser Zustandsraum zweidimensional ist. Wieder nennen wir die Lösungen an welche wir interessiert
+		sind $p$ und $q$.
+		\begin{align*}
+			& \text{ (i) } p = p + r p \left(
+				1 - \frac{ p }{ K }
+			\right)  - s pq \\
+			& \text{ (ii) } q = q - u q + v pq \\
+			& \overset{(i)} \implies 0 = r p \left(
+				1 - \frac{ p }{ K }
+			\right) - s pq \overset{p \neq 0} \implies q = \frac{ r }{ s } \left(
+				1 - \frac{ p }{ K }
+			\right) \\
+			& \overset{(ii)} \implies 0 = v pq - u q \overset{q \neq 0} \implies p = \frac{ u }{ v }
+		\end{align*}
+		Offensichtlich erhalten wir zusätzlich wieder die Lösung $(p, q) = (0,0)$ welche aber uninteressant
+		für uns ist. Als nächstes berechnen wir die Jacobian Matrix von unserer Übergangsfunktion:
+		$(p_{t+1}, q_{t+1}) = F(p_{t}, q_{t})$. 
+		\begin{align*}
+			J &= \begin{pmatrix} 
+				\frac{ \partial p_{t+1} }{ \partial p_{t} } & \frac{ \partial p_{t+1} }{ \partial q_{t} } \\
+				\frac{ \partial q_{t+1} }{ \partial p_{t} } & \frac{ \partial q_{t+1} }{ \partial q_{t} }
+			\end{pmatrix} 
+				= \begin{pmatrix} 
+					1 + r - \frac{ 2 rp }{ K } - sq & - sp \\
+					vq & 1 - u + vp
+				\end{pmatrix} 
+		\end{align*}
+		Nun setzen wir die Gleichgewichtspunkte in die Jacobian Matrix ein und erhalten:
+		\begin{align*}
+			J_{x ^{\star}} &= \begin{pmatrix} 
+				1 + r \left(
+					1 - \frac{ 2u }{ vK }
+				\right) - r \left(
+					1 - \frac{ u }{ vK }
+				\right) & \frac{ -su }{ v } \\
+				\frac{ vr }{ s } (1 - \frac{ u }{ vK })
+						& 1 \\
+			\end{pmatrix} \\
+				   &= \begin{pmatrix} 
+					   1 - \frac{ ur }{ vK } & \frac{ -su }{ v } \\
+					   \frac{ vr }{ s } ( 1 - \frac{ u }{ vK } ) & 1 \\
+				   \end{pmatrix} 
+		\end{align*}
+		Nun erkennen wir, dass wir eine 2x2 Matrix haben und verwenden das Kriterium welches wir aus 21a wissen.
+		Dieses vereinfacht uns die Aussage, dass der Betrag der Eigenwerte kleiner als $1$ ist und welches
+		aber genau besagt, ob unser dynamisches System stabil ist oder nicht.
+		\begin{align*}
+			\text{System stabil} & \Leftrightarrow
+			| - \text{Spur} (J_{x ^{\star}}) | < \det (J_{x ^{\star}}) + 1 < 2 \\
+				 & \Leftrightarrow \Big | -2 + \frac{ ur }{ vK } \Big |
+				 < \left(
+				 	1 - \frac{ ur }{ vK }
+				\right) \cdot (1) + \frac{ su }{ v } \cdot \frac{ vr }{ s } \left(
+					1 - \frac{ u }{ vK }
+				\right) + 1 < 2 \\
+				 & \Leftrightarrow \Big | 2 - \frac{ ur }{ vK } \Big |
+				 < 2 + ur - (1 + u) \frac{ ur }{ vK } < 2 \\
+		\end{align*}
+		Wir erhalten also ein schönes Kriterium für die Parameter $u, r, v, K$ wann unser dynamisches System stabil ist.
+	\end{proof}
+	\end{theorem}
+\end{document}
+
