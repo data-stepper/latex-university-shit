@@ -40,11 +40,22 @@
 \end{proof}
 
 \begin{Aufgabe}{2} % #2
+	Es seien $(\Omega, \mathcal{A})$ und $(S, \mathcal{D})$ Maßräume und $Y:(\Omega, \mathcal{A}) \rightarrow (S, \mathcal{D})$ und $Z:(\Omega, \sigma(Y)) \rightarrow (\mathbb{R}, \mathbb{B})$ jeweils messbare Abbildungen. 
 \end{Aufgabe}
 
-\beh 
+\beh Es existiert eine Abbildung $h:(S, \mathcal{D}) \rightarrow  (\mathbb{R}, \mathbb{B})$, so dass $Z = h \circ Y$.
 
 \begin{proof}[Beweis]
+	Es sei $Y$ eine beliebige, aber fest gewählte Abbildung von der gewünschten Form. Wir zeigen die Aussage für alle Abbildungen $Z:(\Omega, \sigma(Y)) \rightarrow (\mathbb{R}, \mathbb{B})$ mit Hilfe von algebraischer Induktion. \\
+
+	Sei zuerst $Z$ eine Elementarfunktion, dh. $Z = \sum_{i=1}^n a_i \mathbbm{1}_{A_i}$ für paarweise disjunkten Mengen $A_i \in \sigma(Y)$ und $0 < a_i \in \bar{\mathbb{R}}$ für $1 \leq i \leq n$. 
+	Da die Mengen $A_i$ alle in $\sigma(Y)$ liegen, ist jede Menge $A_i$ das Urbild $Y^{-1}(B_i)$ einer Menge $B_i \in \mathcal{D}$. Für $\omega \in \Omega$ gilt dann $\mathbbm{1}_{A_i}(\omega) = \mathbbm{1}_{B_i}(Y(\omega)) = \mathbbm{1}_{B_i} \circ Y (\omega)$
+	für alle $1 \leq i \leq n$ und es folgt $Z = h \circ Y$ für $h \coloneqq \sum_{i=1}^n a_i \mathbbm{1}_{B_i}$. Die so definierte Funktion ist natürlich auch messbar. \\
+
+	Ist $Z$ eine beliebige nicht-negative Funktion $(\Omega, \sigma(Y)) \rightarrow (\mathbb{R}, \mathbb{B})$, dann gibt es eine Folge von Elementarfunktionen $(Z_k)_{k \in \mathbb{N}}$  mit $Z_k \uparrow Z$. Wie wir soeben gesehen haben, gibt es zu jedem $Z_k$ eine 	messbare Funktion $h_k$ mit $Z_k = h_k \circ Y$ und damit $h_k \circ Y \uparrow Z$ für $k \to \infty$. Aus der Monotonie der Konvergenz folgt die Existenz einer Funktion $h \coloneqq \lim_{k \to \infty} h_k$ und für diese gilt $Z = h \circ Y$. \\
+
+	Ist schliesslich $Z$ eine beliebige messbare Funktion $(\Omega, \sigma(Y)) \rightarrow (\mathbb{R}, \mathbb{B})$, dann zerlegen wir sie in Positiv- und Negativteil, dh. $Z = Z^+ - Z^-$, und erhalten aus dem vorigen Schritt zwei Funktionen $h^+$ und $h^-$ mit den
+	gewünschten Eigenschaften. Für $h \coloneqq h^+ - h^-$ gilt dann $h \circ Y = h^+\circ Y - h^-\circ Y = Z^+ - Z^- = Z$.  
 \end{proof}
 
 \begin{Aufgabe}{3} % #3
