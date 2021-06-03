@@ -52,15 +52,15 @@
 	bedingt stochastisch unabhängig gegeben $Z_1$.
 \end{Aufgabe}
 
-\beh Für alle Funktionen $h: (\R,\B)\to (\R,\B)$ mit $E[\vert h(X) \vert] < \infty$ und alle Mengen $D_2\in\D$ gilt 
+\beh Für alle Funktionen $h: (\R,\B)\to (\R,\B)$ mit $E[\,\vert h(X) \vert\,] < \infty$ und alle Mengen $D_2\in\D$ gilt 
 	\begin{align*}
-		E[h(X)1_{D_2}(Z_2) \,\vert\, Z_1] = E[h(X) \,\vert\, Z_1] \cdot E[1_{D_2}(Z_2) \,\vert\, Z_1] \quad\text{$P$-f.s.}
+		E[h(X)1_{D_2}(Z_2) \,\vert\, Z_1] = E[h(X) \,\vert\, Z_1] \cdot E[1_{D_2}(Z_2) \gap Z_1] \quad\text{$P$-f.s.}
 	\end{align*}
 
 \begin{proof}[Beweis]
 	Sei $B\in\A$. Da $X$ und $Z_2$ bedingt unabhängig gegeben $Z_1$ sind, sind es auch $1_B(X)$ und $1_{D_2}(Z_2)$. Also gilt 
 	\begin{align*}
-		E[1_B(X)1_{D_2}(Z_2) \,\vert\, Z_1] = E[1_B(X) \,\vert\, Z_1]\cdot E[1_{D_2}(Z_2) \,\vert\, Z_1].
+		E[1_B(X)1_{D_2}(Z_2) \gap Z_1] = E[1_B(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1].
 	\end{align*}
 
 	Sei nun $X_n := \sum_{i=1}^{n} c_i\cdot 1_{B_i}$ für $B_i\in\A,\, c_i\in\R_{>0}$. Dann ist $X_n$ eine einfache Funktion. 
