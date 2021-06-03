@@ -71,16 +71,16 @@
 									   = E[X_n(X) \gap Z_1] \cdot E[1_{D_2}(Z_2) \gap Z_1].
 	\end{align*}
 
-	Die Behauptung gilt also für einfache Funktionen. Sei nun $h \geq 0$. Wähle $X_n$, so dass $X_n \uparrow h$ $P$-f.s. 
-	Daraus folgt, dass auch $X_n 1_{D_2} \uparrow h 1_{D_2}$ $P$-f.s. Mit $5.3 (ii)$ gilt dann 
+	Die Behauptung gilt also für einfache Funktionen. Sei nun $h \geq 0$. Wähle $X_n$, so dass $X_n \uparrow h$ $P-$f.s. 
+	Daraus folgt, dass auch $X_n 1_{D_2} \uparrow h 1_{D_2}$ $P-$f.s. Mit $5.3$ (ii) gilt dann ($P-$f.s.)
 	\begin{align*}
-		E[h(X) 1_{D_2}(Z_2) \gap Z_1] &= \lim_{n\to\infty} E[X_n(X) 1_{D_2}(Z_2) \gap Z_1] \\
-									  &= \lim_{n\to\infty} E[X_n(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] 
-									  = E[h(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1].
+		E[h(X) 1_{D_2}(Z_2) \gap Z_1] &= \lim_{n\to\infty} E[X_n(X) 1_{D_2}(Z_2) \gap Z_1]  \\
+									  &= \lim_{n\to\infty} E[X_n(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1]  
+									  = E[h(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1]. 
 	\end{align*}
 
 	Schließlich sei $h$ eine beliebige Funktion. Setze $h = h^+ - h^-$ mit $h^+, h^- \geq 0$. Dann folgt zusammen mit 
-	der Linearität des bedingten Erwartungswertes und den vorherigen Ergebnissen 
+	der Linearität des bedingten Erwartungswertes und den vorherigen Ergebnissen ($P-$f.s.)
 	\begin{align*}
 		E[h(X) 1_{D_2}(Z_2) \gap Z_1] &= E[h^+(X) 1_{D_2}(Z_2) \gap Z_1] - E[h(X)^- 1_{D_2}(Z_2) \gap Z_1] 								    \\
 									  &= E[h^+(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] - E[h^-(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] \\
