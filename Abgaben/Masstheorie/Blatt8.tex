@@ -63,12 +63,28 @@
 		E[1_B(X)1_{D_2}(Z_2) \,\vert\, Z_1] = E[1_B(X) \,\vert\, Z_1]\cdot E[1_{D_2}(Z_2) \,\vert\, Z_1].
 	\end{align*}
 
-	Sei nun $X_n := \sum_{i=1}^{n} c_i\cdot 1_{B_i}$ für $B_i\in\A,\, c_i\in\R$. Dann ist $X_n$ eine einfache Funktion. 
+	Sei nun $X_n := \sum_{i=1}^{n} c_i\cdot 1_{B_i}$ für $B_i\in\A,\, c_i\in\R_{>0}$. Dann ist $X_n$ eine einfache Funktion. 
 	Aus der Linearität des bedingten Erwartungswertes, folgt:
 	\begin{align*}
 		E[X_n(X)1_{D_2}(Z_2) \gap Z_1] &= \sum_{i=1}^{n} c_i E[1_{B_i}(X) 1_{D_2}(Z_2) \gap Z_1]		\\
 									   &= \sum_{i=1}^{n} c_i E[1_{B_i}(X) \gap Z_1] \cdot E[1_{D_2}(Z_2) \gap Z_1] 
 									   = E[X_n(X) \gap Z_1] \cdot E[1_{D_2}(Z_2) \gap Z_1].
+	\end{align*}
+
+	Die Behauptung gilt also für einfache Funktionen. Sei nun $h \geq 0$. Wähle $X_n$, so dass $X_n \uparrow h$ $P$-f.s. 
+	Daraus folgt, dass auch $X_n 1_{D_2} \uparrow h 1_{D_2}$ $P$-f.s. Mit $5.3 (ii)$ gilt dann 
+	\begin{align*}
+		E[h(X) 1_{D_2}(Z_2) \gap Z_1] &= \lim_{n\to\infty} E[X_n(X) 1_{D_2}(Z_2) \gap Z_1] \\
+									  &= \lim_{n\to\infty} E[X_n(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] 
+									  = E[h(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1].
+	\end{align*}
+
+	Schließlich sei $h$ eine beliebige Funktion. Setze $h = h^+ - h^-$ mit $h^+, h^- \geq 0$. Dann folgt zusammen mit 
+	der Linearität des bedingten Erwartungswertes und den vorherigen Ergebnissen 
+	\begin{align*}
+		E[h(X) 1_{D_2}(Z_2) \gap Z_1] &= E[h^+(X) 1_{D_2}(Z_2) \gap Z_1] - E[h(X)^- 1_{D_2}(Z_2) \gap Z_1] 								    \\
+									  &= E[h^+(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] - E[h^-(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1] \\
+									  &= E[h(X) \gap Z_1]\cdot E[1_{D_2}(Z_2) \gap Z_1].
 	\end{align*}
 \end{proof}
 
