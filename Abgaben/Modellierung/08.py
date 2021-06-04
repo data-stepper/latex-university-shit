@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 # This script can be used to simulate the SIR epidemic model
 
-N = 100
-alpha = 0.3 / N
-beta = 0.2
+N = 8 * 10 ** 6
+alpha = 1.0 / N
+beta = 1 / 3
 infected_at_start = 10
 
 
@@ -34,4 +34,5 @@ for _ in range(100):
 plt.plot(S, label="susceptible")
 plt.plot(I, label="infected")
 plt.plot(R, label="recovered")
+plt.legend()
 plt.show()
