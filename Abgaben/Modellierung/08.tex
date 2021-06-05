@@ -1,0 +1,136 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+
+\begin{theorem} % Aufgabe #22
+\begin{Aufgabe}{22} % #22
+	Ein zeitdiskretes deterministisches Epidemie-Modell
+\end{Aufgabe}
+
+\textbf{a)} Gleichgewichtspunkte und Stabilität
+
+\begin{proof}[Rechnung]
+	Zuerst beobachten wir, dass die Anzahl der 'Recovered' also der Genesenen garnicht Teil des
+	dynamischen Systems ist, sondern nur eine Kennzahl zu jedem Zeitpunkt. Also handelt es sich
+	um ein 2-dimensionales dynamisches System. Nun wollen wir die Gleichgewichtspunkte dieses finden:
+	\begin{align*}
+		(i) \qquad s &= s - \alpha si \\
+		(ii) \qquad i &= i - \beta i + \alpha si \\
+		(i) \implies - \alpha si = 0 & \implies \left(
+			s = 0 \text{ oder } i = 0
+		\right) \\
+			(ii) \implies \alpha si - \beta i = 0 &
+			\overset{(i)} \implies \beta i = 0
+			\overset{\beta > 0} \implies i = 0
+	\end{align*}
+	Wir sehen jetzt also, dass unser System immer genau dann im Gleichgewicht ist wenn wir keine
+	Infizierten in der Gesellschaft haben.
+	Also ist jeder Zustand der Form $(s, 0)$, für eine beliebige Anzahl an Gesunden Bürgern $s$
+	ein Gleichgewichtspunkt des Systems.
+	Nun interessiert uns die Stabilität des Systems.
+	Also berechnen wir zuerst die Jacobi-Matrix, welche wie folgt aussieht:
+	\begin{align*}
+		J &= \begin{pmatrix} 
+			\frac{ \partial S(t+1) }{ \partial S(t) } &
+			\frac{ \partial S(t+1) }{ \partial I(t) } \\
+			\frac{ \partial I(t+1) }{ \partial S(t) } &
+			\frac{ \partial I(t+1) }{ \partial I(t) }
+		\end{pmatrix} 
+		= \begin{pmatrix} 
+			1 - \alpha i & - \alpha s \\
+			\alpha i & 1 - \beta + \alpha s
+		\end{pmatrix} 
+	\end{align*}
+	Nun wollen wir uns die Jacobi-Matrix genauer an den Gleichgewichtspunkten ansehen.
+	Wir setzen also die Lösung für die Gleichgewichtspunkte in die Jacobi-Matrix ein und erhalten:
+	\begin{align*}
+		J_{x ^{\star}} & \overset{i = 0} = \begin{pmatrix} 
+			1 & - \alpha s \\
+			0 & 1 - \beta + \alpha s
+		\end{pmatrix} 
+	\end{align*}
+	Leider dürfen wir das Kriterium aus 21a) hier nicht verwenden, da die Jacobi-Matrix nicht symmetrisch ist.
+	Also berechnen wir die Eigenwerte per Hand, indem wir die Nullstellen des charakteristischen Polynoms
+	berechnen:
+	\begin{align*}
+		P_\lambda (J_{x ^{\star}}) &=
+		\det (J_{x ^{\star}} - \lambda I_2) \\
+			   &= (1 - \lambda) (1 - \beta + \alpha s - \lambda ) \\
+			   &= \lambda ^2 + \lambda \left(
+				\beta - \alpha s + 2
+			   \right) + 1 - \beta + \alpha s \\
+		P_\lambda (J_{x ^{\star}}) = 0 & \Leftrightarrow
+		\lambda_{1, 2} = \frac{ 1 }{ 2 } \left(
+			2 + \alpha s - \beta \pm \sqrt{
+				\beta ^2 - 2 \beta \alpha s + 8 \beta + \alpha ^2 s ^2 - 8 \alpha s
+			} 
+		\right) 
+	\end{align*}
+	Wir überlegen uns also zusätzlich auch noch, dass das System offensichtlich auch stabil bleibt,
+	wenn wir nur an der Anzahl der Gesunden etwas ändern. Im Hinblick auf die Stabilität sind
+	also nur Änderungen an der Anzahl der Infizierten für uns interessant.
+	Wohlgemerkt ist die Stabilität des Systems bei Änderungen an einem Gleichgewichtspunkt
+	auch abhängig von der Anzahl der Gesunden. Hier überlegt man sich einmal, dass auch dies sehr
+	viel Sinn macht, da jetzt ein Infizierter eine höhere beziehungsweise niedrigere Chance
+	hat andere Bürger zu infizieren.
+	Folglich müssen wir uns für die Eigenwerte der Jacobi-Matrix nun anschauen wann dessen Beträge
+	kleiner beziehungsweise größer Null sind.
+	\begin{align*}
+		| \lambda_{1, 2} | < 1 & \Leftrightarrow
+		\Big | 1 + \frac{ 1 }{ 2 } \left(
+			\alpha s - \beta \pm \sqrt{
+				\beta ^2 - 2 \beta \alpha s + 8 \beta + \alpha ^2 s ^2 - 8 \alpha s
+			} 
+		\right) \Big | < 1
+	\end{align*}
+	-------------------------- HIER WIRD NOCH WEITER GERECHNET ------------------------------------
+\end{proof}
+\end{theorem}
+
+\textbf{b)} \beh $R(t+1) = R(t) + \beta I(t)$
+
+\begin{proof}[Beweis]
+	\begin{align*}
+		R(t+1) &= N - S(t+1) - I(t+1) \\
+			   &= N - \left(
+				   S(t) - \alpha S(t) I(t)
+			   \right) - \left(
+			   I(t) - \beta I(t) + \alpha S(t) I(t)
+			   \right) \\
+			   &= N - S(t) - I(t) + \beta I(t) \\
+			   &= R(t) + \beta I(t)
+	\end{align*}
+\end{proof}
+
+\textbf{c)} Hierfür haben wir ein Python Script geschrieben, welches Sie unter dem Namen '08.py' finden.
+Unter anderem haben wir auch 10 Bilder der Simulation für verschiedene Werte von $\alpha$
+hinzugefügt. Man sieht, dass sobald $\alpha$ den Wert von ca. 1,7 überschreitet, das Wachstum
+der Infizierten rasant ansteigt. Das Maximum für den Wert der total Infizierten finden
+wir natürlich bei $\alpha = \frac{ 3 }{ N }$. Allerdings ist diese Simulation fehlerhaft,
+da der Wert von $\alpha S(t) I(t)$ in diesem Fall so schnell ansteigt, dass
+die Anzahl an Gesunden Bürgern kurzzeitig ins negative fällt.
+Schauen wir uns jedoch die Simulation für $\alpha < \frac{ 1 }{ N }$ an, so erkennen wir
+schöne logistische Wachstumskurven, und auch schnell eine Sättigung der Bevölerung
+an Infizierten.
+\\
+
+Wir schlussfolgern also, dass dieses Modell nur brauchbar ist für kleine Werte von $\alpha$.
+
+\end{document}
+
