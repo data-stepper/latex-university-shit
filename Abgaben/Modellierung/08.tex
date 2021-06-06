@@ -99,7 +99,21 @@
 			} 
 		\right) \Big | < 1
 	\end{align*}
-	-------------------------- HIER WIRD NOCH WEITER GERECHNET ------------------------------------
+	Wir überlegen uns jetzt, dass $\alpha \cdot s = \frac{ \alpha_0 }{ N } \cdot s = \frac{ s }{ N } \alpha_0$
+	ist, da wir
+	diesen Parameter ja so wählen. Diese Zahl sagt also wie groß der Anteil an Gesunden in der Gesellschaft
+	ist, multipliziert mit dem Kontaktfaktor $\alpha_0$. Wenn wir jetzt unser dynamisches System aus dem
+	Gleichgewicht bringen, indem wir einen Infizierten hinzufügen, dann sagt dieser Wert uns wie viele
+	Gesunde Menschen dieser Infizierte anstecken kann. 
+	Vereinfachen wir die Gleichung ein wenig erhalten wir das Folgende Stabilitätskriterium:
+	\[
+	\text{System bleibt stabil } \Leftrightarrow
+	-4 < \alpha s - \beta \pm \sqrt{
+		\beta ^2 - 2 \beta \alpha s + 8 \beta + \alpha ^2 s ^2 - 8 \alpha s
+	} < 0
+	\] 
+	Die erste Differenz sagt also aus, ob die Störung des Systems (unser neuer Infizierter) mehr Menschen
+	anstecken wird als er wieder 'gesundet'. 
 \end{proof}
 \end{theorem}
 
