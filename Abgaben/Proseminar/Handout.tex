@@ -52,7 +52,7 @@ Wenn unsere Markowkette diese Bedingung erfüllt, dann können wir zeigen, dass 
 Wahrscheinlichkeitsvektor $\rho$ gibt welcher folgende Bedingung erfüllt:
 
 \[
-\rho_k = \sum_{i=1}^{n} \rho_j p_{ji} \quad k \in I
+\rho_k = \sum_{i=1}^{n} \rho_j p_{jk} \quad k \in I
 \]
 
 Diesen Wahrscheinlichkeitsvektor nennen wir dann \textit{invariante Verteilung}.
@@ -110,5 +110,62 @@ $j \leadsto i$, dann schreiben wir
 \]
 Des weiteren nennen wir einen Zustand $i$ \textit{wesentlich}, wenn jeder Zustand $j$ zu dem $i$ führt, auch
 zurück zu $i$ führt. 
+\\
+
+Wir betrachten nun die \textit{Periodizität}  einer Markowkette.
+Wir schauen uns einen Zustand $i$ an. Für diesen Zustand definieren wir
+\[
+d_i = \text{ggT} \{
+	n \in \mathbb{N} : i \leadsto i[n]
+\}
+\] 
+als die sogenannte \textit{Periode} von $i$.
+Zustände für die $d_i = 1$ gilt nennen wir aperiodisch.
+Analog nennen wir die Kette aperiodisch bzw. periodisch mit Periode $d$, wenn alle Zustände die selbe
+Periode haben.
+\\
+
+Periodische Markowketten können wir wie folgt zerlegen.
+
+\begin{center}
+	\begin{tikzpicture}
+		% Add the states
+		\node[state]			 (a) {1};
+		\node[state, right=of a] (b) {2};
+		\node[state, right=of b] (c) {3};
+		\node[state, right=of c] (d) {4};
+		\node[state, right=of d] (e) {5};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			% a -> b -> c -> d
+			(a) edge[bend right, auto=right] node {} (b)
+			(b) edge[bend right, auto=right] node {} (c)
+			(c) edge[bend right, auto=right] node {} (d)
+			(d) edge[bend right, auto=right] node {} (e)
+
+			% d -> c -> b -> a
+			(e) edge[bend right, auto=right] node {} (c)
+			(c) edge[bend right, auto=right] node {} (a)
+	\end{tikzpicture}
+\end{center}
+\qquad \caption{\textbf{Abbildung 1.2:} Eine periodische Markowkette}
+\\
+
+Nun erkennen wir, dass die obige Markowkette Periode 3 besitzt.
+Wählen wir beispielsweise Zustand 1 aus, so beobachten wir, dass wir den restlichen Teil der Markowkette
+in Folgende Teilmengen zerlegen können.
+\[
+	C_0(1) = \{
+		1, 4
+	\}, \; C_1 (1) = \{
+		2, 5
+	\}, \; C_2 (1) = \{
+		3
+	\} 
+\]
+
+\section{Rekurrenz und Transienz}
+Wir nennen einen Zustand $i$ \textit{rekurrent} wenn dessen Markowkette diesen Zustand immer wieder 'besucht'.
 
 \end{document}
