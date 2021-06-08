@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array, tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\textbf{Aufgabe 25:} Stochastisches Tennis und das schwarze Schaf
+\\
+
+\textbf{b)} 
+\begin{center}
+	\begin{tikzpicture}
+		% Add the states
+		\node[state]			 (a) {1};
+		\node[state, below=of a] (b) {2};
+		\node[state, right=of b] (c) {3};
+		\node[state, right=of c] (d) {4};
+		\node[state, right=of d] (e) {5};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			% a -> b -> c -> d
+			(a) edge[bend left, auto=right] node {0.5} (b)
+			(a) edge[bend right, auto=left] node {0.5} (c)
+			(c) edge[bend right, auto=right] node {0.5} (d)
+			(d) edge[bend right, auto=right] node {$\frac{ 1 }{ 3 }$} (b)
+			(d) edge[bend right, auto=right] node {$\frac{ 1 }{ 3 }$} (e)
+
+			% d -> c -> b -> a
+			(d) edge[bend right, auto=right] node {$\frac{ 1 }{ 3 }$} (c)
+			(c) edge[bend right, auto=right] node {0.5} (a)
+
+			% a -> a, b -> b, ...
+			(b) edge[loop left]			 node {1.0} (b)
+			(e) edge[loop right]			 node {1.0} (e)
+	\end{tikzpicture}
+\end{center}
+\\
+
+Die entsprechende Übergangsmatrix sieht wie folgt aus:
+\[
+\mathbb{P} = \begin{pmatrix} 
+	0 & \frac{ 1 }{ 2 } & \frac{ 1 }{ 2 } & 0 & 0 \\
+	0 & 1 & 0 & 0 & 0 \\
+	\frac{ 1 }{ 2 } & 0 & 0 & \frac{ 1 }{ 2 } & 0 \\
+	0 & \frac{ 1 }{ 3 } & \frac{ 1 }{ 3 } & 0 & \frac{ 1 }{ 3 } \\
+	0 & 0 & 0 & 0 & 1 \\
+\end{pmatrix}
+\] 
+\end{document}
