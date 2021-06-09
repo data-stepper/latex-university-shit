@@ -20,6 +20,58 @@
 \textbf{Aufgabe 25:} Stochastisches Tennis und das schwarze Schaf
 \\
 
+\textbf{a)} 
+Wir modellieren den Stand beim Tennismatch mit Hilfe einer Markowkette.
+Schauen wir uns die Reihenfolge der Aufschläge genau an, dann können wir diese
+Aufteilen in Folgende Teile.
+
+\[
+AB\;\; BA\;\; AB\;\; BA\;\; AB\;\; \cdots
+\] 
+Bei jedem Aufschlag hat jeder der Spieler eine Chance $p$ einen Punkt zu machen.
+Die Markowkette ist nun eine Irrfahrt mit absorbierendem Rand.
+Der Zustand ist dann die jeweilige Punktedifferenz nachdem $A$ und $B$ beide ihre Aufschläge
+gemacht haben.
+Ein Zeitschritt heisst also zwei Aufschläge.
+Somit ergibt sich folgender Übergangsgraph:
+
+\begin{center}
+	\begin{tikzpicture}
+		% Add the states
+		\node[state]			 (a) {-2};
+		\node[state, right=of a] (b) {-1};
+		\node[state, right=of b] (c) {0};
+		\node[state, right=of c] (d) {+1};
+		\node[state, right=of d] (e) {+2};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			% a -> b -> c -> d
+			(a) edge[bend right, auto=right] node {} (b)
+			(b) edge[bend right, auto=right] node {} (c)
+			(c) edge[bend right, auto=right] node {} (d)
+			(d) edge[bend right, auto=right] node {} (e)
+
+			% d -> c -> b -> a
+			(e) edge[bend right, auto=right] node {} (d)
+			(d) edge[bend right, auto=right] node {} (c)
+			(c) edge[bend right, auto=right] node {} (b)
+			(b) edge[bend right, auto=right] node {} (a)
+
+			% a -> a, b -> b, ...
+			(a) edge[loop left]			     node {1} (a)
+			(e) edge[loop right]             node {1} (e)
+			(b) edge[loop above]			 node {} (b)
+			(c) edge[loop above]			 node {} (c)
+			(d) edge[loop above]			 node {} (d)
+	\end{tikzpicture}
+\end{center}
+\\
+
+Die Punktedifferenz messen wir immer von Spieler $A$ zu Spieler $B$.
+Wir überlegen uns, dass das Spiel bei Zustand $\pm2$ beendet ist, da nun ein Spieler mit
+zwei Punkten vorne liegt.
+
 \textbf{b)} 
 \begin{center}
 	\begin{tikzpicture}
@@ -58,6 +110,23 @@ Die entsprechende Übergangsmatrix sieht wie folgt aus:
 	\frac{ 1 }{ 2 } & 0 & 0 & \frac{ 1 }{ 2 } & 0 \\
 	0 & \frac{ 1 }{ 3 } & \frac{ 1 }{ 3 } & 0 & \frac{ 1 }{ 3 } \\
 	0 & 0 & 0 & 0 & 1 \\
-\end{pmatrix}
+\end{pmatrix} ^{T}
 \] 
+
+Also berechnen wir $\mathbb{P} ^{3}$, welche wie folgt aussieht:
+\[
+\mathbb{P} ^{3} = \begin{pmatrix} 
+	0 & 0.708 \overline{3} & 0.208 \overline{3} & 0 & 0.08 \overline{3} \\
+	0 & 1 & 0 & 0 & 0 \\
+	0.208 \overline{3} & 0.41 \overline{6} & 0 & 0.208 \overline{3} & 0.1 \overline{6} \\
+	0 & 0.47 \overline{2} & 0.13 \overline{8} & 0 & 0.3 \overline{8} \\
+	0 & 0 & 0 & 0 & 1 \\
+\end{pmatrix} ^{T}
+\] 
+Wir erkennen also, dass die Wahrscheinlichkeit in Zustand 2 zu landen genau in Spalte 2
+(beziehungsweise Zeile 2 nach dem transponieren) steht. 
+Wir ignorieren den Fall in welchem wir in Zustand 5 starten, also den letzten Eintrag.
+Nun erkennen wir, dass das minimum in dieser Zeile $0.41 \overline{6} = \frac{ 5 }{ 12 }$ ist. Dies entspricht aber genau
+der Aufgabenstellung, nämlich die kleinste Wahrscheinlichkeit, dass das Schaf stirbt wobei es überall
+aber nicht in 5 startet.
 \end{document}
