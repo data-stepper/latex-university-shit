@@ -129,4 +129,44 @@ Wir ignorieren den Fall in welchem wir in Zustand 5 starten, also den letzten Ei
 Nun erkennen wir, dass das minimum in dieser Zeile $0.41 \overline{6} = \frac{ 5 }{ 12 }$ ist. Dies entspricht aber genau
 der Aufgabenstellung, nämlich die kleinste Wahrscheinlichkeit, dass das Schaf stirbt wobei es überall
 aber nicht in 5 startet.
+\\
+
+\textbf{Aufgabe 26:} Glücksspiel mit Münze I
+\\
+
+\textbf{a)} 
+Der Übergangsgraph sieht wie folgt aus:
+\begin{center}
+	\begin{tikzpicture}
+		% Add the states
+		\node[state]			 (a) {0};
+		\node[state, right=of a] (b) {1};
+		\node[state, right=of b] (c) {2};
+		\node[state, right=of c] (d) {4};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			% a -> b -> c -> d
+			(b) edge[bend left, auto=left] node {0.5} (c)
+			(c) edge[bend right, auto=right] node {0.5} (d)
+
+			% d -> c -> b -> a
+			(c) edge[bend left, auto=left] node {0.5} (a)
+			(b) edge[bend right, auto=right] node {0.5} (a)
+
+			% a -> a, b -> b, ...
+			(a) edge[loop left]			     node {1} (a)
+			(d) edge[loop right]			 node {1} (d)
+	\end{tikzpicture}
+\end{center}
+\\
+Die entsprechende Übergangsmatrix ist damit:
+\[
+\mathbb{P} = \begin{pmatrix} 
+	1 & 0 & 0 & 0 \\
+	\frac{ 1 }{ 2 } & 0 & \frac{ 1 }{ 2 } & 0 \\
+	\frac{ 1 }{ 2 } & 0 & 0 & \frac{ 1 }{ 2 } \\
+	0 & 0 & 0 & 1 \\
+\end{pmatrix} 
+\] 
 \end{document}
