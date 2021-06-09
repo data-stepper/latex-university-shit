@@ -10,3 +10,5 @@
 *.fdb_latexmk
 *.pdf
 *.DS_Store
+*.nav
+*.snm

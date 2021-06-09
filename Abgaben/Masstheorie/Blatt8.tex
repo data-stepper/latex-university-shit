@@ -2,8 +2,8 @@
  
 \usepackage[margin=1in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
- \usepackage{bbm, mathtools}
- 
+  \usepackage{bbm, mathtools}
+  
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -35,46 +35,63 @@
 \begin{Aufgabe}{1} % #1
 \end{Aufgabe}
 
-\beh
+Seien 
+\begin{align*}
+	V \quad&\hat{=}\quad \text{"Körperlänge vom Vater"} \\
+	S \quad&\hat{=}\quad \text{"Körperlänge vom Sohn"} \\
+	S_{V=x} \quad&\hat{=}\quad \text{"Körperlänge des Sohnes, gegeben dass V=x"}
+\end{align*} 
+Aus der Aufgabenstellung ist gegeben:
+\begin{align*}
+	V &\sim \normal(a,\sigma^2) \\
+	S_{V=x} &\sim \normal(x+b(a-x),\tau^2)
+\end{align*}
 
-\begin{proof}[Beweis]
-	Seien 
-	\begin{align*}
-		V \quad&\hat{=}\quad \text{"Körperlänge vom Vater"} \\
-		S \quad&\hat{=}\quad \text{"Körperlänge vom Sohn"} \\
-		S_{V=x} \quad&\hat{=}\quad \text{"Körperlänge des Sohnes, gegeben dass V=x"}
-	\end{align*} 
-	Aus der Aufgabenstellung ist gegeben:
-	\begin{align*}
-		V &\sim \normal(a,\sigma^2) \\
-		S_{V=x} &\sim \normal(x+b(a-x),\tau^2)
-	\end{align*}
+Sei $P^V$ die Verteilung von $V$. Dann bezeichne $\varphi_V$ die $\lambda$-Dichte von $P^V$, wobei 
+$\lambda$ das Lebesgue-Maß bezeichnet. Analog sei $P^{S_{V=x}}$ die Verteilung von $S_{V=x}$ mit 
+$\lambda$-Dichte $\varphi_{S_{V=x}}(x, \cdot) = K(x, \cdot)$. Dies wählen wir als unseren Markov-Kern.
+Wohlgemerkt sind die Verteilungen $\sigma$-endlich weil diese Wahrscheinlichkeitsmaße sind.
+Nach Blatt 6 Aufgabe 2 hat die gemeinsame Verteilung von 
+$V$ und $S$, $P^V \otimes P^{S_{V=x}} =: P^{(V,S)}$, die $\lambda^2$-Dichte $\varphi_V \cdot 
+\varphi_{S_{V=x}}(x, \cdot) =: \varphi_{(V,S)}$. \\
 
-	Sei $P^V$ die Verteilung von $V$. Dann bezeichne $\varphi_V$ die $\lambda$-Dichte von $P^V$, wobei 
-	$\lambda$ das Lebesgue-Maß bezeichnet. Analog sei $P^{S_{V=x}}$ die Verteilung von $S_{V=x}$ mit 
-	$\lambda$-Dichte $\varphi_{S_{V=x}}(x, \cdot)$. Nach Blatt 6 Aufgabe 2 hat die gemeinsame Verteilung von 
-	$V$ und $S$, $P^V \otimes P^{S_{V=x}} =: P^{(V,S)}$, die $\lambda^2$-Dichte $\varphi_V \cdot 
-	\varphi_{S_{V=x}}(x, \cdot) =: \varphi_{(V,S)}$. \\
+% Hier geht der mittlere Teil los
 
-	% Hier geht der mittlere Teil los
+Nun wollen wir zeigen, dass die gemeinsame Verteilung von $P ^{V, S}$ eine 2-dimensionale Normalverteilung ist.
 
-	Der bedingte Erwartungswert $E[S|V]$ der Körperlänge S der Söhne gegeben der Körperlänge V der Väter ist 
-	$E[S|V] = x+b(a-x)$. Nach Satz $5.9$ (i) ist der Erwartungswert der Körperlänge der Söhne gegeben durch
-	\begin{align*}
-		E[S] &= E[E[S|V]] 	   \\ 
-			&= E[V + b(a-V)]   \\ 
-			&= E[(1-b)V + ba]  \\ 
-			&= (1-b)E[V] + ba  \\
-			&= (1-b)a + ba 	   \\
-			&= a.
-	\end{align*}   
+Hierfür berechnen wir das Produkt der beiden Dichten:
+\begin{align*}
+	\varphi_{\left(
+		V, S
+\right) } (x, y) &= 
+\frac{ 1 }{ \sqrt{2 \pi} \sigma } e ^{\frac{ -1 }{ 2 } \left(
+		\frac{ x-a }{ \sigma }
+\right) ^2 } \cdot
+\frac{ 1 }{ \sqrt{2 \pi} \tau } e ^{\frac{ -1 }{ 2 } \left(
+		\frac{ y - (x + b(a-x)) }{ \tau }
+\right) ^2 }
+\end{align*}
 
-	Daraus folgt für den Mittelwertvektor $\mu$, dass $\mu = \begin{pmatrix} a \\ a\end{pmatrix}$. Um zu zeigen, dass
-	$P^{V} = P^{S}$ bleibt noch zu zeigen, dass die Varianzen von $V$ und $S$ übereinstimmen. Aus der Kovarianzmatrix 
-	lesen wir heraus, dass $Var(S) = \tau^2 + (b-1)^2\sigma^2$. Aus der Aufgabenstellung ist bekannt, dass $\tau^2 = 37,5$ 
-	und $Var(V) = \sigma^2 = 50$. Also ist $\tau^2 = 0,75\sigma^2$. Aus $b=0,5$ folgt schließlich $Var(S) = \sigma^2 = 
-	Var(V)$. Die Körperlänge der Söhne ist also genauso verteilt wie die der Väter.  
-\end{proof}
+Um nun die Kovarianzmatrix zu berechnen müssen wir den Exponenten ausmultiplizieren.
+Bei der exakten Nachrechnung dieser sind wir leider gescheitert.
+\\
+
+Der bedingte Erwartungswert $E[S|V]$ der Körperlänge S der Söhne gegeben der Körperlänge V der Väter ist 
+$E[S|V] = x+b(a-x)$. Nach Satz $5.9$ (i) ist der Erwartungswert der Körperlänge der Söhne gegeben durch
+\begin{align*}
+	E[S] &= E[E[S|V]] 	   \\ 
+		&= E[V + b(a-V)]   \\ 
+		&= E[(1-b)V + ba]  \\ 
+		&= (1-b)E[V] + ba  \\
+		&= (1-b)a + ba 	   \\
+		&= a.
+\end{align*}   
+
+Daraus folgt für den Mittelwertvektor $\mu$, dass $\mu = \begin{pmatrix} a \\ a\end{pmatrix}$. Um zu zeigen, dass
+$P^{V} = P^{S}$ bleibt noch zu zeigen, dass die Varianzen von $V$ und $S$ übereinstimmen. Aus der Kovarianzmatrix 
+lesen wir heraus, dass $Var(S) = \tau^2 + (b-1)^2\sigma^2$. Aus der Aufgabenstellung ist bekannt, dass $\tau^2 = 37,5$ 
+und $Var(V) = \sigma^2 = 50$. Also ist $\tau^2 = 0,75\sigma^2$. Aus $b=0,5$ folgt schließlich $Var(S) = \sigma^2 = 
+Var(V)$. Die Körperlänge der Söhne ist also genauso verteilt wie die der Väter.  
 
 \begin{Aufgabe}{2} % #2
 	Es seien $(\Omega, \mathcal{A})$ und $(S, \mathcal{D})$ Maßräume und $Y:(\Omega, \mathcal{A}) \rightarrow (S, \mathcal{D})$ und $Z:(\Omega, \sigma(Y)) \rightarrow (\mathbb{R}, \mathbb{B})$ jeweils messbare Abbildungen. 
@@ -137,15 +154,4 @@
 \end{proof}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
 
