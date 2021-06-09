@@ -34,12 +34,56 @@
 \maketitle
 
 \begin{Aufgabe}{1} % #1
+	Sei $X$ eine $\R$-wertige Zufallsvariable auf ($\Omega, \A, P$), so dass $P^X$ eine Lebesgue-Dichte $f$ besitzt. 
 \end{Aufgabe}
 
-\beh
+\textbf{(i)}
+\beh $Y = |X|$ besitzt die Lebesgue-Dichte 
+	\begin{align*}
+		g(x) = (f(x) + f(-x))1_{(0,\infty)}(x).
+	\end{align*}
 
 \begin{proof}[Beweis]
-	 
+	 Es gilt $Y \geq 0$. Daraus folgt
+	 \begin{align*}
+		 P^{Y}((-\infty, 0)) = 0.
+	 \end{align*}
+
+	 Also $g(x) = 0$ für $x\in (-\infty,0)$ $(\star)$. Nun betrachten wir positive Intervalle:
+	 \begin{align*}
+		 P^{Y}([0,x)) = P^{Y}((0,x)) &= P(Y \in [0,x])  \\ 
+		 			  &= P(Y \in (0,x))  \\ 
+					  &= P(\{ X\in (0,x) \} \cup \{ X\in (-x,0) \}) \\
+					  &= P^X((0,x)) + P^X((-x,0))				\\
+					  &= \int f(t)1_{(0,x)}(t) \,\lambda(dt) + \int f(t)1_{(-x,0)}(t) \,\lambda(dt). \\ 
+	 \end{align*}
+
+	 Sei $S$ die Spiegelungsabbildung. Mit der Transformationsformel gilt
+	 \begin{align*}
+		\int f(t)1_{(-x,0)} \lambda(dt) &= \int f(t)1_{(-x,0)}(t) \circ S^{-1} \,\lambda^{S}(dt)   \\
+										&= \int f(-t)1_{(0,x)}(t) \,\lambda^{S}(dt).
+	 \end{align*}
+
+	 Da das Lebesgue-Maß invariant unter $S$ ist, gilt $\lambda^S = \lambda$. Insgesamt folgt
+	 \begin{align*}
+		P^{Y}((0,x)) &= \int f(t)1_{(0,x)}(t) \,\lambda(dt) + \int f(-t)1_{(0,x)}(t) \,\lambda^{S}(dt) 	\\
+					 &= \int (f(t) + f(-t)) 1_{(0,x)}(t) \,\lambda(dt).		\qquad (\star\star) \\
+	 \end{align*}
+
+	  Da die offenen Intervalle ein Erzeugendensystem von der Borel-$\sigma$-Algebra sind, ist $P^{Y}$ eindeutig durch die 
+	  oberen Gleichungen charakterisiert.
+	  Aus $(\star)$ und $(\star\star)$ folgt, dass $g$ die Lebesgue-Dichte von $P^{Y}$ ist.
+\end{proof}
+ 
+\newpage
+
+\textbf{(ii)}
+\beh \begin{align*}
+	E(X|Y) = \frac{f(Y)}{g(Y)}Y - \frac{f(-Y)}{g(Y)}Y \quad{\text{$P$-f.s.}}
+\end{align*}
+
+\begin{proof}[Beweis]
+	
 \end{proof}
 
 \begin{Aufgabe}{2} % #2
@@ -51,7 +95,6 @@
 \end{Aufgabe}
 
 \textbf{(i)}
-
 \beh $Cov(X,Y \gap \C) = E(XY \gap \C) - E(X \gap \C) \cdot E(Y \gap \C)$.
 
 \begin{proof}[Beweis]  
@@ -66,12 +109,18 @@
 		X^2+Y^2 = |X^2+Y^2| = |XY|\cdot \underbrace{|(X/Y + Y/X)|}_{\geq 1} \Longrightarrow |XY| \leq X^2+Y^2 
 	\end{align*} 
 
-	Aus $|XY| \leq X^2+Y^2$ folgt $E(|XY|) \leq E(X^2 + Y^2) < \infty$. Wir können nun Satz 5.10 (x) verwenden und erhalten 
+	Aus $|XY| \leq X^2+Y^2$ folgt $E(|XY|) \leq E(X^2 + Y^2) < \infty$. Wir können nun Satz 5.10(x) verwenden und erhalten 
 	\begin{align*}
 		E\big(XE(Y \gap \C) \gap \C \big) = E\big(YE(X \gap \C) \gap \C \big) = E(X \gap \C) E(Y \gap C) \quad\text{$P$-f.s.}
 	\end{align*}
 
-	Z.zg.: $E(|E(X\gap \C)Y|) < \infty$. Dann 
+	Außerdem gilt
+	\begin{align*}
+		E(|E(X \gap \C)Y|) \overset{\text{5.10(x)}}{=} E(|E(XY \gap \C)|) 
+		\overset{\text{5.10(xiv)}}{\leq} E(E(|XY| \gap \C)) \overset{\text{5.10(i)}}{=} E(|XY|) < \infty
+	\end{align*}
+
+	Analog wird gezeigt, dass $E(|E(Y \gap \C)X|) < \infty$. Nun kann wieder Satz 5.10(x) verwendet werden:
 	\begin{align*}
 		E\big( E(X \gap \C)E(Y \gap \C) \gap \C \big) &= E\big( E(X \gap \C) \gap \C \big)E\big( E(Y \gap \C) \gap \C \big) \\
 													  &= E(X \gap \C) E(Y \gap \C).
@@ -87,7 +136,6 @@
 \newpage
 
 \textbf{(ii)}
-
 \beh $Cov(X,Y) = E\big(Cov(X,Y \gap Z)\big) + Cov\big(E(X \gap Z), E(Y \gap Z)\big)$.
 
 \begin{proof}[Beweis] Aus der Linearität des Erwartungswertes und der eben bewiesenen Formel für die bedingte Kovarianz folgen
@@ -108,7 +156,7 @@
 																		&\overset{\text{Def.}}{=} Cov(X,Y),
 	\end{align*}
 
-	wobei beim zweiten Schritt Satz 5.10 (i) verwendet wird.
+	wobei beim zweiten Schritt Satz 5.10(i) verwendet wird.
 \end{proof}
 
 \end{document}
