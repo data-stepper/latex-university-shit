@@ -50,9 +50,38 @@
 	\end{align*}
 \end{Aufgabe}
 
+\textbf{(i)}
+
 \beh $Cov(X,Y \gap \C) = E(XY \gap \C) - E(X \gap \C) \cdot E(Y \gap \C)$.
 
 \begin{proof}[Beweis]  
+	Multiplizieren wir das Produkt aus und verwenden die Linearität des bedingten Erwartungswertes, so erhalten wir
+	\begin{align*}
+		Cov(X,Y \gap \C) = E(XY \gap \C) - E\big(XE(Y \gap \C) \gap \C \big) - E\big(YE(X \gap \C) \gap \C \big) 
+																			 + E\big( E(X \gap \C)E(Y \gap \C) \gap \C \big)
+	\end{align*}
+
+	Per Annahme gilt $E(X^2 + Y^2) < \infty$. Außerdem
+	\begin{align*}
+		X^2+Y^2 = |X^2+Y^2| = |XY|\cdot \underbrace{|(X/Y + Y/X)|}_{\geq 1} \Longrightarrow |XY| \leq X^2+Y^2 
+	\end{align*} 
+
+	Mit 5.10 (vi) folgt $E(|XY|) < \infty$. Aus 5.10 (x) folgt 
+	\begin{align*}
+		E\big(XE(Y \gap \C) \gap \C \big) = E\big(YE(X \gap \C) \gap \C \big) = E(X \gap \C) E(Y \gap C) \quad\text{$P$-f.s.}
+	\end{align*}
+
+	Z.zg.: $E(|E(X\gap \C)Y|) < \infty$. Dann 
+	\begin{align*}
+		E\big( E(X \gap \C)E(Y \gap \C) \gap \C \big) &= E\big( E(X \gap \C) \gap \C \big)E\big( E(Y \gap \C) \gap \C \big) \\
+													  &= E(X \gap \C) E(Y \gap \C).
+	\end{align*}
+
+	Insgesamt folgt 
+	\begin{align*}
+		Cov(X,Y \gap \C) &= E(XY \gap \C) - E(X \gap \C) E(Y \gap C) - E(X \gap \C) E(Y \gap C) + E(X \gap \C) E(Y \gap \C) \\
+						 &= E(XY \gap \C) - E(X \gap \C) E(Y \gap C).
+	\end{align*}
 \end{proof}
 
 \end{document}
