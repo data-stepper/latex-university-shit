@@ -8,6 +8,7 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\A}{\mathcal{A}}
+\newcommand{\C}{\mathcal{C}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\B}{\mathbb{B}}
 \newcommand{\normal}{\mathcal{N}}
@@ -42,20 +43,16 @@
 \end{proof}
 
 \begin{Aufgabe}{2} % #2
-	
+	Seien $X,Y : (\Omega,\A)\to (\R,\B)$ mit $E(X^2+Y^2) < \infty$ und $\C\subset\A$ eine Unter-$\sigma$-Algebra. Dann 
+	ist die bedingte Kovarianz von $X$ und $Y$ gegeben $\C$ definiert als
+	\begin{align*}
+		Cov(X,Y \gap \C) := E\big( (X-E(X\gap\C)) \cdot (Y-E(Y\gap\C)) \gap C \big).
+	\end{align*}
 \end{Aufgabe}
 
-\beh 
+\beh $Cov(X,Y \gap \C) = E(XY \gap \C) - E(X \gap \C) \cdot E(Y \gap \C)$.
 
 \begin{proof}[Beweis]  
-\end{proof}
-
-\begin{Aufgabe}{3} % #3
-\end{Aufgabe}
-
-\beh 
-
-\begin{proof}[Beweis]
 \end{proof}
 
 \end{document}
