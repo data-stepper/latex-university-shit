@@ -335,19 +335,172 @@
 		\vspace{5mm}
 		\textit{Beweis:} \\
 		\vspace{5mm}
-		\only<1>{
+		\only<1-2>{
 			$\exists k: j \rightsquigarrow i [k]$ \\
 			Seien $m < n$ in $\mathbb{N}$ mit
 			$i \rightsquigarrow j [m]$ und $i \rightsquigarrow j [n]$
+		}
+		\only<2>{
+			\\ \vspace{5mm}
+			Dann gilt
+			\[
+				i \rightsquigarrow i [k+m] \text{ und }
+				i \rightsquigarrow i [k+n].
+			\]
+			Somit teilt $d_i$ dann $n - m$
+			\\
+			Also liegen alle Zahlen $n$ mit $j \rightsquigarrow j [n]$ in der gleichen
+			Restklasse
+			\[
+				r_j \; (\text{mod } d_i)
+			\]
+		}
+		\only<3>{
+			Es gilt:
+			\[
+				i \rightsquigarrow j [m d_i + r_j]
+				\text{ für } m \geq 0
+			\] 
+			Man setzt
 		}
 	\end{frame}
 
 	\section{Rekurrenz und Transienz}
 	\subsection{Definition Rekurrenz}
-	\subsection{Beispiel mehrdimensionale Irrfahrt}
 	\begin{frame}
-		\frametitle{Rekurrente Ketten}
-		
+		\frametitle{Rekurrenz}
+		\only<2-3>{
+			\begin{center}
+				Rekurrenz beschreibt das Rückkehrverhalten einer Markowkette.
+			\end{center}
+		}
+		\only<3>{
+			\vspace{5mm}
+			Wie oft 'besucht' eine Markowkette einen bestimmten Zustand $i$?
+		}
+		\only<4-6>{
+			Definiere folgende zwei Begriffe für Zustände:
+			\begin{itemize}
+				\only<5-6>{
+				\item 'rekurrent' heißt, dass eine Markowkette einen Zustand unendlich oft besucht.
+				}
+				\only<6>{
+				\item 'transient' meint genau das Gegenteil.
+				}
+			\end{itemize}
+		}
 	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Kriterium für Rekurrenz}
+		\only<1-6>{
+			Wir setzen für $n \in \mathbb{N}$:
+			\[
+				f_{ij} ^{(n)} = P_i \left(
+					X_n = j, X_{n-1} \neq j, ..., X_1 \neq j
+				\right) 
+			\]
+		}
+		\only<2>{
+			Die Wahrscheinlichkeit bei Start in $i$ zum ersten mal nach $n$ Schritten den Zustand $j$
+			zu besuchen.
+		}
+		\only<3-6>{
+			Wir erkennen $f_{ij} ^{(0)} = 0$ uns setzen weiter:
+			\[
+				f_{ij} ^{*} = \sum_{n=1}^{\infty} f_{ij} ^{(n)}
+				\;\;\;
+				\text{ und }
+				\;\;\;
+				p_{ij} ^{*} = \sum_{n=1}^{\infty} p_{ij} ^{(n)}
+			\] 
+		}
+		\only<4-5>{
+			\begin{itemize}
+				\only<4-5>{
+				\item $f_{ij} ^{*}$ ist die Wahrscheinlichkeit je von $i$ nach $j$ zu gelangen.
+				}
+				\only<5>{
+				\item $p_{ij} ^{*}$ ist die erwartete Anzahl an Besuchen in $j$ bei Start in $i$.
+				}
+			\end{itemize}
+		}
+		\only<6>{
+			Es gilt nämlich:
+			\begin{align*}
+				p_{ij} ^{*} &= \sum_{n=1}^{\infty} p_{ij} ^{(n)}
+				= \sum_{n=1}^{\infty} E_i \left(
+					1_{\{
+						X_n = j
+					\} }
+				\right) 
+				= E_i \left(
+					\sum_{n=1}^{\infty} 1_{\{
+						X_n = j
+					\} }
+				\right) \\
+					&= E_i \left(
+						\text{Anzahl der Besuche in $j$}
+					\right) 
+			\end{align*}
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Kriterium für Rekurrenz}
+		Wir nennen eine ZV
+		\[
+		\tau : \Omega \to \mathbb{N}_0
+		\] 
+		\only<2->{
+			\textbf{Stoppzeit}
+			, wenn für alle $n \geq 0$
+			das Ereignis
+			\[
+				\{
+					\omega : \tau (\omega) = n
+				\}
+			\] 
+			nur von $X_0, ..., X_n$ abhängt.
+		}
+		\only<3->{
+			\vspace{5mm}
+
+			Dies bedeutet für ein geeignetes $A \subset I^{n+1}$:
+			\[
+				\{
+					\tau = n
+				\} = \{
+					\left(
+						X_0, ..., X_n
+					\right) \in A
+				\} 
+			\] 
+		}
+		\only<4->{
+			Im Folgenden schreiben wir $B_i$ für die Anzahl der Besuche in $i$.
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Kriterium für Rekurrenz}
+		\textit{Aussage:} $P_i (B_i \geq m) = \left(
+			f_{ii} ^{*}
+		\right) ^{m}, m \in \mathbb{N}$
+
+		\vspace{5mm}
+		\textit{Beweis:} 
+		\vspace{5mm}
+
+		\only<1>{
+			Seien:
+			\[
+				\tau_1 (\omega) = \inf \{
+					n \in \mathbb{N} : X_n (\omega) = i
+				\} 
+			\] 
+		}
+	\end{frame}
+	\subsection{Beispiel mehrdimensionale Irrfahrt}
 	
 \end{document}
