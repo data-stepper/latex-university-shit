@@ -182,12 +182,120 @@
 			n \in \mathbb{N} \; | \; i \rightsquigarrow i[n]
 		\}
 		\] 
+		\only<1>{
+			$d_i \Rightarrow$ Periode für Zustand $i$ \\
+		}
+		\only<2-3>{
+			$d \Rightarrow$ Periode für gesamte Markowkette \\
+			\vspace{5mm}
+			Wenn alle Zustände die selbe Periode haben. \\
+		}
+		\only<3>{
+			Also wenn
+			\[
+			\forall i \in I : d = d_i \geq 2.
+			\]
+		}
+		\only<4>{
+			Falls $d=1$, so nennen wir die Markowkette \textbf{aperiodisch} .
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Kommunizierende Zustände haben die selbe Periode}
+		\textit{Aussage}: $i \leftrightsquigarrow j \Rightarrow d_i = d_j$ \\
+		\only<2-5>{
+		\textit{Beweis:} \\
+		\vspace{5mm}
+			Es gelte $j \rightsquigarrow j [n]$, \\
+			und seien $k, m$ Zeitpunkte, sodass
+			$i \rightsquigarrow j [k]$ und $j \rightsquigarrow i [m]$. \\
+			\vspace{5mm}
+		}
+		\only<3-5>{
+			Dann gilt:
+			\[
+				i \rightsquigarrow i [k+m] 
+				\text{ und }
+				i \rightsquigarrow i [k+m+n]
+			\] \\
+			\vspace{5mm}
+		}
+		\only<4-5>{
+			Somit teilt $d_i$ dann $k+m$ und $k+m+n$,
+			dann teilt $d_i$ auch $n$. \\
+			\vspace{5mm}
+		}
+		\only<5>{
+			Damit ist $d_i$ gemeinsamer Teiler aller $n$ mit
+			$j \rightsquigarrow j [n]$. \\
+			\[
+			\Rightarrow d_i \leq d_j
+			\]
+		}
+		\only<6>{
+			\\
+			\vspace{5mm}
+			Nun folgt aus Symmetriegründen auch $d_j \leq d_i$. \\
+			\vspace{5mm}
+			Und damit insbesondere
+			\[
+			d_i = d_j.
+			\]
+		}
 	\end{frame}
 	
 	\subsection{Zerlegung in Teilgruppen}
 	\begin{frame}
-		\frametitle{Kommunizierende Zustände}
-		Wir benutzen Folgende Notation:
+		\frametitle{Zerlegung in Teilgruppen}
+		Wir betrachten wieder unsere periodische Markowkette von vorhin:
+		\begin{center}
+			\begin{tikzpicture}
+				% Add the states
+				\node[state]			 (a) {1};
+				\node[state, right=of a] (b) {2};
+				\node[state, right=of b] (c) {3};
+				\node[state, right=of c] (d) {4};
+				\node[state, right=of d] (e) {5};
+
+				% Connect the states with arrows
+				\draw[every loop]
+					% a -> b -> c -> d
+					(a) edge[bend right, auto=right] node {} (b)
+					(b) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (d)
+					(d) edge[bend right, auto=right] node {} (e)
+
+					% d -> c -> b -> a
+					(c) edge[bend right, auto=right] node {} (a)
+					(e) edge[bend right, auto=right] node {} (c)
+			\end{tikzpicture}
+		\end{center}
+		\\
+		\vspace{5mm}
+		\only<2>{
+			Wir definieren
+			\[
+				C(i) = \{
+					\;
+					j \in I \; | \; j \leftrightsquigarrow i
+					\;
+				\} 
+			\]
+		}
+		\only<3-4>{
+			In unserem Fall sind das aber alle Zustände:
+			\[
+				\forall i \in I : C(i) = I
+			\] 
+		}
+		\only<4>{
+			Jetzt sehen wir: Wenn einer dieser Zustände periodisch ist,
+			so sind es die anderen direkt auch alle.
+		}
+		\only<5>{
+			Wir können die Menge $C(i)$ in Teilgruppen wie folgt zerlegen:
+		}
 	\end{frame}
 
 	\section{Rekurrenz und Transienz}
