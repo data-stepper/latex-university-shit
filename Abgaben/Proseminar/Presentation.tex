@@ -293,8 +293,52 @@
 			Jetzt sehen wir: Wenn einer dieser Zustände periodisch ist,
 			so sind es die anderen direkt auch alle.
 		}
-		\only<5>{
+		\only<5-6>{
 			Wir können die Menge $C(i)$ in Teilgruppen wie folgt zerlegen:
+			\[
+				C_r (i) = \{
+					\;
+					j \in C(i) \; | \; 
+					r \equiv n \; (\text{mod } d_i)
+					\text{ mit } i \rightsquigarrow j [n]
+					\;
+				\} 
+			\]
+		}
+		\only<6>{
+			Also die Menge an Zuständen, die mit
+			$i$ kommunizieren, welche wir von $i$ aus in 
+			$n = r + k \cdot d_i$ Schritten erreichen können (für 
+			alle $k \in \mathbb{N}$).
+		}
+		\only<7>{
+			Für unsere Markowkette heißt das:
+			\[
+				C_0 (1) = \{
+					1, 4
+				\},
+				C_1 (1) = \{
+					2, 5
+				\},
+				C_2 (1) = \{
+					3
+				\} 
+			\] 
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Beweisschritte der Zerlegbarkeit}
+		\textit{Aussage:} Für jedes $j \in C(i)$ gibt es ein eindeutiges
+		$0 \leq r_j < d_i$, sodass $i \rightsquigarrow j [n]$ nur
+		für Zahlen $n \equiv r_j \; (\text{mod } d_i)$ gilt. \\
+		\vspace{5mm}
+		\textit{Beweis:} \\
+		\vspace{5mm}
+		\only<1>{
+			$\exists k: j \rightsquigarrow i [k]$ \\
+			Seien $m < n$ in $\mathbb{N}$ mit
+			$i \rightsquigarrow j [m]$ und $i \rightsquigarrow j [n]$
 		}
 	\end{frame}
 
