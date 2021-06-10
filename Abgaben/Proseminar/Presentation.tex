@@ -488,16 +488,76 @@
 			f_{ii} ^{*}
 		\right) ^{m}, m \in \mathbb{N}$
 
-		\vspace{5mm}
 		\textit{Beweis:} 
 		\vspace{5mm}
 
-		\only<1>{
+		\only<2-3>{
 			Seien:
-			\[
-				\tau_1 (\omega) = \inf \{
+			\begin{align*}
+				\tau_1 (\omega) &= \inf \{
 					n \in \mathbb{N} : X_n (\omega) = i
+				\} \\
+				\tau_{m+1} (\omega) &= \inf \{
+					n > \tau_m (\omega) : X_n (\omega) = i
 				\} 
+			\end{align*}
+		}
+		\only<3>{
+			Es ist $\tau_m (\omega)$ der Zeitpunkt des m-ten Besuches in $i$.
+			\\
+			\vspace{5mm}
+			Und wenn dieser nicht existiert, dann ist $\tau_m (\omega) = \infty$.
+		}
+		\only<4>{
+			\textit{Bemerkung:} Die $\tau_m$ sind Stoppzeiten.
+			\\
+			\vspace{5mm}
+			Setzen wir nämlich $A_{mn}$ als die Menge der Folgen von Realisationen
+			$\left(
+				j_0, ..., j_{n-1}
+			\right) \in I ^{n} $ mit $j_0 = i$, \\
+			welche $i$ noch $m-1$ weitere Male
+			besucht haben. \\
+			\vspace{5mm}
+			Dann ist
+			\[
+			\{
+				X_0 = i, \tau_m = n
+			\} = \{
+				\left(
+					X_0, ..., X_{n-1}
+				\right) \in A_{mn}, X_n = i
+			\}.
+			\]
+		}
+		\only<5-6>{
+			Jetzt sehen wir
+			\[
+			\{
+				\tau_m < \infty
+			\} = \{
+				B_i \geq m
+			\}.
+			\]
+			Die Behauptung beweisen wir nun nach Induktion: \\
+			\vspace{5mm}
+			Für $m = 1$ gilt
+			\[
+				P_i (\tau_m < \infty) = \left(
+					f_{ii} ^{*}
+				\right) ^{m}.
+			\]
+			\\
+			Die Wahrscheinlichkeit \textbf{einmal} zu $i$ zurückzukehren.
+		}
+		\only<6>{
+			\\
+			\vspace{5mm}
+			Wir definieren
+			\[
+			D_n ^{n+k} = \{
+				X_{n+1} \neq i, ..., X_{n+k-1} \neq i, X_{n+k} = i
+			\} 
 			\] 
 		}
 	\end{frame}
