@@ -1,9 +1,12 @@
-\documentclass[]{beamer}
+\documentclass[compress]{beamer}
 %Information to be included in the title page:
 \title{Langzeitverhalten von Markowketten}
 \author{Nogarbek Sharykpayev, Bent Müller}
 \institute{Universität Hamburg}
 \date{15.06.2021}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
 
 \setbeamertemplate{headline}[default]
 \setbeamertemplate{navigation symbols}{}
@@ -34,25 +37,153 @@
 		Die konvergiert
 	\end{frame}
 
-	\section{Periodizität}
+	\section{Kommunizieren und Periodizität}
 	\subsection{Kommunizierende Zustände}
 	\begin{frame}
-		\frametitle{Notation}
+		\frametitle{Begriffe}
 		$i, j \in I$ seien Zustände
-		\[
-			i \rightsquigarrow j
-		\]
-		heißt, dass wir von $i$ nach $j$ gelangen können.
+		\begin{align*}
+			\only<1->{
+				i \rightsquigarrow j [n] & \Leftrightarrow
+				p_{ij} ^{(n)} > 0 & \Leftrightarrow
+				\text{ i führt in n Schritten zu j } \\
+			}
+			\only<2->{
+				i \rightsquigarrow j & \Leftrightarrow
+				\exists n \in \mathbb{N} : i \rightsquigarrow j [n] & \\
+			}
+			\only<3->{
+				i \leftrightsquigarrow j & \Leftrightarrow
+				i \rightsquigarrow j \text{ und } j \rightsquigarrow i & \Leftrightarrow
+				\text{ i \textit{kommuniziert}  mit j } \\
+			}
+			\only<4->{
+				& \forall h \in I \text{ mit } i \rightsquigarrow h
+				\Rightarrow h \rightsquigarrow i & \Leftrightarrow
+				\text{ i ist \textit{wesentlich} }
+			}
+		\end{align*}
+	\end{frame}
 
-		Wir sagen $i$ kommuniziert mit $j$.
-		Des weiteren gilt:
+	\begin{frame}
+		\frametitle{Wichtige Folgerungen}
+		Kommunizieren ist eine \textbf{Äquivalenzrelation} auf der
+		Teilmenge der wesentlichen Zustände.
+		\\
+		\only<2->{
+			Es gilt für $i, j, k$ wesentliche Zustände in $I$:
+			\begin{itemize}
+				\item $i \leftrightsquigarrow i$ (reflexiv)
+				\item $i \leftrightsquigarrow j \Rightarrow$
+					$j \leftrightsquigarrow i$ (symmetrisch)
+				\item $i \leftrightsquigarrow j$ und
+					$j \leftrightsquigarrow k \Rightarrow
+					i \leftrightsquigarrow k$ (transitiv)
+			\end{itemize}
+		}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Wieso interessiert uns das?}
+		\begin{center}
+			\begin{tikzpicture}
+				% Add the states
+				\node[state]			 (a) {1};
+				\node[state, right=of a] (b) {2};
+				\node[state, right=of b] (c) {3};
+				\node[state, right=of c] (d) {4};
+
+				% Connect the states with arrows
+				\draw[every loop]
+					% a -> b -> c -> d
+					(a) edge[bend right, auto=right] node {} (b)
+					(c) edge[bend right, auto=right] node {} (d)
+
+					% d -> c -> b -> a
+					(d) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (b)
+					(b) edge[bend right, auto=right] node {} (a)
+
+					% a -> a, b -> b, ...
+					(a) edge[loop left]			     node {} (a)
+					(d) edge[loop right]			 node {} (d)
+			\end{tikzpicture}
+		\end{center}
+
+		Zustände 1 und 2 sind wesentlich, 3 und 4 aber nicht.
+		\\
+		\only<2->{
+			\vspace{5mm}
+			Was heißt das für das Langzeitverhalten der Kette?
+		}
+		\\
+		\vspace{5mm}
+		\only<3->{
+			Eine invariante Verteilung würde den Zuständen 3 und 4 also
+			Wahrscheinlichkeit 0 zuweisen.
+		}
+	\end{frame}
+	\subsection{Periodische Markowketten}
+
+	\begin{frame}
+		\frametitle{Periodische Markowketten}
+		Wir betrachten folgende Markowkette:
+		\begin{center}
+			\begin{tikzpicture}
+				% Add the states
+				\node[state]			 (a) {1};
+				\node[state, right=of a] (b) {2};
+				\node[state, right=of b] (c) {3};
+				\node[state, right=of c] (d) {4};
+				\node[state, right=of d] (e) {5};
+
+				% Connect the states with arrows
+				\draw[every loop]
+					% a -> b -> c -> d
+					(a) edge[bend right, auto=right] node {} (b)
+					(b) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (d)
+					(d) edge[bend right, auto=right] node {} (e)
+
+					% d -> c -> b -> a
+					(c) edge[bend right, auto=right] node {} (a)
+					(e) edge[bend right, auto=right] node {} (c)
+			\end{tikzpicture}
+		\end{center}
+		\\
+		\only<2-3>{
+			Mögliche Rückkehrzeiten für Zustand 1 sind
+			\[
+			\{
+				3, 6, 9, 12, ...
+			\} 
+			\only<3>{
+				=
+				\{
+					n \in \mathbb{N} \; | \; i \rightsquigarrow i[n]
+				\} 
+			}
+			\]
+			$\Rightarrow$ Zustand 1 ist periodisch mit Periode 3.
+		}
+		\only<4>{
+			Dies gilt sogar für alle Zustände.
+			\vspace{5mm}
+
+			$\Rightarrow$ Die Markowkette ist periodisch mit Periode 3.
+		}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Definition Periode}
+		Wir definieren den Begriff der Periode:
 		\[
-		i \leftrightsquigarrow j \Leftrightarrow i \rightsquigarrow j
-		\text{ und } j \rightsquigarrow i
+		d_i = \text{ggT} \{
+			n \in \mathbb{N} \; | \; i \rightsquigarrow i[n]
+		\}
 		\] 
 	\end{frame}
 	
-	\subsection{Periodische Markowketten}
 	\subsection{Zerlegung in Teilgruppen}
 	\begin{frame}
 		\frametitle{Kommunizierende Zustände}
