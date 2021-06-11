@@ -560,6 +560,71 @@
 			\} 
 			\] 
 		}
+		\only<7>{
+			\vspace{5mm}
+			Nun machen wir den Induktionsschritt:
+			\[
+				P_i(\tau_m < \infty) = \left(
+					f_{ii} ^{*}
+				\right) ^{m} \Rightarrow
+				P_i \left(
+					\tau_{m+1} < \infty
+				\right) = \left(
+				f_{ii} ^{*}
+				\right) ^{m+1}
+			\]
+		}
+		\only<8->{
+			\baselineskip
+			\begin{align*}
+				\only<8-9>{
+					P_i \left(
+						\tau_{m+1} < \infty
+						\right) &= \sum_{k=1}^{\infty} \sum_{n=1}^{\infty} P_i \left(
+						\tau_{m+1} - \tau_m = k, \tau_m = n
+					\right) \\
+				}
+				\only<9-10>{
+					&= \sum_{k=1}^{\infty} \sum_{n=1}^{\infty} P_i \left(
+						\tau_{m+1} - \tau_m | \tau_m = n
+				\right)
+				P_i \left(
+					\tau_m = n
+				\right) 
+				\\
+				}
+				\only<10-11>{
+					&= \sum_{k=1}^{\infty} \sum_{n=1}^{\infty} P_i \left(
+						D_n ^{n+k} | X_n = i, \left(
+							X_0, ..., X_{n-1}
+						\right) \in A_{mn}
+					\right) 
+					P_i (\tau_m = n)
+				\\
+				}
+				\only<11-12>{
+					&= \sum_{k=1}^{\infty} \sum_{n=1}^{\infty} P_i \left(
+						D_n ^{n+k} | X_n = i
+					\right) P_i (\tau_m = n)
+				\\
+				}
+				\only<12->{
+					&= \sum_{k=1}^{\infty} \sum_{n=1}^{\infty} P_i \left(
+						D_0 ^{k} | X_0 = i
+					\right) P_i (\tau_m = n)
+				\\
+				}
+				\only<13->{
+					&= \sum_{k=1}^{\infty} f_{ii} ^{(k)} P_i
+					\underbrace{ P_i (\tau_m < \infty) }_{ \left(
+							f_{ii} ^{*}
+					\right) ^{m} } 
+					= \left(
+						f_{ii} ^{*}
+					\right) ^{m+1}
+				}
+			\end{align*}
+		}
 	\end{frame}
 	\subsection{Beispiel mehrdimensionale Irrfahrt}
 	
