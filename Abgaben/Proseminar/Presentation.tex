@@ -408,7 +408,70 @@
 				\}.
 			\]
 		}
-		
+		\only<8-9>{
+			Wir beobachten:
+			\begin{align*}
+				\sum_{k+} \left(
+					p_{hk} ^{(L)} - p_{ik} ^{(L)}
+				\right) + \sum_{k-} \left(
+					p_{hk} ^{(L)} - p_{ik} ^{(L)}
+				\right) = 1 - 1 = 0
+			\end{align*}
+		}
+		\only<9-11>{
+			Sei nun für festes $n$, h ein Zustand, sodass $p_{hj} ^{(n+L)}$ maximal ist und $i$
+			ein Zustand, sodass $p_{ij} ^{(n+L)}$ minimal ist. \\
+		}
+		\only<10-11>{
+			\vspace{5mm}
+			\only<10-11>{
+				Dann gilt:
+			}
+			\begin{align*}
+				\only<10->{
+					M_j ^{(n+L)} - m_j ^{(n+L)} &= p_{hj} ^{(n+L)}
+					- p_{ij} ^{(n+L)} \\
+				}
+				\only<11->{
+					&= \sum_{k} \left(
+						p_{hk} ^{(L)} - p_{ik} ^{(L)}
+					\right) p_{kj} ^{(n)} \\
+				}
+			\end{align*}
+		}
+		\only<12-13>{
+			\begin{align*}
+				&= \sum_{k} \left(
+					p_{hk} ^{(L)} - p_{ik} ^{(L)}
+				\right) p_{kj} ^{(n)} \\
+				\only<12->{
+					& \leq \sum_{k+} \left(
+						p_{hk} ^{(L)} - p_{ik} ^{(L)}
+					\right) \left(
+						M_j ^{(n)} - m_j ^{(n)}
+					\right) \\
+				}
+				\only<13->{
+					& \leq \left(
+						1- \delta
+					\right) \left(
+						M_j ^{(n)} - m_j ^{(n)}
+					\right) \\
+				} 
+			\end{align*}
+		}
+		\only<13->{
+			Nun folgt induktiv für ein $a \geq 0$:
+			\[
+			M_j ^{(aL)} - m_j ^{(aL)} \leq \left(
+				1- \delta
+			\right) ^{a}
+			\]
+		} 
+		\only<14>{
+			Da aber die Folge (über $n$) $M_j ^{(n)}$ fallend und $m_j ^{(n)}$ wachsend ist,
+			konvergieren die Einträge der Matrix. $\qquad \qquad \qquad \qed$
+		} 
 	\end{frame}
 
 	\section{Kommunizieren und Periodizität}
