@@ -1,4 +1,4 @@
-\documentclass[compress]{beamer}
+\documentclass[draft,compress]{beamer}
 %Information to be included in the title page:
 \title{Langzeitverhalten von Markowketten}
 \author{Nogarbek Sharykpayev, Bent Müller}
@@ -27,14 +27,388 @@
 
 	\section{Konvergenz der Übergangsmatrix}
 	\subsection{Invariante Wahrscheinlichkeitsverteilung}
-	\subsection{Beweis der Konvergenz}
+	\begin{frame}[t]
+		\frametitle{Invariante Verteilung}
+		Wir betrachten eine Markowkette mit Übergangsgraphen:
+		\begin{center}
+			\begin{tikzpicture}
+				% Add the states
+				\node[state]			 (a) {1};
+				\node[state, above right=of a] (b) {2};
+				\node[state, right=of b] (c) {3};
+				\node[state, below right=of c] (d) {4};
+				\node[state, below left=of d] (e) {5};
+				\node[state, left=of e] (f) {6};
+
+				% Connect the states with arrows
+				\draw[every loop]
+					% a -> b -> c -> d
+					(a) edge[bend right, auto=right] node {} (b)
+					% (b) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (d)
+					(d) edge[bend right, auto=right] node {} (e)
+					(e) edge[bend right, auto=right] node {} (f)
+					(f) edge[bend right, auto=right] node {} (a)
+
+					% d -> c -> b -> a
+					(d) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (b)
+					(b) edge[bend right, auto=right] node {} (a)
+					(a) edge[bend right, auto=right] node {} (f)
+					(f) edge[bend right, auto=right] node {} (e)
+					(e) edge[bend right, auto=right] node {} (d)
+
+					% a -> a, b -> b, ...
+					(a) edge[loop left]			     node {} (a)
+					(b) edge[loop above]			 node {} (b)
+					(c) edge[loop above]			 node {} (c)
+					(d) edge[loop right]			 node {} (d)
+					(e) edge[loop below]			 node {} (e)
+					(f) edge[loop below]			 node {} (f)
+			\end{tikzpicture}
+		\end{center}
+		\\
+	\end{frame}
 
 	\begin{frame}
-		\frametitle{Convergence}
-		Yo
+		\frametitle{Invariante Verteilung}
+		Die Übergangsmatrix sei Folgende:
+		\begin{align*}
+			\mathbb{P} =
+			\begin{pmatrix} 
+				0.60 &	0.15 &	0.00 &	0.00 &	0.00 &	0.25\\
+				0.25 &	0.75 &	0.00 &	0.00 &	0.00 &	0.00\\
+				0.00 &	0.40 &	0.50 &	0.10 &	0.00 &	0.00\\
+				0.00 &	0.00 &	0.35 &	0.60 &	0.05 &	0.00\\
+				0.00 &	0.00 &	0.00 &	0.25 &	0.50 &	0.25\\
+				0.25 &	0.00 &	0.00 &	0.00 &	0.25 &	0.50
+			\end{pmatrix} 
+		\end{align*}
+		\only<2-3>{
+			Wir behaupten, es gibt ein $L \in \mathbb{N}$, sodass alle Einträge
+			von $\mathbb{P} ^{(L)}$ strikt positiv sind. \\
+		}
+		\only<3>{
+			\vspace{5mm}
+			Wir schauen uns jetzt ein paar Potenzen dieser Matrix an.
+		}
 	\end{frame}
+
 	\begin{frame}
-		Die konvergiert
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(2)} =
+				\begin{pmatrix} 
+				  0.4600 &  0.2025 &  0.0000 &  0.0000 &  0.0625 &  0.2750\\
+				  0.3375 &  0.6000 &  0.0000 &  0.0000 &  0.0000 &  0.0625\\
+				  0.1000 &  0.5000 &  0.2850 &  0.1100 &  0.0050 &  0.0000\\
+				  0.0000 &  0.1400 &  0.3850 &  0.4075 &  0.0550 &  0.0125\\
+				  0.0625 &  0.0000 &  0.0875 &  0.2750 &  0.3250 &  0.2500\\
+				  0.2750 &  0.0375 &  0.0000 &  0.0625 &  0.2500 &  0.3750
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(3)} =
+				\begin{pmatrix} 
+				  0.3954 &  0.2209 &  0.0000 &  0.0156 &  0.1000 &  0.2681\\
+				  0.3681 &  0.5006 &  0.0000 &  0.0000 &  0.0156 &  0.1156\\
+				  0.1850 &  0.5040 &  0.1810 &  0.0958 &  0.0080 &  0.0263\\
+				  0.0381 &  0.2590 &  0.3351 &  0.2967 &  0.0510 &  0.0200\\
+				  0.1000 &  0.0444 &  0.1400 &  0.2550 &  0.2388 &  0.2219\\
+				  0.2681 &  0.0694 &  0.0219 &  0.1000 &  0.2219 &  0.3187
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(4)} =
+				\begin{pmatrix} 
+				  0.3595 &  0.2250 &  0.0055 &  0.0344 &  0.1178 &  0.2579\\
+				  0.3749 &  0.4307 &  0.0000 &  0.0039 &  0.0367 &  0.1538\\
+				  0.2436 &  0.4781 &  0.1240 &  0.0775 &  0.0153 &  0.0614\\
+				  0.0926 &  0.3340 &  0.2714 &  0.2243 &  0.0453 &  0.0323\\
+				  0.1266 &  0.1043 &  0.1593 &  0.2267 &  0.1876 &  0.1956\\
+				  0.2579 &  0.1010 &  0.0459 &  0.1177 &  0.1956 &  0.2819
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(5)} =
+				\begin{pmatrix} 
+				  0.3364 &  0.2248 &  0.0148 &  0.0506 &  0.1251 &  0.2483\\
+				  0.3711 &  0.3793 &  0.0014 &  0.0115 &  0.0570 &  0.1798\\
+				  0.2810 &  0.4448 &  0.0891 &  0.0628 &  0.0269 &  0.0954\\
+				  0.1472 &  0.3730 &  0.2142 &  0.1731 &  0.0420 &  0.0506\\
+				  0.1509 &  0.1609 &  0.1590 &  0.1988 &  0.1540 &  0.1764\\
+				  0.2505 &  0.1328 &  0.0641 &  0.1241 &  0.1742 &  0.2543
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+		\only<2-3>{
+			Also sehen wir, dass unsere Behauptung für $L = 5$ stimmt. \\
+		}
+		\only<3>{
+			\vspace{5mm}
+			Nach $5$ Schritten ist es also möglich von jedem Zustand in jeden anderen Zustand
+			zu gelangen.
+		}
+		\only<4>{
+			Weiter behaupten wir, dass die Übergangsmatrix jetzt konvergiert
+			wenn wir die Potenz gegen $\infty$ laufen lassen.
+		}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(10)} =
+				\begin{pmatrix} 
+				  0.2893 &  0.2395 &  0.0532 &  0.0850 &  0.1199 &  0.2131\\
+				  0.3213 &  0.2652 &  0.0292 &  0.0589 &  0.1086 &  0.2168\\
+				  0.3218 &  0.3119 &  0.0365 &  0.0530 &  0.0863 &  0.1904\\
+				  0.2926 &  0.3478 &  0.0688 &  0.0698 &  0.0680 &  0.1531\\
+				  0.2518 &  0.2880 &  0.0950 &  0.1064 &  0.0951 &  0.1636\\
+				  0.2598 &  0.2433 &  0.0802 &  0.1059 &  0.1170 &  0.1939
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(20)} =
+				\begin{pmatrix} 
+				  0.2882 &  0.2653 &  0.0587 &  0.0828 &  0.1074 &  0.1977\\
+				  0.2884 &  0.2609 &  0.0577 &  0.0831 &  0.1096 &  0.2003\\
+				  0.2918 &  0.2608 &  0.0547 &  0.0807 &  0.1097 &  0.2023\\
+				  0.2958 &  0.2648 &  0.0518 &  0.0773 &  0.1079 &  0.2023\\
+				  0.2935 &  0.2705 &  0.0548 &  0.0783 &  0.1051 &  0.1978\\
+				  0.2899 &  0.2694 &  0.0578 &  0.0810 &  0.1055 &  0.1963
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Potenzen der Übergangsmatrix}
+		\begin{center}
+			\begin{align*}
+				\mathbb{P} ^{(200)} =
+				\begin{pmatrix} 
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+				  0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988
+				\end{pmatrix} 
+			\end{align*}
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Potenzen der Übergangsmatrix - Invariante Verteilung}
+		Wir nennen den Zeilenvektor gegen welche die Übergangsmatrix konvergiert
+		\textbf{invariante Verteilung}, beziehungsweise $\rho$.
+		\only<2-3>{
+			\begin{align*}
+				\mathbb{P} ^{(200)} =
+				\begin{pmatrix} 
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988\\
+					0.2900 &  0.2652 &  0.0570 &  0.0815 &  0.1075 &  0.1988
+				\end{pmatrix} 
+			\end{align*}
+		}
+		\only<3->{
+			\[
+			\Rightarrow \rho = \left(
+					0.29,  0.2652 ,  0.057 ,  0.0815 ,  0.1075 ,  0.1988
+			\right) 
+			\] 
+		}
+		\only<4->{
+			Dieser sagt uns, unabhängig vom Startpunkt, wie wahrscheinlich es ist
+			zu einem beliebigen Zeitpunkt in einem bestimmten Zustand zu sein.
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Invariante Verteilung der Markowkette}
+		\begin{center}
+			\begin{tikzpicture}
+				% Add the states
+				\node[state]			 (a) {1};
+				\node[state, above right=of a] (b) {2};
+				\node[state, right=of b] (c) {3};
+				\node[state, below right=of c] (d) {4};
+				\node[state, below left=of d] (e) {5};
+				\node[state, left=of e] (f) {6};
+
+				% Connect the states with arrows
+				\draw[every loop]
+					% a -> b -> c -> d
+					(a) edge[bend right, auto=right] node {} (b)
+					% (b) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (d)
+					(d) edge[bend right, auto=right] node {} (e)
+					(e) edge[bend right, auto=right] node {} (f)
+					(f) edge[bend right, auto=right] node {} (a)
+
+					% d -> c -> b -> a
+					(d) edge[bend right, auto=right] node {} (c)
+					(c) edge[bend right, auto=right] node {} (b)
+					(b) edge[bend right, auto=right] node {} (a)
+					(a) edge[bend right, auto=right] node {} (f)
+					(f) edge[bend right, auto=right] node {} (e)
+					(e) edge[bend right, auto=right] node {} (d)
+
+					% a -> a, b -> b, ...
+					(a) edge[loop left]			     node {} (a)
+					(b) edge[loop above]			 node {} (b)
+					(c) edge[loop above]			 node {} (c)
+					(d) edge[loop right]			 node {} (d)
+					(e) edge[loop below]			 node {} (e)
+					(f) edge[loop below]			 node {} (f)
+			\end{tikzpicture}
+		\end{center}
+		\[
+		\rho = \left(
+				0.29,  0.2652 ,  0.057 ,  0.0815 ,  0.1075 ,  0.1988
+		\right) 
+		\]
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Invariante Verteilung - Intuition}
+		\[
+		\rho = \left(
+				0.29,  0.2652 ,  0.057 ,  0.0815 ,  0.1075 ,  0.1988
+		\right) 
+		\]
+		\vspace{3mm}
+		\begin{center}
+			Lassen wir die Markowkette unendlich lange 'laufen', so
+			halten wir uns $29\%$ der Zeit in Zustand $1$ auf.
+		\end{center}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Invariante Verteilung - Eigenschaft}
+		$\rho$ als Zeilenvektor ist \textbf{linker} 
+		Eigenvektor der Übergangsmatrix $\mathbb{P}$:
+		\[
+		\rho = \rho \mathbb{P}
+		\] 
+		\only<2>{
+			Das heißt aber einfach:
+			\[
+			\rho = \mathbb{P} ^{T} \rho
+			\]
+		}
+	\end{frame}
+	
+	\subsection{Beweis der Konvergenz}
+	\begin{frame}[t]
+		\frametitle{Beweis der Konvergenz}
+		\only<1>{
+			\textit{Aussage:} Gibt es für eine Markowkette mit endlich vielen Zuständen ein $L \in \mathbb{N}$,
+			sodass die L-Schritt-Übergangsmatrix $\mathbb{P} ^{(L)}$ nur strikt positive Elemente 
+			enthält, dann konvergieren
+			die $p_{ij}$ gegen die von $i$ unabhängige Verteilung $\rho$. \\
+		}
+		\only<2->{
+			\textit{Aussage:} $\exists L \in \mathbb{N} : \mathbb{P} ^{(L)} > 0$
+			$\Rightarrow \lim_{L \to \infty} \mathbb{P} ^{(L)}$ konvergiert. \\
+			\textit{Beweis:} \\
+			\vspace{5mm}
+		}
+		\only<2-3>{
+			Wir setzen
+			\[
+				m_j ^{(n)} = \min_{i} p_{ij} ^{(n)} 
+				\;\;\;
+				\text{ und }
+				\;\;\;
+			M_j ^{(n)} = \max_i p_{ij} ^{(n)}.
+			\]
+		}
+		\only<3>{
+			Dann gilt
+			\[
+				m_j ^{(n+1)} = \min_i \sum_{h \in I} p_{ih} p_{hj} ^{(n)}
+				\geq \min_i \sum_{h \in I} p_{ih} m_j ^{(n)} = m_j ^{(n)},
+			\]
+			und analog $M_j ^{(n+1)} \leq M_j ^{(n)}$.
+		}
+		\only<4-5>{
+			Wir setzen außerdem
+			\[
+				\delta = \min_{(i,j) \in I ^2} p_{ij} ^{(L)} \ge 0.
+			\]
+		}
+		\only<5>{
+			Weiter setzen wir für feste $h, i \in I$, die Summe über alle Indize $k$ für welche
+			$p_{hk} ^{(L)} \geq p_{ik} ^{(L)}$ gilt als $\sum_{k+}$ und $\sum_{k-}$
+			für die übrigen Indize $k$.
+		}
+		\only<6-7>{
+			Wir veranschaulichen dies an der Übergangsmatrix $\mathbb{P}$ von vorhin:
+			\begin{align*}
+				\begin{pmatrix} 
+					0.60 &	0.15 &	0.00 &	0.00 &	0.00 &	0.25\\
+					\cdots &	\cdots &	\cdots &	\cdots &	\cdots &	\cdots\\
+					0.00 &	0.40 &	0.50 &	0.10 &	0.00 &	0.00\\
+					\cdots &	\cdots &	\cdots &	\cdots &	\cdots &	\cdots\\
+					\cdots &	\cdots &	\cdots &	\cdots &	\cdots &	\cdots\\
+					\cdots &	\cdots &	\cdots &	\cdots &	\cdots &	\cdots
+				\end{pmatrix}
+				\begin{matrix}
+					\leftarrow \text{ h } \\
+					\\
+					\leftarrow i \\
+					\\
+					\\
+					\\
+				\end{matrix}
+			\end{align*}
+		}
+		\only<7>{
+			Somit wären hier die beiden Indexmengen $k+$ und $k-$
+			\[
+				k+ = \{
+					1, 5, 6
+				\}, \quad
+				k- = \{
+					2, 3, 4
+				\}.
+			\]
+		}
+		
 	\end{frame}
 
 	\section{Kommunizieren und Periodizität}
@@ -615,7 +989,7 @@
 				\\
 				}
 				\only<13->{
-					&= \sum_{k=1}^{\infty} f_{ii} ^{(k)} P_i
+					&= \sum_{k=1}^{\infty} f_{ii} ^{(k)}
 					\underbrace{ P_i (\tau_m < \infty) }_{ \left(
 							f_{ii} ^{*}
 					\right) ^{m} } 
@@ -624,8 +998,97 @@
 					\right) ^{m+1}
 				}
 			\end{align*}
+			\only<13->{
+				\qquad \qquad \qed
+			}
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Kriterium für Rekurrenz - Rekurrenzsatz}
+		Wir schauen uns noch einmal die Gleichung von eben an:
+		\[
+		P_i \left(
+			B_i \geq m
+		\right) = \left(
+			f_{ii} ^{*}
+		\right) ^{m}
+		\] 
+		\only<2->{
+			Wir überlegen uns, dass ein Zustand rekurrent ist genau dann wenn
+			\[
+				f_{ii} ^{*} = 1,
+			\]
+			denn nun klappt die obige Gleichung für alle $m \in \mathbb{N}$. \\
+		}
+		\only<3->{
+			\vspace{5mm}
+			Dies ist aber äquivalent zu
+			\[
+				p_{ii} ^{*} = \infty.
+			\]
+			\\
+			Dass wir also bei Start in $i$, den Zustand $i$ unendlich oft wieder besuchen.
 		}
 	\end{frame}
 	\subsection{Beispiel mehrdimensionale Irrfahrt}
+	\begin{frame}[t]
+		\frametitle{Mehrdimensionale Irrfahrt}
+		\only<-3>{
+			Sei
+			\[
+				Y_n = \left(
+					Y_{n_1}, Y_{n_2}, ..., Y_{nd}
+				\right) 
+			\]
+			eine Folge von unabhängigen $d$-dimensionalen ZV in $\mathbb{Z}$. \\
+		}
+		\only<2-3>{
+			\vspace{5mm}
+			Wir fragen uns ob der Zustand
+			\[
+			\left(
+				0, 0, ..., 0
+			\right) \in \mathbb{Z}^{d}
+			\]
+			rekurrent ist oder transient. \\
+		}
+		\only<3-5>{
+			\vspace{5mm}
+			Wir betrachten
+			\[
+				p_{(0,...,0), (0,...,0)} ^{(2n)} = \left(
+					\begin{pmatrix} 2n \\ n \\ \end{pmatrix} 2 ^{-2n}
+				\right) ^{d}
+				\sim \left(
+					\frac{ 1 }{ \sqrt{\pi n}  } 
+				\right) ^{d}
+			\]
+		}
+		\only<4->{
+			die Wahrscheinlichkeit nach $2n$ Schritten vom Ursprung zum Ursprung
+			zurückzukehren. \\
+		}
+		\only<5->{
+			\vspace{5mm}
+			Die Markowkette ist für
+			\begin{align*}
+				d \leq 2 & \text{ rekurrent und } \\
+				d \geq 3 & \text{ transient. }
+			\end{align*}
+		}
+	\end{frame}
+
+	\begin{frame}[t]
+		\frametitle{Warum?}
+		Mit dem Rekurrenzsatz prüfen wir wann $p_{ii} ^{*} < \infty$
+		\begin{align*}
+			p_{ii} ^{*} &= \sum_{n=1}^{\infty} p_{ii} ^{(n)} \\
+					&= \frac{ 1 }{ (\sqrt{\pi}) ^{d} } \sum_{n=1}^{\infty} \left(
+						\frac{ 1 }{ n }
+					\right) ^{\frac{ d }{ 2 }}
+		\end{align*}
+		Und diese Summe divergiert nur für $d \leq 2$.
+	\end{frame}
 	
 \end{document}
