@@ -142,7 +142,8 @@ Der Übergangsgraph sieht wie folgt aus:
 		\node[state]			 (a) {0};
 		\node[state, right=of a] (b) {1};
 		\node[state, right=of b] (c) {2};
-		\node[state, right=of c] (d) {4};
+		\node[state, right=of c] (d) {3};
+		\node[state, right=of d] (e) {4};
 
 		% Connect the states with arrows
 		\draw[every loop]
@@ -151,22 +152,63 @@ Der Übergangsgraph sieht wie folgt aus:
 			(c) edge[bend right, auto=right] node {0.5} (d)
 
 			% d -> c -> b -> a
-			(c) edge[bend left, auto=left] node {0.5} (a)
+			(c) edge[bend left, auto=left] node {0.5} (b)
 			(b) edge[bend right, auto=right] node {0.5} (a)
+			(d) edge[bend right, auto=right] node {0.5} (e)
+			(d) edge[bend right, auto=right] node {0.5} (c)
 
 			% a -> a, b -> b, ...
 			(a) edge[loop left]			     node {1} (a)
-			(d) edge[loop right]			 node {1} (d)
+			(e) edge[loop right]			 node {1} (e)
 	\end{tikzpicture}
 \end{center}
-\\
 Die entsprechende Übergangsmatrix ist damit:
 \[
 \mathbb{P} = \begin{pmatrix} 
-	1 & 0 & 0 & 0 \\
-	\frac{ 1 }{ 2 } & 0 & \frac{ 1 }{ 2 } & 0 \\
-	\frac{ 1 }{ 2 } & 0 & 0 & \frac{ 1 }{ 2 } \\
-	0 & 0 & 0 & 1 \\
+	1 & 0 & 0 & 0 & 0 \\
+	0.5 & 0 & 0.5 & 0 & 0 \\
+	0 & 0.5 & 0 & 0.5 & 0 \\
+	0 & 0 & 0.5 & 0 & 0.5 & \\
+	0 & 0 & 0 & 0 & 1 \\
 \end{pmatrix} 
-\] 
+\\
+
+\textbf{b)} 
+Da wir in der Markowkette zwei Zustände haben, welche absorbierend sind, also man aus diesen
+Zuständen nicht wieder in andere Zustände zurückzukehren kann. Und diese Zustände von allen
+anderen Zuständen aus mit Wahrscheinlichkeit $\neq 0$ erreicht werden können, können wir sagen,
+dass diese beiden Zustände auf lange Zeit erreicht werden.
+\\
+
+\textbf{c)} 
+\begin{align}
+	\eta_1 &= p_{12} \eta_2 \\
+	\eta_2 &= p_{21} \eta_1 + p_{23} \eta_3 \\
+	\eta_3 &= p_{32} \eta_2 + p_{34} p_{44}
+\end{align}
+
+Nun wissen wir, dass in diesen Gleichungen $p_{44} = 1$ und sonst alle Übergangswahrscheinlichkeiten
+$p_{ij} = \frac{ 1 }{ 2 }$ sind. 
+Der Einfachheit halber nennen wir jeweils $\eta_i$ im Folgenden $x_i$.
+Somit lösen wir das LGS von unten nach oben auf:
+\begin{align*}
+	(3) & \implies x_3 = \frac{ 1 }{ 2 } x_2 + \frac{ 1 }{ 2 }
+	\implies x_2 = 2 x_3 - 1 \\
+		& \overset{(2)} \implies 2 x_3 - 1 = \frac{ 1 }{ 2 } x_1 + \frac{ 1 }{ 2 } x_3
+		\implies x_1 = 3 x_3 - 2 \\
+		& \overset{(3)} \implies x_1 = \frac{ 3 }{ 2 } x_2 - 2 + \frac{ 3 }{ 2 } \\
+		& \overset{(1)} \implies \frac{ 3 }{ 2 } x_2 - 2 + \frac{ 3 }{ 2 } = \frac{ 1 }{ 2 } x_2
+		\implies x_2 = 2 - \frac{ 3 }{ 2 } = \frac{ 1 }{ 2 } \\
+		& \overset{(1)} \implies x_1 = \frac{ 1 }{ 4 } \\
+		& \overset{(3)} \implies x_3 = \frac{ 1 }{ 2 } x_2 + \frac{ 1 }{ 2 }
+		= \frac{ 1 }{ 4 } + \frac{ 1 }{ 2 } = \frac{ 3 }{ 4 }
+\end{align*}
+
+Wir erhalten nun also als Gewinnwahrscheinlichkeitsvektor Folgenden:
+\[
+\eta = x = \left(
+	\frac{ 1 }{ 4 }, \frac{ 1 }{ 2 }, \frac{ 3 }{ 4 }
+\right) 
+\]
+
 \end{document}
