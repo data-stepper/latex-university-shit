@@ -25,6 +25,35 @@
 		\tableofcontents
 	\end{frame}
 
+	\section{Kurze Wiederholung}
+	\subsection{Homologe Markowketten}
+	\begin{frame}
+		\frametitle{Wiederholung}
+		\begin{center}
+			Wir nennen eine Markowkette \textit{homolog} , wenn die Übergangswahrscheinlichkeiten
+			\textit{unabhängig} vom Zeitpunkt sind.
+		\end{center}
+	\end{frame}
+	\subsection{Übergangsmatrix}
+	\begin{frame}
+		\frametitle{Wiederholung - Übergangsmatrix}
+		In diesem Fall können wir eine Übergangsmatrix wie folgt bilden:
+		\[
+		\mathbb{P} = \left(
+			p_{ij}
+		\right) = \begin{pmatrix} 
+			p_{11} & \cdots & p_{1n} \\
+			\vdots & \ddots & \vdots \\
+			p_{n1} & \cdots & p_{nn} \\
+		\end{pmatrix} 
+		\]
+		\only<2>{
+			Wobei hier der Zustandsraum $n$ Elemente enthält, und jeweils $p_{ij}$ die Wahrscheinlichkeit
+			ist in einem \textit{beliebigen} Zeitpunkt von Zustand $i$ in Zustand $j$ zu gelangen.
+		} 
+	\end{frame}
+	
+	
 	\section{Konvergenz der Übergangsmatrix}
 	\subsection{Invariante Wahrscheinlichkeitsverteilung}
 	\begin{frame}[t]
@@ -764,64 +793,26 @@
 		}
 	\end{frame}
 
-	\begin{frame}[t]
-		\frametitle{Beweisschritte der Zerlegbarkeit}
-		\textit{Aussage:} Für jedes $j \in C(i)$ gibt es ein eindeutiges
-		$0 \leq r_j < d_i$, sodass $i \rightsquigarrow j [n]$ nur
-		für Zahlen $n \equiv r_j \; (\text{mod } d_i)$ gilt. \\
-		\vspace{5mm}
-		\textit{Beweis:} \\
-		\vspace{5mm}
-		\only<1-2>{
-			$\exists k: j \rightsquigarrow i [k]$ \\
-			Seien $m < n$ in $\mathbb{N}$ mit
-			$i \rightsquigarrow j [m]$ und $i \rightsquigarrow j [n]$
-		}
-		\only<2>{
-			\\ \vspace{5mm}
-			Dann gilt
-			\[
-				i \rightsquigarrow i [k+m] \text{ und }
-				i \rightsquigarrow i [k+n].
-			\]
-			Somit teilt $d_i$ dann $n - m$
-			\\
-			Also liegen alle Zahlen $n$ mit $j \rightsquigarrow j [n]$ in der gleichen
-			Restklasse
-			\[
-				r_j \; (\text{mod } d_i)
-			\]
-		}
-		\only<3>{
-			Es gilt:
-			\[
-				i \rightsquigarrow j [m d_i + r_j]
-				\text{ für } m \geq 0
-			\] 
-			Man setzt
-		}
-	\end{frame}
-
 	\section{Rekurrenz und Transienz}
 	\subsection{Definition Rekurrenz}
 	\begin{frame}
 		\frametitle{Rekurrenz}
-		\only<2-3>{
+		\only<1-2>{
 			\begin{center}
 				Rekurrenz beschreibt das Rückkehrverhalten einer Markowkette.
 			\end{center}
 		}
-		\only<3>{
+		\only<2>{
 			\vspace{5mm}
 			Wie oft 'besucht' eine Markowkette einen bestimmten Zustand $i$?
 		}
-		\only<4-6>{
+		\only<3-5>{
 			Definiere folgende zwei Begriffe für Zustände:
 			\begin{itemize}
-				\only<5-6>{
+				\only<4-5>{
 				\item 'rekurrent' heißt, dass eine Markowkette einen Zustand unendlich oft besucht.
 				}
-				\only<6>{
+				\only<5>{
 				\item 'transient' meint genau das Gegenteil.
 				}
 			\end{itemize}
