@@ -36,9 +36,10 @@ welche wie folgt aussehen:
 \text{ wobei für alle $0 \leq j \leq n$ gilt }
 \sum_{i=1}^{n} p_{ji} = 1
 \]
-Wir erinnern uns, dass diese Matrix die Wahrscheinlichkeiten beschreibt von einem Zustand $i$ in einen
+Wir erinnern uns, dass der $(i,j)$-te Eintrag die Wahrscheinlichkeiten beschreibt von einem Zustand $i$ in einen
 Zustand $j$ zu gelangen. Wohlgemerkt betrachten wir nur homogene Markowketten, sodass diese Wahrscheinlichkeit
 zu jedem Zeitpunkt die selbe ist.
+\\
 
 \section{Invariante Wahrscheinlichkeitsverteilung}
 Wir schauen uns Markowketten für die wir ein $L \in \mathbb{N}$ finden können, sodass
@@ -52,7 +53,12 @@ Wenn unsere Markowkette diese Bedingung erfüllt, dann können wir zeigen, dass 
 Wahrscheinlichkeitsvektor $\rho$ gibt welcher folgende Bedingung erfüllt:
 
 \[
-\rho_k = \sum_{j=1}^{n} \rho_j p_{jk} \quad k \in I
+	\lim_{L \to \infty} \mathbb{P} ^{L} =
+	\begin{pmatrix} 
+		\rho_1 & \rho_2 & \cdots & \rho_n \\
+		\vdots & \vdots & \vdots & \vdots \\
+		\rho_1 & \rho_2 & \cdots & \rho_n \\
+	\end{pmatrix} 
 \]
 
 Diesen Wahrscheinlichkeitsvektor nennen wir dann \textit{invariante Verteilung}.
@@ -125,6 +131,9 @@ Analog nennen wir die Kette aperiodisch bzw. periodisch mit Periode $d$, wenn al
 Periode haben.
 \\
 
+Im Folgenden sei $C(i)$ die Menge der Zustände die mit einem Zustand $i$ kommunizieren.
+\\
+
 Periodische Markowketten können wir wie folgt zerlegen.
 
 \begin{center}
@@ -164,6 +173,18 @@ in Folgende Teilmengen zerlegen können.
 		3
 	\} 
 \]
+Für die Zerlegung schauen wir uns die Restklasse (modulo der Periode) der
+möglichen Übergangszeiten an. Wir definieren die Teilmengen nun wie folgt:
+\[
+	C_r (i) = \{
+		\;
+		j \in C(i) \; | \; r \equiv n \; (\text{mod } d) \text{ mit } i \rightsquigarrow j [n]
+		\;
+	\}
+	\text{ und } 0 \leq r < d
+\] 
+Im obigen sind die $n$ alle möglichen Übergangszeiten und $r$ ist jeweils die Restklasse (mod $d$)
+von $n$.
 
 \section{Rekurrenz und Transienz}
 Wir nennen einen Zustand $i$ \textit{rekurrent} wenn dessen Markowkette immer wieder zu ihm zurückkehrt.
