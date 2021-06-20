@@ -24,7 +24,133 @@
 \date{18. Juni 2021}
 \maketitle
 
+\begin{theorem} % Aufgabe #29
+\begin{Aufgabe}{29} % #29
+	Deterministische Prozesse mit stochastischen Matrizen
+\end{Aufgabe}
 
+\textbf{a)} Behälter Aufgabe
+
+\begin{proof}[Beweis]
+	Wir können das Problem als Markowkette modellieren,
+	indem wir den Zustandsraum wie folgt wählen.
+	\\
+
+	$R_A$ sei Rum Anteil in Behälter A und $W_A$ sei Wasser
+	Anteil in Behälter A. Analog $R_B$ und $W_B$ für Behälter
+	B.
+	Betrachten wir den Zustand unseres Experimentes wie folgt
+	\[
+	\left(
+		R_A, W_A, R_B, W_B
+	\right),
+	\] 
+	so können wir die Übergangsmatrix wie folgt hinschreiben:
+	\[
+	\mathbb{P} = \begin{pmatrix} 
+		0.8 & 0 & 0.15 & 0 \\
+		0 & 0.8 & 0 & 0.15 \\
+		0.2 & 0 & 0.85 & 0 \\
+		0 & 0.2 & 0 & 0.85 \\
+	\end{pmatrix}
+	\] 
+	Nun suchen wir für diese eine invariante Verteilung.
+	Wir überlegen uns also wann die Variablen jeweils im
+	nächsten Zeitschritt auf sich selber geschickt werden.
+	Hierfür lösen wir folgendes Gleichungssystem.
+	\begin{align*}
+		(i) \quad R_A &= 0.8 R_A + 0.15 R_B \\
+		(ii) \quad R_B &= 0.2 R_A + 0.85 R_B \\
+		   & \overset{(i)} \implies R_A = 0.75 R_B \\
+		   & \overset{(ii)} \implies R_B 
+		   = 0.2 R_A + 0.85 R_B \\
+		   & \implies R_B = \left(
+		   	0.2 \cdot 0.75 + 0.85
+		   \right) R_B
+	\end{align*}
+	Wir sehen also, solange $R_A = 0.75 R_B$ gilt, so ist dies
+	eine invariante Verteilung der Markowkette. Dies heisst für 
+	unser dynamisches System, dass dieses ein stationärer Punkt
+	ist. Durch Anwendung des Experimentes ändert sich nicht
+	der Zustand des Systems.
+	\\
+
+	Da wir für den Wasseranteil jeweils die exakt selben
+	Gleichungen erhalten, und Rum nicht zu Wasser werden kann
+	und auch nicht anders herum, gilt das selbe auch für 
+	die beiden Variablen $W_A$ und $W_B$.
+	\\
+
+	Jetzt müssen wir nur noch passende Variablen für 
+	unser tatsächliches Experiment finden.
+	\[
+	R_A + R_B = 0.7 L
+	\overset{(i)} \implies R_B \left(
+		1 + 0.75
+	\right) = 0.7 L
+	\implies 
+	R_B = 0.4L, \,
+	R_A = 0.3L
+	\] 
+	Also finden wir als stationären Zustand $x$ folgende Anteile
+	an Wasser bzw Rum in unseren Behältern:
+	\[
+	x = \left(
+		0.3 L, 0.3 L, 0.4 L, 0.4 L
+	\right) 
+	\] 
+	Somit wissen wir, dass dieser Zustand auch auf lange Zeit
+	erreicht wird beim wiederholten ausführen des Experimentes.
+\end{proof}
+\end{theorem}
+
+\textbf{b)} Fussball Weltmeisterschaft
+
+\begin{proof}[Rechnung]
+	Wir geben pro Gewinn eines Spiels einer Mannschaft jeweils
+	3 Punkte wie es beim Fussball üblich ist.
+	Die Punkte notieren wir jeweils mit $P_A$ als Punkte für 
+	Team A, und auch analog für die anderen Teams.
+	Somit erhalten wir Folgenden Rechenweg:
+	\begin{align*}
+		\text{A besiegt B} & \Rightarrow P_A = 3 \\
+		\text{B besiegt C} & \Rightarrow P_B = 3 \\
+		\text{B besiegt D} & \Rightarrow P_B = 6 \\
+		\text{A besiegt C} & \Rightarrow P_A = 6 \\
+		\text{D besiegt A} & \Rightarrow P_D = 3 \\
+		\text{C besiegt D} & \Rightarrow P_C = 3 \\
+	\end{align*}
+	Nun können wir die Teams nach der Anzahl deren Punkte ordnen
+	und erhalten folgende Reihenfolge:
+	\begin{center}
+	\begin{tabular}{ |c|c|c| } 
+	 \hline
+	 Name des Teams & Anzahl der Punkte \\ 
+	 \hline
+	 Team A & 6 \\ 
+	 Team B & 6 \\ 
+	 Team D & 3 \\ 
+	 Team C & 3 \\ 
+	 \hline
+	\end{tabular}
+\end{center}
+\end{proof}
+
+\begin{theorem} % Aufgabe #30
+\begin{Aufgabe}{30} % #30
+	Fahrschulformel
+\end{Aufgabe}
+
+\textbf{b)} Schulmathematik
+
+\begin{proof}[Rechnung]
+	Wir betrachten die gleichförmig gebremste Bewegung bei
+	Fahrt mit $v_0$ Anfangsgeschwindigkeit (in km/h ).
+	\[
+	
+	\] 
+\end{proof}
+\end{theorem}
 
 \end{document}
 
