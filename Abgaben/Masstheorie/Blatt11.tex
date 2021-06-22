@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ \usepackage{bbm, mathtools}
+ 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\normal}{\mathcal{N}}
+\newcommand{\gap}{\,\vert\,}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+ 
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{amatrix}[1]{%
+  \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\begin{document}
+ 
+\title{ \textbf{Maßtheoretische Konzepte der Stochastik \\ -- Übungsblatt \#11 --} }
+
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332),
+        Michael Hermann (6981007)}
+\maketitle
+
+\begin{Aufgabe}{1} % #1
+	Sei $X:(\Omega, \mathcal{A}, P) \rightarrow (\mathbb{R}, \mathbb{B})$ eine endlich integrierbare Zufallsvariable, 
+	$\mathcal{C} \subseteq \mathcal{A}$ eine Unter-$\sigma$-Algebra und $Z$ eine $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable.
+\end{Aufgabe}
+
+\beh Die folgenden beiden Aussagen sind äquivalent:
+\begin{itemize}
+	\item[(i)] $Z = E(X|\mathcal{C}) \;\;$ P-f.s.
+	\item[(ii)] $E(XY) = E(ZY)$ für alle  $\mathcal{C},\mathbb{B}$-messbaren beschränkten Zufallsvariablen $Y$
+\end{itemize}
+
+\begin{proof}[Beweis]  
+Es gelte (ii). Für eine beliebige Menge $D \in \mathcal{C}$ ist $\mathbbm{1}_D$ eine beschränkte $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable und es gilt
+$$
+\int_{D} X \,dP = \int X \mathbbm{1}_D \,dP = E(X \mathbbm{1}_D) = E(Z \mathbbm{1}_D) =  \int Z \mathbbm{1}_D \,dP = \int_{D} Z \,dP
+$$
+Da $Z$ nach Voraussetzung $\mathcal{C},\mathbb{B}$-messbar ist, ist $Z$ ein bedingter Erwartungswert von $X$ gegeben $\mathcal{C}$. \\
+
+Es gelte (i). Wir zeigen die Gültigkeit von (ii) durch algebraische Induktion. \\
+Sei zuerst $Y \coloneqq \sum_{i=1}^{n} a_i \mathbbm{1}_{A_i}$ eine Elementarfunktion mit $a_i > 0$ und paarweise disjunkten Mengen $A_i \in \mathcal{C}$ für $i=1, \dots n$. Dann gilt
+\begin{align*}
+E(XY) &= E(X  \sum_{i=1}^{n} a_i \mathbbm{1}_{A_i}) =  \sum_{i=1}^{n} a_i E(X \mathbbm{1}_{A_i}) =  \sum_{i=1}^{n} a_i \int_{A_i} X dP \\
+	  &=  \sum_{i=1}^{n} a_i \int_{A_i} Z dP =  \sum_{i=1}^{n} a_i E(Z \mathbbm{1}_{A_i}) =  E(Z \sum_{i=1}^{n} a_i \mathbbm{1}_{A_i}) = E(ZY) 
+\end{align*}
+wobei die Linearität des Erwartungswertes und die Radon-Nikodym-Gleichungen verwendet wurden. \\
+Ist $Y:(\Omega, \mathcal{A}) \rightarrow (\mathbb{R}, \mathbb{B})$ eine beliebige nichtnegative beschränkte $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable, dann gibt es eine Folge von Elementarfunktionen $(Y_n)_{n \in \mathbb{N}}$, die monoton von unten gegen $Y$ konvergiert. Es gilt dann $XY_n \rightarrow XY$ und $ZY_n \rightarrow ZY$ für $n \to \infty$ und, wie soeben gesehen, $E(XY_n) = E(ZY_n)$ für alle $n \in \mathbb{N}$. Mit $Y$ sind auch alle $Y_n$ beschränkt und, da $X$ und $Z$ endlich integrierbar sind, sind die Folgen $XY_n$ und $ZY_n$ gleichgradig $P$-integrierbar. Es folgt
+$$
+E(XY) = E( \lim_{n \to \infty} XY_n) =  \lim_{n \to \infty} E(X Y_n) =  \lim_{n \to \infty} E(Z Y_n) = E(\lim_{n \to \infty} ZY_n) = E(ZY)
+$$
+Ist schliesslich $Y$ eine beliebige beschränkte $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable, dann folgt die Aussage nach Zerlegung in Positiv- und Negativteil und der Linearität des Erwartungswertes:
+$$
+E(XY) = E(XY^+)-E(XY^-) = E(ZY^+)-E(ZY^-) = E(ZY) 
+$$
+ 
+\end{proof}
+ 
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
