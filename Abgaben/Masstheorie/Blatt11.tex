@@ -58,7 +58,7 @@ E(XY) &= E(X  \sum_{i=1}^{n} a_i \mathbbm{1}_{A_i}) =  \sum_{i=1}^{n} a_i E(X \m
 	  &=  \sum_{i=1}^{n} a_i \int_{A_i} Z dP =  \sum_{i=1}^{n} a_i E(Z \mathbbm{1}_{A_i}) =  E(Z \sum_{i=1}^{n} a_i \mathbbm{1}_{A_i}) = E(ZY) 
 \end{align*}
 wobei die Linearität des Erwartungswertes und die Radon-Nikodym-Gleichungen verwendet wurden. \\
-Ist $Y:(\Omega, \mathcal{A}) \rightarrow (\mathbb{R}, \mathbb{B})$ eine beliebige nichtnegative beschränkte $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable, dann gibt es eine Folge von Elementarfunktionen $(Y_n)_{n \in \mathbb{N}}$, die monoton von unten gegen $Y$ konvergiert. Es gilt dann $XY_n \rightarrow XY$ und $ZY_n \rightarrow ZY$ für $n \to \infty$ und, wie soeben gesehen, $E(XY_n) = E(ZY_n)$ für alle $n \in \mathbb{N}$. Mit $Y$ sind auch alle $Y_n$ beschränkt und, da $X$ und $Z$ endlich integrierbar sind, sind die Folgen $XY_n$ und $ZY_n$ gleichgradig $P$-integrierbar. Es folgt
+Ist $Y:(\Omega, \mathcal{A}) \rightarrow (\mathbb{R}, \mathbb{B})$ eine beliebige nichtnegative beschränkte $\mathcal{C},\mathbb{B}$-messbare Zufallsvariable, dann gibt es eine Folge von Elementarfunktionen $(Y_n)_{n \in \mathbb{N}}$, die monoton von unten gegen $Y$ konvergiert. Es gilt dann $XY_n \rightarrow XY$ und $ZY_n \rightarrow ZY$ für $n \to \infty$ und, wie soeben gesehen, $E(XY_n) = E(ZY_n)$ für alle $n \in \mathbb{N}$. Mit $Y$ sind auch alle $Y_n$ beschränkt und, da $X$ und $Z$ endlich integrierbar sind, sind die Folgen $XY_n$ und $ZY_n$ gleichgradig $P$-integrierbar, denn $|XY_n| \leq |XY|$ und $XY \in \mathcal{L}_1$ bzw. $|ZY_n| \leq |ZY|$ und $ZY \in \mathcal{L}_1$. Es folgt
 $$
 E(XY) = E( \lim_{n \to \infty} XY_n) =  \lim_{n \to \infty} E(X Y_n) =  \lim_{n \to \infty} E(Z Y_n) = E(\lim_{n \to \infty} ZY_n) = E(ZY)
 $$
