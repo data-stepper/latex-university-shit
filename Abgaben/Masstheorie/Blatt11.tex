@@ -69,6 +69,48 @@ $$
  
 \end{proof}
  
+ 
+ \begin{Aufgabe}{2} % #2
+ \begin{itemize}
+ \item[a)]
+	Seien $Y_n, n \in \mathbb{N}$ unabhängige, identisch verteilte Zufallsvariablen mit $E(Y_1)=1$. Dann ist 
+	$$
+	X_n \coloneqq \prod_{i=1}^n Y_i
+	$$ 
+	für $n \in \mathbb{N}_0$ (mit der Konvention $X_0 = 1$) ein Martingal.
+ \item[b)]
+	Für unabhängige, identisch verteilte Zufallsvariablen $Z_n, n \in \mathbb{N}$, $M(t) \coloneqq E(e^{tZ_1}) < \infty$ für $t \in \mathbb{R} \setminus \{0\}$ und $S_n \coloneqq \sum{i=1}^n Z_i$ für $n \in \mathbb{N}$ ist
+	$$
+	X_n \coloneqq \frac{\exp(tS_n)}{(M(t))^n}, \; n \in \mathbb{N}_0
+	$$
+	ein Martingal.
+\end{itemize}
+\end{Aufgabe}
+
+\begin{proof}[Beweis]  
+ \begin{itemize}
+ \item[a)]
+	Es gilt 
+	$$
+	E(|X_n|) = E(\prod_{i=1}^n |Y_i|) = \prod_{i=1}^n E(|Y_i|) < \infty 
+	$$
+	da die $Y_i$ insbesondere endlich integrierbar sind und
+	$$
+	E(X_{n+1}|(X_i)_{1 \leq i \leq n}) = E(Y_{n+1}X_{n}|(X_i)_{1 \leq i \leq n}) \overset{(*)}{=} X_n E(Y_{n+1} | (X_i)_{1 \leq i \leq n}) \overset{(**)}{=}  X_n E(Y_{n+1}) = X_n 
+	$$
+	wobei wir für $(*)$ Teil (ix) von Satz 9.5 mit $g((X_i)_{1 \leq i \leq n})) \coloneqq X_n $ benutzt haben. Die Gleicheit $(**)$ folgt aus der stoch. Unabhängigkeit der Zufallsvariablen $Y_i$.
+ \item[b)] Mit $Y_i \coloneqq \frac{\exp(tZ_i)}{M(t)}$ ist
+ $$
+ X_n = \frac{\exp(tS_n)}{(M(t))^n} = \frac{\exp(\sum_{i=1}^n tZ_i)}{(M(t))^n} = \prod_{i=1}^n \frac{\exp(tZ_i)}{M(t)} = \prod_{i=1}^n Y_i
+ $$
+ und es gilt
+ $$
+ E(Y_i) = E\left(\frac{\exp(tZ_i)}{M(t)}\right) = \frac{E(\exp(tZ_i))}{M(t)} = \frac{E(\exp(tZ_i))}{E(\exp(tZ_1)} = 1
+ $$
+ Die Aussage folgt nun direkt aus a), da mit den $Z_i$ natürlich auch die $Y_i$ stochastisch unabhängig sind.
+ 
+\end{itemize}
+\end{proof}
 
 
 \end{document}
