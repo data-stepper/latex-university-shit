@@ -69,6 +69,7 @@ $$
  
 \end{proof}
  
+ \newpage
  
  \begin{Aufgabe}{2} % #2
  \begin{itemize}
@@ -94,11 +95,12 @@ $$
 	$$
 	E(|X_n|) = E(\prod_{i=1}^n |Y_i|) = \prod_{i=1}^n E(|Y_i|) < \infty 
 	$$
-	da die $Y_i$ insbesondere endlich integrierbar sind und
+	da die $Y_i$ insbesondere endlich integrierbar sind. Die Adaption ist klar, da wir die natürliche Filtration verwenden. Ausserdem gilt
 	$$
 	E(X_{n+1}|(X_i)_{1 \leq i \leq n}) = E(Y_{n+1}X_{n}|(X_i)_{1 \leq i \leq n}) \overset{(*)}{=} X_n E(Y_{n+1} | (X_i)_{1 \leq i \leq n}) \overset{(**)}{=}  X_n E(Y_{n+1}) = X_n 
 	$$
-	wobei wir für $(*)$ Teil (ix) von Satz 9.5 mit $g((X_i)_{1 \leq i \leq n})) \coloneqq X_n $ benutzt haben. Die Gleicheit $(**)$ folgt aus der stoch. Unabhängigkeit der Zufallsvariablen $Y_i$.
+	wobei wir für $(*)$ Teil (ix) von Satz 9.5 mit $g((X_i)_{1 \leq i \leq n})) \coloneqq X_n $ benutzt haben. Die Gleichheit $(**)$ folgt aus der stoch. Unabhängigkeit der Zufallsvariablen $Y_i$. 
+	Damit ist $(X_n)_{n \in \mathbb{N}_0}$ ein Martingal.
  \item[b)] Mit $Y_i \coloneqq \frac{\exp(tZ_i)}{M(t)}$ ist
  $$
  X_n = \frac{\exp(tS_n)}{(M(t))^n} = \frac{\exp(\sum_{i=1}^n tZ_i)}{(M(t))^n} = \prod_{i=1}^n \frac{\exp(tZ_i)}{M(t)} = \prod_{i=1}^n Y_i
@@ -109,6 +111,42 @@ $$
  $$
  Die Aussage folgt nun direkt aus a), da mit den $Z_i$ natürlich auch die $Y_i$ stochastisch unabhängig sind.
  
+\end{itemize}
+\end{proof}
+
+
+\begin{Aufgabe}{3} % #3
+	Sei $(S_n)_{n \in \mathbb{N}}$ eine Folge von Stoppzeiten bzgl. einer Filtration $(\mathcal{A}_t)_{t \in \mathbb{N}_0}$. \\
+	Dann gilt:
+	\begin{itemize}
+		\item[(i)] $\min_{n \in \mathbb{N}_0} S_n$ und $\sup_{n \in \mathbb{N}}$ sind Stoppzeiten bzgl. $(\mathcal{A}_t)_{t \in \mathbb{N}_0}$
+		\item[(ii)] Die Ereignisse $\{S_1 \leq S_2\}$ und $\{S_1= S_2\}$ liegen in $\mathcal{A}_{S_1} \cap \mathcal{A}_{S_2}$
+	\end{itemize}
+\end{Aufgabe}
+
+\begin{proof}[Beweis]  
+\begin{itemize}
+	\item[(i)] Es gilt $\{S_n \leq t\} \in \mathcal{A}_t$ für jedes $n \in \mathbb{N}_0$, da jedes $S_n$ eine Stoppzeit ist. \\
+	Da $\mathcal{A}_t$ eine $\sigma$-Algebra ist folgt damit sofort
+	$$
+	\{\min_{n \in \mathbb{N}_0} S_n \leq t\} = \{S_n \leq t \;\; \text{für ein } n \in \mathbb{N}_0 \} = \bigcup_{n \in \mathbb{N}_0} \{S_n \leq t\} \in \mathcal{A}_t
+	$$
+	und
+	$$
+	\{\sup_{n \in \mathbb{N}_0} S_n \leq t\} = \{S_n \leq t \;\; \text{für alle }  n \in \mathbb{N}_0 \} = \bigcap_{n \in \mathbb{N}_0} \{S_n \leq t\} \in \mathcal{A}_t,
+	$$
+	dh. die beiden Funktionen sind tatsächlich Stoppzeiten.
+	\item[(ii)] Es gilt
+	$$
+	\{S_1 \leq S_2\} = \bigcup_{t \in \mathbb{N}_0} \{S_1 \leq t\} \cap  \{S_2 \geq t\} 
+	$$
+	und 
+	$$
+	\{S_1 = S_2\} = \bigcup_{t \in \mathbb{N}_0} \{S_1 = t\} \cap  \{S_2 = t\} 
+	$$
+	Die Mengen $\{S_i \leq t\}$, $\{S_i \geq t\} = \{S_i \leq t-1\}^c$ und $\{S_i = t\} = \{S_i \leq t\} \cap \{S_i \geq t\}$ liegen alle in $\mathcal{A}_t \subseteq \mathcal{A}$, also auch in $\mathcal{A}_{S_i}$, jeweils für $i = 1,2$.
+	Damit ist $\{S_1 \leq t\} \cap  \{S_2 \geq t\} \in \mathcal{A}_{S_1} \cap \mathcal{A}_{S_2}$ und $\{S_1 = t\} \cap  \{S_2 = t\} \in \mathcal{A}_{S_1} \cap \mathcal{A}_{S_2}$ für jedes $t \in \mathbb{N}_0$. 
+	Die Aussage folgt nun, da jede $\sigma$-Algebra alle abzählbaren Vereinigungen ihrer Mengen enthält und der Schnitt zweier $\sigma$-Algebren wiederum eine $\sigma$-Algebra ist.
 \end{itemize}
 \end{proof}
 
