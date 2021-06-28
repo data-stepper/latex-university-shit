@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{ \textbf{Modellierung Blatt #11} }
+\author{Amir Miri Lavasani (7310114), Bent Müller (7302332)}
+\date{28.06.2021}
+\maketitle
+	\begin{Aufgabe}{30}
+		Analytisch lösbare Differentialgleichungen
+	\end{Aufgabe}
+
+	\textbf{c)} 
+	\begin{proof}[Rechnung]
+		Wir wählen nach dem Hinweis den linearen Ansatz der Lösung.
+		\[
+			y_p (x) = ax + b, \;\;
+			y_p ' (x) = a
+		\]
+		Jetzt setzen wir dies in die Differentialgleichung aus der
+		Aufgabenstellung ein und erhalten:
+		\begin{align*}
+			1 - x ^3 &= y' (x) - 2 x ^2 y(x) + xy(y) ^2 \\
+			 &= a - 2x ^2 \left(
+			 	ax + b
+			 \right) + x \left(
+			 	ax + b
+			 \right) ^2 \\
+			 &= a - 2a x ^3 - 2 ab x ^2
+			 + x \left(
+			 	a ^2 x ^2 + 2 ab x + b ^2
+			 \right) \\
+			 &= a - 2a x ^3 - 2 ab x ^2
+			 + a ^2 x ^3 + 2 ab x ^2 + b ^2 x \\
+			 &= a + b ^2 x - x ^2 \left(
+			 	-2b + 2 ab
+			 \right) + x ^3 \left(
+			 	-2a + a ^2
+			 \right) = 1 - x ^3 \\
+			 & \overset{\text{Koeffizientenvergleich}} \implies 
+			 \qquad a = 1, \quad b = 0
+		\end{align*}
+		Wir erkennen also, dass die einzige lineare Funktion die unsere
+		Differentialgleichung löst $y_p (x) = x$ ist.
+	\end{proof}
+\end{document}
