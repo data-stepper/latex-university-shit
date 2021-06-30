@@ -1,0 +1,60 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{ \textbf{Statistik Blatt \# 12} }
+\author{Bent Müller, Ferdinand Cramm, Steven Zinger}
+\date{30.06.2021}
+\maketitle
+	\begin{Aufgabe}{2}
+		Genotypen
+	\end{Aufgabe}
+
+	\begin{proof}[Beweis]
+		Zuerst beobachten wir, dass wir unser Experiment mit Hilfe einer
+		Multinomialverteilung modellieren können.
+		\\
+
+		Die Zähldichte können wir somit wie folgt aufstellen:
+		\[
+			P(X_j = x_{j} ,j \in \{
+				1, 2, ..., m
+				\}) = \frac{ n! }{ 
+				\prod_{k = 1}^{m} x_k!
+			}
+			\prod_{k = 1}^{m} p_k ^{x_k} 
+		\]
+		In unserem Fall ist $m=3$, da wir drei verschiedene
+		Ausgangssituationen vorliegen haben ($AA, Aa, aa$).
+		Da wir allerdings noch mehr über die Wahrscheinlichkeiten in unserem
+		Modell wissen, können wir die Zähldichte noch präziser formulieren.
+		\begin{align*}
+			P(X_j = x_{j}, j \in \{
+				1, 2, 3
+			\} ) &= 
+		\end{align*}
+		Für den Maximum-Likelihood-Schätzer schauen wir uns die folgende
+		log-Likelihood Funktion an, für welche wir dann auch direkt das
+		Maximum finden.
+		\begin{align*}
+			l (p, )
+		\end{align*}
+	\end{proof}
+\end{document}
