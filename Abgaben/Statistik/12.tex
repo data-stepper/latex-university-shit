@@ -45,16 +45,77 @@
 		Ausgangssituationen vorliegen haben ($AA, Aa, aa$).
 		Da wir allerdings noch mehr über die Wahrscheinlichkeiten in unserem
 		Modell wissen, können wir die Zähldichte noch präziser formulieren.
-		\begin{align*}
+		\[
 			P(X_j = x_{j}, j \in \{
 				1, 2, 3
-			\} ) &= 
-		\end{align*}
+				\} ) &= \frac{ n! }{ 
+				x_1 \cdot x_2 \cdot x_3
+			} \left(
+				p ^2
+			\right) ^{x_1} \cdot
+			\left(
+				2p(1-p)
+			\right) ^{x_2} \cdot
+			\left(
+				1 - p ^2
+			\right) ^{x_3}
+		\] 
+		Wichtig hier ist, dass $x_j$ jeweils diskret die Anzahl der 
+		Genotypen beschreibt.
 		Für den Maximum-Likelihood-Schätzer schauen wir uns die folgende
 		log-Likelihood Funktion an, für welche wir dann auch direkt das
 		Maximum finden.
 		\begin{align*}
-			l (p, )
+			l (p, x=n) &=
+			\log \left(
+				L(p, x_1 = n_1, x_2 = n_2, x_3 = n_3)
+			\right) \\
+			   &= 
+			   \log
+			\left(
+			    \frac{ n! }{ 
+				x_1 \cdot x_2 \cdot x_3
+			} \left(
+				p ^2
+			\right) ^{x_1} \cdot
+			\left(
+				2p(1-p)
+			\right) ^{x_2} \cdot
+			\left(
+				1 - p ^2
+			\right) ^{x_3}
+			\right) \\
+				&= \log (n!) - \log \left(
+					x_1 x_2 x_3
+				\right) + 2 x_1 \log \left(
+					p
+				\right) + x_2 \log \left(
+					2p (1-p)
+				\right) + x_3 \log \left(
+					1 - p ^2
+				\right) \\
+				&= \log (n!) - \log \left(
+					x_1 x_2 x_3
+				\right) + 2 x_1 \log \left(
+					p
+				\right) + x_2 \log \left(
+				2p - 2p ^2
+				\right) + x_3 \log \left(
+					1 - p ^2
+				\right) \\
+				\Rightarrow \frac{ \partial l (p, x=n) }{ \partial p } &= 
+				\frac{ 2 x_1 }{ p } +
+				\left(
+					2 - 4p
+				\right) 
+				\frac{ x_2 }{ 2 (p - p ^2) }
+				\; - 2p \frac{ x_3 }{ 1 - p ^2 } = 0 \\
+				   & \Leftrightarrow \frac{ x_1 }{ p }
+				   + \frac{ x_2 - 2p x_2 }{ 2(p - p ^2) }
+				   - \frac{ p x_3 }{ 1 - p ^2 } = 0 \\
+				   & \overset{p \neq 0} \Longleftrightarrow 
+				   x_1 + \frac{ p (1 - 2 x_2) }{ 2 (1- p) }
+				   - \frac{ p ^2 x_3 }{ 1 - p ^2 } = 0
 		\end{align*}
 	\end{proof}
 \end{document}
