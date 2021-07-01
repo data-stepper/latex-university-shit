@@ -114,8 +114,70 @@
 				   + \frac{ x_2 - 2p x_2 }{ 2(p - p ^2) }
 				   - \frac{ p x_3 }{ 1 - p ^2 } = 0 \\
 				   & \overset{p \neq 0} \Longleftrightarrow 
-				   x_1 + \frac{ p (1 - 2 x_2) }{ 2 (1- p) }
-				   - \frac{ p ^2 x_3 }{ 1 - p ^2 } = 0
+				   x_1 + \frac{ x_2 (1 - 2p) }{ 2 (1- p) }
+				   - \frac{ p ^2 x_3 }{ 1 - p ^2 } = 0 \\
+				   & \overset{p \neq 1} \Longleftrightarrow 
+				   (1 - p) x_1 + \frac{ x_2 (1 - 2p) }{ 2 }
+				   - \frac{ p ^2 x_3 }{ 1 + p } = 0 \\
+				   & \Leftrightarrow x_1 + p \left(
+				   		- x_1 - x_2 
+				   \right) - \frac{ p ^2 x_3 }{ 1 + p }
+				   + \frac{ x_2 }{ 2 } = 0 \qquad \big \vert \cdot (1+p) \\
+				   & \Leftrightarrow x_1 + p \left(
+				   		- x_2 
+				   \right)
+				   + p ^2 \left(
+				   		- x_1 - x_2 - x_3
+				   \right)
+				   + \frac{ (1+p) x_2 }{ 2 } = 0 \\
+				   & \Leftrightarrow 
+				   \underbrace{ x_1 + \frac{ x_2 }{ 2 } }_{ c } 
+				   + p \underbrace{ \left(
+					   \frac{ - x_2 }{ 2 } 
+				   \right) }_{ b }
+					+ p ^2 
+				   \underbrace{ 
+					   \left(
+							- x_1 - x_2 - x_3
+					   \right)
+				   }_{ a } 
+				   = 0 \\
+				   & \Rightarrow
+				   x_{1,2} = \frac{ 
+					   \frac{ x_2 }{ 2 } \pm \sqrt{
+						   \frac{ x_2 ^2 }{ 4 } - 4 \left(
+						   	- x_1 - x_2 - x_3
+						   \right) \left(
+						   	x_1 + \frac{ x_2 }{ 2 }
+						   \right) 
+					   }
+					   }{ 
+					   2 x_1 + x_2
+				   } \\
+				   & \Rightarrow
+				   x_{1,2} = \frac{ 
+					   \frac{ x_2 }{ 2 } \pm \sqrt{
+						   \frac{ x_2 ^2 }{ 4 } + 4 \left(
+							   x_1 ^2 + x_1 x_2 + x_1 x_3
+							   \right) 
+							   + 2
+							   \left(
+								   x_1 x_2 + x_2 ^2 + x_2 x_3
+						   \right) 
+					   }
+					   }{ 
+					   2 x_1 + x_2
+				   } \\
+				   & \Rightarrow
+				   x_{1,2} = \frac{ 
+					   \frac{ x_2 }{ 2 } \pm \sqrt{
+						   (2 + \frac{ 1 }{ 4 }) x_2 ^2
+						   + 4 x_1 ^2 + 6 x_1 x_2 
+						   + 4 x_1 x_3 + 2 x_2 x_3
+					   }
+					   }{ 
+					   2 x_1 + x_2
+				   } \\
 		\end{align*}
 	\end{proof}
 \end{document}
