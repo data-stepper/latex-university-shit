@@ -16,7 +16,15 @@
 \newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
 \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
 
+\author{Bent Müller}
+\title{Notizen zur Mathematischen Statistik}
+\date{22. Juli 2021}
+
 \begin{document}
+
+\maketitle
+\tableofcontents
+\pagebreak
 
 \section{Dichten}
 \subsection{Die Exponentielle Familie}
@@ -50,7 +58,186 @@
 
 	Im Folgenden betrachten wir immer eine Zufallsvariable $X$ mit einer unbekannten
 	Dichte (oder Verteilung).
+	\begin{align*}
+		\Rightarrow "
+		X_1, ..., X_{n}
+		"
+		\text{ nennen wir eine Stichprobe }
+	\end{align*}
+	Bei gegebener Stichprobe nennen wir folgende Zufallsvariable
+	das $k$-te Stichprobenmoment:
+	\begin{align*}
+		a_k = \frac{ 1 }{ n } \sum_{i=1}^{n} X_{i} ^{k}
+	\end{align*}
+	\begin{align*}
+		a_1 &= \frac{ 1 }{ n } \sum_{i=1}^{n} X_i
+		\Rightarrow \overline{X}_n \text{ Stichprobenmittel } \\
+		b_k &= \frac{ 1 }{ n } \sum_{i=1}^{n} (X_i - \overline{X}_n) ^{k}
+		\Rightarrow \text{ zentrales k-tes Stichprobenmoment } \\
+		\hat{S}_n ^{2} &= \frac{ n }{ n-1 } b_2
+		\Rightarrow \text{ Stichprobenvarianz }
+	\end{align*}
+	Ist eine Stichprobe einer bivariaten Verteilung gegeben (2-dimensionale
+	Verteilung), so nennen wir
+	\[
+		S_{11} = \frac{ 1 }{ n-1 } \sum_{i=1}^{n} (X_i - \overline{X}_n)
+		(Y_i - \overline{Y}_n) \quad \text{ die Stichproben-Kovarianz. }
+	\]
 \end{theorem}
+
+\subsubsection{Momente der Stichprobenmomente}
+
+\begin{theorem}
+	Des weiteren können wir Momente der Stichprobenmomente berechnen.
+	Hier schauen wir uns ein Paar Beispiele und deren Hintergründe an:
+	\begin{enumerate}
+		\item $E \left[
+			\overline{X}_n
+		\right] = E \left[
+			X_1
+		\right] $ gilt weil $X_1, ..., X_{n}$ \textit{i.i.d.} verteilt sind.
+	\item $Var (\overline{X}_n) = \frac{ Var(X_1) }{ n }$
+		 beschreibt die quadratische Abweichung vom Erwartungswert,
+		 ist daher also gleich der Varianz jeder einzelnen ZV.
+		 Bei grösserer Stichprobe wird diese immer kleiner.
+	 \item $E \left[
+			\hat{S_n ^2}
+		\right] = Var(X_1)$, denn die Stichprobenvarianz schätzt die echte
+		Varianz der ZV.
+	\item $Var( \hat{S_n ^2} ) = \frac{ 1 }{ n } E \left[
+			(X_1 - E \left[
+				X_1
+			\right] ) ^{4}
+		\right] + \frac{ 3-n }{ n(n-1) } (Var (X_1))^2$
+	\end{enumerate}
+\end{theorem}
+
+\subsubsection{Asymptotische Verteilung}
+
+\begin{theorem}
+	\[
+	\frac{ \sum_{i=1}^{n} X_i ^{k} - nm_k }{ \sqrt{n \left(
+		m_{2k} - m_k ^2
+	\right) } } = \sqrt{n} \frac{ a_k - m_k }{ 
+		\sqrt{m_{2k} - m_k ^2} 
+	} \overset{D} \longrightarrow \mathcal{N} (0, 1)
+	\]
+	\\
+	Intuition: Im Zähler zentrieren wir das $k$-Te Stichprobenmoment, sodass wir
+	Erwartungswert 0 erhalten. Im Nenner normieren wir dieses Moment jetzt mit
+	der Varianz dessen. Denn wir wissen, dass die Varianz des $k$-ten Moments
+	immer der Erwartungswert des $2k$-ten Moments ist. Die Wurzel dessen gibt
+	uns die Standardabweichung, mit welcher wir dann standardisieren.
+\end{theorem}
+
+\section{Schätzung}
+
+\subsection{Punktschätzung}
+
+\begin{theorem}
+	Ein Punktschätzer ist eine Statistik, welche uns einen bestimmten Wert
+	liefern soll, zum Beispiel können wir einen Erwartungswert mit dem
+	Stichprobenmittel schätzen. Hier erhalten wir dann eine Zahl.
+
+	\subsubsection{Erwartungstreue und Konsistente Schätzer}
+	\[
+		b(\delta, \psi(\vartheta)) = E_\vartheta \left[
+			\delta (X)
+		\right] - \psi (\vartheta)
+	\] 
+	nennen wir Bias (english) oder Verzerrung. Sie beschreibt ob unser Schätzer
+	überhaupt den Parameter richtig schätzt.
+	Wenn dieser gleich 0 ist, dann nennen wir den Schätzer erwartungstreu oder
+	auch unbiased (auf english).
+	\\
+
+	Intuitiv sagt uns dies, dass der Schätzer dann tatsächlich bei grösser
+	werdender Stichprobe gegen den gesuchten Parameter konvergiert.
+
+	\subsubsection{asymptotische Eigenschaften}
+	Wichtig ist bei den asymptotischen Eigenschaften, dass diese jeweils
+	für \textbf{alle} Parameter aus dem Parameterraum gelten.
+	Denn sonst hat unser Schätzer das Problem, dass es einen Parameter gibt
+	welchen wir nicht schätzen können.
+
+	\begin{enumerate}
+		\item \textbf{asymptotisch erwartungstreu} heißt, dass
+			$\lim_{n \to \infty} E_\vartheta \left[
+				\delta_n (X ^{(n)})
+			\right] = \psi( \vartheta )$
+			\\
+			Intuitiv: Der Schätzer schätzt bei einer unendlich grossen Stichprobe
+			genau den Parameter.
+		\item \textbf{konsistent} meint $\delta_n \left(
+				X ^{(n)}
+			\right) \overset{P} \longrightarrow \psi (\vartheta)$
+			\\
+			Intuitiv: Die Wahrscheinlichkeit, dass der Schätzer bei unendlich
+			grosser Stichprobe von dem Parameter abweicht ist 0.
+	\end{enumerate}
+
+	\subsubsection{Kriterium für Konsistenz}
+	$\delta_n$ ist Schätzer der von $n$ abhängt. Dann gilt:
+	\[
+	\lim_{n \to \infty} Var_\vartheta \left(
+		\delta_n (X ^{(n)})
+	\right) = 0 \Rightarrow \delta_n \text{ konsistent für } \psi(\vartheta).
+	\] 
+\end{theorem}
+
+\section{Suffizienz und Vollständigkeit}
+
+\textbf{Suffizient} nennen wir eine Statistik für einen Parameter, wenn
+wir mit Hilfe dieser Statistik einen Schätzer bauen können der 
+den gesuchten Parameter schätzen kann.
+\\
+
+Dies bedeutet, dass die \textbf{bedingte Verteilung} von $X$ gegeben
+$T(X) = t$ unabhängig von dem gesuchten Parameter $\vartheta$ ist.
+
+\subsection{Kriterien}
+
+\subsubsection{Faktorisierungskriterium}
+Um zu testen ob eine Statistik $T$ für einen Parameter $\vartheta$ suffizient
+ist, schauen wir ob wir dessen Dichte umschreiben können wie folgt:
+
+\[
+	f_\vartheta (x) = g_{\vartheta} \left(
+		T(x)
+	\right) \cdot h(x) \quad \forall x \in \mathcal{X},
+	\forall \vartheta \in \Theta
+\] 
+Hierbei gilt
+\begin{itemize}
+	\item $T(x)$ ist die Statistik ausgewertet auf \textbf{Realisationen} von $X$,
+	\item $g$ hängt von $\vartheta$ ab und
+	\item $h$ nicht!
+	\item und jeweils $\forall \vartheta \in \Theta, \forall x \in \mathcal{X} 
+		h(x) > 0, g_{\vartheta}(x) > 0$ beide Funktionen sind also
+		positiv.
+\end{itemize}
+
+Man überlege sich, dass die Statistik $T$ keine Informationen über den
+Funktionswert $x$ verlieren darf. Denn dann wird es schwierig für die
+Funktion $g_{\vartheta}$ die richtige Dichte von $X$ wieder zu "bauen".
+\\
+
+Gegenbeipiel um dies zu verdeutlichen: 
+$X$ sei normalverteilt mit $\mathcal{N}(\mu, \sigma ^2)$ und wir wollen
+prüfen ob die Statistik $T(X_n) = \frac{ 1 }{ 2 }$ suffizient
+für die Parameter $\mu$ und $\sigma ^2$ ist:
+
+\[
+	f_\vartheta (x) = \frac{ 1 }{ \sqrt{2\pi \sigma ^2} }
+	e ^{ \frac{ (x - \mu) ^2 }{ \sigma ^2 } }
+\] 
+
+Jetzt können wir aber diese Funktion nicht in $g_{(\mu, \sigma ^2)} (x)$ und
+$h(x)$ aufteilen. Denn unsere Statistik $T$ verliert alle Informationen
+über den Funktionswert $x$ welchen wir aber im Exponenten von
+$e ^{ \frac{ (x - \mu) ^2 }{ \sigma ^2 } }$
+brauchen. Also sehen wir, dass wir die Dichte nicht wieder herstellen
+können und somit ist $T$ nicht suffizient.
 
 \end{document}
 
