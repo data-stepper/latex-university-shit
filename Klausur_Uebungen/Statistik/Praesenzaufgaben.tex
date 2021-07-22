@@ -1,0 +1,58 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{ \textbf{Praesenzaufgaben} }
+\author{Bent Müller}
+\date{22. Juli 2021}
+\maketitle
+
+\section*{Blatt 1}
+
+\textbf{(1)} Dichte der Binomialverteilung:
+
+\begin{align*}
+	P(X = k) &= \begin{pmatrix} n \\ k \end{pmatrix} 
+	\cdot p ^{k} (1-p) ^{n-k} \\
+			 &= \exp \left(
+				 \log \left(
+					 \frac{ n! }{ k! (n-k)! }
+				\right) 
+				+ k \cdot \log (p) + (n-k) \cdot \log (1-p)
+			 \right) \\
+			 &= \exp \left(
+				 \log \left(
+					 n!
+				\right) 
+				- \log (k! (n-k)!)
+				+ k \cdot \log (p) + n \cdot \log (1-p) -
+				k \cdot \log (1-p)
+			 \right) \\
+\end{align*}
+
+\textbf{(2)}
+
+\begin{align*}
+	f_{\vartheta , \rho} (x) &= \frac{ \vartheta ^{\rho} }{ \Gamma (\rho) }
+	x ^{\rho - 1} e ^{- \vartheta x} \cdot I_{ [ 0, \infty ) } (x) \\
+		 &= 
+\end{align*}
+
+\end{document}
