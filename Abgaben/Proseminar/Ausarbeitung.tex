@@ -302,6 +302,7 @@ Damit ist der erste Satz bewiesen.
 \qquad \caption{\textbf{Abbildung 2.1.4:} Gerichteter Graph einer Markowkette, die Satz 1 erfüllt}
 \\
 
+Diese Markowkette hat folgende Übergangsmatrix:
 \[
 	\mathbb{P} = \begin{pmatrix} 
 		0 & 0.75 & 0.25 \\
@@ -309,5 +310,54 @@ Damit ist der erste Satz bewiesen.
 		1 & 0 & 0 \\
 	\end{pmatrix} 
 \]
+
+Aus dem gerichteten Graphen ist die Fähigkeit zu erkennen, nach maximal 4 Schritten alle Zustände
+zu erreichen.
+Dies spiegelt sich auch in der $\mathbb{P} ^{4}$ Matrix wieder, für die gilt nämlich:
+
+\[
+	\mathbb{P} ^{4} \approx \begin{pmatrix} 
+		0.39 & 0.28 & 0.33 \\
+		0.5 & 0.23 & 0.27 \\
+		0.37 & 0.47 & 0.16 \\
+	\end{pmatrix} 
+\]
+Aufgrund der Gestalt dieser stochastischen Matrix sind alle Bedingungen des ersten Satzes erfüllt.
+\\
+
+Auf welche messbaren Eigenschaften der Markow-Ketten hat das Langzeitverhalten einen Einfluss?
+
+Hierfür definieren wir zunächst wichtige Attribute der Zustände.
+
+\section{Eigenschaften bezüglich Langzeitverhalten}
+
+\subsection{Definition 16.3}
+
+Wir sagen, dass Zustand $i$ in $n$ Schritten zu Zustand $j$ führe und schreiben
+dafür $i \rightsquigarrow j [n] $, wenn $p_{ij} ^{(n)} > 0$ ist.
+Gibt es ein $n \geq 1$ mit $i \rightsquigarrow j [n]$, so sagen wir $i$ führe
+zu $j$ und schreiben $i \rightsquigarrow j$.
+\\
+
+Mit der Chapman-Kolmogorov-Gleichung folgt:
+\[
+p_{hj} ^{(m+n)} \geq p_{hi} ^{(m)} p_{ij} ^{(n)}
+\] 
+Aus dieser Gleichung folgt die Transitivität dieser Relation.
+
+\subsubsection{Kommunizierende Zustände}
+
+Der Zustand $i$ kommuniziere mit $j$, hierfür schreiben wir
+\[
+i \leftrightsquigarrow j
+\] 
+wenn $i$ zu $j$ und umgekehrt $j$ zu $i$
+führt.
+
+\subsubsection{Wesentliche Zustände}
+Der Zustand $i$ wird als wesentlich bezeichnet, wenn dieser mit allen anderen Zuständen
+kommuniziert, falls $i$ zu diesen Zuständen führt. Es gilt dabei die Umkehrung, also bilden alle
+wesentlichen Zustände eine Äquivalenzrelation auf dem Zustandsraum des Prozesses, das heißt es
+gilt zusätzlich die Reflexivität und Symmetrie.
 
 \end{document}
