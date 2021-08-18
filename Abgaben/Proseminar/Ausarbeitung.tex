@@ -57,8 +57,160 @@ Bevor wir uns mit dem Langzeitverhalten der Markow-Ketten beschäftigen, folgt h
 \\
 
 Der aktuelle Zustand einer Markow-Kette besitzt die Eigenschaft von Zuständen aus mindestens 2 Schritten aus der Vergangenheit unabhängig zu sein, also wenn gilt:
-\\
+
+\subsection{Markowsche Eigenschaft}
 
 1. Es sei $\{X_n : n \in \mathbb{Z} \}$ ein stochastischer Prozess mit dem abzählbaren Zustandsraum $I$ und es gilt für alle $i_0, …, i_{n+1}$ Element in $I$ : 
 
+\[
+	P(X_0 = i_0, ..., X_{n} = i_{n}) > 0 \\
+\] 
+
+\[
+	P(X_{n+1} = i_{n+1} \; \vert \; X_0 = i_0, ..., X_{n} = i_{n})
+	= 
+	P(X_{n+1} = i_{n+1} \; \vert \; X_{n} = i_{n})
+
+\] 
+
+
+dann besitzt dieser stochastische Prozess die markowsche Eigenschaft und ist somit eine Markow-Kette
+
+\subsection{Stationäre Übergangswahrscheinlichkeiten und stochastische Matrix}
+
+2. Eine homogene Markov-Kette besitzt stationäre Übergangswahrscheinlichkeiten. Das bedeutet:
+
+\[
+	\forall i, j \in I: P(X_{n+1} = j \; \vert \; X_n = i) =: p_{ij}
+\] 
+Der Prozess ist damit unabhängig von $n$.
+\\
+
+Mit der letzten Eigenschaft lassen sich solche stochastischen Prozesse mittels folgender Gleichung
+modellieren:
+
+\[
+	\mathbb{P} ^{n} x_0 = x_n
+\] 
+
+$\mathbb{P}$ : stochastische Matrix, die einen Markow-Prozess genau nach einem Schritt/Übergang beschreibt.
+
+\begin{align*}
+	\mathbb{P} = \left(
+		p_{ij}
+	\right) \text{ ist stochastische Matrix } & \Leftrightarrow \\
+	p_{ij} \geq 0 \left(
+		i, j \in I
+	\right) \text{ und }
+	\sum_{j \in I} p_{ij} = 1
+\end{align*}
+
+$x_0$ : Die Startverteilung (z.B. (1, 0,…,0) , der Prozess startet in dem ersten Zustand ) \\
+$n$ : Anzahl der Schritte/Übergänge ( Zeitdiskretes Modell) \\
+$x_n$ : Die Verteilung nach n-Übergängen (kein deterministischer Faktor mehr). \\
+
+Nun zu der Leitfrage dieses Kapitels: Welche qualitativen Eigenschaften der Markow-Ketten haben
+Einfluss auf das Langzeitverhalten des Prozesses. Die obere explizite Darstellung der Folge
+$(X_n)_{n\in \mathbb{N}}$ zeigt die Wichtigkeit der Analyse der stochastischen Matrix. Was muss also für diese
+Matrix P gelten, damit sie für $n \rightarrow \infty$ konvergiert ? Dies beantwortet der folgende Satz:
+
+\section{Langzeitverhalten}
+
+\subsection{Satz 1 - Konvergenz der Übergangsmatrix}
+
+Unter der Voraussetzung, dass die L-Schritt-Übergangsmatrix 
+$\mathbb{P} ^{L} = \left(
+	p_{ij}
+\right) ^{L}$
+nur strikt positive
+Elemente besitzt, das heißt 
+$\forall (i, j) \in I^2 : p_{ij} > 0$
+, wobei $I$ der Zustandsraum der
+Markov-Kette ist, dann konvergieren (exponentiell schnell) die entsprechenden
+Übergangswahrscheinlichkeiten 
+$\left(
+	p_{ij}
+\right) ^{n}$
+für $n \rightarrow \infty$ gegen von $i$ unabhängige Zahlen $p_{j}$ . Es
+entsteht also eine stochastische Matrix mit identischen Zeilen. 
+\\
+
+Der entstandene
+Wahrscheinlichkeitszeilenvektor $\rho$ ist eindeutig und löst das folgende Gleichungssystem:
+
+\[
+	\rho_k = \sum_{j \in I} \rho_j p_{jk} \quad (k \in I) \\
+\] 
+\[
+	\rho = \rho \mathbb{P} \text{ mit } \mathbb{P} = (p_{ij})
+\]
+
+Man kann diese als einen Linkseigenvektor auffassen, der auch als invariante
+Wahrscheinlichkeitsverteilung bezeichnet wird, weil das In- sowohl als auch Output gleichbleiben
+bei Multiplikation mit der stochastischen Übergangsmatrix $\mathbb{P}$.
+
+\subsubsection{Beweis von Satz 1}
+Zunächst fixieren wir einen Spaltenvektor der Matrix $\mathbb{P}^{n}$ und suchen uns das minimale und das
+maximale Element dieser Spalte aus:
+
+\[
+m_j ^{(n)} = \min_i p_{ij}^{(n)} \text{ und }
+M_j^{(n)} = \max_i p_{ij}^{(n)}
+\]
+
+Dann gilt auch:
+
+\begin{align*}
+	m_j^{(n+1)} &= \min_i \sum_{h\in I} p_{ih} p_{hj} ^{(n)} \\
+				&\geq \min_i \sum_{h\in I} p_{ih} m_{j} ^{(n)} \\
+				&= m_j ^{(n)} \text{ und analog folgt auch } \\
+				&\Rightarrow M_j ^{(n+1)} \leq M_j ^{(n)}
+\end{align*}
+
+Bei der ersten Gleichung wurde die Chapman-Kolmogorov-Gleichung genutzt und die zweite
+Gleichung gilt, weil
+$\sum_{h\in I} p_{ih} = 1$
+ergibt (stochastische Matrix).
+
+\subsubsection{Bemerkung 1}
+$(m_j ^{(n)})_{n\in \mathbb{N}}$ bildet also eine monoton steigende und 
+$(M_j ^{(n)})_{n \in \mathbb{N}}$
+eine monoton fallende Folge in
+$[0,1]$.
+\\
+
+Zusätzlich definieren wir ein $\delta$, dass das kleinste Element der Übergangsmatrix nach L-Zeitschritten
+repräsentiert:
+\[
+p_{ij} ^{(L)} \geq \delta > 0, \quad
+\forall (i, j) \in I^2
+\] 
+
+Darüber hinaus fixieren wir die Zeilen $h, j \in I$ und spalten alle
+möglichen Zustände $k \in I$ wie folgt auf:
+\[
+k+ := \{
+	k\in I \; \vert \; p_{hk} ^{(L)} \geq p_{ik} ^{(L)}
+\} 
+	\text{ und analog }
+\] 
+\[
+k- := \{
+	k\in I \; \vert \; p_{hk} ^{(L)} < p_{ik} ^{(L)}
+\} \text{ , sodass gilt } (k+) \cup (k-) = I
+\] 
+Mittels der obigen Spaltung von $k$ in $k+$ und $k-$ folgt ein hilfreiches Resultat für die folgende Summen:
+
+\[
+\sum_{k+} \left(
+	p_{hk} ^{(L)} - p_{ik} ^{(L)}
+\right) + \sum_{k-} \left(
+	p_{hk} ^{(L)} - p_{ik} ^{(L)}
+\right) = 1 - 1 = 0
+\] 
+
+Nun betrachten wir nach n+L-Schritten für festes n Element aus Z (ganze Zahlen) und h Element
+aus I maximales Element p hjn+L und für i Element aus I das minimale Element p ijn+L
+Für diese gilt dann:
+.
 \end{document}
