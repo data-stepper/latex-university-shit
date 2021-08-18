@@ -209,8 +209,105 @@ Mittels der obigen Spaltung von $k$ in $k+$ und $k-$ folgt ein hilfreiches Resul
 \right) = 1 - 1 = 0
 \] 
 
-Nun betrachten wir nach n+L-Schritten für festes n Element aus Z (ganze Zahlen) und h Element
-aus I maximales Element p hjn+L und für i Element aus I das minimale Element p ijn+L
+Nun betrachten wir nach (n+L)-Schritten für festes $n$ Element aus $\mathbb{Z}$ (ganze Zahlen) und $h$ Element
+aus $I$ maximales Element $p_{hj} ^{n+L}$ und für $i$ Element aus $I$ das minimale Element $p_{ij} ^{n+L}$
 Für diese gilt dann:
-.
+
+\begin{align*}
+	M_j ^{(n+L)} - m_j ^{(n+L)} &= p_{hj} ^{(n+L)} - p_{ij} ^{(n+L)}
+	= \sum_{k} \left(
+		p_{hk} ^{(L)} - p_{ik} ^{(L)}
+	\right) p_{kj} ^{(n)} \\
+		& \leq \sum_{k+} \left(
+			p_{hk} ^{(L)} - p_{ik} ^{(L)}
+		\right) M_j ^{(n)} + \sum_{k-} \left(
+			p_{hk} ^{(L)} - p_{ik} ^{(L)}
+		\right) m_j ^{(n)} \\
+		& \leq \sum_{k+} \left(
+			p_{hk} ^{(L)} - p_{ik} ^{(L)}
+		\right) \left(
+			M_j ^{(n)} - m_j ^{(n)}
+		\right) \\
+		& \leq \left(
+			1- \delta
+		\right) \left(
+			M_j ^{(n)} - m_j ^{(n)}
+		\right) 
+\end{align*}
+
+In der ersten Ungleichung wird die Summe über alle $k$ in $k+$ und $k-$ zerlegt und die $p_{ kj }$ nach oben mit
+$M_j$ bzw nach unten mit $m_j$ abgeschätzt. Mittels des umgeformten Hilfsresultates von oben
+
+\[
+\sum_{k+} \left(
+	p_{hk} ^{(L)} - p_{ik} ^{(L)}
+\right) 
+=
+-
+\sum_{k-} \left(
+	p_{hk} ^{(L)} - p_{ik} ^{(L)}
+\right) 
+\] 
+erhält man die 2. Ungleichung,
+Induktiv folgt nun
+
+\[
+M_j ^{(\nu L)} - m_j ^{(\nu L)}
+\leq \left(
+	1 - \delta
+\right) ^{\nu} \quad (\nu \geq 0) .
+\] 
+
+Aufgrund der Bemerkung 1 ergibt sich folgende Abschätzung:
+\[
+	M_j ^{(n)} - m_j ^{(n)} \leq \left(
+		1 - \delta
+	\right) ^{(n-L) / L}
+\]
+Wobei $1- \delta$ Element aus $(0,1)$ ist und deshalb die Folge 
+$\left(
+	(1 - \delta) ^{(n-L) / L}
+\right) _{n \in \mathbb{N}} $
+für $n \rightarrow \infty$ gegen $0$
+konvergiert. Das bedeutet, dass die Abstände zwischen kleinstem und größtem Element der $j$-ten
+Spalte beliebig klein werden und diese somit gegen den gleichen Grenzwert $\rho_j$ konvergieren. Für
+alle Elemente der $j$-ten Spalte gilt somit:
+
+\[
+	\; | \; p_{ij} ^{(n)} - \rho_j \; | \; \leq (1 - \delta) ^{(n-L) / L}
+\]
+Damit ist der erste Satz bewiesen.
+
+\subsubsection{Beispiel 1 - Graph und Übergangsmatrix einer Markowkette}
+
+\begin{center}
+	\begin{tikzpicture}
+		\tikzset{
+			node distance=2cm,
+		  }
+		% Add the states
+		\node[state]			 (c) {3};
+		\node[state, below left=of c] (a) {1};
+		\node[state, below right=of c] (b) {2};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			(a) edge[bend right, auto=right] node {0.75} (b)
+			(b) edge[auto=right] node {0.5} (a)
+			(b) edge[bend right, auto=right] node {0.5} (c)
+			(c) edge[bend right, auto=right] node {1} (a)
+			(a) edge[bend right, auto=left] node {0.25} (c)
+	\end{tikzpicture}
+\end{center}
+\qquad \caption{\textbf{Abbildung 2.1.4:} Gerichteter Graph einer Markowkette, die Satz 1 erfüllt}
+\\
+
+\[
+	\mathbb{P} = \begin{pmatrix} 
+		0 & 0.75 & 0.25 \\
+		0.5 & 0 & 0.5 \\
+		1 & 0 & 0 \\
+	\end{pmatrix} 
+\]
+
 \end{document}
