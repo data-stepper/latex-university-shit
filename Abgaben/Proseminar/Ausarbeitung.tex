@@ -172,7 +172,7 @@ Gleichung gilt, weil
 $\sum_{h\in I} p_{ih} = 1$
 ergibt (stochastische Matrix).
 
-\subsubsection{Bemerkung 1}
+\subsubsection{Bemerkung}
 $(m_j ^{(n)})_{n\in \mathbb{N}}$ bildet also eine monoton steigende und 
 $(M_j ^{(n)})_{n \in \mathbb{N}}$
 eine monoton fallende Folge in
@@ -347,7 +347,7 @@ Aus dieser Gleichung folgt die Transitivität dieser Relation.
 
 \subsubsection{Kommunizierende Zustände}
 
-Der Zustand $i$ kommuniziere mit $j$, hierfür schreiben wir
+Der Zustand $i$ \textbf{kommuniziere}  mit $j$, hierfür schreiben wir
 \[
 i \leftrightsquigarrow j
 \] 
@@ -355,9 +355,269 @@ wenn $i$ zu $j$ und umgekehrt $j$ zu $i$
 führt.
 
 \subsubsection{Wesentliche Zustände}
-Der Zustand $i$ wird als wesentlich bezeichnet, wenn dieser mit allen anderen Zuständen
+Der Zustand $i$ wird als \textbf{wesentlich}  bezeichnet, wenn dieser mit allen anderen Zuständen
 kommuniziert, falls $i$ zu diesen Zuständen führt. Es gilt dabei die Umkehrung, also bilden alle
 wesentlichen Zustände eine Äquivalenzrelation auf dem Zustandsraum des Prozesses, das heißt es
 gilt zusätzlich die Reflexivität und Symmetrie.
+
+\begin{center}
+	\begin{tikzpicture}
+		% Add the states
+		\node[state]			 (a) {1};
+		\node[state, right=of a] (b) {2};
+		\node[state, right=of b] (c) {3};
+		\node[state, right=of c] (d) {4};
+
+		% Connect the states with arrows
+		\draw[every loop]
+			% a -> b -> c -> d
+			(a) edge[bend right, auto=right] node {} (b)
+			(c) edge[bend right, auto=right] node {} (d)
+
+			% d -> c -> b -> a
+			(d) edge[bend right, auto=right] node {} (c)
+			(b) edge[bend right, auto=right] node {} (a)
+			(c) edge[bend right, auto=right] node {} (b)
+
+			% a -> a, b -> b, ...
+			(a) edge[loop left]			     node {} (a)
+			(d) edge[loop right]			 node {} (d)
+	\end{tikzpicture}
+\end{center}
+\qquad \caption{\textbf{Abbildung 3.1.3:}  Die Zustände (1) und (2) sind wesentlich, (3) und (4) verletzen diese Eigenschaft.
+}
+\\
+
+Eine weitere Problematik stellt die Periodizität der Markowketten dar. Im Folgenden untersuchen wir
+dieses Phänomen genauer.
+
+\subsection{Periodizität}
+
+\subsubsection{Definition Periode}
+Für einen Zustand $i$ mit $i \rightsquigarrow i$ heißt der grösste gemeinsame
+Teiler der potenziellen Rückkehrzeiten
+\[
+d_i = \text{ggT} \{
+	n \geq 1 : i \rightsquigarrow i [n]
+\} 
+\] 
+
+die \textbf{Periode} von Zustand $i$. Falls $i$ mit sich selbst nicht kommuniziert, so ist die Periode unendlich.
+Für d $i$ = 1 heißen die Zustände $i$ \textbf{aperiodisch} . Wenn jeder Zustand der Kette aperiodisch ist, so ist die
+gesamte Markowkette aperiodisch. Die Fähigkeit aperiodisch zu sein ist eines der Anforderungen
+für Markowketten die den Satz 1 erfüllen.
+
+\subsection{Satz 2 - Kommunizierende Zustände haben die selbe Periode}
+Kommuniziert $i$ mit $j$, so gilt $d_i = d_j$
+
+\subsubsection{Beweis von Satz 2}
+\begin{proof}
+Zunächst zeigen wir $d_i \leq d_j$ woraus aus Symmetriegründen der Korrespondenz auch die
+Umkehrung gilt:
+\\
+
+	\begin{enumerate}
+		\item Gilt $j \rightsquigarrow j[n]$ und sind $k, m$ Zeitpunkte mit 
+			$i \rightsquigarrow j [k]$ und $j \rightsquigarrow i [m]$, so gilt
+		\item $i \rightsquigarrow i [k+m]$ und $i \rightsquigarrow i [k+m+n]$.
+		\item $d_i$ teilt also $k+m$ und $k+m+n$ und also auch $n$. 
+		\item $d_i$ ist also gemeinsamer Teiler aller $n$ mit 
+			$j \rightsquigarrow j [n]$. 
+		\item Daraus folgt, dass $d_i \leq d_j$ ist.
+	\end{enumerate}
+\end{proof}
+\\
+
+Jetzt folgt eine nützliche Partition auf der Menge der Zustände, die zu sich zurückführen, durch diese
+Relation.
+
+\subsubsection{Unterteilung periodischer Markowketten in Restklassen}
+
+Die entstandene Äquivalenzrelation unterteilt also alle möglichen Zustände in
+Repräsentanten, für die alle Elemente aus dieser Repräsentantenmenge gilt, dass alle Zustände mit
+einander kommunizieren.
+\\
+
+Eine solche Äquivalenzklasse bezeichnen wir mit $C(i)$, d.h. falls $i \leftrightsquigarrow j$ gilt, so ist $C(i)=C(j)$.
+
+Zum Beispiel gilt in Abbildung 3.1.3 Folgendes: 
+\[
+	C(1) = C(2) \text{ und } C(3) = C(4)
+\] 
+wobei $C (3)$ ein nicht wesentlicher
+Zustand ist, man kann also diesen „für immer“ verlassen.
+\\
+
+\subsubsection{Bemerkung}
+Die Periode einer dieser Äquivalenzklassen ist die Periode jedes Elementes dieser Menge, sie ist für alle
+Elemente gleich.
+Durch diese Partition der Zustände ist es nun bei der Betrachtung der Perioden $d_i$ , für ein beliebiges $i$
+Element aus $I$, der jeweiligen Äquivalenzklassen $[i]$ bzw. $C([i])$ möglich festzustellen, dass die
+Zyklen, falls $d_i \geq 2$ gilt, von deterministischer Natur sind.
+\\
+
+An dieser Stelle wurde im Buch der Beweis zu folgendem Lemma dargestellt:
+
+\subsubsection{Lemma 16.6}
+Ist $d$ der grösste gemeinsame Teiler von Zahlen $n_1, n_2, ... \in \mathbb{N}$,
+so gibt es Zahlen $K$ und $L$ derart, dass sich jedes $ld$ mit $l \geq L$
+als Summe der Form
+\[
+ld = \sum_{k=1}^{K} c_k n_k \qquad
+\text{ mit } c_k \in \mathbb{N}
+\] 
+schreiben lässt.
+\\
+
+Den Beweis hierfür sparen wir uns und setzen fort mit der Periode von $C(i)$, indem wir den dritten Satz einführen.
+
+\subsection{Satz 3}
+
+Zu jedem Element $j$ der Äquivalenzklasse $C([i])$ existiert eine eindeutig bestimmte Zahl $r(j)$ mit
+$0 \leq r(j) < d_i$ derart, dass $i$ zu $j$ in $n$ Schritten führe, nur für solche $n$, für die gilt:
+$n \equiv r(j) (\text{mod } d_i)$, für hinreichend großes $n>N(j)$ auch für alle diese $n$. 
+\\
+
+Das heißt, dass es Zeitpunkte
+gibt, in denen bestimmte Zustände aktuell nicht erreichbar sind.
+
+\subsubsection{Beweis von Satz 3}
+
+\begin{proof}
+	Es gibt ein $k$ mit $j \rightsquigarrow i [k]$.
+	\\
+
+	Sind $m<n$ zwei natürliche Zahlen mit $i \rightsquigarrow j[m]$ und
+	$i \rightsquigarrow j[n]$, so gilt
+	$i \rightsquigarrow i[k+m]$ und $i \rightsquigarrow i[k+n]$.
+
+	$d_i$ teilt also $n - m$. Alle $n$ mit $j \rightsquigarrow j[n]$ liegen also
+	in der gleichen Restklassen $r_j \; (\text{mod } d_i)$.
+	\\
+
+	Für ein $m \geq 0$ gilt also $i \rightsquigarrow j[m d_i + r_j]$.
+
+	Ist $L$ die zu $d = d_i$ im vorigen Lemma bestimmte Zahl, so setzt man
+	$N(j) = r_j + m d_i + L d_i$.
+	\\
+
+	Für jedes $n \equiv r_j \; (\text{mod } d_i)$ mit $n \geq N(j)$ gibt
+	es dann ein $l \geq L$ mit $n = r_j + m d_i + l d_i$.
+
+	Aus $i \rightsquigarrow i[n_k]$ und (16.7) folgt $i \rightsquigarrow i [l d_i]$
+	und also $i \rightsquigarrow j[n]$.
+\end{proof}
+
+
+\subsubsection{Resultate des Satzes}
+Um solche unerwünschten Szenarien zu vermeiden, konzentrieren wir uns nur noch auf die
+aperiodischen Markowketten bei denen alle Zustände miteinander kommunizieren und $n > N(j)$ ist.
+\\
+
+Diese Bedingungen erfüllen die strikte Positivität der Elemente $p_{ij} ^{(n)}$, womit Satz 1 gilt.
+Umgekehrt bedeutet das, wenn alle $p_{ij} ^{(n)} > 0$, dass alle Zustände miteinander kommunizieren und der
+Prozess aperiodisch ist.
+\\
+
+Denn erstens gilt $i \rightsquigarrow i[n]$ und zweitens $i \rightsquigarrow i[n+1]$,
+weil nämlich für mindestens ein $j \in I$
+
+\begin{itemize}
+	\item $i \rightsquigarrow j[1]$ und für alle $j \in I$
+	\item $j \rightsquigarrow i[n]$
+\end{itemize}
+
+gilt.
+
+\section{Rückkehrverhalten von Markowketten}
+
+Für das wahrscheinlichkeitstheoretische Verhalten der Markowketten ist es essentiell zu wissen, ob man
+zum Ausgangszustand mit einer Wahrscheinlichkeit von $1$ zurückkehrt. Diese Abhängigkeit vom System
+veranlasst uns das Rückkehrverhalten des Prozesses zu studieren.
+
+\subsection{Wichtige Definitionen zur Beschreibung des Rückkehrverhaltens}
+
+Wir beginnen deshalb mit folgender Definition:
+\[
+f_{ij} ^{(n)} := P_i \left(
+	X_n = j, X_{n-1} \ne j, ..., X_2 \ne j, X_1 \ne j
+\right) 
+\] 
+ist die Wahrscheinlichkeit nach genau $n$ Schritten beim Start in $i$ das erste Mal den Zustand $j$ zu erreichen.
+\\
+
+Dieses eingeführte Ereignis ist alleine nicht vielversprechend, weshalb wir die Summe dieser Größe über
+alle $n$ Element aus den Natürlichen Zahlen bilden.
+
+\[
+f_{ij} ^{*} := \sum_{n=1}^{\infty} f_{ij} ^{(n)}
+\] 
+
+Somit ist dies die Wahrscheinlichkeit bei Start in $i$ je nach $j$ zu gelangen.
+\\
+
+Zusätzlich wird die erwartete Anzahl der Besuche in $j$ bei Start in $i$ folgendermaßen definiert:
+
+\begin{align*}
+	p_{ij} ^{*} &=
+	\sum_{n=1}^{\infty} p_{ij} ^{(n)} 
+				= \sum_{n=1}^{\infty} E_i \left[
+		1_{\{
+				X_n = j
+		\}}  
+	\right] 
+			  = E_i \left[
+				  \sum_{n=1}^{\infty} 1\{
+				  	X_n = j
+				  \} 
+			  \right]  \\
+			  &= E_i \left[
+				  \text{Anzahl $B_j$ der Besuche in $j$ zu Zeitpunkten $n \geq 1$}
+			  \right] 
+\end{align*}
+
+Dabei bezeichnet $E_i$ den Erwartungswert unter $P_i$, also bei Start in $i$.
+
+\subsubsection{Definition Stoppzeit}
+Eine Zufallsvariable 
+\[
+\tau : \Omega \mapsto \{
+	0, 1, 2, ..., \infty
+\} 
+\] 
+heißt \textbf{Stoppzeit} , wenn für alle $n \geq 0$ das Ereignis 
+\[
+\{
+	\omega \in \Omega \; \vert \; \tau (\omega) = n
+\} 
+\] 
+nur von $X_0, X_1 ,...,X_n$ abhängt. Das bedeutet, 
+dass für ein geeignetes $A \subset I ^{n+1}$
+\[
+\{
+	\tau = n
+\} = \{
+	\left(
+		X_0, ..., X_n
+	\right) \in A
+\}
+\] 
+
+\subsection{Satz 4}
+
+Es gilt $P_i(B_i \geq m) = \left(
+	f_{ii} ^{*}
+\right) ^{m}$ für $m \geq 1$.
+
+Dabei ist $B_i$ die Anzahl der Besuche in Zustand $i$.
+
+\subsubsection{Beweis von Satz 4}
+\begin{proof}
+	Sei 
+	\[
+	\tau_1 = \inf
+	\] 
+	, der früheste Zeitpunk
+\end{proof}
 
 \end{document}
