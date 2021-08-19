@@ -615,9 +615,186 @@ Dabei ist $B_i$ die Anzahl der Besuche in Zustand $i$.
 \begin{proof}
 	Sei 
 	\[
-	\tau_1 = \inf
+	\tau_1 = \inf \{
+		n \geq 1 : X_n (\omega) = i
+	\} 
 	\] 
-	, der früheste Zeitpunk
+	der früheste Zeitpunkt des Eintretens des Zustandes $i$ nach einem Schritt
+	und 
+	\[
+		\tau_{m+1} (\omega) = \inf \{
+			n > \tau_{m} : X_n (\omega) = i
+		\} 
+	\] 
+	der Zeitpunkt, an dem Zustand $i$ zum $(m+1)$-ten Mal besucht wird. Das Infimum
+	der leeren Menge ist dabei $\infty$, sowie $\tau_m (\omega)$, wenn der Zustand i nicht $m$-mal besucht werden kann.
+	\\
+
+	Nun zum Beweis, der mittels einer Induktion über $m \in \mathbb{N}$ folgt:
+
+	Sei $m=1$ dann gilt,
+	\[
+		P_i (B_i \geq m) = P_i (\tau_m < \infty)
+		= f_{ii} ^{*},
+	\] 
+	da $f_{ii} ^{*}$ die Rückkehrwahrscheinlichkeit nach $i$ ist.
+	\\
+
+	Induktionsschritt: Sei nun die Behauptung für ein $m$ wahr. Wir zeigen mit Hilfe der Menge
+	\[
+	D_n ^{n+k} = \{
+		X_{n+1} \ne i, ..., X_{n+k-1} \ne i, X_{n+k} = i
+	\},
+	\] 
+	dass dies dann auch für $m+1$ gilt:
+	\begin{align*}
+		P_i (\tau_{m+1} < \infty) &= 
+		\sum_{k=1}^{\infty} \sum_{n=1}^{\infty} 
+		P_i \left(
+			\tau_{m+1} - \tau_m = k, \tau_m = n
+		\right) \\
+			  &= 
+		\sum_{k=1}^{\infty} \sum_{n=1}^{\infty} 
+		P_i \left(
+			\tau_{m+1} - \tau_m = k \; \vert \; \tau_m = n
+		\right) P_i \left(
+			\tau_m = n
+		\right) \\
+			  &=
+		\sum_{k=1}^{\infty} \sum_{n=1}^{\infty} 
+		P_i \left(
+			D_n ^{n+k} \; \vert \; X_n = i, \left(
+				X_0, ..., X_{n-1}
+			\right) \in A_{mn}
+		\right) P_i \left(
+			\tau_m = n
+		\right) \\
+			  &= 
+		\sum_{k=1}^{\infty} \sum_{n=1}^{\infty} 
+		P_i \left(
+			D_n ^{n+k} \; \vert \; X_n = i
+		\right) P_i \left(
+			\tau_m = n
+		\right) \\
+			  &= 
+		\sum_{k=1}^{\infty} \sum_{n=1}^{\infty} 
+		P_i \left(
+			D_0 ^{k} \; \vert \; X_0 = i
+		\right) P_i \left(
+			\tau_m = n
+		\right) \\
+			  &=
+		\sum_{k=1}^{\infty}
+		f_{ii} ^{(k)}
+		P_i \left(
+			\tau_m < \infty
+		\right) \\
+			  &= f_{ii} ^{*} \left(
+			  	f_{ii} ^{*}
+			  \right) ^{m}
+	\end{align*}
+	Die erste Gleichung erklärt sich durch das Betrachten der Sprünge zwischen dem Eintreten des
+	$n$-ten Zeitpunktes und dem darauffolgenden, wobei $n$ alle natürlichen Zahlen durchläuft.
+	\\
+
+	In der zweiten Gleichung nutzen wir die bedingte Wahrscheinlichkeit und können somit für die
+	Sprünge zwischen $n$ und $n+k$ die Menge $D_n ^{n+k}$ nutzen, die vom Ereignis $A_{mn}$ unabhängig ist.
+	Aufgrund der Homogenität des Prozesses gelangen wir schließlich zur letzten Gleichung, die die
+	Induktion, und damit den Beweis, abschließt.
+	\\
+
 \end{proof}
+
+
+\subsection{Rekurrenz und Transienz}
+Nach dem Beweis des letzten Satzes ist es uns möglich die Begriffe Rekurrenz und Transienz
+einzuführen und zu studieren.
+
+\subsubsection{Bemerkung}
+
+Statt $P_i (B_i = \infty)$ schreiben wir auch
+$\{
+	X_n = i \; \infty \; \text{oft}
+\} $
+
+\subsubsection{Definition Rekurrenz und Transienz}
+Ein Zustand i heißt \textbf{rekurrent} , wenn 
+\[
+P_i \left(
+	X_n = i \; \infty \; \text{oft}
+\right) = 1 
+\] 
+ist, das heißt dieser Zustand $i$ wird fast
+sicher unendlich oft durchlaufen. Andernfalls heißt $i$ transient und die Markowkette heißt dann
+rekurrent bzw. transient, wenn jeder Zustand rekurrent bzw. transient ist.
+
+\subsection{Satz 5 - Rekurrenzsatz}
+Ein Zustand $i$ ist rekurrent genau dann, wenn $f_{ii}^* = 1$ ist.
+
+Hierfür notwendig und auch hinreichend ist $p_{ii} ^{*} = \infty$.
+\\
+
+Wir müssen also nur prüfen ob die Summe 
+$p_{ii} ^{*} = \sum_{n=1}^{\infty} p_{ii} ^{(n)}$
+konvergiert oder divergiert. Wollen wir Rekurrenz zeigen, müssen wir sogar nur
+zeigen, dass die Summanden $p_{ii} ^{(n)}$ nicht gegen $0$ konvergieren.
+
+\subsubsection{Beweis von Satz 5}
+
+\begin{proof}
+	"$\Leftarrow$"
+
+	Sei also $f_{ii} ^{*} =1$, so ist nach Satz 4 auch 
+	$P_i \left(
+		B_i \geq m
+	\right) = 1$
+	für alle $m \geq 1$ und deshalb 
+	$P_i \left(
+		B_i = \infty
+	\right) = 1 ^{\infty} = 1$,
+	was $i$ zu einem rekurrenten Zustand macht. 
+	Somit gilt auch für die Erwartung von $B_i$, $p_{ii} ^{*} = \infty$.
+	\\
+
+	"$\Rightarrow$"
+
+	Hier nutzen wir die Tautologie der Implikation 
+	\[
+	\left(
+		A \Rightarrow B
+	\right) \Leftrightarrow 
+	\left(
+		\neg B \Rightarrow \neg A
+	\right) 
+	\] 
+	und gehen deshalb
+	davon aus, dass $f_{ii} ^{*} < 1$ gilt. Dann gilt die Konvergenz der folgenden geometrischen Reihe:
+	\[
+	\sum_{m=1}^{\infty} P_i \left(
+		B_i \geq m
+	\right) = \sum_{m=1}^{\infty} \left(
+		f_{ii} ^{*}
+	\right) ^{m} < \infty
+	\] 
+	Dies wiederum bedeutet, dass $P_i (B_i = \infty) = 0$, also fast unmöglich gilt.
+	\\
+
+	Es sei $k$ die endliche Anzahl der Besuche in $i$, dann kommt in der linken Summe $P_i \left(
+		B_i = k
+	\right) $ $k$-mal
+	vor, für $m=1,...,k$. Es ist also die Erwartung $p_{ii} ^{*}$ von $B_i$ unter $P_i$ und es gilt $p_{ii} ^{*} < \infty$.
+\end{proof}
+
+\subsection{Rekurrenzkriterium und Folgerungen aus Rekurrenz}
+Diese zusätzlich definierte, notwendige und hinreichende Bedingung der Rekurrenz, $p_{ii} ^{*} = \infty$, ist
+sehr hilfreich. Sie wird auch als Rekurrenzkriterium bezeichnet. 
+Um jenes zu zeigen, reichen
+Abschätzungen von Wahrscheinlichkeiten. 
+\\
+
+Für den direkten Weg, also zeigen, dass $f_{ii} ^{*} = 1$ gilt,
+müsste man unendlich viele $f_{ii} ^{(n)}$ berechnen.
+
+\subsubsection{Folgerungen aus Rekurrenz}
 
 \end{document}
