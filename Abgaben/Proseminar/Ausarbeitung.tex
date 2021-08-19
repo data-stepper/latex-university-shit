@@ -796,5 +796,65 @@ Für den direkten Weg, also zeigen, dass $f_{ii} ^{*} = 1$ gilt,
 müsste man unendlich viele $f_{ii} ^{(n)}$ berechnen.
 
 \subsubsection{Folgerungen aus Rekurrenz}
+Folgende Folgerungen aus der Rekurrenz sind nützlich:
+
+\begin{enumerate}
+	\item Alle mit einem rekurrenten Zustand kommunizierenden Zustände sind rekurrent.
+	\item Ist i rekurrent, so gilt für alle j mit i ~> j f ji* = 1. Insbesondere ist jeder rekurrente Zustand wesentlich.
+\end{enumerate}
+
+\begin{proof}
+	Zu 1.
+	\\
+
+	Seien $p_{ji} ^{(k)} > 0, p_{ij} ^{(m)} > 0$ und 
+	$p_{ii} ^{*} = \infty$. Per Definition gilt
+	\[
+	p_{ii} ^{*} = \sum_{n=1}^{\infty} p_{ii} ^{(n)}
+	\] 
+	Zusätzlich gilt folgende Abschätzung 
+	\[
+	p_{jj} ^{(k+n+m)} \geq p_{ji} ^{(k)}
+	p_{ii} ^{(n)} p_{ij} ^{(m)}
+	\] 
+	(nach Chapman-Kolmogorow-Gleichung).
+	Es folgt daraus durch Summation $p_{jj} ^{*} = \infty$
+\end{proof}
+
+\begin{proof}
+	Zu 2.
+	\\
+	
+	Wegen $i \rightsquigarrow j$ existiert ein $m$ mit $p_{ij} ^{(m)} > 0$.
+	Da $i$ rekurrent ist, gilt
+	\begin{align*}
+		1 &= P_i \left(
+			\exists n > m : X_n = i
+		\right) \\
+		  &= \sum_{k \in I} P_i \left(
+		  	\exists n > m: X_n = i, X_m = k
+		  \right) \\
+		  &= \sum_{k \in I}
+		  P_i (X_m = k)
+		  P_i \left(
+		  	\exists n > m: X_n = i \; \vert \; X_m = k
+		  \right) \\
+		  &= \sum_{k \in I}
+		  p_{ik} ^{(m)}
+		  P_k \left(
+		  	\exists n > 0: X_n = i
+		  \right) \\
+		  &= \sum_{k \in I}
+		  p_{ik} ^{(m)}
+		  f_{ki} ^{*}
+	\end{align*}
+	Wäre $f_{ij} ^{*} < 1$, so wäre die letzte Summe $<1$.
+	\\
+
+	Die zweite Gleichung erfolgt über die Chapman-Kolmogorow-Gleichung und die dritte über die
+	bedingte Wahrscheinlichkeit mit $P(A \; \cap \; B) = P(A \; \vert \; B) P(B)$
+	(Satz von Bayes). Anschließend nutzen wir die
+	Homogenität der Markowkette und gelangen zu der letzten Gleichung.
+\end{proof}
 
 \end{document}
