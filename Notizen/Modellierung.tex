@@ -228,4 +228,53 @@ umsortieren ein LGS, welches wie folgt aussieht.
 	\right) ^{T}
 \end{align*}
 
+\subsection{Pad\'e Approximation}
+
+Idee: Bestimme rationale Funktion, sodass die Potenzreihen-Entwicklung (PRE)
+soweit wie möglich mit der PRE von der zu approximierenden Funktion übereinstimmt.
+\\
+
+Oft wird hier als PRE die Taylorreihe benutzt.
+
+\subsubsection{Taylorreihen-Entwicklung}
+
+\[
+	T_{n} ( f(x; a) ) = 
+	\sum_{k=0}^{n} \frac{ f ^{(k)} (a) }{ k! } (x - a) ^{k}
+	\quad \text{ mit }
+\] 
+\[
+	f ^{(k)},
+	\text{ $k$-te Ableitung von $f$; } \quad
+	a,
+	\text{ Entwicklungspunkt }
+\] 
+
+\subsubsection{Pad\'e Approximation - Definition}
+
+\begin{align*}
+	& R_{m, n} (x) \text{ ist Pad\'e Approximierende } \\
+	& \Leftrightarrow \forall k \in \{
+		0, 1, ..., m+n
+	\} : 
+	\frac{ d ^{k} }{ d x ^{k} } R_{m, n} (0)
+	=
+	\frac{ d ^{k} }{ d x ^{k} } f (0) \\
+	& \Leftrightarrow \text{ jeweils $k$-ten Ableitungen stimmen überein }
+\end{align*}
+
+Wir erhalten daraus folgende Gleichungen:
+\begin{align*}
+	& \sum_{j=0}^{k} b_j c_{k-j} = a_k
+	\text{ für } k \in \{
+		0, ..., m
+	\} \text{ und } \\
+	& \sum_{j=0}^{k} b_j c_{m-j+k} = 0
+	\text{ für } k \in \{
+		1, ..., n
+	\} 
+\end{align*}
+
+Wieder gilt $b_0 = 1$.
+
 \end{document}
