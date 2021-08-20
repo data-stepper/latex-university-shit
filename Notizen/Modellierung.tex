@@ -51,6 +51,181 @@
 \tableofcontents
 \pagebreak
 
-Hello World
+\section{Funktionsapproximation}
+
+\subsection{Rationale Interpolation}
+
+Funktioniert ähnlich wie normale Interpolation, mit dem entscheidenden
+Unterschied, dass wir hier einen \textbf{Bruch} von Polynomen benutzen.
+
+\[
+	R_{m, n} (x) := \frac{ 
+		P_m (x)
+	}{ Q_n (x) } \text{ mit }
+	P_m (x) := \sum_{k=0}^{m} a_k x^{k}, \;
+	Q_n (x) := \sum_{k=0}^{n} b_k x^{k}, \;
+\] 
+
+\begin{itemize}
+	\item Polynomgrade $m$ und $n$ sind gegeben
+	\item Es soll gelten für bekannte $x_i$: ($f$ ist die zu 
+		interpolierende Funktion)
+		\[
+			f(x_0) = R_{m, n} (x_0), ...,
+			f(x_1) = R_{m, n} (x_1)
+		\] 
+	\item $m+n+2$ freie Koeffizienten
+	\item Oft wird normiert durch $b_0 = 1$
+	\item $m+n \; (=s)$ = Anzahl Freiheitsgrade (= Anzahl Interpolationsbedingungen)
+	\item Wir erhalten lineares homogenes Gleichungssystem:
+		\[
+			P_m (x_i) - f(x_i) Q_n(x_i) = 0
+			\qquad i \in \{
+				0, ..., m+n
+			\} 
+		\] 
+	\item Dieses LGS hat immer eine nicht-triviale Lösung.
+	\item Es kann passieren, dass es unerreichbare Punkte gibt, für solche
+		braucht man mehr Freiheitsgrade.
+\end{itemize}
+
+\subsection{Ausgleichsrechnung mit rationalen Funktionen}
+
+Hier schauen wir uns Kriterien für die Bestimmung der Koeffizienten an.
+Geläufig ist das Gaußsche Prinzip der kleinsten 
+\textbf{Summe der Fehlerquadrate}.
+\\
+
+Problem ist nämlich, dass man oft mehr Beobachtungen zur Interpolation
+hat als man der rationalen Funktion Freiheitsgrade geben möchte.
+\\
+
+Zur Notation:
+\begin{itemize}
+	\item $b_0 = 1$ (normiert)
+	\item $(x_0, f_0), \; ... \;, (x_s, f_s)$
+		ist die Folge an Beobachtungen
+	\item $m + n + 1 < s =$ Anzahl an Beobachtungen
+\end{itemize}
+
+\subsubsection{Kleinste Summe von Fehlerquadraten}
+
+\[
+\rho \left(
+	a_0, a_1, ..., a_m,
+	b_1, b_2, ..., b_n
+\right) :=
+\sum_{i=0}^{s} \left[
+	P_m (x_i) - f(x_i) Q_n (x_i)
+\right] ^2
+\] 
+
+\begin{itemize}
+	\item Im Fall $m+n+1 = s$ finden wir die eindeutige Lösung 
+		(das LGS von vorher).
+	\item Ansonsten: Minimum der oberen Gleichung finden.
+\end{itemize}
+
+Hierfür müssen wir den Gradienten der Fehlerquadrate gleich $0$ setzen.
+\begin{align*}
+	& \nabla
+		\rho \left(
+			a_0, a_1, ..., a_m,
+			b_1, b_2, ..., b_n
+		\right) 
+		\text{ (Gradient) }
+		\\
+	&= \left(
+		\frac{ \partial \rho }{ \partial a_0 },
+		\frac{ \partial \rho }{ \partial a_1 },
+		...,
+		\frac{ \partial \rho }{ \partial a_m },
+		\frac{ \partial \rho }{ \partial b_1 },
+		\frac{ \partial \rho }{ \partial b_1 },
+	\right) 
+\end{align*}
+
+Wir können diese Gleichung dann weiter auflösen und erhalten am Ende durch
+umsortieren ein LGS, welches wie folgt aussieht.
+
+\begin{align*}
+	& \begin{pmatrix} 
+		s+1 &
+		\sum_{i} x_i &
+		\cdots &
+		\sum_{i} x_i ^{m} &
+		- \sum_{i} f_i x_i &
+		\cdots &
+		- \sum_{i} f_i x_i ^{n} \\[1em]
+		\sum_{i} x_i &
+		\sum_{i} x_i ^2 &
+		\cdots &
+		\sum_{i} x_i ^{m+1} &
+		- \sum_{i} f_i x_i ^2 &
+		\cdots &
+		- \sum_{i} f_i x_i ^{n+1} \\[1em]
+		\vdots &
+		\vdots &
+		\ddots &
+		\vdots &
+		\vdots &
+		\ddots &
+		\vdots \\[1em]
+		\sum_{i} x_i ^{m} &
+		\sum_{i} x_i ^{m+1} &
+		\cdots &
+		\sum_{i} x_i ^{2m} &
+		- \sum_{i} f_i x_i ^{m+1} &
+		\cdots &
+		- \sum_{i} f_i x_i ^{m+n} \\[1em]
+		\sum_{i} f_i x_i &
+		\sum_{i} f_i x_i ^2 &
+		\cdots &
+		\sum_{i} f_i x_i ^{m+1} &
+		- \sum_{i} f_i ^2 x_i ^2 &
+		\cdots &
+		- \sum_{i} f_i ^2 x_i ^{n+1} \\[1em]
+		\sum_{i} f_i x_i ^2 &
+		\sum_{i} f_i x_i ^3 &
+		\cdots &
+		\sum_{i} f_i x_i ^{m+2} &
+		- \sum_{i} f_i ^2 x_i ^3 &
+		\cdots &
+		- \sum_{i} f_i ^2 x_i ^{n+2} \\[1em]
+		\vdots &
+		\vdots &
+		\ddots &
+		\vdots &
+		\vdots &
+		\ddots &
+		\vdots \\[1em]
+		\sum_{i} f_i x_i ^n &
+		\sum_{i} f_i x_i ^{n+1} &
+		\cdots &
+		\sum_{i} f_i x_i ^{m+n} &
+		- \sum_{i} f_i ^2 x_i ^{n+1} &
+		\cdots &
+		- \sum_{i} f_i ^2 x_i ^{2n} \\[1em]
+	\end{pmatrix} 
+	\begin{pmatrix} 
+		a_0 \\[1em]
+		a_1 \\[1em]
+		\vdots \\[1em]
+		a_m \\[1em]
+		b_1 \\[1em]
+		b_2 \\[1em]
+		\vdots \\[1em]
+		b_n \\[1em]
+	\end{pmatrix} \\
+	&= \left(
+		\sum_i f_i, \;
+		\sum_i f_i x_{i}, \;
+		\cdots, \;
+		\sum_i f_i x_{i} ^{m}, \;
+		\sum_i f_i ^2 x_{i}, \;
+		\cdots, \;
+		\sum_i f_i ^2 x_{i} ^{n}, \;
+	\right) ^{T}
+\end{align*}
 
 \end{document}
