@@ -272,9 +272,106 @@ Wir erhalten daraus folgende Gleichungen:
 	& \sum_{j=0}^{k} b_j c_{m-j+k} = 0
 	\text{ für } k \in \{
 		1, ..., n
-	\} 
+	\}  \\
+	& \text{ und wieder } b_0 = 1
 \end{align*}
 
-Wieder gilt $b_0 = 1$.
+\subsubsection{Quotientenregel - Ableitung}
+
+\[
+	\left(
+		\frac{ f(x) }{ g(x) }
+	\right) '
+	=
+	\frac{ f' (x) g(x) - f(x) g' (x) }{ g ^2 (x) }
+\] 
+
+\section{Optimierung}
+
+\subsection{Geometrische Lösung linearer Optimierung im $\R ^2$}
+
+==\gg In Progress
+\\
+
+Einfache Skizze / Anleitung zur Lösung solche aufgaben muss hier angefertigt
+werden.
+
+\subsection{lineare Optimierung im $\R ^{n}$}
+
+\begin{itemize}
+	\item Bei $\max$-Optimierungsaufgaben die Zielfunktion mit $-1$
+		multiplizieren und Minimum berechnen.
+\end{itemize}
+
+\subsubsection{Beispiel Schuhfabrik}
+
+Jeden Monat stehen zur Verfügung:
+
+\begin{itemize}
+	\item $8000$ Stunden Herstellungszeit
+	\item $2000$ Stunden Maschinenzeit
+	\item $4500\; dm ^2$ Leder
+\end{itemize}
+
+Pro Schuh $16$ Euro für Damenschuh und $32$ Euro für Herrenschuh.
+\\
+
+Stelle Nebenbedingung auf:
+
+\begin{align*}
+	20 x_1 + 10 x_2 & \leq 8000 \\
+	4 x_1 + 5 x_2 & \leq 2000 \\
+	6 x_1 + 15 x_2 & \leq 4500 \\
+	x_1 & \geq 0 \\
+	x_2 & \geq 0 & \\
+\end{align*}
+
+Maximiere Zielfunktion $Z(x_1, x_2) = 16 x_1 + 32 x_2 \rightarrow \max !$.
+
+\section{Dynamische Systeme (Prozesse)}
+
+Beschreibung der Zeit $t$ und aller möglichen Zustände, einem sog.
+Zustandsraum $X$.
+
+\subsection{Deterministische zeitdiskrete dynamische Systeme}
+
+Modell:
+
+\[
+	x(t+1) = F(x(t)) \text{ oder } x(t+1) = x(t) + f(x(t))
+	\text{ mit } t \in \N_0
+\] 
+
+\subsubsection{Fixpunkte}
+
+\begin{align*}
+	& x ^{*} \in X \text{ ist Fixpunkt } \\
+	& \Leftrightarrow x ^{*} = F ( x ^{*} ) \\
+	& \Leftrightarrow x ^{*} \text{ bleibt auf sich sitzen }
+\end{align*}
+
+\subsubsection{Differenzengleichungen}
+
+
+\begin{align*}
+	& f(t, x(t), x(t+1), ..., x(t+k)) = 0 \qquad
+	\forall t \in \mathbb{N} \\
+	& \text{ mit } f: \N \times D^{k+1} \rightarrow \mathbb{K}
+	\text{ und } D \subseteq \mathbb{K}
+\end{align*}
+
+\begin{itemize}
+	\item $f$ gegeben und $x$ gesucht
+	\item \textbf{autonom} $\Leftrightarrow$ 
+		$f$ hängt nicht explizit von $t$ ab.
+	\item $k$ ist \textbf{Ordnung} oder \textbf{Grad} 
+	\item $x: \N \rightarrow D$ heißt \textbf{Lösung}
+\end{itemize}
+
+\subsection{Dynamische stochastische Prozesse}
+
+\subsection{Dimensionsanalyse und Skalierung}
+
+\subsection{Gewöhnliche Differentialgleichungen}
 
 \end{document}
