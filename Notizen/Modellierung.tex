@@ -290,10 +290,7 @@ Wir erhalten daraus folgende Gleichungen:
 
 \subsection{Geometrische Lösung linearer Optimierung im $\R ^2$}
 
-==\gg In Progress
-\\
-
-Einfache Skizze / Anleitung zur Lösung solche aufgaben muss hier angefertigt
+TODO: Einfache Skizze / Anleitung zur Lösung solche aufgaben muss hier angefertigt
 werden.
 
 \subsection{lineare Optimierung im $\R ^{n}$}
@@ -367,6 +364,55 @@ Modell:
 	\item $k$ ist \textbf{Ordnung} oder \textbf{Grad} 
 	\item $x: \N \rightarrow D$ heißt \textbf{Lösung}
 \end{itemize}
+
+Differenzengleichungen als diskrete dynamische Systeme:
+\[
+	x(t+k) = \tilde{f} \left(
+		t, x(t), ..., x(t+k-1)
+	\right) \qquad
+	\forall t \in \mathbb{N} 
+\] 
+
+\subsubsection{Lineare diskrete dynamische Systeme}
+
+\begin{align*}
+	x(t+1) = A(t) x(t) + u(t)
+	\qquad \qquad & \text{ (homogen) } \\
+	x(t+1) = A(t) x(t)
+	\qquad \qquad & \text{ (inhomogen) }
+\end{align*}
+
+Dabei gilt:
+
+\begin{itemize}
+	\item $(A(t))_{t \in \mathbb{N}}$
+		ist Folge von Matrizen $A(t) \in \R ^{n, n}$
+	\item $(u(t))_{t \in \mathbb{N}}$ ist Folge von Vektoren 
+		$u(t) \in \R ^{n}$
+\end{itemize}
+
+Über Linearisierung Approximation von nichtlinearen Systemen
+\\
+
+\subsubsection{Übergangsmatrix}
+
+Für $s, t \in \N, s \leq t$ ist:
+
+\[
+	\Phi(t, s) := 
+	\begin{cases}
+		I \text{ (Einheitsmatrix)}, 
+		& \text{ falls } s = t \\
+		A(t-1) A(t-2) ... A(s),
+		& \text{ falls } s < t
+	\end{cases}
+\] 
+
+Ist die Übergangsmatrix von $s$ nach $t$.
+\\
+
+TODO: Anfangswertaufgabe hier und inhomogenes System,
+Fundamentalmatrix
 
 \subsection{Dynamische stochastische Prozesse}
 
