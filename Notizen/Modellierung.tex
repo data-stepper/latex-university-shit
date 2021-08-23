@@ -377,9 +377,9 @@ Differenzengleichungen als diskrete dynamische Systeme:
 
 \begin{align*}
 	x(t+1) = A(t) x(t) + u(t)
-	\qquad \qquad & \text{ (homogen) } \\
+	\qquad \qquad & \text{ (inhomogen) } \\
 	x(t+1) = A(t) x(t)
-	\qquad \qquad & \text{ (inhomogen) }
+	\qquad \qquad & \text{ (homogen) }
 \end{align*}
 
 Dabei gilt:
@@ -412,7 +412,197 @@ Ist die Übergangsmatrix von $s$ nach $t$.
 \\
 
 TODO: Anfangswertaufgabe hier und inhomogenes System,
+\\
+
+TODO: Lösung inhomogene und homogen systems hier Satz 5.1
 Fundamentalmatrix
+
+\subsubsection{Zeitinvariante lineare Systeme}
+
+\[
+	x(t+1) = A x(t)
+	\qquad \text{ (Matrix konstant) }
+\] 
+
+Lösung über Eigenwerte (-vektoren):
+\begin{align*}
+	v \in \R ^{n}, v \ne 0 \qquad
+	& \text{ Eigenvektor mit } \\
+	\lambda \in \R \qquad
+	& \text{ Eigenwert von } A
+	\quad ( \Leftrightarrow  Av = \lambda v ) \\
+	\Rightarrow y(t) = \lambda ^{t} v \qquad
+	& \text{ ist Lösung des Systems }
+\end{align*}
+
+\subsubsection{Ähnlichkeitstransformation von Matrizen}
+\begin{align*}
+	& A, B \in \mathbb{K} ^{n, n} \text{ sind ähnlich } \\
+	& \Leftrightarrow \exists
+		S \in \mathbb{K} ^{n,n},\; S \text{ invertierbar} :
+		B = S ^{-1} A S
+\end{align*}
+
+\underline{Jede} Matrix $A \in \mathbb{C} ^{n,n}$ ist ähnlich
+zu einer Matrix in Jordanscher Normalform.
+\\
+
+TODO: Jordansche Normalform Kapitel 5.4 im Skript
+
+\subsubsection{Langzeitverhalten der Lösung}
+\begin{align*}
+	& A \in \mathbb{C} ^{n,n}, \lambda_1 \text{ betragsgrösster Eigenwerte } \\
+	& \text{ zu } \lambda_1 : v_1 \text{ Rechtseigenvektor }, q_1
+	\text{ Linkseigenvektor } \\
+	& \Leftrightarrow A v_1 = \lambda_1 v_1, q_1 ^{H} A = \lambda_1 q_1 ^{H} \\
+	&\Rightarrow \forall x(t) \text{ Lösung des Systems}:
+	\lim_{t \to \infty} \frac{ x(t) }{ \lambda_1 ^{t} }
+	= (q_1 ^{H} x(0)) v_1
+\end{align*}
+
+$q_1 ^{H}$ ist komplex konjugierte von $q_1$.
+
+\subsubsection{Positive lineare Systeme}
+\[
+	A = (a_{ij}):
+	A \geq (>) 0 \Leftrightarrow \forall (i, j): a_{ij} \geq (>) 0
+\] 
+
+TODO: Satz von Perron-Frobenius (Satz 5.5)
+
+\subsubsection{Satz über Nullstellen von reellen Polynomen}
+\begin{align*}
+	& p = \lambda ^{n} - \left(
+		d_1 \lambda ^{n-1} + \cdots + d_{n-1} \lambda + d_n
+	\right) \\
+	& d_1, ..., d_n \geq 0 \text{ und } 
+	\exists k: d_k > 0 \\
+	&\Rightarrow \exists \lambda_1 \text{ reell positive einfache Nullstelle}: \\
+	& \qquad \lambda_1 \geq | \lambda |, 
+	\forall \lambda \text{ anderen Nullstellen von } p \\
+	& \\
+	&\Rightarrow \text{ggT} ( k ) = 1, \text{ wobei }
+	k \text{ Indite von } d_k > 0 \\
+	& \qquad \Rightarrow \lambda_1 > | \lambda |, 
+	\forall \lambda \text{ anderen Nullstellen von } p
+\end{align*}
+
+\subsection{Stabilität dynamischer Systeme}
+$x(t)$ sei Lösung:
+
+\begin{itemize}
+	\item $\Rightarrow \{
+			x(0), x(1), ...
+		\} $ heißt \textbf{Bahn} oder \textbf{Orbit} von $x(t)$
+	\item $x(t)$ heisst \textbf{stabil}:
+		\[
+		\forall \varepsilon > 0, \exists \delta :
+		\left(
+			(
+				\forall y(t) \text{ Lösung}, \| y(0) - x(0) \| < \delta
+			)
+			\Rightarrow \forall t \in \mathbb{N}:
+			\| y(t) - x(t) \| < \varepsilon
+		\right) 
+		\] 
+	\item $x(t)$ nicht stabil $\Leftrightarrow$ $x(t)$ \textbf{instabil} 
+	\item $x(t)$ heisst \textbf{attraktiv}:
+		\[
+		\exists \delta : \left(
+			(
+				\forall y(t) \text{ Lösung}, \| y(0) - x(0) \| < \delta
+			)
+			\Rightarrow \lim_{t \to \infty} 
+			\| y(t) - x(t) \| = 0
+		\right) 
+		\] 
+	\item $x(t)$ heisst \textbf{asymptotisch stabil} 
+		$\Leftarrow$ ($x(t)$ stabil und attraktiv)
+	\item Umgekehrte Implikationen gelten hier \textbf{nicht}:
+		\[
+			\text{z.B.} \; x(t) \; \text{stabil} \nRightarrow
+			\left(
+				\forall \varepsilon > 0 \cdots
+			\right) 
+		\] 
+\end{itemize}
+
+\subsubsection{Stabilität linearer Systeme}
+
+\begin{itemize}
+	\item \underline{eine} stabile Lösung existiert $\Rightarrow$ \underline{alle}
+		Lösungen sind stabil.
+\end{itemize}
+\begin{align}
+	x(t+1) &= A(t) x(t) + b(t), \qquad x(0) = x_0 \\
+	x(t+1) &= A(t) x(t)
+\end{align}
+
+Folgende Aussagen sind \underline{äquivalent}:
+
+\begin{itemize}
+	\item Alle Lösungen des inhomogenen Systems (1) sind stabil.
+	\item Eine Lösung des inhomogenen Systems (1) ist stabil.
+	\item Die Nulllösung ($x(t) = 0$) des homogenen Systems (2) ist stabil.
+\end{itemize}
+
+\subsubsection{Stabilität nichtlinearer Systeme}
+Geht im Allgemeinen nicht, also
+Stabilität in Fixpunkten untersuchen oder
+Periodische Punkte finden.
+
+\begin{itemize}
+	\item $\overline{x}$ heisst \textbf{periodischer Punkt}, wenn:
+		\[
+		\exists p \in \mathbb{N}:
+		F ^{p} (\overline{x})
+		\text{ und }
+		F ^{t} (\overline{x}) \neq \overline{x}
+		\text{ für } t \in \{
+			1, ..., p-1
+		\} 
+		\] 
+	\item $p$ heisst \textbf{Periode}  von $\overline{x}$
+	\item $x$ Lösung heisst \textbf{Gleichgewichtspunkt}, wenn
+		$\forall t \in \mathbb{N}: x(t) = x ^{*}$
+		mit $x ^{*}$ Fixpunkt ist.
+	\item $x ^{*}$ Fixpunkt ist periodischer Punkt mit $p = 1$
+	\item Für $\overline{x}$ periodisch mit Periode $p$
+		$\Rightarrow \; \overline{x}$ ist GGP von $F ^{p}$
+	\item Jeder GGP von $F ^{p}$ ist periodischer Punkt von $F$ mit
+		einem Teiler von $p$ als Periode.
+\end{itemize}
+
+Stabilitätsaussage bei \textbf{stetig differenzierbarem} $f$ (bzw. $F$):
+\[
+	x(t+1) = f(x(t))
+\] 
+
+$x ^{*}$ GGP $\Rightarrow$ $x ^{*}$ ist
+\begin{itemize}
+	\item asymptotisch stabil, falls $| f' (x ^{*}) | < 1$
+	\item instabil, falls $| f'(x ^{*}) | > 1$
+\end{itemize}
+
+\subsubsection{Asymptotisch stabile Matrix}
+\begin{align*}
+	& A \in \R ^{n, n} \text{ heisst asymptotisch stabil } \\
+	&\Leftrightarrow 0 \text{ ist GGP von } x(t+1) = A x(t) \\
+	&\Leftrightarrow \forall x \in \R \lim_{t \to \infty} A ^{t} x = 0
+\end{align*}
+
+\subsubsection{Kriterium für asymptotische Stabilität}
+Bei $F$ in $x ^{*}$ (einem Fixpunkt) differenzierbar:
+\begin{align*}
+	& M \subseteq \R ^{n}, F: M \rightarrow M,
+	x ^{*} \text{ innerer Punkt von } M: \\
+	& \textbf{DF} (x ^{*}) \;\; (\text{Jacobi Matrix}) \text{ asymptotisch stabil} \\
+	&\Rightarrow x ^{*} \text{ asymptotisch stabil}
+\end{align*}
+
+Im vorigen Kriterium steht aber nur ein lineares System, also müssen
+wir für die Stabilität des Systems nur die Eigenwerte der Jacobi-Matrix
+prüfen. (Schauen ob diese jeweils $</> 1$ sind)
 
 \subsection{Dynamische stochastische Prozesse}
 
