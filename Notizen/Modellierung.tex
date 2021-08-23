@@ -729,6 +729,10 @@ abhängen heisst stochastischer Prozess (SP):
 	\item $T$ diskret $\Rightarrow$ $\{
 			x(t) \; \vert \; t \in T
 	\} $ ist abzählbar
+\end{itemize}
+
+\subsubsection{Markowketten}
+\begin{itemize}
 	\item Markowkette:
 		\[
 			P(x(t_{m+1}) = i_{m+1})
@@ -757,6 +761,18 @@ abhängen heisst stochastischer Prozess (SP):
 \end{itemize}
 
 TODO: Stoppzeiten wiederholen hier
+
+\subsubsection{Deterministische Interpretation von Markowketten}
+\begin{align*}
+	& A \in \R ^{n,n} \text{ ist stochastische Matrix } \\
+	&\Leftrightarrow A \geq 0, \text{ \textbf{Spalten}summe } = 1 \\
+	& \qquad \qquad \Leftrightarrow \sum_{i=1}^{n} p_{ij} = 1 \\
+\end{align*}
+
+\begin{itemize}
+	\item Lineare Systeme mit stochastischer Matrix heissen
+		\textbf{Markowprozesse}.
+\end{itemize}
 
 \subsection{Dimensionsanalyse und Skalierung}
 
