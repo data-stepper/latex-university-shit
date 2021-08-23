@@ -604,7 +604,159 @@ Im vorigen Kriterium steht aber nur ein lineares System, also müssen
 wir für die Stabilität des Systems nur die Eigenwerte der Jacobi-Matrix
 prüfen. (Schauen ob diese jeweils $</> 1$ sind)
 
+\subsubsection{Stabilität eines inneren Orbits }
+
+\begin{align*}
+	& M \subseteq \R ^{n}, F: M \rightarrow M \text{ stetig } \\
+	& \gamma := \{
+		x_0, ..., x_{p-1}
+	\} \text{ im Inneren von $M$ liegendes $p$-periodisches Orbit } \\
+	& \\
+	& \textbf{DF}^{p} (x_0) =
+	\textbf{DF} (x_{p-1})
+	\textbf{DF} (x_{p-2})
+	\cdots
+	\textbf{DF} (x_1)
+	\textbf{DF} (x_0) \text{ (Jacobi von $F ^{p}$ ) }
+	\\
+	& \text{besitzt nur Eigenwerte betragsmässig} < 1 \\
+	&\Rightarrow \gamma \text{ asymptotisch stabil } \\
+	& \\
+	& \textbf{DF}^{p} \text{ besitzt einen Eigenwert betragsmässig}>1  \\
+	&\Rightarrow \gamma \text{ ist instabil }
+\end{align*}
+
+TODO: Unterschied zwischen Orbit und Lösung präzisieren
+
 \subsection{Dynamische stochastische Prozesse}
+
+\subsubsection{Entropie}
+Entropie ist das Maß des Informationsgewinns beim Bekanntwerden eines
+Ereignisses eines Zufallsexperimentes.
+
+\subsubsection*{Definition - Entropie}
+Ereignis $E$ hat Wahrscheinlichkeit $p$. Funktion $H(p)$ heisst \textbf{Entropie}
+wenn folgende Axiome gelten:
+
+\begin{itemize}
+	\item $H(1) = 0$ (für $p = 1$ entsteht kein Informationsgewinn)
+	\item $\forall p_1, p_2 \in (0, 1]: p_1 < p_2 \Rightarrow H(p_2) < H(p_1)$
+	\item $H(p)$ ist stetig auf $(0, 1] \rightsquigarrow$ 
+		kleine Ursache, kleine Wirkung
+	\item $\forall p_1, p_2 \in (0, 1]: H(p_1 p_2) = H(p_1) + H(p_2)$
+\end{itemize}
+
+TODO: mehr über Entropie herausfinden und bessere Intuition ausarbeiten
+
+\subsubsection{Approximative Entropie}
+Versuch der Analyse von Entropie einer Zahlenfolge
+\[
+x = \left(
+	x_1, ..., x_{n}
+\right) 
+\] 
+
+\begin{enumerate}
+	\item Wähle Genauigkeit $\varepsilon > 0$
+	\item Betrachte Abschnitte $x_{i} ^{m} := (x_{i}, ..., x_{i+m-1})$
+		der Länge $m$.
+	\item Definiere Metrik 
+		$d(x_{i} ^{m}, x_{j} ^{m}) := \max_{k\in [1, m]} \{
+			| x_{i+k-1} - x_{j+k-1} |
+		\} $
+	\item Definiere Anteil der Übereinstimmungen 
+		aller vorkommenden Folgen
+		mit $x_{i} ^{m}$
+		\[
+			C_{i} ^{m} (\varepsilon)
+			:= \frac{ 
+				\text{Anzahl} \{
+					j \in [1, n-m+1]:
+					d \left(
+						x_{i} ^{m}, x_{j} ^{m}
+					\right) \leq \varepsilon
+				\} 
+			}{ n - m + 1 }
+		\]
+	\item Definiere Hilfsgrösse
+		\[
+			\phi_m (\varepsilon)
+			:=
+			\frac{ \sum_{i=1}^{n-m+1} \log (C_i ^{m}) }{ n-m+1 }
+		\] 
+	\item Definiere \textbf{Approximative Entropie}
+		\begin{align*}
+			& AE (m, \varepsilon, n) (x) := 
+			\phi_m (x) - \phi_{m+1} (\varepsilon)
+			\qquad \forall m \geq 1
+			\\
+			& AE(0, \varepsilon, n) (x) :=
+			- \phi_1 (\varepsilon)
+		\end{align*}
+\end{enumerate}
+
+\subsubsection*{$(m,n)$-Zufälligkeit binärer Folgen}
+Eine binäre Folge $x$ mit Länge $n$ heisst $(m,n)$-zufällig, wenn
+\[
+	AE(m, \varepsilon, n) (x) = \max_{y} AE(m, \varepsilon, n)(y)
+\] 
+Das Maximum der $AE$ aller $2^{n}$ binären Folgen.
+\\
+
+Für zwei Folgen $x, y$ der Länge $n$ gilt:
+
+\[
+x \text{ zufälliger als } y 
+\Leftrightarrow
+\forall n \geq m \geq 0: \;
+AE(m, \varepsilon, n) (x) \geq
+AE(m, \varepsilon, n) (y)
+\] 
+
+\subsection{Grundbegriffe stochastischer Prozesse}
+Folge von Zufallsvariablen die von einem Parameter
+abhängen heisst stochastischer Prozess (SP):
+
+\[
+\{
+	x(t) \; \vert \; t \in T
+\} 
+\] 
+
+\begin{itemize}
+	\item $T$ heisst \textbf{Parameterraum} 
+	\item $x(t) \in Z$, $Z$ heisst \textbf{Zustandsraum} 
+	\item $T$ diskret $\Rightarrow$ $\{
+			x(t) \; \vert \; t \in T
+	\} $ ist abzählbar
+	\item Markowkette:
+		\[
+			P(x(t_{m+1}) = i_{m+1})
+			\text{ hängt nur von $x(t_m)$ ab }
+			\text{ (und nicht von $x(t_{m-1})...$) }
+		\] 
+	\item Zustandsvektor $x_{j} (t)$ beschreibt W. dass System
+		sich zum Zeitpunkt $t$ in Zustand $j$ befindet.
+	\item Übergangswahrscheinlichkeit (W. von $i$ nach $j$ zur Zeit $t_m$)
+		\[
+			p_{ij} (t_m , t_{m+1}) =
+			P(x(t_{m+1}) = j \; \vert \; x(t_m) = i)
+		\] 
+	\item Markowkette \textbf{homogen} $\Leftrightarrow
+		p_{ij}$ hängt nicht von der Zeit ab
+	\item Übergangswahrscheinlichkeiten bilden Matrix $\mathbb{P} = (p_{ij})$
+		mit:
+		\[
+		p_{ij} \geq 0 \text{ und }
+		\sum_{j=1}^{n} p_{ij} = 1
+		\] 
+	\item Transponiert können wir die Kette als dynamisches System schreiben
+		\[
+			x(t+1) = \mathbb{P} ^{T} x(t)
+		\] 
+\end{itemize}
+
+TODO: Stoppzeiten wiederholen hier
 
 \subsection{Dimensionsanalyse und Skalierung}
 
