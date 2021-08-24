@@ -729,6 +729,9 @@ abhängen heisst stochastischer Prozess (SP):
 	\item $T$ diskret $\Rightarrow$ $\{
 			x(t) \; \vert \; t \in T
 	\} $ ist abzählbar
+	\item $x \in \R ^{n}$ ist Wahrscheinlichkeitsverteilung
+		$\Leftrightarrow \sum_{i=1}^{n} x_{i} = 1$
+		und $x_{i} \geq 0$
 \end{itemize}
 
 \subsubsection{Markowketten}
@@ -770,11 +773,62 @@ TODO: Stoppzeiten wiederholen hier
 \end{align*}
 
 \begin{itemize}
+	\item Anstatt Wahrscheinlichkeiten werden Anteile modelliert
+	\item Beispiel $\rightsquigarrow$ Aufenthaltsort eines Phosphat Moleküls im
+		Phosphatkreislauf
 	\item Lineare Systeme mit stochastischer Matrix heissen
 		\textbf{Markowprozesse}.
 \end{itemize}
 
-\subsection{Dimensionsanalyse und Skalierung}
+\subsubsection{Langzeitverhalten Markowketten}
+\begin{itemize}
+	\item $x \in \R ^{n}$ eine Wahrscheinlichkeitsverteilung
+		$\Rightarrow \mathbb{P} \cdot x$ auch WV \\
+		mit $\mathbb{P}$ stochastische Matrix
+		(bzw. transponierte Übergangsmatrix einer Markowkette)
+	\item $\lambda_1 = 1$ ist Eigenwert der stochastischen Matrix
+		$\mathbb{P} ^{T}$
+		$\Rightarrow \forall \lambda$ anderen Eigenwerte
+		$| \lambda | \leq 1$
+	\item Markowkette heisst \textbf{regulär}
+		$\Leftarrow \exists p \in \mathbb{N}: \left(
+			\mathbb{P} ^{T}
+		\right) ^{t} > 0$
+	\item reguläre Markowketten haben immer den Eigenwert $1$
+		mit einem Eigenvektor $y$ welcher eine WV ist.
+		Alle anderen Eigenwerte (-vektoren) verschwinden
+		wenn wir die Kette als dynamisches System darstellen
+		(Eigenwerte $|\lambda|<1$).
+\end{itemize}
+
+\setcounter{equation}{0}
+
+\subsection{Chaos - Pseudo Zufallszahlen}
+
+\subsubsection{chaotische Abbildungen}
+Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
+\begin{align}
+	& f \text{ topologisch transitiv }
+	\Leftrightarrow \forall I, J \subseteq M: \exists k \in \mathbb{N}:
+	f ^{k} (I) \cap J \ne \O
+	\\
+	& \text{ jede Umgebung von $x \in M$ enthält einen periodischen Punkt } 
+	\text{ (liegen dich in $M$) }
+	\\
+	& \exists \zeta > 0: \forall x \in M
+	, U \text{ Umgebung von } x:
+	\exists y \in U, k \in \mathbb{N}:
+	|f ^{k} (x) - f ^{k} (y) | > \zeta
+\end{align}
+
+\begin{itemize}
+	\item (1) besagt, dass $f$ nach einiger Zeit zu allen Punkten
+		gelangen wird.
+	\item (2) sagt, dass jeder Punkt von $f$ unendlich oft besucht wird.
+	\item (3) sagt, dass die Abbildung garantiert divergiert,
+		also jeder Punkt egal wie nah am ursprünglichen $x$ irgendwann
+		weit entfernt von $x$ sein wird.
+\end{itemize}
 
 \subsection{Gewöhnliche Differentialgleichungen}
 
