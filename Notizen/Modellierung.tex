@@ -831,5 +831,109 @@ Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
 \end{itemize}
 
 \subsection{Gewöhnliche Differentialgleichungen}
+\[
+	F(x, u(x), u'(x), ..., u ^{(n)}) = 0
+\] 
+\begin{itemize}
+	\item ist Differentialgleichungen $n$-ter Ordnung
+	\item Die DGL heisst \textbf{explizit}
+		$\Leftarrow$ man kann nach $u ^{(n)} (x)$ auflösen
+		\[
+			u ^{(n)} (x) =
+			f(
+				x,
+				u(x),
+				u'(x),
+				...,
+				u ^{(n-1)} (x)
+			)
+		\] 
+	\item nicht explizit heisst \textbf{implizit} 
+	\item $\phi (x)$ heisst Lösung auf $I \subseteq \R \Leftarrow$
+		\begin{align*}
+			& \phi(x),
+			\phi(x)',
+			...,
+			\phi(x) ^{(n)}
+			\text{ existieren in } I \text{ und } \\
+			&
+			\forall x \in I
+			\phi ^{(n)} (x) =
+			f(
+				x,
+				\phi(x),
+				\phi(x)',
+				...,
+				\phi ^{(n-1)} (x)
+			)
+		\end{align*}
+	\item DGL heisst \textbf{gewöhnlich} $\Leftarrow$
+		$u$ hängt nur von einer Variable ab ($x$)
+	\item eine DGL heisst \textbf{linear} $\Leftarrow$
+		$F$ ist linear in $x, u(x), u'(x) ..., u ^{(n)} (x)$
+		\[
+			a_n (x) y ^{(n)} +
+			a_{n-1} (x) y ^{(n-1)} +
+			... + 
+			a_{0} (x) y
+			= b(x)
+		\] 
+		$a$ kann von $x$ abhängen, es dürfen nur die Ableitungen
+		z.B. nicht quadriert werden
+\end{itemize}
+
+Lösungen für folgende Typen von Differentialgleichungen:
+\begin{enumerate}
+	\item Separierbare Differentialgleichungen
+	\item Ähnlichkeitsdifferentialgleichungen
+	\item lineare Differentialgleichungen erster Ordnung
+	\item Bernoullische Differentialgleichungen
+	\item Riccatische Differentialgleichungen
+	\item Exakte Differentialgleichungen
+\end{enumerate}
+
+\subsubsection{Separierbare Differentialgleichungen}
+Gegeben
+\[
+\begin{cases}
+	y' (x) & = f(x) \cdot g(y) \\
+	y(x_0) &= y_0 
+\end{cases}
+\] 
+
+in $D \subset \R ^2$. Falls $g(y) \neq 0$
+lässt sich die DGL wie folgt aufteilen (und lösen):
+\begin{align*}
+	\frac{ y' }{ g(y) } &= f(x) \\
+	\Rightarrow 
+	\int_{y_0}^{y} \frac{ dz }{ g(z) } 
+		&= 
+		\int_{x_0}^{x} f(z) dz 
+	\\
+	\text{ Setze } H(y) 
+		&= \int \frac{ dz }{ g(z) } 
+		\text{ (Stammfunktion) } \\
+		\Rightarrow H(y) 
+		&= H(y_0)  + \int_{x_0}^{x} f(z) dz \\
+		& g(y) \neq 0 \Rightarrow H(y)
+		\text{ injektiv und invertierbar}
+		\\
+	\Rightarrow y(x)
+	&= H ^{-1} \left(
+		H(y_0) + \int_{x_0}^{x} f(z) dz
+	\right)  
+\end{align*}
+
+\subsubsection{Ähnlichkeitsdifferentialgleichungen}
+\[
+	y' (x) = f \left(
+		\frac{ y }{ x }
+	\right) 
+\] 
+
+\subsubsection{lineare Differentialgleichungen erster Ordnung}
+\subsubsection{Bernoullische Differentialgleichungen}
+\subsubsection{Riccatische Differentialgleichungen}
+\subsubsection{Exakte Differentialgleichungen}
 
 \end{document}
