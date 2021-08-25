@@ -836,6 +836,10 @@ Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
 \] 
 \begin{itemize}
 	\item ist Differentialgleichungen $n$-ter Ordnung
+	\item Anfangswertproblem heisst, wir haben einen Anfangswert gegeben,
+		da wir sonst unendlich viele Lösungen erhalten. Alternativ
+		setzen wir den Anfangswert einfach auf ein $x_0$, sodass wir
+		die Allgemeine Lösung erhalten.
 	\item Die DGL heisst \textbf{explizit}
 		$\Leftarrow$ man kann nach $u ^{(n)} (x)$ auflösen
 		\[
@@ -882,14 +886,42 @@ Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
 		z.B. nicht quadriert werden
 \end{itemize}
 
-Lösungen für folgende Typen von Differentialgleichungen:
+\subsubsection{Welcher Typ Differentialgleichung?}
+
+Welchen Typ von Differentialgleichung habe ich vorliegen?
 \begin{enumerate}
 	\item Separierbare Differentialgleichungen
+		\[
+			y' (x) = f(x) \cdot g(y), \qquad
+			y(x_0) = y_0, \qquad
+			g(y) \neq 0
+		\] 
 	\item Ähnlichkeitsdifferentialgleichungen
+		\[
+			y' (x) = f \left(
+				\frac{ y }{ x }
+			\right) 
+		\] 
 	\item lineare Differentialgleichungen erster Ordnung
+		\[
+			y' (x) + a(x) y(x) = b(x)
+		\] 
 	\item Bernoullische Differentialgleichungen
+		\[
+			y' (x) + a(x) y(x) + b(x) (y(x)) ^{\alpha} = 0,
+			\qquad \alpha \in \R \setminus \{
+				0, 1
+			\} 
+		\] 
 	\item Riccatische Differentialgleichungen
+		\[
+			y' (x) + a(x) y(x) + b(x) y ^2 (x) = c(x), \qquad
+			\text{ spez. Lsg. } y_p (x) \text{ bekannt }
+		\] 
 	\item Exakte Differentialgleichungen
+		\[
+			g(x, y(x)) + h(x, y(x)) y' (x) = 0
+		\] 
 \end{enumerate}
 
 \subsubsection{Separierbare Differentialgleichungen}
@@ -915,7 +947,7 @@ lässt sich die DGL wie folgt aufteilen (und lösen):
 		\text{ (Stammfunktion) } \\
 		\Rightarrow H(y) 
 		&= H(y_0)  + \int_{x_0}^{x} f(z) dz \\
-		& g(y) \neq 0 \Rightarrow H(y)
+		g(y) \neq 0 &\Rightarrow H(y)
 		\text{ injektiv und invertierbar}
 		\\
 	\Rightarrow y(x)
@@ -925,15 +957,151 @@ lässt sich die DGL wie folgt aufteilen (und lösen):
 \end{align*}
 
 \subsubsection{Ähnlichkeitsdifferentialgleichungen}
+Ist eine DGL in Form:
 \[
 	y' (x) = f \left(
 		\frac{ y }{ x }
 	\right) 
 \] 
+können wir sie auf eine separierbare zurückführen:
+\begin{align*}
+	u(x) : &= \frac{ y(x) }{ x } \\
+	\Rightarrow f(u) = y' (x)
+	&= \left(
+		x u(x)
+	\right)' = u(x) + xu'(x) \\
+	\Rightarrow u'(x) &= \frac{ f(u) - u }{ x }
+	\; \text{ ist separierbar }
+\end{align*}
 
 \subsubsection{lineare Differentialgleichungen erster Ordnung}
+\[
+	y' (x) + a(x) y(x) = b(x)
+\] 
+\begin{itemize}
+	\item $b(x)$ heisst \textbf{Inhomogenität} der Gleichung 
+	\item DGL heisst \textbf{homogen} $\Leftrightarrow b(x) = 0$
+	\item \textbf{allgemeine Lösung}:
+		\begin{align*}
+			& y(x) = y_p (x) + y_h (x) \text{ mit } \\
+			& y_p(x) \text{ spezielle (partikuläre) Lösung der inhomogenen DGL } 
+			\\
+			& \text{und } y_h (x)
+			\text{ allgemeine Lösung der homogenen Gleichung}\\
+			& \qquad y_h '(x) + a(x) y_h (x) = 0
+		\end{align*}
+	\item Erinnerung: Diese DGL haben alle unendliche viele Lösungen,
+		$y_p$ löst z.B. die gesamte Gleichung, $y_h + y_p$ ist aber die
+		allgemeine Lösung. \underline{Alle} Lösungen dieser DGL
+		sind in genau dieser Form.
+\end{itemize}
+
+\subsubsection*{1. Lösung der homogenen Gleichung}
+\begin{align*}
+	y_h '(x) + a(x) y_h (x) &= 0 \text{ ist separierbar } \\
+	\Rightarrow \frac{ y_h ' }{ y_h } = -a(x) 
+	&\Rightarrow
+	\int \frac{ d y_h }{ y_h } = - \int a(z) dz
+	\\
+	\Rightarrow
+	y_h (x) &= C \cdot \exp \left(
+		- \int_{x_0}^{x} a(z) dz 
+	\right) 
+\end{align*}
+
+mit $C \in \R$ beliebig.
+
+\subsubsection*{2. Lösung der inhomogenen Gleichung}
+\begin{align*}
+	y_p (x) &= C(x) \cdot \exp \left(
+		- \int_{x_0}^{x} a(z) dz 
+	\right) \\
+	\overset{\text{Einsetzen}} \Longrightarrow
+	C' (x) \cdot \exp \left(
+		- \int_{x_0}^{x} a(z) dz 
+	\right) &- a(x) y_p (x) + a(x) y_p (x) = b(x) \\
+	\Rightarrow C(x) &= 
+	\int_{x_0}^{x} b(z) \cdot \exp \left(
+		\int_{x_0}^{z} a (\gamma) d \gamma 
+	\right) dz \\
+	\Rightarrow y_p (x) &= 
+	\left(
+		\int_{x_0}^{x} b(z) \cdot \exp \left(
+			\int_{x_0}^{z} a (\gamma) d \gamma 
+		\right) dz
+	\right) \cdot \exp \left(
+		- \int_{x_0}^{x} a(z) dz 
+	\right)
+\end{align*}
+
+Die allgemeine Lösung der DGL erhalten wir dann als Summe der beiden
+Lösungen ($y_h(x) + y_p(x)$).
+
 \subsubsection{Bernoullische Differentialgleichungen}
+\[
+	y' (x) + a(x) y(x) + b(x) (y(x)) ^{\alpha} = 0,
+	\qquad \alpha \in \R \setminus \{
+		0, 1
+	\} 
+\] 
+Nach $u(x) := (y(x)) ^{1 - \alpha}$ zurückführen auf lineare
+Differentialgleichung:
+\[
+	u'(x) + (1 - \alpha) a(x) u(x) = (1 - \alpha) b(x)
+\] 
+
+\textbf{Aufpassen} bei der Rücksubstitution:
+\[
+y = u ^{\frac{ 1 }{ 1- \alpha }}
+\] 
+kann z.B. bei $\alpha = 2$ singulär werden.
+
 \subsubsection{Riccatische Differentialgleichungen}
+\[
+	y' (x) + a(x) y(x) + b(x) y ^2 (x) = c(x)
+\] 
+Bei gegebener spezieller Lösung $y_p (x)$, substituieren:
+\[
+	u(x) := \frac{ 1 }{ y(x) - y_p (x) }, \text{ also }
+	y(x) = y_p (x) + \frac{ 1 }{ u(x) }
+\] 
+wir erhalten lineare DGL:
+\[
+	u' (x) - \left(
+		a(x) + 2b (x) y_p (x)
+	\right) u(x) = b(x)
+\] 
+
 \subsubsection{Exakte Differentialgleichungen}
+\[
+	g(x, y(x)) + h(x, y(x)) y' (x) = 0
+\] 
+Gibt es Funktion $\phi(x, y)$, sodass
+\[
+	\frac{ \partial \phi (x,y) }{ \partial x } = 
+	g(x, y(x))
+	\qquad
+	\text{ und }
+	\qquad
+	\frac{ \partial \phi (x,y) }{ \partial y } = 
+	h(x, y(x))
+\] 
+Dann ist die DGL $g + hy' = 0$ \textbf{exakt}.
+Dann gilt:
+\[
+	\frac{ d \phi (x, y) }{ dx }
+	= 
+	\frac{ \partial \phi (x,y) }{ \partial x }
+	+
+	\frac{ \partial \phi (x,y) }{ \partial y } y' (x) = 0
+\] 
+Die Lösungen der Gleichung sind dann gegeben durch:
+\[
+	\phi (x, y) = C, \qquad
+	\text{ für } C \in \R \text{ konstant }
+\] 
+
+\subsubsection{Lösung exakter Differentialgleichung}
+TODO: Einschub Vektorfeld hier hinzufügen
 
 \end{document}
