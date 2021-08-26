@@ -152,6 +152,49 @@
 		\frac{ x_1 - x_2 }{ 2 }
 	\right) 
 \end{gather}
+
+\subsection{Lineare Algebra - Basics}
+\begin{itemize}
+	\item Determinante 2x2 Matrix
+		\[
+		\det \begin{pmatrix} 
+			a & b \\
+			c & d \\
+		\end{pmatrix} 
+		= ad - bc
+		\] 
+	\item Charakteristisches Polynom 2x2 Matrix
+		\[
+			P_\lambda (A)
+			= \det (A - \lambda \cdot I) =
+			\det \begin{pmatrix} 
+				a - \lambda & b \\
+				c & d - \lambda \\
+			\end{pmatrix} =
+			(a - \lambda) (d - \lambda) - bc
+		\] 
+	\item Eigenwerte 2x2 Matrix
+		(Nullstellen des charakteristischen Polynoms):
+		\begin{gather*}
+			(a - \lambda) (d - \lambda) - bc = 0
+			\Leftrightarrow 
+			\lambda ^2 - \lambda (a + d) + ad - bc = 0 \\
+			\Rightarrow
+			\lambda = \frac{ a+d \pm \sqrt{(a+d) ^2 -4 (ad -bc)} }{ 2 } \\
+			= \frac{ 1 }{ 2 } \left(
+				a + d \pm \sqrt{
+					a ^2 + d ^2 - 2 ad + 4 bc
+				} 
+			\right) 
+		\end{gather*}
+	\item abc-Formel (= Quadratische Formel)
+		\[
+			a x ^2 + b x + c = 0
+			\Leftrightarrow 
+			x = \frac{ -b \pm \sqrt{b ^2 - 4 ac} }{ 2a }
+		\] 
+\end{itemize}
+
 \pagebreak
 
 \section{Funktionsapproximation}
@@ -1275,11 +1318,98 @@ TOTO: hier genau herausfinden was dieser Satz definiert
 		\[
 			y(t) = y_h (t) + y_p (t)
 		\] 
+	\item Lösungen $y_h ' = A y_h$ bilden reellen Vekorraum
+		es genügt zum aufstellen der allgemeinen Lösung, das Ermitteln einer
+		Basis des Lösungsraums. Die Basiselemente bilden zusammengefasst
+		die Fundamentalmatrix.
 \end{itemize}
-TODO: Fundamentalmatrix erklären und hier und im vorigen besser illustrieren.
-\\
 
-TODO: Zeitinvariante Systeme erster Ordnung besser studieren
+Wir schauen uns jetzt die allgemeine Lösungsmethode solcher
+Systeme an.
+
+\subsubsection{Lösung homogene Gleichung}
+\[
+	y_h ' = A y_h
+\]
+Ermittle Basis für Lösungen von $y_h$.
+\begin{gather*}
+	(w_1(t), ..., w_{n} (t)) ^{T} \text{ Basis von } \R ^{n},
+	\text{ Berechne $n$ Anfangswertaufgaben: } \\
+	\text{ für } k \in \{
+		1, ..., n
+	\}: \;
+	y_{k}' (t) = A(t) y_{k} (t) \text{ und }
+	y_k (t_0) = w_k
+\end{gather*}
+
+Immer jeweils $k$-ten Eintrag der Vektoren betrachten.
+Lösungen $y_k (t)$ bilden Fundamentalmatrix $Y(t)$:
+\[
+	Y(t) := (y_1 (t), y_2 (t), ..., y_n (t))
+\] 
+Nun erhalten wir allgemeine Lösung der \textbf{homogenen} DGL:
+\[
+	y_h (t) = Y(t) \cdot \begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix},
+	a \in \R ^{n}
+\]
+
+\subsubsection{Lösung inhomogene Gleichung}
+Wie vorher, homogenen Ansatz durch Variation der Konstanten.
+\[
+	y_p (t) = Y(t) \cdot a(t)
+\]
+Unterschied hier, $a$ nicht mehr konstant, sonder hängt von $t$ ab.
+\begin{gather*}
+	Y(t) \cdot a' (t) = b(t)
+	\Rightarrow a(t) = a(t_0) +
+	\int_{t_0}^{t} Y ^{-1}  (s) b(s) \; ds \\
+	y(t) = Y(t) \left(
+		a(t_0) + 
+		\int_{t_0}^{t} Y ^{-1}  (s) b(s) \; ds
+	\right), \qquad
+	y(t_0) = y_0
+	\text{ (Anfangswert nicht Index von $y$) }
+\end{gather*}
+Ist allgemeine Lösung der DGL.
+
+\subsubsection{Lösung im Fall zeitinvarianter Matrix}
+\[
+	y'(t) = A y(t), \qquad
+	A \in \R ^{n,n} \text{ unabhängig von $t$}
+\]
+Ansatz:
+\[
+	y(t) = e ^{\lambda t} v, \quad
+\] 
+\textbf{Berechnung allgemeiner Lösung:} 
+
+1. Eigenwerte von $A$ berechnen.
+
+2. Für die Eigenwerte $\lambda_i$ welche wir erhalten folgende
+Fälle 
+
+\begin{enumerate}
+	\item[(i)] Alle Eigenwerte sind reell,
+		es existiert Basis aus Eigenvektoren. Allgemeine
+		Lösung des Systems:
+		\[
+			y_h (t) = \sum_{k=1}^{n} a_k e ^{\lambda_k \cdot t}
+			v_k, \qquad
+			a_k \in \R
+		\] 
+	\item[(ii)] $A$ ist diagonalisierbar.
+		es existiert Basis aus ggf. komplexen Eigenvektoren. Allgemeine
+		Lösung des Systems:
+		\[
+			y_h (t) = \sum_{k=1}^{n} a_k e ^{\lambda_k \cdot t}
+			v_k, \qquad
+			a_k \in \mathbb{C}
+		\] 
+	\item[(iii)] $A$ ist nicht diagonalisierbar
+		$\rightarrow$ Jordansche Normalform von $A$ berechnen.
+
+		Baba Leben wenn das passiert.
+\end{enumerate}
 
 \subsubsection{Stabilität(sbegriffe) von Differentialgleichungs-Systemen}
 \[
