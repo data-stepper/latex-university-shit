@@ -1101,11 +1101,21 @@ Die Lösungen der Gleichung sind dann gegeben durch:
 	\text{ für } C \in \R \text{ konstant }
 \] 
 
+\subsubsection{Einschub - Vektorfeld}
+\begin{align*}
+	F(x, y) := \left(
+		g(x, y), h(x, y)
+	\right) ^{T}
+\end{align*}
+$F$ heisst Vektorfeld. Die DGL heisst \textbf{exakt} falls $F$
+ein Potential $\phi(x, y)$ besitzt.
+
 \subsubsection{Lösung exakter Differentialgleichung}
-\textbf{Existenz des Potentials $\phi (x,y)$} 
+\textbf{Existenz des Potentials $\phi (x,y)$ im Vektorfeld $F$} 
 \\
 
-Im Definitionsbereich muss gelten:
+Potential existiert $\Leftrightarrow$
+Im Definitionsbereich gilt:
 \[
 	\frac{ \partial h }{ \partial x } (x, y) =
 	\frac{ \partial g }{ \partial y } (x, y)
@@ -1123,5 +1133,111 @@ TODO: Beispiel rechnen und besser erklären (die Berechnung eines solchen).
 
 \subsection{Existenz und Eindeutigigkeit Lösungen gewöhnlicher DGL}
 
+\subsubsection{Lipschitz-Bedingung}
+$G\subset \R \times \R ^{n}$ und $f: G \rightarrow \R ^{n}$
+gegebene Funktion.
+
+\begin{enumerate}
+	\item $f$ genügt in $G$ einer (globalen) \textbf{Lipschitz-Bedingung} 
+		bezüglich $y$ mit Lipschitz-Konstante $L \geq 0$, wenn
+		\[
+			\forall (x, y), (x, \tilde{y}) \in G:
+			\| f(x, y) - f(x, \tilde{y}) \| \leq L \| y - \tilde{y} \|
+		\] 
+	\item $f$ genügt in $G$ \textbf{lokal} einer Lipschitz-Bedingung bezüglich
+		$y$, wenn
+		\[
+			\forall (a, b) \in G: \exists \; U \text{ Umgebung von } (a, b):
+			f \text{ in } G \; \cap \; U 
+			\text{ (global) Lipschitz-Bedingung genügt (bezüglich $y$) }
+		\] 
+\end{enumerate}
+
+\subsubsection{Gleichheit von Lösungen von DGL}
+\begin{gather*}
+	G\subset \R \times \R ^{n}, \quad
+	f: G \rightarrow \R ^{n} \text{ stetig }, \quad
+	f \text{ genügt lokal Lipschitz-Bedingung bezüglich } y \\
+	\text{ Im Intervall } I \subset \R
+	\text{ sind zwei Lösungen } \varphi, \psi: I \rightarrow \R ^{n}
+	\text{ der DGL } \\
+	y' (x) = f(x, y(x)) \text{ mit }
+	\varphi (x_0) = \psi (x_0) \text{ für } x_x \in I
+	\text{ bekannt. } \\
+	\\
+	\Rightarrow \forall x \in I: \varphi (x) = \psi(x) 
+\end{gather*}
+
+\subsubsection{Existenz einer Lösung}
+\begin{gather*}
+	G\subset \R \times \R ^{n}, \quad
+	f: G \rightarrow \R ^{n} \text{ stetig }, \quad
+	f \text{ genügt lokal Lipschitz-Bedingung bezüglich } y \\
+	\forall (x_0, y_0) \in G \; \exists \; \varepsilon > 0, \;
+	\exists \; \varphi : [x_0 - \varepsilon, x_0 + \varepsilon] \rightarrow \R ^{n}
+	\text{ Lösung von } \\
+	\\
+	y' (x) = f(x, y(x)), \quad y(x_0) = y_0
+\end{gather*}
+
+TOTO: hier genau herausfinden was dieser Satz definiert
+
+\subsection{Lineare Systeme erster Ordnung}
+\[
+	y'(t) = A(t) y(t) +b(t), \qquad
+	A(t) \in \R ^{n,n}, b(t) \in \R
+	\text{ beide stetig }
+\] 
+
+\begin{itemize}
+	\item Jede Lösung hat Form (wegen Linearität):
+		\[
+			y(t) = y_h (t) + y_p (t)
+		\] 
+\end{itemize}
+TODO: Fundamentalmatrix erklären und hier und im vorigen besser illustrieren.
+\\
+
+TODO: Zeitinvariante Systeme erster Ordnung besser studieren
+
+\subsubsection{Stabilität(sbegriffe) von Differentialgleichungs-Systemen}
+\[
+	y' (t) = f (t, y(t)), \qquad
+	y(t) \in \R ^{n}
+\] 
+$y^{*} (t)$ sei spezielle Lösung der DGL.
+Untersuche wie sich benachbarte Lösungen $y(t; t_0, y_0)$
+verhalten.
+\\
+
+Begriffe von Stabilität in Differentialgleichungssystemen:
+
+\begin{itemize}
+	\item Lösung $y^{*} (t)$ heisst \textbf{stabil} auf $I \subset \R$,
+		falls $\forall t_0 \in I, \varepsilon > 0: \;
+		\exists \delta > 0: \forall y_0 \text{ mit }
+		\| y_0 - y^{*} (t) \| < \delta$ gilt:
+		\[
+			\forall t \in I: \qquad
+			\| y(t; t_0, y_0) - y^{*} (t) \| < \varepsilon
+		\] 
+	\item ist $\delta$ unabhängig von $t_0$ $\Rightarrow$
+		$y^{*} (t)$ ist \textbf{gleichmässig stabil} auf $I$.
+	\item Falls $y ^{*} (t)$ auf $[a, \infty)$ definiert ist, dann heisst
+		$y^{*} (t)$ \textbf{asymptotisch stabil}, falls $y ^{*} (t)$
+		dort stabil ist und $\forall t_0 \geq a:\; \exists \delta > 0$,
+		sodass:
+		\[
+		\forall y_0 \text{ mit } \| y_0 - y^{*} (t) \| < \delta :
+		\lim_{t \to \infty} \| y(t; t_0, y_0) - y^{*} (t) \| = 0
+		\] 
+	\item $y ^{*} (t)$ ist gleichmässig und asymptotisch stabil
+		$\Rightarrow$ $y ^{*} (t)$ heisst \textbf{strikt stabil} 
+\end{itemize}
+\\
+
+\begin{itemize}
+	\item Es reicht aus die Stabilität der Nulllösung zu prüfen.
+\end{itemize}
 
 \end{document}
