@@ -51,6 +51,104 @@
 \tableofcontents
 \pagebreak
 
+\section{Cheatsheet}
+
+\subsection{Reihen}
+
+\begin{itemize}
+	\item Taylorreihen-Entwicklung
+	\[
+		T_{n} ( f(x; a) ) = 
+		\sum_{k=0}^{n} \frac{ f ^{(k)} (a) }{ k! } (x - a) ^{k}
+		\quad \text{ mit }
+	\] 
+	\[
+		f ^{(k)},
+		\text{ $k$-te Ableitung von $f$; } \quad
+		a,
+		\text{ Entwicklungspunkt }
+	\] 
+	\item Exponentialreihe
+	\[
+		z \in \mathbb{C}: \qquad
+		e ^{z} = \sum_{k=0}^{\infty} \frac{ z ^{k} }{ k! }
+	\] 
+\end{itemize}
+
+\subsection{Ableitungsregeln}
+\begin{itemize}
+	\item Produktregel
+		\[
+			(g(x) \cdot f(x))' = 
+			(g(x))' f(x) +
+			(f(x))' g(x)
+		\] 
+	\item Kettenregel
+		\[
+		(f(g(x)))' =
+		g' (x) \cdot f' (g(x))
+		\] 
+	\item Quotientenregel
+	\[
+		\left(
+			\frac{ f(x) }{ g(x) }
+		\right) '
+		=
+		\frac{ f' (x) g(x) - f(x) g' (x) }{ g ^2 (x) }
+	\] 
+\end{itemize}
+
+\subsection{Integrationstechniken}
+\begin{itemize}
+	\item Partielle Integration
+		\begin{align*}
+			\int_{a}^{b} f' (x) g(x) dx
+			= - \int_{a}^{b} f(x) g' (x) dx 
+			+ \left[
+				f(x) g(x)
+			\right]_a^b \quad & \text{ (bestimmt) } \\
+			\int f'(x) g(x) dx = - \int f(x) g'(x) dx
+			+ f(x) g(x) \quad & \text{ (unbestimmt) }
+		\end{align*}
+	\item Substitutionsregel
+		\begin{gather*}
+			\int_{a}^{b} \varphi' (x) f( \varphi(x) ) dx
+			=
+			\int_{\varphi(a)}^{\varphi(b)} f(u) du \\
+				u := \phi (x)
+				\Rightarrow \frac{ du }{ dx } = \phi' (x)
+				\Rightarrow dx = \frac{ du }{ d \phi(x) } \\
+				\Rightarrow
+				\int_{a}^{b} \varphi' (x) f( \varphi(x) ) dx
+				 = \int_{\phi (a)}^{\phi(b)} \phi' (x) f(u)
+				\frac{ du }{ \phi' (x) } 
+				 = \int_{\varphi(a)}^{\varphi(b)} f(u) du
+		\end{gather*}
+\end{itemize}
+
+\subsection{Trigonometrische Identitäten}
+\begin{gather}
+	\sin (x_1 + x_2) =
+	\sin (x_1) \cos (x_2) + 
+	\sin (x_2) \cos (x_1) \\
+	\cos (x_1 + x_2) = 
+	\cos (x_1) \cos(x_2) - 
+	\sin (x_1) \sin(x_2) \\
+	\sin ^2 (x) = \frac{ 1 }{ 2 } \left(
+		1 - \cos (2x)
+	\right), \qquad
+	\cos ^2 (x) = \frac{ 1 }{ 2 } \left(
+		1 + \cos (2x)
+	\right) \\
+	\sin (x_1) + \sin (x_2)
+	= 2 \cdot \sin \left(
+		\frac{ x_1 + x_2 }{ 2 }
+	\right) \cdot \cos \left(
+		\frac{ x_1 - x_2 }{ 2 }
+	\right) 
+\end{gather}
+\pagebreak
+
 \section{Funktionsapproximation}
 
 \subsection{Rationale Interpolation}
@@ -236,19 +334,6 @@ soweit wie möglich mit der PRE von der zu approximierenden Funktion übereinsti
 
 Oft wird hier als PRE die Taylorreihe benutzt.
 
-\subsubsection{Taylorreihen-Entwicklung}
-
-\[
-	T_{n} ( f(x; a) ) = 
-	\sum_{k=0}^{n} \frac{ f ^{(k)} (a) }{ k! } (x - a) ^{k}
-	\quad \text{ mit }
-\] 
-\[
-	f ^{(k)},
-	\text{ $k$-te Ableitung von $f$; } \quad
-	a,
-	\text{ Entwicklungspunkt }
-\] 
 
 \subsubsection{Pad\'e Approximation - Definition}
 
@@ -276,15 +361,6 @@ Wir erhalten daraus folgende Gleichungen:
 	& \text{ und wieder } b_0 = 1
 \end{align*}
 
-\subsubsection{Quotientenregel - Ableitung}
-
-\[
-	\left(
-		\frac{ f(x) }{ g(x) }
-	\right) '
-	=
-	\frac{ f' (x) g(x) - f(x) g' (x) }{ g ^2 (x) }
-\] 
 
 \section{Optimierung}
 
