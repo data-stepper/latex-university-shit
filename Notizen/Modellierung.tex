@@ -195,6 +195,19 @@
 		\] 
 \end{itemize}
 
+\subsection{Landau-Symbole}
+Für $x \to x_0$:
+\begin{align*}
+	f(x) = o(g(x))
+	&\Leftrightarrow \frac{ f(x) }{ g(x) } \to 0 \\
+	f(x) = O(g(x))
+	&\Leftrightarrow \frac{ f(x) }{ g(x) } \text{ beschränkt } \\
+	f(x) = \text{ord}(g(x))
+	&\Leftrightarrow 
+	\frac{ f(x) }{ g(x) } = O(1) \text{ und }
+	\frac{ g(x) }{ f(x) } = O(1)
+\end{align*}
+
 \pagebreak
 
 \section{Funktionsapproximation}
@@ -1370,7 +1383,7 @@ Unterschied hier, $a$ nicht mehr konstant, sonder hängt von $t$ ab.
 	y(t_0) = y_0
 	\text{ (Anfangswert nicht Index von $y$) }
 \end{gather*}
-Ist allgemeine Lösung der DGL.
+Ist allgemeine Lösung der DBL.
 
 \subsubsection{Lösung im Fall zeitinvarianter Matrix}
 \[
@@ -1406,12 +1419,180 @@ Fälle
 			a_k \in \mathbb{C}
 		\] 
 	\item[(iii)] $A$ ist nicht diagonalisierbar
-		$\rightarrow$ Jordansche Normalform von $A$ berechnen.
-
-		Baba Leben wenn das passiert.
+		$\rightarrow$ Jordanische Normalform von $A$ berechnen.
+		\begin{align*}
+			B &= S ^{-1} A S =
+			\begin{pmatrix} 
+				J_1 & & 0 \\
+					& \ddots & \\
+				0 & & J_m
+			\end{pmatrix}, \\
+			J_i &= \text{Jordan-Kästchen}, \quad
+			i \in \{
+				1, ..., m
+			\} \\
+			S &:= \left(
+				s_1 ^{(1)}, s_2 ^{(1)}, ...,
+				s_{r_1} ^{(1)}, s_1 ^{(n)}, ...,
+				s_1 ^{(m)}, ...,
+				s_{r_m} ^{(m)}
+			\right)  \\
+			s_1 ^{(i)}  &:= \text{ Eigenvektor zum }
+			r_i\text{-fachen Eigenwert } \lambda_i,\quad i \in \{
+				1, ..., m
+			\} 
+			\\
+			s_k ^{(i)} &:= (k-1)-\text{ter Hauptvektor zum}
+			\text{ Eigenwert } \lambda_i,\quad i \in \{
+				1, ..., m
+			\} 
+		\end{align*}
+		\[
+		\text{Es gilt: }
+		\left(
+			A - \lambda_i I_n
+		\right) s_k ^{(i)} = s_{k-1} ^{(i)}, \qquad
+		k \in \{
+			2, ..., r_i
+		\} 
+		\] 
+		\begin{enumerate}
+			\item[1.] System transformieren auf $z(t) := S ^{-1} y(t)$
+			\item[2.] Neues DGL-System zerfällt in Jordan-Blöcke
+				z.B. erstes Jordan-Kästchen ergibt folgendes
+				DGL:
+				\[
+				\frac{ d }{ dt } 
+				\begin{pmatrix} 
+					z_1 \\
+					z_2 \\
+					\vdots \\
+					z_{r_1}
+				\end{pmatrix} 
+				=
+				\begin{pmatrix} 
+					\lambda_1 & 1 & & 0 \\
+					  & \lambda_1 & \ddots & \\
+					& & \ddots & 1 \\
+					0 & & & \lambda_1 \\
+				\end{pmatrix} 
+				\begin{pmatrix} 
+					z_1 \\
+					z_2 \\
+					\vdots \\
+					z_{r_1}
+				\end{pmatrix} 
+				\]
+				Hier erhalten wir ein Differentialgleichungssystemen, welches
+				wir wie folgt lösen können:
+				\setcounter{equation}{0}
+				\begin{gather}
+					z_{r_1}' = \lambda_1 z_{r_1}
+					\text{ (letzte Gleichung) }
+					\Rightarrow z_{r_1}
+					= c_{1} \cdot e ^{\lambda_1 t},
+					c_{1} \in \R \text{ konstant }
+					\\
+					\Rightarrow 
+					z_{r_1 - 1}' = \lambda_1 z_{r_1 - 1}
+					+ c_{1} \cdot r ^{\lambda_1 t}
+					\Rightarrow z_{r_1 - 1} = 
+					e ^{\lambda_1 t} \left(
+						\tilde{c_2} t + c_2
+					\right) \\
+					\Rightarrow
+					\cdots \Rightarrow
+					z_{r_1 -2} = e ^{\lambda_1 t} \left(
+						\tilde{c_3} \cdot \frac{ 1 }{ 2 } t^2
+						+ c_3
+					\right)  \text{ setze Konstanten } =1 \\
+					\Rightarrow z(t) =
+					e ^{\lambda_1 t} \begin{pmatrix} 
+						\frac{ t ^{r-1} }{ (r-1)! } \\[1em]
+						\frac{ t ^{r-2} }{ (r-2)! } \\[1em]
+						\vdots \\[1em]
+						\frac{ t ^2 }{ 2! } \\[1em]
+						\frac{ t }{ 1! } \\[1em]
+						1 
+					\end{pmatrix} 
+					= e ^{\lambda_1 t}
+					\cdot s_k ^{(1)}
+				\end{gather}
+				Nun haben wir den letzten Hauptvektor gefunden. Um die anderen
+				Hauptvektoren zu finden setzen wir bei Gleichung (1)
+				statt $z_{r_1} = c_1 \cdot e ^{\lambda_1 t}$,
+				$z_{r_1} = 0$ welches ebenfalls die Differentialgleichung
+				$z_{r_1}' = \lambda_1 z_{r_1}$ löst.
+				Dann wird Gleichung (2) genau zur vorigen Gleichung (1), also
+				$z_{r_1 - 1}' = z_{r_1 - 1} + 0 (= z_{r_1})$
+				Und wir erhalten den selben Lösungsvektor welcher nur um
+				eins nach oben verschoben wurde. Alle Hauptvektoren
+				dieses Jordan-Kästchen sehen dann wie folgt aus:
+				\[
+				e ^{\lambda_1 t}
+				\begin{pmatrix} 
+					1 \\
+					0 \\
+					\vdots \\
+					\vdots \\
+					\vdots \\
+					0
+				\end{pmatrix},
+				e ^{\lambda_1 t}
+				\begin{pmatrix} 
+					t / 1! \\
+					1 \\
+					0 \\
+					\vdots \\
+					\vdots \\
+					0
+				\end{pmatrix},
+				e ^{\lambda_1 t}
+				\begin{pmatrix} 
+					t ^2 / 2! \\
+					t / 1! \\
+					1 \\
+					0 \\
+					\vdots \\
+					0
+				\end{pmatrix},
+				... ,
+				e ^{\lambda_1 t}
+				\begin{pmatrix} 
+					\frac{ t ^{r-1} }{ (r-1)! } \\
+					\vdots \\
+					\vdots \\
+					\vdots \\
+					t / 1! \\
+					1
+				\end{pmatrix}
+				\] 
+				Wichtig ist, das sind nur die Hauptvektoren zu dem ersten
+				Jordan-Kästchen. Um die gesamte Transformationsmatrix $S$
+				zu ermitteln müssen wir alle Hauptvektoren finden.
+				Wir erhalten folgende Lösungen nach Rücktransformation:
+				\begin{align*}
+					y^{(1, 1)} (t)
+					&= e ^{\lambda_1 t} s_1 \\
+					y^{(1, 2)} (t)
+					&= e ^{\lambda_1 t} \left(
+						\frac{ t }{ 1! } s_1 + s_2
+					\right)  \\
+					& \vdots \\
+					y^{(1, r_1)} (t)
+					&= e ^{\lambda_1 t} \left(
+						\frac{ t ^{r_1 - 1} }{ (r_1 - 1) ! } s_1 +
+						\cdots +
+						\frac{ t }{ 1! } s_1 + s_2
+					\right) 
+				\end{align*}
+				Sind die Lösungen zum Eigenwert $\lambda_1$, andere
+				Lösungen sind mit $y ^{(i, k)}$ gekennzeichnet.
+				(Für den $i$-ten Eigenwert)
+		\end{enumerate}
 \end{enumerate}
 
-\subsubsection{Stabilität(sbegriffe) von Differentialgleichungs-Systemen}
+\subsection{Stabilität(sbegriffe) von Differentialgleichungs-Systemen}
 \[
 	y' (t) = f (t, y(t)), \qquad
 	y(t) \in \R ^{n}
@@ -1445,10 +1626,96 @@ Begriffe von Stabilität in Differentialgleichungssystemen:
 	\item $y ^{*} (t)$ ist gleichmässig und asymptotisch stabil
 		$\Rightarrow$ $y ^{*} (t)$ heisst \textbf{strikt stabil} 
 \end{itemize}
-\\
 
 \begin{itemize}
 	\item Es reicht aus die Stabilität der Nulllösung zu prüfen.
 \end{itemize}
+
+\subsubsection{Stabilitätssatz 1 bei linearen DGL}
+\[
+	y' (t) = A(t) y(t), \qquad
+	\text{ mit } a \leq t < \infty
+	\; (a \text{ konstant) }
+\] 
+$A(t)$ stetige Matrix und $Y(t)$ bel. Fundamentalsystem.
+
+\begin{enumerate}
+	\item Nulllösung $y ^{*} (t) = 0$ ist stabil auf $I=[a, \infty)$
+		$\Leftrightarrow$ $Y(t)$ ist auf $I$ beschränkt.
+		
+		$\Leftrightarrow$ Finde ich eine konstante Matrix $B \in \R ^{n,n}$,
+		sodass $\forall t \in I: Y(t) \leq B$?
+
+		Insbesondere auch bei $t \to \infty$.
+	\item Nulllösung $y ^{*} (t)$ ist gleichmässig stabil auf $I$
+		\[
+		\Leftrightarrow \exists M > 0: \forall t \geq t_0 \geq a:
+		\| Y(t) Y (t_0) ^{-1} \| \leq M
+		\] 
+	\item Nulllösung $y ^{*} (t)$ ist asymptotisch stabil
+		\[
+		\Leftrightarrow \lim_{t \to \infty} 
+		\| Y(t) \| = 0
+		\]
+	\item Weiteres Stabilitätskriterium (Eigenwert)
+		\\
+
+		$\lambda (t)$ sei grösster Eigenwert von $A(t) + A(t) ^{T}$:
+		\[
+			\int_{t_0}^{\infty} \lambda (t) dt = - \infty 
+			\Rightarrow \forall y(t) \text{ Lösung von }
+			y' = A(t) y :
+			\lim_{t \to \infty} y(t) = 0
+		\] 
+		Und dann ist die Nulllösung $y ^{*} (t) = 0$
+		asymptotisch.
+\end{enumerate}
+
+\subsubsection{Stabilitätssatz 2 bei linearen DBL}
+Gleiches DBL (wie beim vorigen Satz), konstante Matrix $A \in \R ^{n,n}$.
+\\
+
+Die Nulllösung $y ^{*} (t)$ ist genau dann
+\begin{enumerate}
+	\item \textbf{strikt stabil} $\Leftrightarrow$
+		$\forall \lambda_j $ Eigenwert von $A: Re(\lambda_j) < 0$.
+	\item \textbf{gleichmässig stabil} $\Leftrightarrow$
+		\[
+			\forall \lambda_j
+			\text{ Eigenwert von }A : \;
+			Re (\lambda_j)
+			\text{ und }
+			Re (\lambda_j) = 0
+			\Rightarrow g( \lambda_j ) = a( \lambda_j )
+		\] 
+		(geometrischen Vielfachheiten und arithmetischen Vielfachheiten
+		stimmen überein)
+	\item In allen anderen Fällen ist die Nulllösung 
+		$y ^{*} (t)$ \textbf{instabil}.
+\end{enumerate}
+
+\subsubsection{Stabilität bei nichtlinearen Gleichungen}
+Stabilitätsuntersuchung nichtlinearer autonomer Systeme:
+\[
+	y' (t) = f(y(t)), \qquad 
+	f(0) = 0, y ^{*} = 0
+	\text{ ist GGP }
+\] 
+
+Wir linearisieren die rechte Seite und versuchen dann Kriterien für
+lineare Systeme anzuwenden.
+\begin{align*}
+	y' (t) &= A y(t) + g(y(t)) \\
+	A &= J f(0) \\
+	g(y) &= o( \| y \| ), 
+	\text{ mit } g(0) = 0
+\end{align*}
+Es folgt nach Taylor-Entwicklung um $y^* = 0$:
+\[
+	f(y) = f( 0 ) + J f(0) y + g(y)
+\] 
+
+\subsubsection{Stabilitätssatz 3 für nichtlineare Gleichungen}
+
 
 \end{document}
