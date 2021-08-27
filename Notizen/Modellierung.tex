@@ -1383,7 +1383,7 @@ Unterschied hier, $a$ nicht mehr konstant, sonder hängt von $t$ ab.
 	y(t_0) = y_0
 	\text{ (Anfangswert nicht Index von $y$) }
 \end{gather*}
-Ist allgemeine Lösung der DBL.
+Ist allgemeine Lösung der DGL.
 
 \subsubsection{Lösung im Fall zeitinvarianter Matrix}
 \[
@@ -1671,8 +1671,8 @@ $A(t)$ stetige Matrix und $Y(t)$ bel. Fundamentalsystem.
 		asymptotisch.
 \end{enumerate}
 
-\subsubsection{Stabilitätssatz 2 bei linearen DBL}
-Gleiches DBL (wie beim vorigen Satz), konstante Matrix $A \in \R ^{n,n}$.
+\subsubsection{Stabilitätssatz 2 bei linearen DGL}
+Gleiches DGL (wie beim vorigen Satz), konstante Matrix $A \in \R ^{n,n}$.
 \\
 
 Die Nulllösung $y ^{*} (t)$ ist genau dann
@@ -1694,7 +1694,7 @@ Die Nulllösung $y ^{*} (t)$ ist genau dann
 		$y ^{*} (t)$ \textbf{instabil}.
 \end{enumerate}
 
-\subsubsection{Stabilität bei nichtlinearen Gleichungen}
+\subsubsection{Stabilitätsuntersuchung durch Linearisierung bei nichtlinearen Gleichungen}
 Stabilitätsuntersuchung nichtlinearer autonomer Systeme:
 \[
 	y' (t) = f(y(t)), \qquad 
@@ -1706,16 +1706,50 @@ Wir linearisieren die rechte Seite und versuchen dann Kriterien für
 lineare Systeme anzuwenden.
 \begin{align*}
 	y' (t) &= A y(t) + g(y(t)) \\
-	A &= J f(0) \\
+	A &= J_f (0) \\
 	g(y) &= o( \| y \| ), 
 	\text{ mit } g(0) = 0
 \end{align*}
+$o( \| y \| )$ ist Landau-Symbole.
 Es folgt nach Taylor-Entwicklung um $y^* = 0$:
 \[
-	f(y) = f( 0 ) + J f(0) y + g(y)
+	f(y) = f( 0 ) + J_f (0) y + g(y)
 \] 
 
 \subsubsection{Stabilitätssatz 3 für nichtlineare Gleichungen}
+Falls gilt:
+\begin{gather*}
+	\forall \lambda_j \text{ Eigenwerte von } A = J_f (0):
+	Re (\lambda_j) \leq 0
+	\text{ und } \\
+	\exists \lambda_j \text{ Eigenwert von } A:
+	Re (\lambda_j) = 0
+\end{gather*}
+dann können wir folgenden Stabilitätssatz \textbf{nicht} anwenden.
+Bei $Re(\lambda_j) = 0$ sind die geom. bzw. algebraischen Vielfachheiten
+hier egal.
+\\
 
+Andernfalls gilt nach dem linearisieren:
+
+\begin{enumerate}
+	\item 
+		\[
+			\forall \lambda_j \text{ Eigenwerte von }
+			A = J_f (0): Re (\lambda_j) < 0
+		\] 
+		$\Rightarrow$ $y ^{*} = 0$ ist \textbf{strikt stabiler} 
+		Gleichgewichtspunkt von $y' = f(y)$, also ist das nichtlineare
+		System auch stabil.
+	\item Gibt es einen Eigenwert $\lambda_j$ von $J_f (0)$ mit:
+		\[
+		Re (\lambda_j) > 0
+		\] 
+		$\Rightarrow$ Dann ist $y ^{*} = 0$ \textbf{instabil}.
+\end{enumerate}
+
+\subsubsection{Stabilitätssatz 4 bei nichtlinearen DGL - Ljapunov Methode}
+\subsubsection*{Definition - Ljapunov-Funktion}
+Eine $C^{1}$-Funktion $V: D \to \R, D \subset \R$ heisst Ljapunov-Funktion
 
 \end{document}
