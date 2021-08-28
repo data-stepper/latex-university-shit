@@ -485,7 +485,8 @@ Modell:
 \end{align*}
 
 \subsubsection{Differenzengleichungen}
-
+Differenzengleichungen sind Differentialgleichungen
+mit Zeitschritt 1.
 
 \begin{align*}
 	& f(t, x(t), x(t+1), ..., x(t+k)) = 0 \qquad
@@ -967,7 +968,7 @@ Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
 		weit entfernt von $x$ sein wird.
 \end{itemize}
 
-\subsection{Gewöhnliche Differentialgleichungen}
+\section{Gewöhnliche Differentialgleichungen}
 \[
 	F(x, u(x), u'(x), ..., u ^{(n)}) = 0
 \] 
@@ -1023,6 +1024,7 @@ Eine Abbildung $f: M \rightarrow M$ heisst chaotisch, wenn:
 		z.B. nicht quadriert werden
 \end{itemize}
 
+\subsection{Typen von Differentialgleichungen}
 \subsubsection{Welcher Typ Differentialgleichung?}
 
 Welchen Typ von Differentialgleichung habe ich vorliegen?
@@ -1238,7 +1240,7 @@ Die Lösungen der Gleichung sind dann gegeben durch:
 	\text{ für } C \in \R \text{ konstant }
 \] 
 
-\subsubsection{Einschub - Vektorfeld}
+\subsection{Einschub - Vektorfeld}
 \begin{align*}
 	F(x, y) := \left(
 		g(x, y), h(x, y)
@@ -1750,6 +1752,34 @@ Andernfalls gilt nach dem linearisieren:
 
 \subsubsection{Stabilitätssatz 4 bei nichtlinearen DGL - Ljapunov Methode}
 \subsubsection*{Definition - Ljapunov-Funktion}
-Eine $C^{1}$-Funktion $V: D \to \R, D \subset \R$ heisst Ljapunov-Funktion
+Eine $C^{1}$-Funktion
+(stetig differenzierbar auf $\R$)
+$V: D \to \R, D \subset \R$ heisst Ljapunov-Funktion
+auf $\overline{K}_r (0)$ für $f(y)$, falls gilt
+\begin{enumerate}
+	\item[a)] 
+	\begin{cases}
+			V(0) = 0 \\
+			V(y) > 0 \text{ für } y \ne 0 \text{ und } y \in \overline{K}_r (0)
+	\end{cases}
+	\item[b)]
+		\[
+			\forall y \in \overline{K}_r (0): \qquad
+			\langle \nabla V, f(y) \rangle \leq 0
+		\] 
+	\item[b')] $V$ heisst \textbf{strenge} Ljapunov-Funktion, falls
+		\[
+			\forall y \text{ mit } 0 < \| y \| \leq r: \qquad
+			\langle \nabla V, f(y) \rangle < 0
+		\] 
+\end{enumerate}
+
+\subsubsection*{Stabilitätssatz}
+\begin{enumerate}
+	\item Existiert eine Ljapunov-Funktion $V(y)$ von $f(y)$, dann ist
+		$y^* = 0$ ein \textbf{gleichmässig stabiler GGP}.
+	\item Ist $V(y)$ eine strenge Ljapunov-Funktion (von $f(y)$), dann
+		ist $y^* = 0$ ein \textbf{asymptotisch stabiler GGP}.
+\end{enumerate}
 
 \end{document}
