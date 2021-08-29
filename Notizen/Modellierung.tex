@@ -163,6 +163,18 @@
 		\end{pmatrix} 
 		= ad - bc
 		\] 
+	\item Determinante 3x3 Matrix (Sarrus)
+		\[
+		\det \begin{pmatrix} 
+			a & b & c \\
+			d & e & f \\
+			g & h & i \\
+		\end{pmatrix} =
+		aei + bfg + cdh
+		- ceg - bdi - afh
+		\] 
+		Produkt entlang links oben unten rechts Diagonale (+) \\
+		Produkt entlang rechts oben unten links Diagonale (-)
 	\item Charakteristisches Polynom 2x2 Matrix
 		\[
 			P_\lambda (A)
@@ -187,11 +199,31 @@
 				} 
 			\right) 
 		\end{gather*}
+	\item Laplacscher Entwicklungssatz (Determinanten)
+		\begin{gather*}
+			\det A = \sum_{i=1}^{n} (-1) ^{i+j} \cdot a_{ij} \cdot \det A_{ij}
+			\text{ (nach $j$-ter Spalte) }
+			\\
+			\det A = \sum_{j=1}^{n} (-1) ^{i+j} \cdot a_{ij} \cdot \det A_{ij}
+			\text{ (nach $i$-ter Zeile) }
+			\\
+			A_{ij} \text{ ist Untermatrix nach Streichen $i$-ten Zeile}
+			\text{ und $j$-ten Spalte. }
+		\end{gather*}
+\end{itemize}
+
+\subsection{Einfache Mathematik}
+\begin{itemize}
 	\item abc-Formel (= Quadratische Formel)
 		\[
 			a x ^2 + b x + c = 0
 			\Leftrightarrow 
 			x = \frac{ -b \pm \sqrt{b ^2 - 4 ac} }{ 2a }
+		\] 
+	\item Binomische Formeln
+		\[
+			(a+b)^2 = a ^2 + 2ab + b ^2, \qquad
+			(a+b)(a-b) = a ^2 - b ^2
 		\] 
 \end{itemize}
 
@@ -1373,19 +1405,24 @@ Wie vorher, homogenen Ansatz durch Variation der Konstanten.
 \[
 	y_p (t) = Y(t) \cdot a(t)
 \]
-Unterschied hier, $a$ nicht mehr konstant, sonder hängt von $t$ ab.
+Unterschied hier, $a$ nicht mehr konstant, sondern hängt von $t$ ab.
 \begin{gather*}
 	Y(t) \cdot a' (t) = b(t)
 	\Rightarrow a(t) = a(t_0) +
-	\int_{t_0}^{t} Y ^{-1}  (s) b(s) \; ds \\
+	\int_{t_0}^{t} Y (s) ^{-1} b(s) \; ds \\
 	y(t) = Y(t) \left(
 		a(t_0) + 
-		\int_{t_0}^{t} Y ^{-1}  (s) b(s) \; ds
+		\int_{t_0}^{t} Y (s)^{-1}  b(s) \; ds
 	\right), \qquad
 	y(t_0) = y_0
 	\text{ (Anfangswert nicht Index von $y$) }
 \end{gather*}
 Ist allgemeine Lösung der DGL.
+\\
+
+Tipp: Anstatt Integral über $Y(s) ^{-1} b(s)$ zu berechnen, LGS
+$Y(s)z(s) = b(s)$ lösen (Gauss-Algorithmus) und dann Integral über
+$z(s)$ lösen.
 
 \subsubsection{Lösung im Fall zeitinvarianter Matrix}
 \[
