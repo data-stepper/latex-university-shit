@@ -155,6 +155,7 @@
 
 \subsection{Lineare Algebra - Basics}
 \begin{itemize}
+	\item Reguläre Matrix $\Leftrightarrow$ Matrix ist \textbf{invertierbar} 
 	\item Determinante 2x2 Matrix
 		\[
 		\det \begin{pmatrix} 
@@ -564,6 +565,8 @@ Dabei gilt:
 Über Linearisierung Approximation von nichtlinearen Systemen
 \\
 
+Die allgemeine Lösung stellen wir weiter unten auf.
+
 \subsubsection{Übergangsmatrix}
 
 Für $s, t \in \N, s \leq t$ ist:
@@ -581,14 +584,42 @@ Für $s, t \in \N, s \leq t$ ist:
 Ist die Übergangsmatrix von $s$ nach $t$.
 \\
 
-TODO: Anfangswertaufgabe hier und inhomogenes System,
-\\
+\subsubsection*{Allgemeine Lösung eines solchen Systems}
+\[
+	x(t) = \Phi (t, 0) x(0)
+	+
+	\sum_{s=0}^{t-1} \Phi (t, s+1) u(s)
+\] 
+Ist eindeutige Lösung des inhomogenen Systems.
+$\Phi$ kann man auch mit unterem Satz ermitteln.
 
-TODO: Lösung inhomogene und homogen systems hier Satz 5.1
-Fundamentalmatrix
+\subsubsection{Fundamentalsystem /-matrix}
+\[
+	x(t+1) = A(t) x(t)
+\] 
+ist LGS, da $A$ nach einsetzen von $t$ eine Matrix wird.
+Lösungen $x_i (t)$ bilden einen Vektorraum, den sog.
+Lösungsraum. Die Menge dieser Vektoren heisst \textbf{Fundamentalsystem},
+sammeln wir diese in einer Matrix als \underline{Spaltenvektoren}
+zusammen, so heisst diese \textbf{Fundamentalmatrix}.
+Dann gilt:
+\begin{itemize}
+	\item $X(t) \in \mathbb{K} ^{n,n}$ ist Folge von Fundamentalmatrizen
+		\[
+			\Leftrightarrow X(0) \text{ ist regulär, und }
+			\forall t \in \mathbb{N}:
+			X(t+1) = A(t) X(t)
+		\] 
+		Dann ist auch $\forall t \in \mathbb{N}: X(t)$ regulär.
+	\item $X(t)$ ist Fundamentalmatrix und
+		$\forall t \in \mathbb{N}: A(t)$ regulär
+		\[
+			\Rightarrow \Phi (t, s) = X(t) X(s) ^{-1}
+		\] 
+		$\Phi (t,s)$ ist Übergangsmatrix.
+\end{itemize}
 
 \subsubsection{Zeitinvariante lineare Systeme}
-
 \[
 	x(t+1) = A x(t)
 	\qquad \text{ (Matrix konstant) }
@@ -1370,6 +1401,47 @@ TOTO: hier genau herausfinden was dieser Satz definiert
 		Basis des Lösungsraums. Die Basiselemente bilden zusammengefasst
 		die Fundamentalmatrix.
 \end{itemize}
+
+\subsubsection{Reduktion linearer Differentialgleichung höherer Ordnung}
+Eine lineare DGL höherer Ordnung können wir wie folgt reduzieren
+auf ein lineares System erster Ordnung (aber vektorwertig dann):
+\[
+	y ^{(n)} (t) = a_{n-1} y ^{(n-1)} (t)
+	+ \cdots +
+	a_1 y' (t) + a_0 y (t)
+	+ b(t)
+\] 
+Wir substituieren:
+\[
+	y_1 = y, \quad
+	y_2 = y', \quad
+	..., \quad
+	y_n = y ^{(n)}
+\] 
+Und erhalten dann jeweils $(y_k)' = y_{k+1}$,
+mit diesem Wissen können wir unser Problem als vektorwertiges
+System erster Ordnung umformulieren:
+\[
+	\begin{pmatrix} 
+		y_1 \\
+		y_2 \\
+		\vdots \\
+		y_{n-1}
+	\end{pmatrix}'
+	=
+	\begin{pmatrix}
+		0 & 1 & \cdots & 0 \\
+		\cdots & \cdots & 1 & \vdots \\
+		\ddots & \ddots & \ddots & \vdots \\
+		a_1 & a_2 & \cdots & a_{n-1}
+	\end{pmatrix} \cdot
+	\begin{pmatrix} 
+		y_1 \\
+		y_2 \\
+		\vdots \\
+		y_{n-1}
+	\end{pmatrix}
+\] 
 
 Wir schauen uns jetzt die allgemeine Lösungsmethode solcher
 Systeme an.
