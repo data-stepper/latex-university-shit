@@ -1416,7 +1416,7 @@ Wir substituieren:
 	y_1 = y, \quad
 	y_2 = y', \quad
 	..., \quad
-	y_n = y ^{(n)}
+	y_{n-1} = y ^{(n-1)}
 \] 
 Und erhalten dann jeweils $(y_k)' = y_{k+1}$,
 mit diesem Wissen können wir unser Problem als vektorwertiges
@@ -1441,7 +1441,17 @@ System erster Ordnung umformulieren:
 		\vdots \\
 		y_{n-1}
 	\end{pmatrix}
+	+ 
+	\begin{pmatrix} 
+		0 \\
+		0 \\
+		\vdots \\
+		b
+	\end{pmatrix}
 \] 
+In der letzten Zeile steht dann genau unsere Ursprüngliche Differentialgleichung.
+Diese können wir jetzt mit folgender Methode lösen:
+\\
 
 Wir schauen uns jetzt die allgemeine Lösungsmethode solcher
 Systeme an.
