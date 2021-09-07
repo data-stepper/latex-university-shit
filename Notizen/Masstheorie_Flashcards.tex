@@ -1,0 +1,38 @@
+\documentclass[a4paper]{article}
+
+\usepackage[paperwidth=.5\paperwidth,paperheight=.25\paperheight]{geometry}
+\usepackage{pgfpages}
+\pagestyle{empty}
+\thispagestyle{empty}
+\pgfpagesuselayout{8 on 1}[a4paper]
+\makeatletter
+\@tempcnta=1\relax
+\loop\ifnum\@tempcnta<9\relax
+\pgf@pset{\the\@tempcnta}{bordercode}{\pgfusepath{stroke}}
+\advance\@tempcnta by 1\relax
+\repeat
+\makeatother
+
+\usepackage[latin1]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\begin{document}
+
+{
+	\noindent \textsc{Definition}
+	\vfill
+	\centerline{{\Large Ja man}}
+	\vfill
+}
+\newpage
+
+{
+	\vspace*{\stretch{1}}
+	\centerline{{\Large Neni9 man}}
+	\vspace*{\stretch{1}}
+}
+\newpage
+
+
+\end{document}
