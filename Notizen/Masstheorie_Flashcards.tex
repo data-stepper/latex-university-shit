@@ -13,7 +13,7 @@
 \repeat
 \makeatother
 
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
 \usepackage{amsmath}
 
@@ -27,7 +27,7 @@
 		}
 		\vfill
 		\centerline{{
-				$\sigma$-Algebra
+			$\sigma$-Algebra
 		}}
 		\vfill
 	}
@@ -39,7 +39,7 @@
 		}
 		\vfill
 		\centerline{{
-				Messraum und messbare Menge
+			Messraum und messbare Menge
 		}}
 		\vfill
 	}
@@ -47,11 +47,11 @@
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Definition 1.2
 		}
 		\vfill
 		\centerline{{
-				MARKER: Card number 3
+			Maß
 		}}
 		\vfill
 	}
@@ -59,11 +59,11 @@
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Begriff
 		}
 		\vfill
 		\centerline{{
-				MARKER: Card number 4
+			Maßraum
 		}}
 		\vfill
 	}
@@ -71,11 +71,12 @@
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Definition
 		}
 		\vfill
 		\centerline{{
-				MARKER: Card number 5
+			Wahrscheinlichkeitsmaß und
+			-raum
 		}}
 		\vfill
 	}
@@ -83,45 +84,65 @@
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Satz 1.3,
+			Eigenschaften eines Maßraumes
 		}
 		\vfill
-		\centerline{{
-				MARKER: Card number 6
-		}}
+		\begin{gather*}
+			(\Omega, A, \mu) \text{ ist Maßraum } \\
+			\\
+			\forall B_1 , ..., B_n \in A
+			\text{ disjunkt }:
+		\end{gather*}
 		\vfill
 	}
 	\newpage
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Satz 1.3,
+			Eigenschaften eines Maßraumes
 		}
 		\vfill
-		\centerline{{
-				MARKER: Card number 7
-		}}
+		\begin{gather*}
+			(\Omega, A, \mu) \text{ ist Maßraum } \\
+			\\
+			\forall B, C \in A \\
+			B \subset C \\
+			\mu (B) < \infty :
+		\end{gather*}
 		\vfill
 	}
 	\newpage
 
 	{
 		\noindent \textsc{
-			MARKER: Definition
+			Satz 1.3,
+			Eigenschaften eines Maßraumes
 		}
 		\vfill
-		\centerline{{
-				MARKER: Card number 8
-		}}
+		\begin{gather*}
+			(\Omega, A, \mu) \text{ ist Maßraum } \\
+			\\
+			\forall B, C \in A \\
+			\mu \left(
+				B \cap C
+			\right) < \infty :
+		\end{gather*}
 		\vfill
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 2
-		}}
+		\begin{gather*}
+			(\Omega, A) \text{ heisst Messraum } \\
+			\Leftrightarrow \\
+			\Omega \text{ Grundraum } \\
+			A \text{ ist $\sigma$-Algebra über $\Omega$ } \\
+			\text{ und }\\
+			\text{ Die } B \in A \text{ heissen messbare Mengen }
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
@@ -132,7 +153,7 @@
 			\Omega \neq \emptyset,
 			A
 			\subset 2 ^{\Omega}: \\
-			A \text{ Mengensystem heisst $\sigma$-Algebra } \\
+			A \text{ Mengensystem heisst $\sigma$-Algebra (über $\Omega$) } \\
 			\Leftrightarrow \\
 			\begin{align*}
 				&(i) \; \Omega \in A \\
@@ -147,54 +168,90 @@
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 4
-		}}
+		\begin{gather*}
+			(\Omega, A, \mu) \text{ heisst Maßraum } \\
+			\Leftrightarrow \\
+			A \text{ ist $\sigma$-Algebra über $\Omega$ } \\
+			\mu \text{ ist Maß auf $A$ }
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 3
-		}}
+		\begin{gather*}
+			(\Omega, A) \text{ Messraum, }
+			\mu: A \to [0, \infty] \\
+			\mu \text{ heisst Maß } \\
+			\Leftrightarrow \\
+			\begin{align*}
+				&(i) \; \mu (\emptyset) = 0 \text{ (Nulltreue) } \\
+				&(ii) \; \forall B_n \in A \text{ disjunkt }:
+				\mu \left(
+					\bigcup_{n \in \mathbb{N}}  B_n
+				\right) = \sum_{n \in \mathbb{N}} \mu (B_n) \\
+				&\qquad \qquad \text{ ($\sigma$-Additivität) }
+			\end{align*}
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 6
-		}}
+		\begin{gather*}
+			\bigcup_{i=1}^{n} B_i \in A,
+			\\
+			\mu \left(
+				\bigcup_{i=1}^{n} B_i
+			\right) = 
+			\sum_{i=1}^{n} \mu (B_i)
+			\\
+			\\
+			\text{ $\rightsquigarrow$ für endlich viele! }
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 5
-		}}
+		\begin{gather*}
+			(\Omega, A, \mu) \text{ Maßraum }: \\
+			\mu \text{ heisst Wahrscheinlichkeitsmaß } \\
+			\Leftrightarrow \\
+			\mu (\Omega) = 1 \\
+			\text{ und } \\
+			(\Omega, A, \mu) \text{ heisst Wahrscheinlichkeitsraum }
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 8
-		}}
+		\begin{gather*}
+			\mu \left(
+				B \cup C
+			\right) = \mu (B) + \mu (C) - \mu \left(
+				B \cap C
+			\right) 
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
 
 	{
 		\vspace*{\stretch{1}}
-		\centerline{{
-				Card Backside 7
-		}}
+		\begin{gather*}
+			C \setminus B \in A \\
+			\\
+			\mu \left(
+				C \setminus B
+			\right) =
+			\mu (C) - \mu (B)
+		\end{gather*}
 		\vspace*{\stretch{1}}
 	}
 	\newpage
