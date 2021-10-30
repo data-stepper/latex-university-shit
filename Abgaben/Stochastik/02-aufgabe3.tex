@@ -1,0 +1,63 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\maketitle
+	\begin{Aufgabe}{3}
+	\end{Aufgabe}
+
+	\begin{itemize}
+		\item[a)] Nein, denn für genau dieses Paar gilt ja dann:
+			\[
+				0 = P(A_i \cap A_j) \neq P(A_i) \cdot P(A_j) > 0
+			\] 
+			Insbesondere ist dann die Indexteilemenge $I = \{
+				i, j
+			\} \subset \{
+				1, ..., n
+			\} $ für welche die Unabhängigkeitsaussage nicht gilt.
+
+		\item[b)] {
+				\begin{enumerate}
+					\item[(i)] {
+							\begin{align*}
+								P \left(
+									\bigcup_{i=1}^n A_i
+								\right) &= 
+								P \left(
+									\left(
+										\bigcap_{i=1}^n A_i ^{c}
+									\right) 
+									^{c}
+								\right) =
+								1 - P \left(
+									\bigcap_{i=1}^n A_i ^{c}
+								\right) \\
+								&= 1 - \prod_{i=1}^{n} P(A_i ^{c}) \\
+								&= 1 - \prod_{i=1}^{n} \left(
+									1 - P(A_i)
+								\right)
+							\end{align*}
+						}
+				\end{enumerate}
+			}
+	\end{itemize}
+
+\end{document}
