@@ -1,0 +1,130 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\maketitle
+	\begin{Aufgabe}{5}
+		Als erstes schauen wir uns Fall \textit{(ii)} an.
+		\[
+			\forall i, j \in \{
+				1, ..., n
+			\}:
+			P(A_i \cap A_j) = \frac{ \# A }{ \# \Omega } =
+			2^{-n} \cdot \# \{
+				(w_1, ..., w_n) \in \Omega \; \vert \; 
+				w_i = 1, w_j = 1
+			\} = 2^{-n} \cdot 2^{n-2} = \frac{ 1 }{ 4 } \\
+		\] 
+		Es gilt aber auch:
+		\[
+			P(A_i) = 2^{-n} \cdot \# \{
+				(w_1, ..., w_n) \in \Omega \; \vert \; 
+				w_i = 1
+			\} = 2^{-n} \cdot 2^{n-1} = \frac{ 1 }{ 2 }
+			\qquad (= P(A_j))
+		\] 
+		Und $P(A_i \cap A_j) = \frac{ 1 }{ 4 } = \frac{ 1 }{ 2 } \cdot \frac{ 1 }{ 2 } = P(A_i) P(A_j)
+		\Rightarrow A_i, A_j$ sind stochastisch unabhaengig.
+		Da jeweils aber immer gilt $i\neq j$ koennen wir das fuer beliebige Teilmengen machen. Auch bei
+		allen anderen Teilmengen $I \subset \{
+			1, ..., n
+		\} $ gilt dann immer die Unabhaengigkeit, da die Indize immer disjunkt sind.
+		Insbesondere gilt auch:
+		\[
+			P\left(
+				\bigcap_{i=1}^{n-1} A_i \cap A_n
+			\right) = 2 ^{-n} \cdot \# \{
+				(w_1, ..., w_n) \in \Omega \; \vert \;
+				w_1 = 1, ..., w_n = 1
+			\} = 2^{-n}
+		\] 
+		\[
+			P\left(
+				\bigcap_{i=1}^{n-1} A_i
+			\right) = 2 ^{-n} \cdot \# \{
+				(w_1, ..., w_n) \in \Omega \; \vert \;
+				w_1 = 1, ..., w_{n-1} = 1
+			\} = 2 ^{1-n}
+		\] 
+		\[
+		P\left(
+			A_n
+		\right) = 2 ^{-n} \cdot \# \{
+			(w_1, ..., w_n) \in \Omega \; \vert \;
+			w_n = 1
+		\} = 2^{-1}
+		\] 
+		Wir sehen also auch bei der gesamten Indexmenge die Unabhaengigkeit.
+		Es folgt also, dass $\{
+			A_1, ..., A_n
+		\} $ stochastisch unabhaengig ist.
+		\\
+		
+		Aehnlich koennen wir im Fall \textit{(iii)} vorgehen:
+		\begin{align*}
+			P\left(
+				A_j \cap A_{n+1}
+				\right) &= 2^{-n} \cdot \# \{
+				(w_1, ..., w_n) \in \Omega \; \vert \;
+				w_j = 1, w_1 + \cdots + w_n \text{ ungerade }
+			\} \\
+				&= 2^{-n} \cdot \# \{
+					(w_1, ..., w_n) \in \Omega \; \vert \;
+					w_1 + \cdots w_{j-1} + w_{j+1} + \cdots + w_n
+					\text{ gerade }
+				\} = 2^{-n} \cdot 2^{n-2} = \frac{ 1 }{ 4 }
+		\end{align*}
+		Im obigen verwenden wir den Hinweis, aber mit einer $n-1$-elementigen Teilmenge (da ja $w_j$ nicht
+		Teil der Summe ist). Wie bei \textit{(ii)} koennen wir beliebige Indexmengen hier vereinigen
+		und wir schauen auch, dass im Fall der gesamten Indexmenge klappt:
+		\begin{align*}
+			P\left(
+				\bigcap_{i=2}^n A_i \cap A_{n+1}
+			\right) &= 2^{-n} \cdot \# \{
+				(w_2, ..., w_n) \in \Omega \; \vert \;
+				w_2 = 1, ..., w_n = 1, w_1 + \cdots + w_n \text{ ungerade}
+			\} = 2 ^{-n} \\
+			P\left(
+				\bigcap_{i=2}^n A_i
+		\right) &= 2^{1-n} \\
+			P \left(
+				A_{n+1}
+			\right) &= 2 ^{-n} \cdot \# \{
+					(w_1, ..., w_n) \in \Omega \; \vert \;
+					w_1 + \cdots + w_n \text{ ungerade}
+				\} = 2^{-n} \cdot 2^{n-1} = \frac{ 1 }{ 2 }\\
+					& \frac{ 1 }{ 2 } \cdot 2^{1-n} = 2^{-n}
+					\Rightarrow \text{Die Familie in \textit{(iii)} ist stochastisch unabhaengig.}
+		\end{align*}
+		Nun faellt uns aber auf, dass genau der letzte Schritt im Fall von \textit{(i)} schief geht.
+		Sind naemlich alle $w_i = 1$ dann gibt es keine Moeglichkeit mehr, dass die Summe ungerade ist.
+		Dann gilt also:
+		\[
+			P\left(
+				\bigcap_{i=1}^n A_i \cap A_{n+1}
+			\right) = 0 \neq P\left(
+				\bigcap_{i=1}^n A_i
+			\right) \cdot P \left(
+				A_{n+1}
+			\right) > 0
+		\] 
+		Also ist die Familie im Fall \textit{(i)} \textbf{nicht} stochastisch unabhaengig.
+	\end{Aufgabe}
+\end{document}
