@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 num_paths = 2
 N = 10000
-sigma = 1.0 / np.sqrt(N)
+sigma = 1.0
 
 one_dim = np.cumsum(
     np.random.normal(
