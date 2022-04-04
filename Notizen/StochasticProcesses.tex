@@ -1,0 +1,37 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\beh}{\textit{Behauptung. }}
+
+\setlength{\parindent}{0pt}
+\newenvironment{Aufgabe}[2][Aufgabe]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+\title{ \textbf{Cheat Sheet Stochastic Processes} }
+\author{Bent Mueller}
+\date{04.04.2022}
+\maketitle
+
+\section{Kolmogorov Erweiterungssatz}
+\[
+	\forall J \subset T: \forall B \in \mathcal{B}_s: P(\pi^{-1}_{T, J}(B))
+	= P_J (B)
+\] 
+
+Means that for every transition $T$ in the state space $T$ and every state $B$ in the set of states $B_s$ the probability of the transition $T$ is the same as the probability of the state $B$.
+
+In other words, the probability of the transition $T$ is the same as the probability of the state $B$.
+
+\end{document}
