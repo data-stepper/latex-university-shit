@@ -24,8 +24,8 @@
 \setbeamercovered{transparent}
 \setbeamercolor{block body example}{fg=blue, bg=black!20}
 
-\useoutertheme[subsection=false]{miniframes}
-\usetheme{default}
+\useoutertheme[subsection=true]{miniframes}
+\usetheme{Bergen}
 
 \def\Z{{\mathbb Z}}
 \def\N{{\mathbb N}}
@@ -43,13 +43,6 @@
 \def\cN{{\mathcal N}}
 \def\cP{{\mathcal P}}
 \def\cS{{\mathcal S}}
-
-% This doesn't work in beamer class for some reason
-\newtheorem{algorithm}{Algorithm}[section]
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}{Proposition}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{definition}{Definition}[section]
 
 \begin{document}
 
@@ -113,7 +106,6 @@
 	}
 
 	\only<3->{
-		\vspace{5mm}
 		\[
 			\nabla^2 f(x) := \begin{pmatrix}
 				\frac{ \partial ^2 f(x) }{ \partial x_1 ^2 }           &
@@ -143,8 +135,8 @@
 	}
 
 	\only<4>{
-		Each row of the Hessian can be regarded as the gradient of each of the
-		components of the gradient vector. Specifically, it is the
+		Each row of the Hessian can be regarded as the gradient w.r.t. each
+		component of the gradient vector of $f$. Specifically, it is the
 		\textit{Jacobian} matrix of the gradient.
 	}
 
