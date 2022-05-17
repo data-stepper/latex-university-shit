@@ -27,6 +27,30 @@
 \useoutertheme[subsection=false]{miniframes}
 \usetheme{default}
 
+\def\Z{{\mathbb Z}}
+\def\N{{\mathbb N}}
+\def\Q{{\mathbb Q}}
+\def\R{{\mathbb R}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\K{{\mathbb K}}
+\def\T{{\mathbb T}}
+
+\def\cA{{\mathcal A}}
+\def\cF{{\mathcal F}}
+\def\cG{{\mathcal G}}
+\def\cM{{\mathcal M}}
+\def\cN{{\mathcal N}}
+\def\cP{{\mathcal P}}
+\def\cS{{\mathcal S}}
+
+% This doesn't work in beamer class for some reason
+\newtheorem{algorithm}{Algorithm}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{definition}{Definition}[section]
+
 \begin{document}
 
 \begin{frame}
@@ -40,12 +64,99 @@
 	\tableofcontents
 \end{frame}
 
-\subsection{General problem layout}
-\subsection{Notations commonly used}
+\subsection{General problem layout \& note on Notations}
 
 \begin{frame}
-	World
+	\frametitle{What is automatic differentiation?}
+
+	Given a function $f: \R^{n} \longrightarrow \R$ that is
+	\textit{twice differentiable} , we want to
+	\textit{efficiently and numerically stable} compute
+	\vspace{5mm}
+
+	\begin{itemize}
+		\item $f(x)$, the value of our function at a point $x$ in $\R^{n}$,
+		\item $\nabla f(x)$, the gradient of our function at $x$, and
+		\item $\nabla^2 f(x)$, the Hessian of our function at $x$.
+	\end{itemize}
 \end{frame}
+
+% Make this frame aligned to the top
+\begin{frame}[t]
+	\frametitle{Quick reminder of the symbols}
+
+	\only<1->{
+		\vspace{5mm}
+		Since $f: \R^{n} \longrightarrow \R$, we know that
+		$f(x) \in \R$, now we define the Gradient and Hessian
+		for $x \in D \subset \R^n$ where $D$ is an
+		open subset in $\R^n$ as follows:
+	}
+
+	\only<2>{
+		\vspace{5mm}
+		\[
+			\nabla f(x) := \begin{pmatrix}
+				\frac{ \partial f(x) }{ \partial x_1 } \\
+				\frac{ \partial f(x) }{ \partial x_2 } \\
+				\vdots                                 \\
+				\frac{ \partial f(x) }{ \partial x_n }
+			\end{pmatrix}
+		\]
+
+		\vspace{5mm}
+
+		The Gradient is the n-dimensional
+		\textit{vector} of partial derivatives of $f$ at $x$.
+		It describes how $f$ changes with respect to each of the
+		$n$ variables $x_1, \ldots, x_n$.
+	}
+
+	\only<3->{
+		\vspace{5mm}
+		\[
+			\nabla^2 f(x) := \begin{pmatrix}
+				\frac{ \partial ^2 f(x) }{ \partial x_1 ^2 }           &
+				\frac{ \partial ^2 f(x) }{ \partial x_1 \partial x_2 } &
+				\cdots                                                 &
+				\frac{ \partial ^2 f(x) }{ \partial x_1 \partial x_n }   \\
+				\frac{ \partial ^2 f(x) }{ \partial x_2 \partial x_1 } &
+				\frac{ \partial ^2 f(x) }{ \partial x_2 ^2 }           &
+				\cdots                                                 &
+				\frac{ \partial ^2 f(x) }{ \partial x_2 \partial x_n }   \\
+				\vdots                                                 &
+				\vdots                                                 &
+				\ddots                                                 &
+				\vdots                                                   \\
+				\frac{ \partial ^2 f(x) }{ \partial x_n \partial x_1 } &
+				\frac{ \partial ^2 f(x) }{ \partial x_n \partial x_2 } &
+				\cdots                                                 &
+				\frac{ \partial ^2 f(x) }{ \partial x_n ^2 }             \\
+			\end{pmatrix}
+		\]
+	}
+
+	\only<3>{
+		The Hessian is the real matrix of all \textit{second order}
+		partial derivatives of $f$ at $x$. It describes how the gradient
+		changes with respect to each of the $n$ variables $x_1, \ldots, x_n$.
+	}
+
+	\only<4>{
+		Each row of the Hessian can be regarded as the gradient of each of the
+		components of the gradient vector. Specifically, it is the
+		\textit{Jacobian} matrix of the gradient.
+	}
+
+\end{frame}
+
+\begin{frame}[t]
+	\frametitle{ Notations }
+
+	Definition:
+
+\end{frame}
+
 
 \section{Forward / Reverse mode}
 \subsection{Forward mode}
@@ -59,6 +170,14 @@
 \subsection{Kantorovic trees}
 \subsection{Mode of operation}
 \subsection{Proof of complexity}
+
+\begin{frame}
+	World
+\end{frame}
+
+\section{Applications}
+\subsection{Use in optimization}
+\subsection{Neural networks}
 
 \begin{frame}
 	World
