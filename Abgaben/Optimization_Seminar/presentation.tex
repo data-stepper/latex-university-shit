@@ -10,7 +10,7 @@
 }
 
 \author{Bent Müller}
-\institute{Universität Hamburg}
+\institute{University of Hamburg}
 \date{17.05.2022}
 
 % Standard beamer class setup, configure as needed
@@ -57,14 +57,15 @@
 	\tableofcontents
 \end{frame}
 
-\subsection{General problem layout \& note on Notations}
+\subsection{General problem layout}
 
 \begin{frame}
 	\frametitle{What is automatic differentiation?}
 
 	Given a function $f: \R^{n} \longrightarrow \R$ that is
-	\textit{twice differentiable} , we want to
-	\textit{efficiently and numerically stable} compute
+	\textit{twice differentiable}, we want to
+	\textit{efficiently}
+	and with good \textit{numerical stability} compute
 	\vspace{5mm}
 
 	\begin{itemize}
@@ -142,12 +143,145 @@
 
 \end{frame}
 
+\subsection{Characterizing Sequence}
 \begin{frame}[t]
-	\frametitle{ Notations }
+	\frametitle{ Characterizing Sequence }
 
-	Definition:
+	\vspace{5mm}
 
+	\only<1>{
+		We will only discuss functions that can be written as compositions of:
+		\vspace{5mm}
+
+		\begin{itemize}
+			\item constant functions \mathcal{C},
+			\item unary functions \mathcal{U} and
+			\item binary functions \mathcal{B}.
+		\end{itemize}
+
+		\vspace{5mm}
+		Where \mathcal{C, U} and \mathcal{B} are the corresponding
+		function spaces.
+
+		\vspace{5mm}
+		The characterizing sequence computes $f(x)$ in $m$-steps, with each
+		step depending \textit{only} on previously computed steps.
+	}
+
+	\only<2>{
+		We decompose the computation of $f(x)$ as follows:
+
+		% Char sequence for f(x)
+		\begin{itemize}
+			\item $f_i = x_i$ for $i \in \{
+				      1, \ldots, n
+				      \} $
+			\item $f_{i + n} = \begin{cases}
+					      \omega_i                    & \text{ if } \omega_i \in \mathcal{C} \\
+					      \omega_i (f_{k_i})          & \text{ if } \omega_i \in \mathcal{U} \\
+					      \omega_i (f_{k_i}, f_{l_i}) & \text{ if } \omega_i \in \mathcal{B}
+				      \end{cases}$
+			      \qquad for $i \in \{
+				      1, \ldots, m
+				      \}$
+			\item $f_{m + n} = f(x)$
+			\item $k_i, l_i < i + n$  \text{ and }
+			\item $\{
+				      n+1, \ldots, n+m - 1
+				      \} \subset \bigcup_{i=1}^{m} \{
+				      k_i, l_i
+				      \}$
+		\end{itemize}
+		The last condition ensures that each of the $m$-steps in the computation
+		is actually used to compute $f(x)$.
+		\[
+			\Rightarrow S := \left(
+			(\omega_i, k_i, l_i)
+			\right)_{i \in \{
+					1, \ldots, m
+					\} }
+			\text{is char. seq. for f}
+		\]
+		that is defined in the following.
+	}
+
+	\only<3-4>{
+		More specifically, we set $I := \{
+			1, \ldots, m
+			\} $ and $J := \{
+			1, \ldots, n + m - 1
+			\} $ as two sets of indices.
+
+		\begin{align*}
+			\Rightarrow S & := \left(
+			(\omega_i, k_i, l_i)
+			\right)_{i \in \{
+					1, \ldots, m
+			\} }                       \\
+			              & \in \left(
+			\left(
+				\mathcal{C} \times \{
+				0
+				\}^2
+				\right) \cup
+			\left(
+				\mathcal{U} \times J \times \{
+				0
+				\} \cup
+				\left(
+					\mathcal{B} \times J^2
+					\right)
+				\right) \right) ^m
+		\end{align*}
+
+		The above is equivalent to the following three cases:
+	}
+
+	\only<4>{
+		\vspace{5mm}
+
+		\begin{itemize}
+			\item if $\omega_i \in \mathcal{C} \Rightarrow
+				      k_i = l_i = 0$
+			\item if $\omega_i \in \mathcal{U} \Rightarrow
+				      k_i \in J, l_i = 0$
+			\item if $\omega_i \in \mathcal{B} \Rightarrow
+				      k_i, l_i \in J$
+		\end{itemize}
+	}
 \end{frame}
+
+\begin{frame}
+	\frametitle{The Computational Graph}
+	An example computational graph constructed by a characterizing sequence
+	for $n=4$ and $m=4$.
+
+	\begin{center}
+		\begin{tikzpicture}
+			% Add the states
+			\node[state]			 (a) {$x_1$};
+			\node[state, right=of a] (b) {$x_2$};
+			\node[state, right=of b] (c) {$x_3$};
+			\node[state, right=of c] (d) {$x_4$};
+			\node[state, below=of a] (e) {$f_{1 + n}$};
+			\node[state, below=of b] (f) {$f_{2 + n}$};
+			\node[state, below=of c] (g) {$f_{3 + n}$};
+			\node[state, below=of f] (h) {$f_{m + n} = f(x)$};
+
+			% Connect the states with arrows
+			\draw[every loop]
+			(a) edge[bend right, auto=right] node {$\omega_1 (k_1)$} (e)
+			(b) edge[bend right, auto=right] node {$\omega_2 (k_2, l_2)$} (f)
+			(c) edge[bend right, auto=left] node {$\omega_2 (k_2, l_2)$} (f)
+			(c) edge[bend left, auto=left] node {$\omega_3 (k_3, l_3)$} (g)
+			(f) edge[bend right, auto=right] node {$\omega_3 (k_3, l_3)$} (g)
+			(e) edge[bend right, auto=right] node {$\omega_4 (k_4, l_4)$} (h)
+			(g) edge[bend left, auto=left] node {$\omega_4 (k_4, l_4)$} (h)
+
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
 
 
 \section{Forward / Reverse mode}
@@ -168,8 +302,7 @@
 \end{frame}
 
 \section{Applications}
-\subsection{Use in optimization}
-\subsection{Neural networks}
+\subsection{Use in optimization Algorithms}
 
 \begin{frame}
 	World
