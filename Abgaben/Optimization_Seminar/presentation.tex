@@ -283,24 +283,98 @@
 \end{frame}
 
 \section{Operation of Auto-Diff}
+\subsection{Forward mode}
 \begin{frame}[t]
-	\frametitle{How does Auto-Diff work?}
+	\frametitle{Computing the Gradient $\nabla f(x)$}
 
 	\only<1>{
 		The idea is to compute the gradient and hessian of $f$ stepwise using
 		the characterizing sequence $S$.
 	}
 
-	\only<2>{
-		Sequence for the gradient $\nabla f(x)$:
-		\begin{align*}
-			Seq for grad
-		\end{align*}
+	\only<2->{
+		\begin{itemize}
+			\item $g_j = e_j$ with $(e_j)_k = 1_{k=j}$
+			      and $e_j \in \R^n$ for $j \in \{
+				      1, \ldots, n
+				      \}$
+			\item $g_{i+n} = \begin{cases}
+					      0                                                & \text{ if } \omega_i \in \mathcal{C} \\
+					      \omega_i ' (f_{k_i}) g_{k_i}                     & \text{ if } \omega_i \in \mathcal{U} \\
+					      \partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i}
+					      + \partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i} & \text{ if } \omega_i \in \mathcal{B}
+				      \end{cases}$ ,
+			      for $i \in \{
+				      1, \ldots, m
+				      \}$
+		\end{itemize}
+		Note the following:
+		\vspace{5mm}
 	}
+
+	\only<3>{
+		The $g_i$ are $n$-dimensional vectors $\iff g_i \in \R^n$
+	}
+
+	\only<4>{
+		For $\omega_i \in \mathcal{U}$ we have:
+		\begin{gather*}
+			\omega_i ' (f_{k_i}) \in \R \text{ since }
+			\omega_i : \R \to \R \\
+			\Rightarrow \omega_i ' (f_{k_i}) g_{k_i} \in \R^n
+		\end{gather*}
+	}
+
+	\only<5>{
+		For $\omega_i \in \mathcal{B}$ we have:
+		\begin{align*}
+			\nabla \omega_i (f_{k_i}, f_{l_i})
+			 & =
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) \nabla f_{k_i} +
+			\partial_b \omega_i (f_{k_i}, f_{l_i}) \nabla f_{l_i} \\
+			 & =
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i} +
+			\partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}
+		\end{align*}
+
+		With $\partial_a \omega_i (f_{k_i}, f_{l_i})$ being the partial derivative
+		in the \textit{first} argument, that is w.r.t. $f_{k_i}$.
+	}
+
+	\only<6>{
+		Thus, we have for
+		$i \in \{
+			1, \ldots, n + m
+			\} $:
+		\[
+			g_i = \nabla f_i = \begin{pmatrix}
+				\frac{ \partial f_i }{ \partial x_1 } \\
+				\frac{ \partial f_i }{ \partial x_2 } \\
+				\vdots                                \\
+				\frac{ \partial f_i }{ \partial x_n } \\
+			\end{pmatrix}
+		\]
+	}
+
+	\only<7>{
+		So for all $i \in \{
+			1, \ldots, n + m
+			\} $, $g_i$ is really the gradient vector of $f_i$ w.r.t. all
+		inputs $\left(
+			x_1, \ldots, x_n
+			\right) $.
+
+		\vspace{5mm}
+		$\Rightarrow$ Auto-Diff applies the chain rule iteratively.
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Computing the Hessian $\nabla^2 f(x)$}
 
 \end{frame}
 
-\subsection{Forward mode}
+
 \subsection{Reverse mode}
 \subsection{Algorithmic complexity}
 
