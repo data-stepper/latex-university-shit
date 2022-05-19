@@ -73,6 +73,10 @@
 		\item $\nabla f(x)$, the gradient of our function at $x$, and
 		\item $\nabla^2 f(x)$, the Hessian of our function at $x$.
 	\end{itemize}
+
+	\vspace{5mm}
+	Where $\nabla$ is the \textit{Differential Operator}, also called
+	the \textit{nabla} Operator or sometimes just \textit{Del}.
 \end{frame}
 
 % Make this frame aligned to the top
@@ -108,7 +112,9 @@
 
 	\only<3->{
 		\[
-			\nabla^2 f(x) := \begin{pmatrix}
+			\nabla \left(
+			\nabla f(x)
+			\right) = \nabla^2 f(x) := \begin{pmatrix}
 				\frac{ \partial ^2 f(x) }{ \partial x_1 ^2 }           &
 				\frac{ \partial ^2 f(x) }{ \partial x_1 \partial x_2 } &
 				\cdots                                                 &
@@ -428,20 +434,20 @@
 			\frac{ \partial a }{ \partial x_i } b_j +
 			a \frac{ \partial b_j }{ \partial x_i }
 			\right)_{i,j}
-			= \nabla a b^T + a \cdot Db
+			= \nabla a b^T + a \cdot \nabla b
 		\end{align*}
 	}
 
 	\only<3>{
 		Then we can easily see that:
 		\begin{align*}
-			D \left(
+			\nabla \left(
 			\omega_i ' (f_{k_i}) g_{k_i}
 			\right)
 			 & =
 			\nabla (\omega_i ' (f_{k_i})) g_{k_i}^T + \omega_i ' (f_{k_i})
 			\left(
-			D g_{k_i}
+			\nabla g_{k_i}
 			\right)
 			\\
 			 & = \omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
@@ -449,13 +455,11 @@
 			g_{k_i} ^T
 		\end{align*}
 
-		With $D$ being the  \textit{total Differential} Operator, whilst
-		$\nabla$ denotes the Gradient w.r.t. $(x_1, \ldots, x_{n})$, that is
-		the total Differential for any $\varphi : \R^n \to \R$.
+		With $\nabla$ being the \textit{total Differential} Operator.
 	}
 
 	\only<4>{
-		Not so easy to see is when $\omega_i \in \mathcal{B}$:
+		Not so easy to see is the case $\omega_i \in \mathcal{B}$:
 	}
 
 	\begin{align*}
@@ -473,6 +477,7 @@
 			\partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}^T
 			\right)
 		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot \nabla g_{l_i} \\
+		\\
 		}
 		\only<4-5>{
 		 & =  \;
@@ -486,9 +491,9 @@
 			\partial_b ^2 \omega_i ( f_{k_i}, f_{l_i} ) g_{l_i}
 			+ \partial_a \partial_b \omega_i ( f_{k_i}, f_{l_i} ) g_{k_i}
 		\right) g_{l_i}^T                                             \\
+		\\
 		}
 		\only<5-6>{
-		\\
 		 & =
 			\partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot H_{k_i}
 		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot H_{l_i}        \\
@@ -506,9 +511,9 @@
 				g_{k_i} ^T \\
 				g_{l_i} ^T
 			\end{pmatrix}                                                \\
+		\\
 		}
 		\only<6>{
-		\\
 		 & =
 			\partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot H_{k_i}
 		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot H_{l_i}        \\
@@ -530,8 +535,28 @@
 			}_{2 \times n}
 		}
 	\end{align*}
-
 \end{frame}
+
+\begin{frame}
+	\frametitle{Forward mode}
+
+	Compute \textit{sequentially}:
+	\[
+		f_i, \; g_i, \; H_i, \text{ for } i \in \{
+		1, \ldots, n+m
+		\}
+	\]
+	and then we obtain:
+	\vspace{5mm}
+	\begin{itemize}
+		\item $f_{n+m} = f(x)$, the Function value,
+		\item $g_{n+m} = \nabla f(x)$, the Gradient and
+		\item $H_{n+m} = \nabla ^2 f(x)$, the Hessian matrix.
+	\end{itemize}
+	\vspace{5mm}
+	This mode is called \textit{forward mode}.
+\end{frame}
+
 
 
 \subsection{Reverse mode}
