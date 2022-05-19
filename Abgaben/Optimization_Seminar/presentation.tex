@@ -778,6 +778,29 @@
 
 \begin{frame}
 	\frametitle{Reverse mode - in detail}
+	We verify quickly:
+	\[
+		\nabla f(x) ^T =
+		\underbrace{
+			DF_m (G_{m-1})
+		}_{(1 \times n + m - 1)}
+		\underbrace{
+			DF_{m-1} (G_{m-2})
+		}_{(n+m-1 \times n+m-2)}
+		\cdots
+		\underbrace{
+			DF_1 (x)
+		}_{(n+1 \times n)}
+	\]
+
+	\vspace{5mm}
+	And we can see
+	that this equation really results in a $(1 \times n)$ matrix, i.e.
+	$\nabla f(x) ^T$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reverse mode - in detail}
 \end{frame}
 
 
