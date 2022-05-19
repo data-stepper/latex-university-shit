@@ -557,9 +557,74 @@
 	This mode is called \textit{forward mode}.
 \end{frame}
 
-
-
 \subsection{Reverse mode}
+\begin{frame}
+	\frametitle{Reverse mode - layout}
+
+	We define the following functions for $i \in \{
+		1, \ldots, m-1
+		\} $
+	\begin{align*}
+		F_i : \R^{n+i - 1} \to \R^{n+i},
+		F_i (y_1, \ldots, y_{n+i-1}) =
+		\begin{pmatrix}
+			y_1       \\
+			\vdots    \\
+			y_{n+i-1} \\
+			f_{i+n}
+		\end{pmatrix}
+	\end{align*}
+	And for $i=m$ we set:
+	\[
+		F_m : \R^{n+i - 1} \to \R,
+		F_m \left(
+		y_1, \ldots, y_{n+m-1}
+		\right) = f_{m+n}
+	\]
+	Technically we can only define the $F_i$ on open subsets
+	of $\R^{n+i-1}$ on which the $\omega_i$ are defined,
+	but here I left this out since it is obvious to see.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reverse mode - layout}
+	We set the intermediate state as $G_0 := x$ and:
+	\[
+		G_i ^{T} := \left(
+		f_1, \ldots, f_{n+i}
+		\right)^T
+		=
+		F_i \circ
+		F_{i-1} \circ
+		\ldots \circ
+		F_1 (x)
+	\]
+
+	for
+	$i \in \{
+		1, \ldots, m-1
+		\} $.
+	Thus we have the identity:
+	\[
+		f(x) = f_{m+n} =
+		F_m \circ
+		F_{m-1} \circ
+		\cdots \circ
+		F_1 (x)
+	\]
+	Differentiating this identity w.r.t. $x$ yields:
+	\[
+		\nabla f(x) ^T =
+		DF_m (G_{m-1})
+		DF_{m-1} (G_{m-2})
+		\cdots
+		DF_1 (x)
+	\]
+	Where $DF$ denotes the Jacobian Matrix of $F$.
+
+\end{frame}
+
+
 \subsection{Algorithmic complexity}
 
 \section{The Algorithm}
