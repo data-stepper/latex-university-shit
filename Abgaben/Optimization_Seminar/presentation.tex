@@ -677,6 +677,9 @@
 			1, \ldots, m-1
 			\}$
 		and generalizes to:
+	}
+
+	\only<2-4>{
 		\begin{align*}
 			DF_i (G_{i-1}) =
 			\left(
@@ -694,12 +697,87 @@
 			\right)
 			\in \R^{(n+i) \times (n + i - 1)}
 		\end{align*}
+	}
+
+	\only<2>{
 		But now the last row is the gradient of $f_{i+n}$
 		\textbf{w.r.t.}
 		$\left(
 			f_1, \ldots, f_{n + i - 1}
 			\right) $ and not $x$ !
 	}
+
+	\only<3>{
+		We now recognize that the $f_{i+n}$ can only
+		depend on at most 2 elements in
+		$\left(
+			f_1, \ldots, f_{n+i-1}
+			\right) $.
+
+		\vspace{5mm}
+		Thus the last row can only contain 2 non-zero elements, namely
+		at indices $k_i$ and  $l_i$.
+	}
+
+	\only<4-5>{
+		So we can write:
+		\begin{align*}
+			DF_i (G_{i-1}) =
+			\left(
+			\begin{array}
+					\\
+					\\
+					I_{n + i - 1} \\
+					\\
+					\hline        \\
+					% \vspace{2mm}
+					\kappa_i \hspace{5mm}
+					\lambda_i
+				\end{array}
+			\right)
+		\end{align*}
+	}
+
+	\only<5>{
+		With $\kappa_i$ and $\lambda_i$ being the entries of the last row
+		at indices $k_i$ and $l_i$ respectively, specifically:
+	}
+
+	\only<5-6>{
+		\[
+			\left(
+			\frac{ \partial f_{i+n} }{ \partial f_1 },
+			\ldots,
+			\frac{ \partial f_{i+n} }{ \partial f_{n+i-1} }
+			\right)
+			=
+			\left(
+			\ldots,
+			\kappa_i,
+			\ldots,
+			\lambda_i,
+			\ldots
+			\right)
+		\]
+	}
+
+	\only<5>{
+		The dots represent the zero-entries here.
+	}
+
+	\only<6>{
+		\vspace{5mm}
+		Notice that for $\omega_i \in \mathcal{U} \Rightarrow l_i = 0$
+		and in that case we only have one non-zero entry.
+
+		\vspace{5mm}
+		And if $\omega_i \in \mathcal{C}$ then the last row becomes
+		entirely zero.
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reverse mode - in detail}
 \end{frame}
 
 
