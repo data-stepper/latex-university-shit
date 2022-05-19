@@ -83,7 +83,7 @@
 		\vspace{5mm}
 		Since $f: \R^{n} \longrightarrow \R$, we know that
 		$f(x) \in \R$, now we define the Gradient and Hessian
-		for $x \in D \subset \R^n$ where $D$ is an
+		for $x \in O \subset \R^n$ where $O$ is an
 		open subset in $\R^n$ as follows:
 	}
 
@@ -372,13 +372,92 @@
 	}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Computing the Hessian $\nabla^2 f(x)$}
 	% Note, what I learned today --> big mathematics !! ;))
 	% for vectors a and b (columns vectors both)
 	% a^T b is the dot product
 	% a b^T is the outer product yielding a matrix
 	% (a b^T)_ij = a_i b_j
+
+	\begin{itemize}
+		\item $H_j = 0 \in \R^{n \times n}$ for
+		      $j \in \{
+			      1, \ldots, n
+			      \} $
+		\item $H_{i+n} = \begin{cases}
+				      0
+				       & \text{ if } \omega_i \in \mathcal{C} \\
+				      \omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
+				      g_{k_i}
+				      g_{k_i} ^T
+				       & \text{ if } \omega_i \in \mathcal{U} \\
+				      \partial_a \omega_i (f_{k_i}, f_{l_i}) H_{k_i} +
+				      \partial_b \omega_i (f_{k_i}, f_{l_i}) H_{l_i}
+				       &                                      \\
+				      + (g_{k_i}, g_{l_i}) \nabla ^2 \omega_i (f_{k_i}, f_{l_i})
+				      (g_{k_i}, g_{l_i})^T
+				       & \text{ if } \omega_i \in \mathcal{B} \\
+			      \end{cases}$
+	\end{itemize}
+	\vspace{5mm}
+
+	\only<1>{
+		Note that $g_{k_i} g_{k_i}^T$ is a  $n \times n$ matrix
+		(outer product)
+		, while
+		$g_{k_i} ^T g_{k_i}$ is only a single number (dot product).
+	}
+
+	\only<2>{
+		Now assuming $a: \R^n \to \R$ and $b: \R^n \to \R^n$, we can see:
+		\begin{align*}
+			 & D \left(
+			a \cdot (b_1, \ldots, b_n)^T
+			\right)  = \left(
+			\frac{ \partial (a \cdot b_j) }{ \partial x_i }
+			\right)_{i,j \in \{
+				1, \ldots, n
+			\} }        \\
+			 & = \left(
+			\frac{ \partial a }{ \partial x_i } b_j +
+			a \frac{ \partial b_j }{ \partial x_i }
+			\right)_{i,j}
+			= \nabla a b^T + a \cdot Db
+		\end{align*}
+	}
+
+	\only<3>{
+		Then we can easily see that:
+		\begin{align*}
+			D \left(
+			\omega_i ' (f_{k_i}) g_{k_i}
+			\right)
+			 & =
+			\nabla (\omega_i ' (f_{k_i})) g_{k_i}^T + \omega_i ' (f_{k_i})
+			\left(
+			D g_{k_i}
+			\right)
+			\\
+			 & = \omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
+			g_{k_i}
+			g_{k_i} ^T
+		\end{align*}
+
+		With $D$ being the  \textit{total Differential} Operator, whilst
+		$\nabla$ denotes the Gradient w.r.t. $(x_1, \ldots, x_{n})$, that is
+		the total Differential for any $\varphi : \R^n \to \R$.
+	}
+
+	\only<4>{
+		Not so easy to see is when $\omega_i \in \mathcal{B}$:
+		\begin{align*}
+			 & D \left(
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i}
+			+ \partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}
+			\right) =
+		\end{align*}
+	}
 
 \end{frame}
 
