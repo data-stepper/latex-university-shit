@@ -588,6 +588,7 @@
 
 \begin{frame}
 	\frametitle{Reverse mode - layout}
+	\only<1>{
 	We set the intermediate state as $G_0 := x$ and:
 	\[
 		G_i ^{T} := \left(
@@ -613,15 +614,92 @@
 		F_1 (x)
 	\]
 	Differentiating this identity w.r.t. $x$ yields:
-	\[
-		\nabla f(x) ^T =
-		DF_m (G_{m-1})
-		DF_{m-1} (G_{m-2})
-		\cdots
-		DF_1 (x)
-	\]
-	Where $DF$ denotes the Jacobian Matrix of $F$.
+	}
+	\only<1-3>{
+		\begin{align}
+			\nabla f(x) ^T =
+			DF_m (G_{m-1})
+			DF_{m-1} (G_{m-2})
+			\cdots
+			DF_1 (x)
+		\end{align}
+	}
+	\only<1>{
+		Where $DF$ denotes the Jacobian Matrix of $F$.
+	}
 
+	\only<2>{
+		\vspace{5mm}
+		Evaluating equation (1) from \textit{right to left}
+		corresponds to the forward mode of Auto-Diff.
+	}
+
+	\only<3>{
+		\vspace{5mm}
+		In reverse mode, we want to evaluate (1) from
+		\textit{left to right}.
+
+		\vspace{5mm}
+		This obviously yields the \textit{same} gradient $\nabla f(x)$.
+	}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Reverse mode - in detail}
+
+	\only<1>{
+		In detail we find:
+		\begin{align*}
+			DF_1 ( \; \overbrace{G_0}^{=x} \; ) =
+			\left(
+			\begin{array}
+					\\
+					\\
+					I_n                                       \\
+					\\
+					\hline                                    \\
+					\vspace{2mm}
+					\frac{ \partial f_{1+n} }{ \partial x_1 }
+					\cdots
+					\frac{ \partial f_{1+n} }{ \partial x_n } \\
+				\end{array}
+			\right)
+			\in \R^{(n+1) \times n}
+		\end{align*}
+
+		With the last row being the gradient $\nabla f_{1+n} ^T$ of $f_{1+n}$.
+	}
+
+	\only<2>{
+		This also works for
+		$i \in \{
+			1, \ldots, m-1
+			\}$
+		and generalizes to:
+		\begin{align*}
+			DF_i (G_{i-1}) =
+			\left(
+			\begin{array}
+					\\
+					\\
+					I_{n + i - 1}                                       \\
+					\\
+					\hline                                              \\
+					\vspace{2mm}
+					\frac{ \partial f_{i+n} }{ \partial f_{1} }
+					\cdots
+					\frac{ \partial f_{i+n} }{ \partial f_{n + i - 1} } \\
+				\end{array}
+			\right)
+			\in \R^{(n+i) \times (n + i - 1)}
+		\end{align*}
+		But now the last row is the gradient of $f_{i+n}$
+		\textbf{w.r.t.}
+		$\left(
+			f_1, \ldots, f_{n + i - 1}
+			\right) $ and not $x$ !
+	}
 \end{frame}
 
 
