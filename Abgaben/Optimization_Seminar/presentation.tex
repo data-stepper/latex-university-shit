@@ -380,27 +380,32 @@
 	% a b^T is the outer product yielding a matrix
 	% (a b^T)_ij = a_i b_j
 
-	\begin{itemize}
-		\item $H_j = 0 \in \R^{n \times n}$ for
-		      $j \in \{
-			      1, \ldots, n
-			      \} $
-		\item $H_{i+n} = \begin{cases}
-				      0
-				       & \text{ if } \omega_i \in \mathcal{C} \\
-				      \omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
-				      g_{k_i}
-				      g_{k_i} ^T
-				       & \text{ if } \omega_i \in \mathcal{U} \\
-				      \partial_a \omega_i (f_{k_i}, f_{l_i}) H_{k_i} +
-				      \partial_b \omega_i (f_{k_i}, f_{l_i}) H_{l_i}
-				       &                                      \\
-				      + (g_{k_i}, g_{l_i}) \nabla ^2 \omega_i (f_{k_i}, f_{l_i})
-				      (g_{k_i}, g_{l_i})^T
-				       & \text{ if } \omega_i \in \mathcal{B} \\
-			      \end{cases}$
-	\end{itemize}
-	\vspace{5mm}
+	\only<1-3>{
+		\begin{itemize}
+			\item $H_j = 0 \in \R^{n \times n}$ for
+			      $j \in \{
+				      1, \ldots, n
+				      \} $
+			\item $H_{i+n} = \begin{cases}
+					      0
+					       & \text{ if } \omega_i \in \mathcal{C} \\
+					      \omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
+					      g_{k_i}
+					      g_{k_i} ^T
+					       & \text{ if } \omega_i \in \mathcal{U} \\
+					      \partial_a \omega_i (f_{k_i}, f_{l_i}) H_{k_i} +
+					      \partial_b \omega_i (f_{k_i}, f_{l_i}) H_{l_i}
+					       &                                      \\
+					      + (g_{k_i}, g_{l_i}) \nabla ^2 \omega_i (f_{k_i}, f_{l_i})
+					      (g_{k_i}, g_{l_i})^T
+					       & \text{ if } \omega_i \in \mathcal{B} \\
+				      \end{cases}$
+		\end{itemize}
+	}
+
+	\only<1-4>{
+		\vspace{5mm}
+	}
 
 	\only<1>{
 		Note that $g_{k_i} g_{k_i}^T$ is a  $n \times n$ matrix
@@ -412,13 +417,13 @@
 	\only<2>{
 		Now assuming $a: \R^n \to \R$ and $b: \R^n \to \R^n$, we can see:
 		\begin{align*}
-			 & D \left(
+			 & \nabla \left(
 			a \cdot (b_1, \ldots, b_n)^T
 			\right)  = \left(
 			\frac{ \partial (a \cdot b_j) }{ \partial x_i }
 			\right)_{i,j \in \{
 				1, \ldots, n
-			\} }        \\
+			\} }             \\
 			 & = \left(
 			\frac{ \partial a }{ \partial x_i } b_j +
 			a \frac{ \partial b_j }{ \partial x_i }
@@ -451,13 +456,80 @@
 
 	\only<4>{
 		Not so easy to see is when $\omega_i \in \mathcal{B}$:
-		\begin{align*}
-			 & D \left(
+	}
+
+	\begin{align*}
+		\only<4>{
+		 & \nabla \left(
 			\partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i}
 			+ \partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}
-			\right) =
-		\end{align*}
-	}
+		\right)                                                       \\
+		 & = \; \nabla \left(
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i}^T
+			\right)
+		+ \partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot \nabla g_{k_i} \\
+		 & + \nabla
+			\left(
+			\partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}^T
+			\right)
+		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot \nabla g_{l_i} \\
+		}
+		\only<4-5>{
+		 & =  \;
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot H_{k_i}
+		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot H_{l_i}        \\
+		 & + \left(
+			\partial_a ^2 \omega_i ( f_{k_i}, f_{l_i} ) g_{k_i}
+			+ \partial_b \partial_a \omega_i ( f_{k_i}, f_{l_i} ) g_{l_i}
+		\right) g_{k_i}^T                                             \\
+		 & + \left(
+			\partial_b ^2 \omega_i ( f_{k_i}, f_{l_i} ) g_{l_i}
+			+ \partial_a \partial_b \omega_i ( f_{k_i}, f_{l_i} ) g_{k_i}
+		\right) g_{l_i}^T                                             \\
+		}
+		\only<5-6>{
+		\\
+		 & =
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot H_{k_i}
+		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot H_{l_i}        \\
+		 & + \left(
+			g_{k_i},
+			g_{l_i}
+			\right)
+			\begin{pmatrix}
+				\partial_a ^2 \omega_i ( f_{k_i}, f_{l_i} )         &
+				\partial_a \partial_b \omega_i ( f_{k_i}, f_{l_i} )   \\
+				\partial_b \partial_a \omega_i ( f_{k_i}, f_{l_i} ) &
+				\partial_b ^2 \omega_i ( f_{k_i}, f_{l_i} )           \\
+			\end{pmatrix}
+		\begin{pmatrix}
+				g_{k_i} ^T \\
+				g_{l_i} ^T
+			\end{pmatrix}                                                \\
+		}
+		\only<6>{
+		\\
+		 & =
+			\partial_a \omega_i (f_{k_i}, f_{l_i}) \cdot H_{k_i}
+		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) \cdot H_{l_i}        \\
+		 & +
+			\underbrace{
+				\left(
+				g_{k_i},
+				g_{l_i}
+				\right)
+			}_{n \times 2}
+			\underbrace{
+				\nabla ^2 \omega_i ( f_{k_i}, f_{l_i} )
+			}_{2 \times 2}
+			\underbrace{
+				\left(
+				g_{k_i},
+				g_{l_i}
+				\right) ^T
+			}_{2 \times n}
+		}
+	\end{align*}
 
 \end{frame}
 
