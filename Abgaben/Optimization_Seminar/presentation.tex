@@ -802,16 +802,19 @@
 \begin{frame}[t]
 	\frametitle{Reverse mode - in detail}
 
-	The reverse mode is carried out in $m$-steps (like the forward mode).
-	We compute recursively:
+	\only<1>{
+		The reverse mode is carried out in $m$-steps (like the forward mode).
+		We compute recursively:
+	}
 
-	\only<1-5>{
+	\only<1-3>{
 		\vspace{5mm}
 		\[
-			v_i := \begin{cases}
-				DF_m (G_{m-1})
+			v^{(i)} := \begin{cases}
+				DF^{(m)} (G_{m-1})
 				 & \text{ if } i = m              \\
-				v_{i+1} DF_i (G_{i-1})
+				 &                                \\
+				v^{(i+1)} DF_i (G_{i-1})
 				 & \text{ if } i = m-1, \ldots, 1
 			\end{cases}
 		\]
@@ -819,26 +822,80 @@
 	}
 
 	\only<2>{
-		Then $v_1$ will be $\nabla f(x) ^T$ according to the previous equation.
+		Then $v^{(1)}$ will be $\nabla f(x) ^T$ according to the previous equation.
 	}
 
 	\only<3>{
 		And we compute in the \textit{reverse} direction:
 		\[
-			v_m, v_{m-1}, v_{m-2}, \ldots
-			v_2, v_1
+			v^{(m)} \to
+			v^{(m-1)} \to
+			\ldots \to
+			v^{(2)} \to
+			v^{(1)} =
+			\nabla f(x) ^{T}
 		\]
 	}
 
 	\only<4-5>{
-		Reverse mode requires \textit{less} calculations but \textit{more}
-		memory.
+		In detail we start with
+		$v^{(m)} = \left(
+			0, \ldots, \kappa_i, \ldots, \lambda_i, \ldots, 0
+			\right) $
+		:
+		\\
+		\vspace{5mm}
+		And we inspect:
 	}
 
-	\only<5>{
+	\begin{align*}
+		\only<5-6>{
+			v^{(m-1)}
+		 & = v^{(m)} DF_{m-1} ( G_{m-2} )                       \\
+		 & =
+			\left(
+			\; \kappa_i \qquad \lambda_i \;
+			\right)
+		\begin{pmatrix}
+				1      & 0            & \ldots & \ldots        & 0      \\
+				0      & 1            & \ddots & \ddots        & 0      \\
+				\vdots & \vdots       & \ddots & \ddots        & \vdots \\
+				0      & 0            & \ldots & \ldots        & 1      \\
+				       & \kappa_{i-1} &        & \lambda_{i-1} &        \\
+			\end{pmatrix} \\
+		}
+		\only<6-7>{
+		\\
+		 & =
+			\left(
+			v^{(m)}_1,
+			v^{(m)}_2,
+			\ldots
+			v^{(m)}_{n+m-2},
+			v^{(m)}_{n+m-1}
+		\right)                                                 \\
+		 & +
+			\left(
+			0, \ldots,
+			\kappa_{m-1} v^{(m)}_{n+m},
+			0, \ldots, 0,
+			\kappa_{m-1} v^{(m)}_{n+m},
+			\ldots, 0
+			\right)
+		}
+	\end{align*}
+
+	\only<7>{
 		\vspace{5mm}
-		We will now see how we can optimize the \textit{forward mode}.
+		To compute $v^{(i-1)}$ from $v^{(i)}$,
+		we add $\kappa_{i-1} v^{(i)}_{n+i}$ to the $k_i$-th
+		component and $\lambda_{i-1} v^{(i)}_{n+i}$ to the $l_i$-th
+		component (if $k_i \neq 0$ and / or  $l_i \neq 0$).
+
+		\vspace{5mm}
+		And of course delete the last component of $v^{(i)}$.
 	}
+
 \end{frame}
 
 
