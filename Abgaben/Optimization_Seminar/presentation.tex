@@ -799,8 +799,46 @@
 	$\nabla f(x) ^T$.
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
 	\frametitle{Reverse mode - in detail}
+
+	The reverse mode is carried out in $m$-steps (like the forward mode).
+	We compute recursively:
+
+	\only<1-5>{
+		\vspace{5mm}
+		\[
+			v_i := \begin{cases}
+				DF_m (G_{m-1})
+				 & \text{ if } i = m              \\
+				v_{i+1} DF_i (G_{i-1})
+				 & \text{ if } i = m-1, \ldots, 1
+			\end{cases}
+		\]
+		\vspace{5mm}
+	}
+
+	\only<2>{
+		Then $v_1$ will be $\nabla f(x) ^T$ according to the previous equation.
+	}
+
+	\only<3>{
+		And we compute in the \textit{reverse} direction:
+		\[
+			v_m, v_{m-1}, v_{m-2}, \ldots
+			v_2, v_1
+		\]
+	}
+
+	\only<4-5>{
+		Reverse mode requires \textit{less} calculations but \textit{more}
+		memory.
+	}
+
+	\only<5>{
+		\vspace{5mm}
+		We will now see how we can optimize the \textit{forward mode}.
+	}
 \end{frame}
 
 
