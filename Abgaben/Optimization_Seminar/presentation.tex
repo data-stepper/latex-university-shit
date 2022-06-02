@@ -4,9 +4,8 @@
 
 \title{
 	Automatic Differentiation:
-	An Overview of methods used and presentation of one
-	specific structure-exploiting Algorithm that achieves
-	almost optimal complexity for Kantorovic trees.
+	An Overview of Forward and Reverse Mode
+	in Applications to Optimization Problems
 }
 
 \author{Bent Müller}
@@ -896,15 +895,18 @@
 		And of course delete the last component of $v^{(i)}$.
 	}
 
+	\only<8->{
+		Now remember that $\kappa_i$ and $\lambda_i$ are always entries
+		of the gradients in $g_i$ (the gradient vector).
+	}
+
+	\only<9->{
+		\vspace{5mm}
+		Compute $v^{(i)}$ efficiently by decomposing $g_i$ and thus applying
+		smart multiplication rules.
+	}
+
 \end{frame}
-
-
-\subsection{Algorithmic complexity}
-
-\section{The Algorithm}
-\subsection{Kantorovic trees}
-\subsection{Mode of operation}
-\subsection{Proof of complexity}
 
 \begin{frame}
 	World
@@ -914,8 +916,62 @@
 \subsection{Use in optimization Algorithms}
 
 \begin{frame}
-	World
+	\frametitle{Applications - Optimization Problems}
+
+	\begin{itemize}
+		\item Efficiently compute gradients \textit{and Hessians}
+		      \vspace{5mm}
+		\item No need to \textit{symbolically} calculate derivatives,
+		      especially for complex functions
+		      \vspace{5mm}
+		\item Auto-Diff achieves high numerical accuracy, better than
+		      numerical methods like finite differences
+	\end{itemize}
 \end{frame}
+
+\subsection{Use in neural networks}
+
+\begin{frame}[t]
+	\frametitle{Applications - Neural Networks}
+	General layout: Learn parameterized mapping
+	$f_\theta : \mathcal{X} \to \mathcal{Y}$ from dataset
+	$(x_i, y_i)_{i \in \{
+				1, \ldots, n
+				\} }$
+	where:
+	$(x_i, y_i) \in \mathcal{X} \times \mathcal{Y}$.
+	\vspace{5mm}
+
+	\begin{enumerate}
+		\only<1-3>{
+		\item Initialize neural network with random parameters $\theta$
+		      }
+		      \only<2-3>{
+		      \vspace{5mm}
+		\item For samples from a dataset $(x_i, y_i)$,
+		      calculate $f_\theta(x_i) = \hat{y}_i$ and the \textit{gradient}
+		      of specified \textit{loss function} $L$ w.r.t. $\theta$:
+		      \[
+			      \nabla_\theta L(\hat{y}_i, y_i)
+		      \]
+		      }
+		      \only<3>{
+		\item Update the parameters $\theta$ using the computed
+		      \textit{gradient}
+		      }
+	\end{enumerate}
+
+	\only<4>{
+		$\rightarrow$ Auto-Diff computes mentioned gradient \textit{at the same time}
+		when computing $\hat{y}_i$ (the network outputs)
+	}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Thank you for your attention!}
+
+\end{frame}
+
 
 \section{Literature}
 \begin{frame}
