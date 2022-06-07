@@ -163,14 +163,139 @@ Now we can use $S$ to also compute gradient and Hessian of $f$.
 
 \subsection{Computing Gradient $\nabla f(x)$}
 
-We define the sequence for the gradient as follows:
+We define the sequence for the gradient as follows,
+$g_j = e_j$ (unit vectors in $\R^n$) for $i \in \{
+	1, \ldots, n
+	\} $ and
 
 \[
-	g_j = e_j \text{ if } j \in \{
-	1, \ldots, n
-	\}
-	\text{ and }
-	g_{i+n}
+	g_{i+n} = \begin{cases}
+		0
+		 & \text{ if } \omega_i \in \mathcal{C} \\
+		\omega_i ' (f_{k_i}) g_{k_i}
+		 & \text{ if } \omega_i \in \mathcal{U} \\
+		\partial_a \omega_i (f_{k_i}, f_{l_i}) g_{k_i}
+		+ \partial_b \omega_i (f_{k_i}, f_{l_i}) g_{l_i}
+		 & \text{ if } \omega_i \in \mathcal{B}
+	\end{cases} \quad \text{ for }
+	i \in \{
+	1, \ldots, m
+	\}.
 \]
+
+At each step, $g_{i+n}$ is exactly the gradient of $f_{i+n}$
+w.r.t. $x$ ($\Leftrightarrow g_{i+n} = \nabla f_{i+n}$).
+Computing this sequence for $i$ in \textit{ascending} order gives us
+the so-called \textit{forward mode} and yields the gradient of $f$
+at the last step: $\nabla f(x) = g_{m+n} (x)$. Also note here that
+$\partial_a \omega_i (f_{k_i}, f_{l_i})$ denotes the partial derivative
+\textit{in the first argument} of $\omega_i$, that is w.r.t. $f_{k_i}$.
+
+\subsubsection{Example of the Forward Mode}
+Suppose we want to compute the gradient of
+$f(x, y) = \sqrt{y} \exp(x^2  - y)$
+then we find a characterizing sequence for $f$ as follows:
+
+\[
+	f_1=x,
+	f_2=y,
+	f_3=\sqrt{f_2},
+	f_4=f_1^2,
+	f_5=\exp(f_4 - f_2),
+	\Rightarrow f_6=f_3 f_5 = f(x, y)
+\]
+
+\[
+	\Rightarrow S = \left(
+	(\sqrt{\cdot}, 2, 0),
+	((\cdot)^2, 1, 0),
+	(\exp(\cdot - \cdot), 4, 2),
+	((\cdot)(\cdot), 3, 5)
+	\right)
+\]
+
+We can see, $S$ computes $f(x,y)$ in four steps ($m=4, n=2$).
+Now we differentiate the $f_{i+n}$ to obtain the $g_{i+n}$:
+
+\[
+	g_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix},
+	g_2 = \begin{pmatrix} 0 \\ 1 \end{pmatrix},
+	g_3 =
+	\frac{ g_2 }{ 2 \sqrt{f_2} } =
+	\frac{ 1 }{ 2 \sqrt{y} } \begin{pmatrix} 0 \\ 1 \end{pmatrix},
+	g_4 = 2 x \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+\]
+
+And now for the binary functions at last we have:
+
+\begin{gather*}
+	g_5 =
+	\partial_{f_4} \exp (f_4 - f_2) g_4
+	+ \partial_{f_2} \exp (f_4 - f_2) g_2
+	= \begin{pmatrix}
+		\exp (x^2 - y) 2x \\
+		- \exp (x^2 - y)
+	\end{pmatrix}
+	\text{ and finally } \\ \\
+	g_6 =
+	\partial_{f_3} ( f_3 \cdot f_5 ) g_3 +
+	\partial_{f_5} ( f_3 \cdot f_5 ) g_5
+	= f_5 g_3 + f_3 g_5 \\
+	=
+	\exp (x^2 - y) \begin{pmatrix} 0 \\
+		\frac{ 1 }{ 2 \sqrt{y} }
+	\end{pmatrix}
+	+ \sqrt{y}
+	\begin{pmatrix}
+		\exp (x^2 - y) 2x \\
+		- \exp (x^2 - y)
+	\end{pmatrix}
+	=
+	\exp (x^2 - y)
+	\begin{pmatrix}
+		2x \sqrt{y} \\
+		\frac{ 1 }{ 2 \sqrt{y} } - \sqrt{y}
+	\end{pmatrix}
+	= \nabla f(x, y)
+\end{gather*}
+
+And we can easily verify that $g_6$ is the gradient of $f(x,y)$.
+Note that here we left $x$ and $y$ free variables but in practice, the
+algorithm would compute only $f(x,y)$ as well as its gradient
+$\nabla f(x,y)$ at specific points $(x,y)$. Thus in the gradient computation,
+this algorithm exploits that we already computed $f_{i+n}$ at the relevant
+points $(x,y)$ saving computational resources.
+
+\subsection{Computing Hessian $\nabla^2 f(x)$}
+
+We define the sequence for the Hessian as $H_j = 0 \in \R^{n \times n}$
+for
+$j \in \{
+	1, \ldots, n
+	\} $ and
+
+\[
+	H_{i+n} = \begin{cases}
+		0
+		 & \text{ if } \omega_i \in \mathcal{C} \\
+		\omega_i ' (f_{k_i}) H_{k_i} + \omega_i '' (f_{k_i})
+		g_{k_i}
+		g_{k_i} ^T
+		 & \text{ if } \omega_i \in \mathcal{U} \\ \\
+		\partial_a \omega_i (f_{k_i}, f_{l_i}) H_{k_i} +
+		\partial_b \omega_i (f_{k_i}, f_{l_i}) H_{l_i}
+		 &                                      \\
+		+ (g_{k_i}, g_{l_i}) \nabla ^2 \omega_i (f_{k_i}, f_{l_i})
+		(g_{k_i}, g_{l_i})^T
+		 & \text{ if } \omega_i \in \mathcal{B} \\
+	\end{cases}
+	\quad \text{ for }
+	i \in \{
+	1, \ldots, m
+	\}.
+\]
+
+Note that each $H_{i+n}$ is a $(n \times n)$ matrix and this sequence
+requires that the gradients $g_i$ are already computed.
 
 \end{document}
