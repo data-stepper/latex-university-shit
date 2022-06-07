@@ -9,6 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{enumerate}
 
 \usepackage{mathrsfs}
 
@@ -55,11 +56,11 @@
 \date{7.6.2022}
 \maketitle
 
-\section{Overview - What is Auto-Diff?}
+\section{Overview}
 
 Given a \textit{twice differentiable} function $f: \R^n \to \R$, the
 Auto-Diff Algorithm \textit{efficiently} computes gradient and Hessian
-and achieves good \textit{numerical stability}:
+while achieving good \textit{numerical stability}:
 
 \[
 	\nabla f(x) := \begin{pmatrix}
@@ -68,7 +69,7 @@ and achieves good \textit{numerical stability}:
 		\vdots                             \\
 		\frac{\partial f(x)}{\partial x_n}
 	\end{pmatrix} ;
-	\quad
+	\qquad
 	\nabla ^2 f(x) :=
 	\begin{pmatrix}
 		\frac{\partial^2 f(x)}{\partial x_1^2}            &
@@ -88,6 +89,88 @@ and achieves good \textit{numerical stability}:
 		\vdots                                            &
 		\frac{\partial^2 f(x)}{\partial x_n \partial x_n}
 	\end{pmatrix}
+\]
+
+The Hessian is the \textit{Jacobian} of the gradient.
+
+\subsection{Characterizing Sequence}
+
+We only consider functions $f$ which can be decomposed into:
+
+\begin{itemize}
+	\item Constant functions $f(x) = c \in \R$, we say $f \in \mathcal{C}$
+	\item Unary functions $f(x) \in \R$, we say $f \in \mathcal{U}$
+	\item Binary functions $f(x_1, x_2) \in \R$, we say $f \in \mathcal{B}$
+\end{itemize}
+
+Note that a constant function takes no argument, a unary function takes one
+and a binary function takes two arguments.
+Thus we can decompose $f$ as follows:
+
+% Char sequence for f(x)
+\begin{enumerate}[(1)]
+	\item $f_i = x_i$ for $i \in \{
+		      1, \ldots, n
+		      \} $
+	\item $f_{i + n} = \begin{cases}
+			      \omega_i                    & \text{ if } \omega_i \in \mathcal{C} \\
+			      \omega_i (f_{k_i})          & \text{ if } \omega_i \in \mathcal{U} \\
+			      \omega_i (f_{k_i}, f_{l_i}) & \text{ if } \omega_i \in \mathcal{B}
+		      \end{cases}$
+	      \qquad for $i \in \{
+		      1, \ldots, m
+		      \}$
+	\item $f_{m + n} = f(x)$
+	\item $k_i, l_i < i + n$  \text{ and }
+	\item $\{
+		      n+1, \ldots, n+m - 1
+		      \} \subset \bigcup_{i=1}^{m} \{
+		      k_i, l_i
+		      \}$
+\end{enumerate}
+
+We define two sets of indices, $I := \{
+	1, \ldots, m
+	\} $ and $J := \{
+	1, \ldots, n+m-1
+	\} $.
+Then we say that a sequence $S$ of tuples is a \textit{characterizing sequence}
+for $f$ if and only if:
+
+\[
+	S = \left(
+	(\omega_i, k_i, l_i)
+	\right)_{i \in I}
+	\in \left(
+	\left(
+		\mathcal{C} \times \{
+		0
+		\}^2
+		\right) \cup
+	\left(
+		\mathcal{U} \times J \times \{
+		0
+		\} \right) \cup
+	\left(
+		\mathcal{B} \times J^2
+		\right)
+	\right) ^m
+\]
+
+Such that $S$ fulfills conditions 1-5 from the above.
+$\Rightarrow$ $S$ computes $f(x)$ in $m$ steps.
+Now we can use $S$ to also compute gradient and Hessian of $f$.
+
+\subsection{Computing Gradient $\nabla f(x)$}
+
+We define the sequence for the gradient as follows:
+
+\[
+	g_j = e_j \text{ if } j \in \{
+	1, \ldots, n
+	\}
+	\text{ and }
+	g_{i+n}
 \]
 
 \end{document}
