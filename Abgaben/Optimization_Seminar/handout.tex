@@ -1,0 +1,93 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{mathrsfs}
+
+\usepackage{color}
+\usepackage{epsfig}
+
+%--------------------------------------------------------------------------
+% Maths Macros
+%--------------------------------------------------------------------------
+\def\Z{{\mathbb Z}}
+\def\N{{\mathbb N}}
+\def\Q{{\mathbb Q}}
+\def\R{{\mathbb R}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\K{{\mathbb K}}
+\def\T{{\mathbb T}}
+
+\def\cA{{\mathcal A}}
+\def\cF{{\mathcal F}}
+\def\cG{{\mathcal G}}
+\def\cM{{\mathcal M}}
+\def\cN{{\mathcal N}}
+\def\cP{{\mathcal P}}
+\def\cS{{\mathcal S}}
+
+%
+\def\sC{\mathscr{C}}
+
+\newtheorem{algorithm}{Algorithm}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{definition} % Makes my definitions non italic
+\newtheorem{definition}{Definition}[section]
+
+\def\qed{\hfill{\rule{1.5ex}{1.5ex}}}
+\def\eop{\hfill{$\Box$}}
+
+\begin{document}
+\title{ \textbf{Handout - Automatic Differentiation} }
+\author{Bent Mueller}
+\date{7.6.2022}
+\maketitle
+
+\section{Overview - What is Auto-Diff?}
+
+Given a \textit{twice differentiable} function $f: \R^n \to \R$, the
+Auto-Diff Algorithm \textit{efficiently} computes gradient and Hessian
+and achieves good \textit{numerical stability}:
+
+\[
+	\nabla f(x) := \begin{pmatrix}
+		\frac{\partial f(x)}{\partial x_1} \\
+		\frac{\partial f(x)}{\partial x_2} \\
+		\vdots                             \\
+		\frac{\partial f(x)}{\partial x_n}
+	\end{pmatrix} ;
+	\quad
+	\nabla ^2 f(x) :=
+	\begin{pmatrix}
+		\frac{\partial^2 f(x)}{\partial x_1^2}            &
+		\frac{\partial^2 f(x)}{\partial x_1 \partial x_2} &
+		\vdots                                            &
+		\frac{\partial^2 f(x)}{\partial x_1 \partial x_n}   \\
+		\frac{\partial^2 f(x)}{\partial x_2 \partial x_1} &
+		\frac{\partial^2 f(x)}{\partial x_2 \partial x_2} &
+		\vdots                                            &
+		\frac{\partial^2 f(x)}{\partial x_2 \partial x_n}   \\
+		\vdots                                            &
+		\vdots                                            &
+		\vdots                                            &
+		\vdots                                              \\
+		\frac{\partial^2 f(x)}{\partial x_n \partial x_1} &
+		\frac{\partial^2 f(x)}{\partial x_n \partial x_2} &
+		\vdots                                            &
+		\frac{\partial^2 f(x)}{\partial x_n \partial x_n}
+	\end{pmatrix}
+\]
+
+\end{document}
