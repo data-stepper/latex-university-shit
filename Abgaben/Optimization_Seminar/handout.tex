@@ -56,6 +56,45 @@
 \date{7.6.2022}
 \maketitle
 
+\section{A Note on the Notation used}
+
+In the literature, there is no clear definition of what exactly the
+$\nabla$-Operator (Nabla) is, we use it as the \textit{total derivative}
+of a function with respect to all variables in the context.
+Hence if $f: \R^n \to \R$ then $\nabla f: \R^n \to \R^n$ and represents
+in this case the gradient vector of $f$. But if $f: \R^n \to \R^n$ then
+$\nabla f: \R^n \to \R^{n \times n}$ and represents the Jacobian matrix
+of $f$. When we explicitly use the Jacobian Operator $D$ it is meant to point out
+that the underlying function is valued in $\R^n$.
+With this Notation, $\nabla ^2 f(x)$ denotes the Hessian Matrix of $f$ and
+\textbf{not} the Laplacian Operator $\Delta$ which is also sometimes
+referred to as $\nabla ^2$.
+\\
+
+For two \textit{column} vectors $x, y \in \R^n$ we note that the matrix product
+has the following feature:
+
+\[
+	a^{T} b := \sum_{i=1}^n a_i b_i \in \R
+	\quad
+	\text{ but }
+	\quad
+	a b^{T} :=
+	\begin{pmatrix} a_1 \\ \vdots \\ a_n \end{pmatrix}
+	\cdot
+	\begin{pmatrix}
+		b_1, \ldots, b_n
+	\end{pmatrix}
+	=
+	\begin{pmatrix}
+		a_1 b_1 & a_1 b_2 & \cdots & a_1 b_n \\
+		a_2 b_1 & a_2 b_2 & \cdots & a_2 b_n \\
+		\vdots  & \vdots  & \ddots & \vdots  \\
+		a_n b_1 & a_n b_2 & \cdots & a_n b_n
+	\end{pmatrix}
+	\in \R^{n \times n}
+\]
+
 \section{Overview}
 
 Given a \textit{twice differentiable} function $f: \R^n \to \R$, the
