@@ -200,7 +200,7 @@ Such that $S$ fulfills conditions 1-5 from the above.
 $\Rightarrow$ $S$ computes $f(x)$ in $m$ steps.
 Now we can use $S$ to also compute gradient and Hessian of $f$.
 
-\subsection{Computing Gradient $\nabla f(x)$}
+\subsection{Computing the Gradient $\nabla f(x)$}
 
 We define the sequence for the gradient as follows,
 $g_j = e_j$ (unit vectors in $\R^n$) for $i \in \{
@@ -305,7 +305,7 @@ $\nabla f(x,y)$ at specific points $(x,y)$. Thus in the gradient computation,
 this algorithm exploits that we already computed $f_{i+n}$ at the relevant
 points $(x,y)$ saving computational resources.
 
-\subsection{Computing Hessian $\nabla^2 f(x)$}
+\subsection{Computing the Hessian $\nabla^2 f(x)$}
 
 We define the sequence for the Hessian as $H_j = 0 \in \R^{n \times n}$
 for
@@ -335,6 +335,110 @@ $j \in \{
 \]
 
 Note that each $H_{i+n}$ is a $(n \times n)$ matrix and this sequence
-requires that the gradients $g_i$ are already computed.
+requires that the gradients $g_{i+n}$ are already computed.
+
+\subsection{Reverse Mode - Overview}
+
+In general, we can interpret the characterizing sequence
+for $f$,
+with functions $F$ and states $G$,
+as follows:
+\\
+
+For $i \in \{
+	1, \ldots, m-1
+	\} $:
+\begin{align*}
+	F_i : \R^{n+i - 1} \to \R^{n+i},
+	F_i (y_1, \ldots, y_{n+i-1}) =
+	\begin{pmatrix}
+		y_1       \\
+		\vdots    \\
+		y_{n+i-1} \\
+		f_{i+n}
+	\end{pmatrix}
+\end{align*}
+
+And for $i=m$:
+\[
+	F_m : \R^{n+i - 1} \to \R,
+	F_m \left(
+	y_1, \ldots, y_{n+m-1}
+	\right) = f_{m+n}
+\]
+
+Now we notice that:
+\begin{equation}
+	f(x) = f_{m+n}
+	=
+	F_m \circ
+	F_{m-1} \circ \dots \circ
+	F_1 \circ
+	F_0 (x)
+\end{equation}
+
+We set the intermediate state as $G_0 := x$ and
+\[
+	G_i ^{T} := \left(
+	f_1, \ldots, f_{n+i}
+	\right)^T
+	=
+	F_i \circ
+	F_{i-1} \circ
+	\ldots \circ
+	F_1 (x)
+\]
+
+for
+$i \in \{
+	1, \ldots, m-1
+	\} $.
+$G_i$ represents the characterizing sequence's intermediate state
+at computation step $i$.
+Now if we differentiate equation (1) with respect to $x$ we get
+\begin{align}
+	\nabla f(x) ^T =
+	DF_m (G_{m-1})
+	DF_{m-1} (G_{m-2})
+	\cdots
+	DF_1 (x)
+\end{align}
+
+by employing the chain rule. Where $DF$ denotes the Jacobian
+Matrix of $F$.
+
+\subsubsection{Inspecting the Jacobian Matrices}
+
+Since $F_i$ is the identity in up to the $(n+i-1)$-th
+component and only actually computes something in the last component,
+we can easily deduct how its Jacobian Matrix must look like.
+Furthermore, the last component can at most only depend
+on two previous components.
+
+\[
+	DF_i =
+	\begin{pmatrix}
+		1      & 0        & \cdots    & 0      \\
+		0      & 1        & \cdots    & 0      \\
+		\vdots & \vdots   & \ddots    & \vdots \\
+		0      & 0        & \cdots    & 1      \\
+		       & \kappa_i & \lambda_i &        \\
+	\end{pmatrix}
+	\in
+	\R^{(n+i) \times (n+i-1)}
+\]
+
+Denote that the last \textit{row} is the zero vector everywhere,
+except on the entries $k_i$ and  $l_i$, where its components are
+$\kappa_i$ and $\lambda_i$ respectively. With  $\kappa_i$ and
+$\lambda_i$ being the components of the gradient $g_i$ of $f_i$
+w.r.t. $f_{i-1}$.
+\\
+
+Notice that in forward mode we evaluate expression (2) from
+\textit{right to left} but in reverse mode we evaluate it from
+\textit{left to right}. Also note that in reverse mode,
+all the $f_i$ already need to be computed, since otherwise
+we don't know the $G_i$.
 
 \end{document}
