@@ -333,10 +333,57 @@
 		\end{gather*}
 	}
 
-	\only<5>{
+	\only<5-6>{
 		For $\omega_i \in \mathcal{B}$ we have:
+	}
+
+	\only<5>{
+		Applying the chain rule, we get:
 		\begin{align*}
-			\nabla \omega_i (f_{k_i}, f_{l_i})
+			\nabla \omega_i \left(
+			f_{k_i}, f_{l_i}
+			\right) & :=
+			\left(
+			\frac{ \partial
+				\left(
+				\omega_i \left(
+				f_{k_i}, f_{l_i}
+				\right)
+				\right)
+			}{ \partial x_1 },
+			\ldots,
+			\frac{ \partial
+				\left(
+				\omega_i \left(
+				f_{k_i}, f_{l_i}
+				\right)
+				\right)
+			}{ \partial x_n }
+			\right)^{T}  \\
+			        & =
+			\frac{ \partial
+				\left(
+				\omega_i \left(
+					f_{k_i}, f_{l_i}
+					\right)
+				\right)
+			}{ \partial f_{k_i} }
+			\nabla f_{k_i}
+			+
+			\frac{ \partial
+				\left(
+				\omega_i \left(
+					f_{k_i}, f_{l_i}
+					\right)
+				\right)
+			}{ \partial f_{l_i} }
+			\nabla f_{l_i}
+		\end{align*}
+	}
+
+	\only<6>{
+		\begin{align*}
+			\Rightarrow \nabla \omega_i (f_{k_i}, f_{l_i})
 			 & =
 			\partial_a \omega_i (f_{k_i}, f_{l_i}) \nabla f_{k_i} +
 			\partial_b \omega_i (f_{k_i}, f_{l_i}) \nabla f_{l_i} \\
@@ -349,7 +396,7 @@
 		in the \textit{first} argument, that is w.r.t. $f_{k_i}$.
 	}
 
-	\only<6>{
+	\only<7>{
 		Thus, we have for
 		$i \in \{
 			1, \ldots, n + m
@@ -364,7 +411,7 @@
 		\]
 	}
 
-	\only<7>{
+	\only<8>{
 		So for all $i \in \{
 			1, \ldots, n + m
 			\} $, $g_i$ is really the gradient vector of $f_i$ w.r.t. all
