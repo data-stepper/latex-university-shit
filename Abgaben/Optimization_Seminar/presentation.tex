@@ -425,14 +425,14 @@
 			 & \nabla \left(
 			a \cdot (b_1, \ldots, b_n)^T
 			\right)  = \left(
-			\frac{ \partial (a \cdot b_j) }{ \partial x_i }
-			\right)_{i,j \in \{
+			\frac{ \partial (a \cdot b_k) }{ \partial x_i }
+			\right)_{i,k \in \{
 				1, \ldots, n
 			\} }             \\
 			 & = \left(
-			\frac{ \partial a }{ \partial x_i } b_j +
-			a \frac{ \partial b_j }{ \partial x_i }
-			\right)_{i,j}
+			\frac{ \parwial a }{ \partial x_i } b_k +
+			a \frac{ \partial b_k }{ \partial x_i }
+			\right)_{i,k}
 			= \nabla a b^T + a \cdot \nabla b
 		\end{align*}
 	}
