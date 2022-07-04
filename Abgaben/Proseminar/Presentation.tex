@@ -1,4 +1,5 @@
-\documentclass[compress]{beamer}
+\documentclass{beamer}
+
 %Information to be included in the title page:
 \title{Langzeitverhalten von Markowketten}
 \author{Nogarbek Sharykpayev, Bent Müller}
@@ -8,6 +9,7 @@
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning}
 
+\usepackage{amsmath, amsthm}
 \setbeamertemplate{headline}[default]
 \setbeamertemplate{navigation symbols}{}
 \mode<beamer>{\setbeamertemplate{blocks}[rounded][shadow=true]}
@@ -52,7 +54,6 @@
 		ist in einem \textit{beliebigen} Zeitpunkt von Zustand $i$ in Zustand $j$ zu gelangen.
 	}
 \end{frame}
-
 
 \section{Konvergenz der Übergangsmatrix}
 \subsection{Invariante Wahrscheinlichkeitsverteilung}
@@ -157,7 +158,6 @@
 	\end{center}
 \end{frame}
 
-
 \begin{frame}
 	\frametitle{Potenzen der Übergangsmatrix}
 	\begin{center}
@@ -174,7 +174,6 @@
 		\end{align*}
 	\end{center}
 \end{frame}
-
 
 \begin{frame}
 	\frametitle{Potenzen der Übergangsmatrix}
