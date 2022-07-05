@@ -364,7 +364,7 @@
 				\right)
 			}{ \partial x_n }
 			\right)^{T}                      \\
-			        & =
+			        & \overset{(*)} =
 			\frac{ \partial
 				\left(
 				\omega_i \left(
@@ -426,6 +426,61 @@
 		$\Rightarrow$ Auto-Diff applies the chain rule iteratively.
 	}
 \end{frame}
+
+\begin{frame}[t]
+	\frametitle{Reminder $(*)$ - Multivariate chain rule}
+	Inspect
+	\[
+		\nabla
+		\omega_i \left(
+		f_{k_i}, f_{k_i}
+		\right)
+	\]
+	and we can decompose as follows:
+	\begin{align*}
+		\nabla
+		\omega_i \left(
+		f_{k_i}, f_{k_i}
+		\right)
+		 & = D_s (f_{k_i}, f_{l_i})
+		\nabla s(x)
+	\end{align*}
+	for a function
+	$s: x \mapsto \left(
+		f_{k_i}, f_{l_i}
+		\right) $
+	then we can see:
+	\begin{align*}
+		\nabla
+		\omega_i \left(
+		f_{k_i}, f_{k_i}
+		\right)
+		 & = \left(
+		\frac{ \partial \omega_i }{ \partial f_{k_i} },
+		\frac{ \partial \omega_i }{ \partial f_{l_i} }
+		\right)
+		\cdot
+		\begin{pmatrix}
+			\nabla f_{k_i} ^{T} \\[2mm]
+			\nabla f_{l_i} ^{T} \\
+		\end{pmatrix} \\
+		 & =
+		\partial_a \omega_i \left(
+		f_{k_i},
+		f_{l_i}
+		\right)
+		\nabla f_{k_i} ^{T}
+		+
+		\partial_b \omega_i \left(
+		f_{k_i},
+		f_{l_i}
+		\right)
+		\nabla f_{l_i} ^{T}
+	\end{align*}
+	Where the last step applies the multivariate chain rule on
+	the composition $\omega_i \circ s$.
+\end{frame}
+
 
 \begin{frame}[t]
 	\frametitle{Computing the Hessian $\nabla^2 f(x)$}
