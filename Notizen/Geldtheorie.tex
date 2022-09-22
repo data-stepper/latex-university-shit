@@ -1,7 +1,10 @@
 \documentclass[a4paper]{article}
 
-\usepackage[margin=1in]{geometry} 
+\usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+% Use spacings
+\usepackage{setspace}
 
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning}
@@ -15,24 +18,90 @@
 \newcommand{\beh}{\textit{Behauptung. }}
 
 \setlength{\parindent}{0pt}
+\onehalfspacing
 
 \begin{document}
 
-    \tableofcontents
-    \pagebreak
+\tableofcontents
+\pagebreak
 
-    \section{
-        Bonds
-    }
+\section{
+  Bonds
+ }
 
-    Always calculate the present value (Barwert) of a bond (Anleihe) by 
-    discounting its future cash flows.
+Der aktuelle Wert einer Anleihe entspricht wegen dem Law of One Price
+der Summe der zukünftigen Zahlungen nach diskontiertem Zinssatz.
+Diesen Wert nennt man Barwert (engl. Present Value).
 
-    As an example, lets say Bond A pays 50 EUR every year and after 2 years it matures,
-    paying back 100 EUR.
+Sagen wir Bond A zahlt 5 EUR jedes Jahr und nach 5 Jahren zahlt er 100 EUR
+(den Nennwert $N$) zurueck. Falls der Marktzins ($r$) 7\% sind, gilt:
 
-    \begin{align*}
-        PV(A) = 
-    \end{align*}
+\begin{align*}
+	PV(A) =
+	\frac{ 5 }{ 1 + r } +
+	\frac{ 5 }{ (1 + r)^{2} } +
+	\frac{ 5 }{ (1 + r)^{3} } +
+	\frac{ 5 }{ (1 + r)^{4} } +
+	\frac{ 100 }{ (1 + r)^{5} }
+	\approx 88,23 \text{ EUR}
+\end{align*}
+
+Und der Bond sollte bei keinem anderen Preis gehandelt werden als dieser.
+Andersherum kann man den Marktzins auch aus dem Bondpreis errechnen mit der
+selben Formel. Generell gilt:
+
+\[
+	PV(B) = \sum_{n=1}^{N} \frac{ i_C }{ \left(
+		1 + r
+		\right) ^n }
+\]
+
+Wobei $i_C$ die Kouponzahlung des Bonds ist. Wichtig ist, dass dieser Preis
+zuerst nur fuer Risikofreie Bonds gilt, da ein Risiko den Preis weiter senkt.
+
+\section{
+  Bilanzierung
+ }
+
+Unterteilung der Bilanz in Aktiva und Passiva:
+
+\begin{itemize}
+	\item Aktiva: Mittelverwendung, also alle Gegenstände, in die
+	      investiert wurde. Worin liegen die Mittel aktuell? Hat die Firma
+	      viel Bargeld, viele Aktien und so weiter.
+
+	\item Passiva: Mittelherkunft, also alle Ursprünge der Mittel.
+	      Wichtig sind hier auch die Unterteilung in Fremdkapital, welches
+	      zusätzliche Verpflichtungen darstellt, und Eigenkapital.
+\end{itemize}
+
+Insgesamt muss die Bilanz aufgehen,
+also beide Seiten summieren sich auf das selbe.
+Wichtig ist auch, dass jeweils immer die Anfangsbestände eingetragen werden.
+Folgende Terme sind wichtig wenn sich die Bilanz aendert.
+
+\begin{itemize}
+	\item Aktivtausch: Tausch innerhalb der Aktiva, z.B. Aktien gegen
+	      Aktien oder Bargeld gegen Aktien.
+
+	\item Passivtausch: Tausch innerhalb der Passiva, z.B. Kredite gegen
+	      Anleihen.
+
+	\item Aktiv-Passiv Mehrung: Erhöhung der Aktiva und Passiva
+	      durch Aufnahme von Fremdkapital.
+\end{itemize}
+
+\section{
+  Formen von Vermögen
+ }
+
+Terminologie: Sichteinlagen = Demand Deposits und
+Sparbuch = Time (oder manchmal Term) Deposits.
+
+\begin{itemize}
+	\item Bruttogeldvermögen: alle Forderungen, die man 'schnell' zu Geld machen
+	      kann. Diese werden unterteilt in Zahlungsmittel
+	      (Bargeld, Sichteinlagen) und in weitere Geldforderungen.
+\end{itemize}
 
 \end{document}
