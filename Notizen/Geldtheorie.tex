@@ -6,6 +6,9 @@
 % Use spacings
 \usepackage{setspace}
 
+% And multi cols
+\usepackage{multicol}
+
 \usepackage{tikz}
 \usetikzlibrary{automata, positioning}
 
@@ -24,6 +27,25 @@
 
 \tableofcontents
 \pagebreak
+
+\section{
+  Terminologie
+ }
+
+\begin{table}[htpb]
+	\centering
+	\label{tab:label}
+	\begin{tabular}{ll}
+		Sichteinlagen   &
+		Demand Deposits, Einlagen auf die man schnell zugreifen kann. \\
+		Sparbuch        &
+		Time (sometimes Term) Deposits                                \\
+		Saldo           &
+		Differenz (besonders bei Bilanz)                              \\
+		Ceteris Paribus &
+		Alle anderen Faktoren konstant halten.                        \\
+	\end{tabular}
+\end{table}
 
 \section{
   Bonds
@@ -88,15 +110,45 @@ Folgende Terme sind wichtig wenn sich die Bilanz aendert.
 	      Anleihen.
 
 	\item Aktiv-Passiv Mehrung: Erhöhung der Aktiva und Passiva
-	      durch Aufnahme von Fremdkapital.
+	      durch Aufnahme von Fremdkapital. Manchmal auch Verlaengerung
+	      der Bilanz.
+
+	\item Aktiv-Passiv Minderung, Bilanzverkuerzung: Wie oben nur andersherum.
 \end{itemize}
+
+Beispiel: Eine Firma hat 1000 EUR Eigenkapital und 1000 EUR Fremdkapital.
+Sie investiert 500 EUR in Aktien, diese steigen um 100 EUR an Wert.
+
+\begin{table}
+	\centering
+	\label{tab:label}
+	\caption{Jahres Anfangsbilanz}
+	\begin{tabular}{l|r}
+		A                & P                     \\
+		\hline                                   \\
+		500 EUR Aktien   & 1000 EUR Eigenkapital \\
+		1500 Bargeld EUR & 1000 EUR Fremdkapital \\
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Jahres Endbilanz}
+	\label{tab:label}
+	\begin{tabular}{l|r}
+		A                & P                     \\
+		\hline                                   \\
+		600 EUR Aktien   & 1100 EUR Eigenkapital \\
+		1500 Bargeld EUR & 1000 EUR Fremdkapital \\
+	\end{tabular}
+\end{table}
+
+Wir sehen, die Aktien haben insgesamt die Bilanz vergrößert, da beide Seiten
+um genau die 100 EUR Gewinn gestiegen sind.
 
 \section{
   Formen von Vermögen
  }
-
-Terminologie: Sichteinlagen = Demand Deposits und
-Sparbuch = Time (oder manchmal Term) Deposits.
 
 \begin{itemize}
 	\item Bruttogeldvermögen (BGV): alle Forderungen, die man 'schnell' zu Geld machen
@@ -110,5 +162,13 @@ Sparbuch = Time (oder manchmal Term) Deposits.
 
 	\item Nettovermögen, Reinvermögen (NV): SV + NGV = gesamt Vermögen.
 \end{itemize}
+
+Bei gesamtwirtschaftlicher Buchhaltung, betrachten wir generell die
+Vermögensbildung, da diese von der Produktivitaet abhaengt.
+\\
+
+Vermögensbildungen werden immer mit $\Delta <Vermögen>$ bezeichnet. Also
+z.B. $\Delta SV$ fuer die Sachvermögensbildung. Dies meint die Differenz
+zwischen dem Anfangs- und Endbestand innerhalb einer Periode des Sachvermögens.
 
 \end{document}
