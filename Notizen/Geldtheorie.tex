@@ -195,4 +195,84 @@ Vorteile eines multilateralen Clearing Haus:
 	      direkt netting durchfuehrt.
 \end{itemize}
 
+\subsection{Federal Reserve}
+
+Die Banken muessen ihre Mindestreserve halten, falls ein Bank Run auftreten
+sollte. Die Mindestreserve war frueher bei 25\% der Einlagen gesetzt. Eine
+feste Mindestreserve ist aber problematisch, da dann die Zinsen periodisch
+schwanken sobald mehr Nachfrage nach Krediten besteht. \\
+
+Die FED dient also tatsaechlich als 'Reserve' der Banken, undzwar genau dann
+wenn die Nachfrage nach Krediten steigt. Banken koennen sich bei der FED sog.
+FR (Federal Reserve Notes) ausleihen. Aus diesem Grund wird das Clearing
+heutzutage auch ueber die Zentralbank abgewickelt.
+
+Schema:
+
+\[
+	\text{Kunde}
+	\overset{\text{nimmt Kredit auf}} \longrightarrow
+	\text{Bank}
+	\overset{\text{leiht sich Reserven (Innertages kredit oder overnight)}}
+	\longrightarrow
+	\text{Zentralbank}
+\]
+
+Rechteres passiert allerdings nur falls die Bank nicht genug Reserveguthaben
+bereitstehend hat, ansonsten kann sie auch direkt,
+solange sie noch die gesetzliche Mindestreserve erfuellt,
+die Einlagen der anderen Kunden als Kredite verleihen.
+
+\subsection{Einfaches Geldmarktmodell}
+
+\begin{itemize}
+	\item $MR$ Mindestreserve, $r = \frac{ MR }{ D }$ Mindestreservesatz (Anteil)
+	\item $D$ Einlagen
+	\item $B$ Bargeld
+	\item $V$ Summe Privatsektor, sodass $V = D + B$
+	\item $b = \frac{ B }{ V }$, Anteil an Bargeld im Privatsektor
+	\item $i_M$ Zinsen auf Kundeneinlagen
+	\item $i_L$ Zinsen auf Unternehmenskredite
+	\item $i_{ZB}$ Zinsen der Zentralbank
+\end{itemize}
+
+\[
+	\Rightarrow
+	D = V \cdot (1 - b),
+	B = V \cdot b,
+	MR = r \cdot D
+\]
+
+Banken halten nur die Mindestreserve, welche nicht verzinst wird.
+Berechnen wir nun $i_L$, die Zinsen auf Unternehmenskredite:
+
+\[
+	i_L (D + B) = \text{Profit der Bank}
+	\overset{!} =
+	\text{Kosten der Bank}
+	=
+	i_M D + i_{ZB} (B + MR)
+\]
+
+\[
+	\Rightarrow i_L = \frac{ i_M D + i_{ZB} (B + MR) }{ D + B } =
+	i_M \frac{ D }{ V } + i_{ZB} \frac{ rD + bV }{ V } =
+	i_{ZB} \left(
+	r (1-b) + b
+	\right) + i_M \left(
+	1 - b
+	\right)
+\]
+
+Also sehen wir, in diesem Modell haengen die Zinsen auf Unternehmenskredite
+garnicht von den Geldmengen oder der Mindestreserve ab, sondern nur von dessen
+Anteilen jeweils am Privatsektor und natuerlich von den exogen gegebenen Zinsen. \\
+
+Mit den partiellen Ableitungen wissen wir dann folgendes:
+
+\begin{itemize}
+	\item $\frac{ \partial i_L }{ \partial r } = i_{ZB} (1 - b)$
+	      also ein
+\end{itemize}
+
 \end{document}
