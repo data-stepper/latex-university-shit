@@ -254,6 +254,9 @@ Berechnen wir nun $i_L$, die Zinsen auf Unternehmenskredite:
 	i_M D + i_{ZB} (B + MR)
 \]
 
+Oberes folgt direkt sobald man die Bilanzen von Zentralbank und Geschaeftsbank
+aufschreibt aus der doppelten Buchfuehrung (Summe Aktiva = Summe Passiva).
+
 \[
 	\Rightarrow i_L = \frac{ i_M D + i_{ZB} (B + MR) }{ D + B } =
 	i_M \frac{ D }{ V } + i_{ZB} \frac{ rD + bV }{ V } =
@@ -272,7 +275,30 @@ Mit den partiellen Ableitungen wissen wir dann folgendes:
 
 \begin{itemize}
 	\item $\frac{ \partial i_L }{ \partial r } = i_{ZB} (1 - b)$
-	      also ein
+	      ,also ein hoeherer Mindestreservesatz fuehrt direkt
+	      zu hoeheren Zinsen auf Unternehmenskredite. Und
+
+	\item $\frac{ \partial i_L }{ \partial b } = -i_M + (1 - r) i_{ZB}$
+	      dies koennen wir wie folgt erklaeren. Wenn die Bargeldhaltung ($b$)
+	      steigt, dann steigen die Zinsen weil die Banken Geld zum $i_{ZB}$
+	      Zins leihen muessen um die Kredite zu vergeben. Aber gleichzeitig
+	      faellt der Zins undzwar genau um die Zinsen die sonst an die Kunden
+	      wegen ihren Einlagen gezahlt werden wuerden, der Zins faellt aber auch
+	      noch, da die Mindestreserve auf die Kundeneinlagen faellt also muss die
+	      Bank sich hier auch weniger Geld leihen.
 \end{itemize}
+
+Mit Gewinnabschlag auf den Kundenzins (5.b), aendert sich das Modell dann mit
+\[
+	i_M = (1 - \mu_M) i_{ZB}, \text{ mit } 1 > \mu_M > 0
+\]
+
+Und wir erhalten:
+
+\[
+	\frac{ \partial i_L }{ \partial b } =
+	- i_{ZB} (1 - \mu_M) + (1 - r) i_{ZB} =
+	(\mu_M - r) i_{ZB}
+\]
 
 \end{document}
