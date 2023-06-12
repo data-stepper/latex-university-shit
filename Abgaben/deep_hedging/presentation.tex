@@ -1,0 +1,80 @@
+\documentclass{beamer}
+
+% Information to be included in the title page:
+
+\title{
+    Deep Hedging
+}
+
+\author{Bent Müller}
+\institute{University of Hamburg, Department of Mathematics}
+\date{12.6.2023}
+
+% Standard beamer class setup, configure as needed
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\setbeamertemplate{headline}[default]
+\setbeamertemplate{navigation symbols}{}
+\mode<beamer>{\setbeamertemplate{blocks}[rounded][shadow=true]}
+\setbeamercovered{transparent}
+\setbeamercolor{block body example}{fg=blue, bg=black!20}
+
+\useoutertheme[subsection=true]{miniframes}
+\usetheme{Frankfurt}
+
+\def\Z{{\mathbb Z}}
+\def\N{{\mathbb N}}
+\def\Q{{\mathbb Q}}
+\def\R{{\mathbb R}}
+\def\C{{\mathbb C}}
+\def\S{{\mathbb S}}
+\def\K{{\mathbb K}}
+\def\T{{\mathbb T}}
+
+\def\cA{{\mathcal A}}
+\def\cF{{\mathcal F}}
+\def\cG{{\mathcal G}}
+\def\cM{{\mathcal M}}
+\def\cN{{\mathcal N}}
+\def\cP{{\mathcal P}}
+\def\cS{{\mathcal S}}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\section{Introduction}
+\subsection{Table of Contents}
+\begin{frame}
+    \tableofcontents
+\end{frame}
+
+\subsection{General problem layout}
+
+\begin{frame}
+    \frametitle{What is ``Deep Hedging''?}
+
+    Given a function $f: \R^{n} \longrightarrow \R$ that is
+    \textit{twice differentiable}, we want to
+    \textit{efficiently}
+    and with good \textit{numerical stability} compute
+    \vspace{5mm}
+
+    \begin{itemize}
+        \item $f(x)$, the value of our function at a point $x$ in $\R^{n}$,
+        \item $\nabla f(x)$, the gradient of our function at $x$, and
+        \item $\nabla^2 f(x)$, the Hessian of our function at $x$.
+    \end{itemize}
+
+    \vspace{5mm}
+    Where $\nabla$ is the \textit{Differential Operator}, also called
+    the \textit{nabla} Operator or sometimes just \textit{Del}.
+\end{frame}
+
+\section{}
+
+\end{document}
