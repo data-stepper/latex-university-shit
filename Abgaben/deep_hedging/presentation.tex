@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[serif]{beamer}
 
 % Information to be included in the title page:
 
@@ -43,9 +43,9 @@
 \def\riskNeutralQ{{\mathbb Q}}
 \def\F{{\mathbb F}}
 
-% These are specifically for deep hedging
-\def\l{{\mathcal l}}
+\def\vs{{\vspace{0.5cm}}}
 
+% These are specifically for deep hedging
 \def\Hu{{\mathcal H^u}}
 
 % New additions for complete market model
@@ -82,23 +82,63 @@
 
 \section{Hedging a Portfolio of Derivatives}
 
+\subsection{Recap from the Lecture}
 \begin{frame}
-    Let $\fm$ be a market. And $\ps$ a probability space.
-    $\delta^* \in \Hu$
+    \frametitle{Notation}
+    \begin{itemize}
+        \item $\O := \{ \omega_1, \omega_2, \dots, \omega_N \}$ is our \textbf{discrete} set of outcomes.
+        \item $\cF := 2^\O$ the $\sigma$-algebra of all subsets of $\O$, so that $\ps$ is our model probability space.
+        \item $\cX := \{X: \O \to \R\}$ is the set of all real-valued random variables.
+        \item $\rho: \cX \to \R$ is a (possibly convex) risk measure.
+        \item $l: \R \to \R$ \textbf{continuous, convex and non-decreasing} is called a loss function.
+        \item $\rho_l: \cX \to \R$, where $\rho_l (X) := \inf_{w \in \R} \{ w + \E [ l (-X -w) ] \}$ defines
+              a convex risk measure, a so-called \textbf{Optimized Certainty Equivalent} (OCE) risk measure
+              (Lemma 3.16).
+    \end{itemize}
 \end{frame}
 
-\subsection{Optimal Hedging Under A Capital Constraint}
-\subsection{Hedging Under Transaction Costs And Market Frictions}
+\begin{frame}[t]
+    \frametitle{Trading with Transaction Costs}
+    For $\delta$ an arbitrary trading strategy, we define
+    $$C_T (\delta) := \sum_{t=0}^T c_t (\delta_t - \delta_{t-1})$$
+    as the \textbf{cumulative cost} of
+    trading using $\delta$ up to time $T$.
+    $c_t : \R^+ \to \R^+$ is non-negative adapted cost function satisfying $\forall t: c_t (0) = 0$.
+    \vs
+
+    This makes different transaction costs possible, e.g.:
+    \begin{itemize}
+        \item Proportional Transaction Costs:
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Fundamental Problem}
+    Let $\fm$ be a financial market, $Z: \O \mapsto \R_{\geq 0}$ a contingent claim on an asset
+    $S_t: \O \mapsto \R$ with a payout at time $T$ and
+    $\rho: \cX \mapsto \R$ be a given risk measure.
+    A hedging agent then wishes to minimize
+    \[
+        \pi (Z) := \rho (
+        Z - (\delta \cdot S)_T - C_T (\delta)
+        )
+    \]
+\end{frame}
+
+\subsection{Conditional Value at Risk}
+
+\subsection{Constrained Hedging Strategies}
+\subsection{Hedging under Transaction Costs and Market Frictions}
 \subsection{Universal Approximation Theorem}
 
-\section{Introduction To Neural Networks}
+\section{Introduction to Neural Networks}
 \subsection{Universal Approximation Theorem}
 
 \section{Deep Hedging}
 
 \subsection{Why Use Neural Networks?}
-\subsection{Deep Hedging As Presented In The Paper}
-\subsection{Pricing Using Deep Hedging}
+\subsection{Deep Hedging as Presented in The Paper}
+\subsection{Pricing using Deep Hedging}
 
 % And make the references slide using bibtex
 \section{References}
