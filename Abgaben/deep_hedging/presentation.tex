@@ -86,29 +86,52 @@
 \begin{frame}
     \frametitle{Notation}
     \begin{itemize}
+        \only<1>{
         \item $\O := \{ \omega_1, \omega_2, \dots, \omega_N \}$ is our \textbf{discrete} set of outcomes.
         \item $\cF := 2^\O$ the $\sigma$-algebra of all subsets of $\O$, so that $\ps$ is our model probability space.
+              }
+              \only<1-2>{
         \item $\cX := \{X: \O \to \R\}$ is the set of all real-valued random variables.
-        \item $\rho: \cX \to \R$ is a (possibly convex) risk measure.
+        \item $\rho: \cX \to \R$ is a risk measure.
+              }
+              \only<2-3>{
         \item $l: \R \to \R$ \textbf{continuous, convex and non-decreasing} is called a loss function.
         \item $\rho_l: \cX \to \R$, where $\rho_l (X) := \inf_{w \in \R} \{ w + \E [ l (-X -w) ] \}$ defines
               a convex risk measure, a so-called \textbf{Optimized Certainty Equivalent} (OCE) risk measure
               (Lemma 3.16).
+        \item $S^i_t : \O \to \R_{\geq 0}$
+              is the $\cF_t$-measurable price of the $i$-th risky asset
+              at time $t$
+              for $0 \leq t \leq T$ and $0 \leq i \leq d$.
+              }
+              % TODO: Check if this \mathcal{F} is filtered or not here
     \end{itemize}
 \end{frame}
 
 \begin{frame}[t]
     \frametitle{Trading with Transaction Costs}
-    For $\delta$ an arbitrary trading strategy, we define
+    For $\delta$ a trading strategy, we define
     $$C_T (\delta) := \sum_{t=0}^T c_t (\delta_t - \delta_{t-1})$$
-    as the \textbf{cumulative cost} of
+    as the \textbf{cumulative transaction cost} of
     trading using $\delta$ up to time $T$.
-    $c_t : \R^+ \to \R^+$ is non-negative adapted cost function satisfying $\forall t: c_t (0) = 0$.
+    $c_t : \R \to \R^+$ is a non-negative \textbf{adapted cost process}
+    satisfying $\forall t: c_t (0) = 0$.
     \vs
 
-    This makes different transaction costs possible, e.g.:
+    This makes different transaction costs possible, like:
     \begin{itemize}
+        \only<1>{
         \item Proportional Transaction Costs:
+              $$c_t (x) = \alpha_t |x|$$
+              for $\alpha_t \geq 0$.
+              }
+              \only<2>{
+        \item Fixed Transaction Costs:
+              $$c_t (x) = \alpha_t 1_{x \neq 0}$$
+              }
+              \only<3>{
+        \item Or even volatility dependent transaction costs which we won't consider here.
+              }
     \end{itemize}
 \end{frame}
 
