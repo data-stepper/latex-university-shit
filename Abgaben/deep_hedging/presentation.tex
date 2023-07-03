@@ -2,9 +2,7 @@
 
 % Information to be included in the title page:
 
-\title{
-    Deep Hedging
-}
+\title{Deep Hedging}
 
 \author{Bent Müller}
 \institute{University of Hamburg, Department of Mathematics}
@@ -24,57 +22,90 @@
 \useoutertheme[subsection=true]{miniframes}
 \usetheme{Frankfurt}
 
-\def\Z{{\mathbb Z}}
-\def\N{{\mathbb N}}
-\def\Q{{\mathbb Q}}
+% Definition of new commands
 \def\R{{\mathbb R}}
-\def\C{{\mathbb C}}
-\def\S{{\mathbb S}}
-\def\K{{\mathbb K}}
-\def\T{{\mathbb T}}
+\def\P{{\mathbb P}}
+\def\E{{\mathbb E}}
+\def\N{{\mathbb N}}
+\def\O{{\Omega}}
 
-\def\cA{{\mathcal A}}
 \def\cF{{\mathcal F}}
-\def\cG{{\mathcal G}}
-\def\cM{{\mathcal M}}
-\def\cN{{\mathcal N}}
+
 \def\cP{{\mathcal P}}
-\def\cS{{\mathcal S}}
+\def\cG{{\mathcal G}}
+\def\cX{{\mathcal X}}
+\def\cY{{\mathcal Y}}
+
+\def\BM{{\text{BM}}}
+\def\RN{{\text{RN}}}
+\def\Var{{\text{Var}}}
+\def\Cov{{\text{Cov}}}
+\def\riskNeutralQ{{\mathbb Q}}
+\def\F{{\mathbb F}}
+
+% These are specifically for deep hedging
+\def\l{{\mathcal l}}
+
+\def\Hu{{\mathcal H^u}}
+
+% New additions for complete market model
+\def\ps{{(\O, \cF, \P)}}
+\def\fm{{(\O, \cF, \F, X, \P)}}
 
 \begin{document}
 
 \begin{frame}
     \titlepage
+    \footnote{
+        Original Paper: \cite[Deep Hedging]{bühler2018deep}
+    }
 \end{frame}
 
-\section{Introduction}
-\subsection{Table of Contents}
+% TOC I sent to supervisor
+% 1. The general problem of hedging a portfolio of derivatives (recap)
+% 2. Setup in the paper
+% 2.1 Different (convex) risk measures
+% 2.2 From risk measures to hedging strategies
+% 3. Neural Networks Introduction
+% 3.1 Universal Approximation Theorem
+% 3.2 Learning Optimal Hedging Strategies
+% 3.3 Neural Network Architectures (recurrent and simple feed forward)
+% 4. Numerical Results from the Paper
+% 4.1 Hedging in the Heston Model
+% 4.2 Hedging in a Multi-Asset Market (underlying + variance swap)
+% 4.3 Choosing risk measures to optimize for
+
+\section{Table of Contents}
 \begin{frame}
     \tableofcontents
 \end{frame}
 
-\subsection{General problem layout}
+\section{Hedging a Portfolio of Derivatives}
 
 \begin{frame}
-    \frametitle{What is ``Deep Hedging''?}
-
-    Given a function $f: \R^{n} \longrightarrow \R$ that is
-    \textit{twice differentiable}, we want to
-    \textit{efficiently}
-    and with good \textit{numerical stability} compute
-    \vspace{5mm}
-
-    \begin{itemize}
-        \item $f(x)$, the value of our function at a point $x$ in $\R^{n}$,
-        \item $\nabla f(x)$, the gradient of our function at $x$, and
-        \item $\nabla^2 f(x)$, the Hessian of our function at $x$.
-    \end{itemize}
-
-    \vspace{5mm}
-    Where $\nabla$ is the \textit{Differential Operator}, also called
-    the \textit{nabla} Operator or sometimes just \textit{Del}.
+    Let $\fm$ be a market. And $\ps$ a probability space.
+    $\delta^* \in \Hu$
 \end{frame}
 
-\section{}
+\subsection{Optimal Hedging Under A Capital Constraint}
+\subsection{Hedging Under Transaction Costs And Market Frictions}
+\subsection{Universal Approximation Theorem}
+
+\section{Introduction To Neural Networks}
+\subsection{Universal Approximation Theorem}
+
+\section{Deep Hedging}
+
+\subsection{Why Use Neural Networks?}
+\subsection{Deep Hedging As Presented In The Paper}
+\subsection{Pricing Using Deep Hedging}
+
+% And make the references slide using bibtex
+\section{References}
+\begin{frame}
+    \frametitle{References}
+    \bibliographystyle{apalike}
+    \bibliography{references}
+\end{frame}
 
 \end{document}
