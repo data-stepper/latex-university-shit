@@ -32,6 +32,8 @@
 
 \def\cF{{\mathcal F}}
 
+\def\cNN{{\mathcal N \mathcal N}}
+\def\cB{{\mathcal B}}
 \def\cP{{\mathcal P}}
 \def\cG{{\mathcal G}}
 \def\cX{{\mathcal X}}
@@ -202,34 +204,21 @@
 \section{Introduction to Neural Networks}
 
 \begin{frame}
-    \frametitle{Single Layer Perceptron}
-    For integers
-    $d_{in}, d_{out} \in \N$ and
-    an activation function \footnotemark
-    \footnotetext{
-        nonlinear, continuous and differentiable a.e.
-    }
-    $\sigma: \R \to O$,
-    we define a \textbf{single layer perceptron} as
-    the following function
+    \frametitle{Feed Forward Networks}
+    For $d_i, d_h, d_o \in \N$
+    and activation function $\sigma$,
+    we define a single hidden layer \textbf{feed forward network} (FFN) as
     \[
-        \text{F}_{W, b}: \R^{d_{in}} \to \R^{d_{out}}, \;
-        x \mapsto \sigma (W x + b).
+        \text{FFN}_{W_2, b_2, W_1, b_1}^{d_i, d_h, d_o} : \R^{d_i} \to \R^{d_o}, \;
+        x \mapsto W_2 \cdot \sigma (W_1 \cdot x + b_1) + b_2.
     \]
-    \only<1>{
-        Note that
-        \begin{itemize}
-            \item $O \subseteq \R$ is the image of $\sigma$,
-            \item $W \in \R^{d_{out} \times d_{in}}$ is called the \textbf{weight matrix},
-            \item $b \in \R^{d_{out}}$ is called the \textbf{bias vector} and
-            \item $\sigma$ is applied component-wise.
-        \end{itemize}
-    }
-    \only<2>{
-        \\ \vs
-        We shorten the parameters of the network to $\theta := (W, b)$
-        and will simply write $\text{F}_\theta$.
-    }
+    Where
+    \begin{itemize}
+        \item $d_i, d_h, d_o$ are the dimensions of the input, hidden and output layer respectively,
+        \item $W_1 \in \R^{d_h \times d_i}, W_2 \in \R^{d_o \times d_h}$ are weight matrices and
+        \item $b_1 \in \R^{d_h}, b_2 \in \R^{d_o}$ are bias vectors.
+    \end{itemize}
+    We shorten the parameters and write $\text{FFN}_\theta^{d_i, d_h, d_o}$.
 \end{frame}
 
 \begin{frame}
@@ -240,32 +229,47 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Feed Forward Networks}
-    For $L, d_1, \ldots, d_L \in \N$
-    and activation function $\sigma$,
-    we define a \textbf{feed forward network} (FFN) as
-    \[
-        \text{FFN}: \R^{d_1} \to \R^{d_L}, \;
-        x \mapsto \text{F}_{\theta_L}^{(L)} \circ \ldots \circ \text{F}_{\theta_1}^{(1)} (x).
-    \]
-    We call
-    \begin{itemize}
-        \item $L$ the depth, or the number of layers, of the network,
-        \item $d_1$ the input dimension,
-        \item $d_L$ the output dimension,
-        \item $d_2, \ldots, d_{L-1}$ the hidden dimensions and
-        \item $F_{\theta_l}^{(l)}: \R^{d_l} \to \R^{d_{l+1}}$ the $l$-th layer of the network.
-    \end{itemize}
-\end{frame}
-
 \subsection{Universal Approximation Theorem}
+
+\begin{frame}[t]
+    \frametitle{Universal Approximation Theorem}
+    Let $\sigma$ be non-constant and bounded, $d \in \N$
+    and $\cNN_\infty := \{ \text{FFN}_{\theta}^{d, L, 1} \; | \; L \in \N \}$
+    be the set of FFNs with arbitrary hidden layer size.
+    Then we have: \\ \vs
+    \begin{enumerate}
+        \only<1-2>{
+        \item For any finite measure $\mu$ on $(\R^{d}, \cB(\R^{d}))$,
+              $p \in [1, \infty)$ the set $\cNN_\infty$ is dense in
+              $L^p (\R^{d}, \mu)$.
+              }
+              \only<2>{
+        \item If further $\sigma$ is continuous
+              then $\cNN_\infty$ is dense in $C(\R^{d})$ in the sense that
+              for any $f \in C(\R^{d})$ there exists a sequence of
+              neural networks $\varphi_n \in \cNN_\infty$ that converge
+              uniformly on any compact set $K \subset \R^{d}$ to $f$.
+              }
+    \end{enumerate}
+\end{frame}
 
 \section{Deep Hedging}
 
-\subsection{Why Use Neural Networks?}
+\subsection{Heston Model}
+
+\begin{frame}
+    \frametitle{Heston Model}
+    In a Heston model, the dynamics of the underlying risky asset $S$ are given
+    by
+    \begin{align*}
+        dS_t & = \mu S_t dt + \sqrt{V_t} S_t dW_t^{(1)}                  \\
+        dV_t & = \kappa (\theta - V_t) dt + \sigma \sqrt{V_t} dW_t^{(2)}
+    \end{align*}
+\end{frame}
+
 \subsection{Deep Hedging as Presented in The Paper}
 \subsection{Pricing using Deep Hedging}
+\subsection{Why Use Neural Networks?}
 
 % And make the references slide using bibtex
 \section{References}
