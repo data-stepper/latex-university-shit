@@ -47,6 +47,7 @@
 
 % These are specifically for deep hedging
 \def\Hu{{\mathcal H^u}}
+\def\H{{\mathcal H}}
 
 % New additions for complete market model
 \def\ps{{(\O, \cF, \P)}}
@@ -114,38 +115,53 @@
     $$C_T (\delta) := \sum_{t=0}^T c_t (\delta_t - \delta_{t-1})$$
     as the \textbf{cumulative transaction cost} of
     trading using $\delta$ up to time $T$.
-    $c_t : \R \to \R^+$ is a non-negative \textbf{adapted cost process}
+    $c_t : \R^{d+1} \to \R^+$ is a non-negative \textbf{adapted cost process}
     satisfying $\forall t: c_t (0) = 0$.
     \vs
 
-    This makes different transaction costs possible, like:
-    \begin{itemize}
-        \only<1>{
-        \item Proportional Transaction Costs:
-              $$c_t (x) = \alpha_t |x|$$
-              for $\alpha_t \geq 0$.
-              }
-              \only<2>{
-        \item Fixed Transaction Costs:
-              $$c_t (x) = \alpha_t 1_{x \neq 0}$$
-              }
-              \only<3>{
-        \item Or even volatility dependent transaction costs which we won't consider here.
-              }
-    \end{itemize}
+    \only<1-3>{
+        This makes different transaction costs possible, like:
+        \begin{itemize}
+            }
+            \only<1>{
+            \item Proportional Transaction Costs:
+                  $$c_t (n) = \sum_{i=0}^d c_t^i S_t^i | n^i |$$
+                  for a transaction $n \in \R^{d+1}$.
+                  }
+                  \only<2>{
+            \item Fixed Transaction Costs:
+                  $$c_t (n) = \sum_{i=0}^d c_t^i 1_{|n^i| > 0}$$
+                  for a transaction $n \in \R^{d+1}$.
+                  }
+                  \only<3>{
+            \item Or even volatility dependent transaction costs which we won't consider here.
+                  In this case $c_t$ might increase with high volatility.
+                  }
+                  \only<1-3>{
+        \end{itemize}
+    }
+    \only<4>{
+        Note that for hedging strategies we have the requirement that
+        $$\delta_{-1} = \delta_T = 0$$
+    }
 \end{frame}
 
 \begin{frame}
     \frametitle{Fundamental Problem}
-    Let $\fm$ be a financial market, $Z: \O \mapsto \R_{\geq 0}$ a contingent claim on an asset
-    $S_t: \O \mapsto \R$ with a payout at time $T$ and
-    $\rho: \cX \mapsto \R$ be a given risk measure.
-    A hedging agent then wishes to minimize
+    % Let $\fm$ be a financial market, $Z: \O \mapsto \R_{\geq 0}$ a contingent claim on an asset
+    % $S_t: \O \mapsto \R$ with a payout at time $T$ and
+    % $\rho: \cX \mapsto \R$ be a given risk measure.
+    A hedging agent then wishes to achieve
+    the optimal hedge for a given liability $-Z$.
     \[
-        \pi (Z) := \rho (
-        Z - (\delta \cdot S)_T - C_T (\delta)
+        \pi (-Z) := \inf_{\delta \in \H} \rho (
+        -Z + (\delta \cdot S)_T - C_T (\delta)
         )
     \]
+    \only<2>{
+        \vs This however is a notoriously hard problem to solve since
+        the optimization runs over all possible trading strategies $\delta \in \H$.
+    }
 \end{frame}
 
 \subsection{Conditional Value at Risk}
