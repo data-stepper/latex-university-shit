@@ -299,7 +299,7 @@
     In the paper, the hedging agent is allowed to trade in
     \begin{itemize}
         \item $S^{(1)}_t$, the underlying risky asset and
-        \item an Idealized variance swap which is defined as
+        \item an idealized variance swap which is defined as
               \begin{align*}
                   S^{(2)}_t & := \E_{\mathbb{Q}} \Big [
                       \int_0^T V_s \; ds \; \Big | \; \cF_t
@@ -307,9 +307,69 @@
                             & = \int_0^t V_s \; ds
                   + \frac{V_t - b}{\alpha} (
                   1 - e^{-\alpha(T-t)}
-                  ) + b(T-t)
+                  ) + b(T-t).
               \end{align*}
     \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How this looks like}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{./images/vol_swap_payoff.png}
+        \caption{
+            Histograms from $10^7$ trajectories of $S_t$ and $V_t$ in the Heston model
+            for $T=30$
+            and parameters as in the paper
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How this looks like}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth]{./images/vol_swap_scatter.png}
+        \caption{
+            Scatter plot showing how $S_T$ and volatility swap
+            payoff (or log thereof in the bottom plot) interact
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How this looks like}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{./images/call_put_payoff.png}
+        \caption{
+            Expected Payoffs from Calls and Puts at $T=30$ with strikes
+            on the x-Axis; Assuming $r=0$, these are the `fair' option prices
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How this looks like}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{./images/var_swap_price1.png}
+        \caption{
+            Price of a variance swap throughout the hedging period
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How this looks like}
+    \begin{figure}
+        \includegraphics[width=0.7\textwidth]{./images/var_swap_price.png}
+        \caption{
+            Price of a variance swap throughout the hedging period
+        }
+    \end{figure}
+\end{frame}
+
+\subsection{Hedging using Deep Neural Networks}
+
+\begin{frame}
+    \frametitle{Approach}
 \end{frame}
 
 \subsection{Pricing using Deep Hedging}
