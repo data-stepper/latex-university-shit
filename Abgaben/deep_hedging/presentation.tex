@@ -247,7 +247,7 @@
         \item If further $\sigma$ is continuous
               then $\cNN_\infty$ is dense in $C(\R^{d})$ in the sense that
               for any $f \in C(\R^{d})$ there exists a sequence of
-              neural networks $\varphi_n \in \cNN_\infty$ that converge
+              neural networks $\varphi_n \in \cNN_\infty$ that converges
               uniformly on any compact set $K \subset \R^{d}$ to $f$.
               }
     \end{enumerate}
@@ -259,12 +259,25 @@
 
 \begin{frame}
     \frametitle{Heston Model}
-    In a Heston model, the dynamics of the underlying risky asset $S$ are given
-    by
-    \begin{align*}
-        dS_t & = \mu S_t dt + \sqrt{V_t} S_t dW_t^{(1)}                  \\
-        dV_t & = \kappa (\theta - V_t) dt + \sigma \sqrt{V_t} dW_t^{(2)}
-    \end{align*}
+    \only<1>{
+        In a Heston model, the dynamics of the underlying risky asset $S$ are given
+        by
+    }
+    \only<1-2>{
+        \begin{align*}
+            dS_t & = \sqrt{V_t} S_t dB_t                          \\
+            dV_t & = \alpha (b - V_t) dt + \sigma \sqrt{V_t} dW_t
+        \end{align*}
+    }
+    \only<1>{
+        where $B, W$ are two correlated Brownian motions with
+        correlation $\rho \in [-1, 1]$.
+    }
+    \only<2>{
+        \\ \vs
+        In our case, we are modeling a `typical equity market' using
+        $$\alpha = 1, b = V_0 = 0.04, \rho = -0.7 \text{ and } \sigma = 2.$$
+    }
 \end{frame}
 
 \subsection{Deep Hedging as Presented in The Paper}
