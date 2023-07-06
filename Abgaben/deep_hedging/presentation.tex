@@ -276,11 +276,42 @@
     \only<2>{
         \\ \vs
         In our case, we are modeling a `typical equity market' using
-        $$\alpha = 1, b = V_0 = 0.04, \rho = -0.7 \text{ and } \sigma = 2.$$
+        $$S_0 = 100, \alpha = 1, b = V_0 = 0.04, \rho = -0.7 \text{ and } \sigma = 2.$$
     }
 \end{frame}
 
+\begin{frame}[t]
+    \frametitle{GBM vs Heston}
+    \begin{figure}[t]
+        \centering
+        \includegraphics[width=1.0\textwidth]{./images/gbm_heston_example.png}
+        \caption{
+            Simulated stock prices by GBM and Heston as well as the real S\&P 500;
+            Below each price we can see the corresponding (14 days rolling) volatility.
+        }
+    \end{figure}
+\end{frame}
+
 \subsection{Deep Hedging as Presented in The Paper}
+
+\begin{frame}
+    \frametitle{Idealized Variance Swap}
+    In the paper, the hedging agent is allowed to trade in
+    \begin{itemize}
+        \item $S^{(1)}_t$, the underlying risky asset and
+        \item an Idealized variance swap which is defined as
+              \begin{align*}
+                  S^{(2)}_t & := \E_{\mathbb{Q}} \Big [
+                      \int_0^T V_s \; ds \; \Big | \; \cF_t
+                  \Big ]                                \\
+                            & = \int_0^t V_s \; ds
+                  + \frac{V_t - b}{\alpha} (
+                  1 - e^{-\alpha(T-t)}
+                  ) + b(T-t)
+              \end{align*}
+    \end{itemize}
+\end{frame}
+
 \subsection{Pricing using Deep Hedging}
 \subsection{Why Use Neural Networks?}
 
