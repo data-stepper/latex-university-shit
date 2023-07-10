@@ -203,7 +203,9 @@
     \frametitle{Conditional Value at Risk of S\&P 500 Daily Returns}
     \begin{figure}
         \includegraphics[width=1.0\textwidth]{./images/cvar_sp500_example.png}
-        \caption{Conditional Value at Risk of S\&P 500 Daily Returns since 1993-02-01}
+        \caption{Conditional Value at Risk of S\&P 500 Daily Returns since 1993-02-01;
+            mirrored on the $0$ for representability
+        }
     \end{figure}
 \end{frame}
 
@@ -282,6 +284,7 @@
             dS_t & = \mu S_t dt + \sqrt{V_t} S_t dB_t             \\
             dV_t & = \alpha (b - V_t) dt + \sigma \sqrt{V_t} dW_t
         \end{align*}
+        % TODO: Add here where the other parameters come from
         \only<1>{
             where $B, W$ are two correlated Brownian motions with
             correlation $\rho \in [-1, 1]$.
@@ -346,8 +349,8 @@
     \begin{figure}
         \includegraphics[width=0.8\textwidth]{./images/vol_swap_scatter.png}
         \caption{
-            Scatter plot showing how $S_T$ and volatility swap
-            payoff (or log thereof in the bottom plot) interact
+            Scatter plot showing how $S^{(1)}_T$ and volatility swap
+            payoff $S^{(2)}_T$ (or log thereof in the bottom plot) interact
         }
     \end{figure}
 \end{frame}
@@ -433,26 +436,124 @@
 
 \begin{frame}
     \frametitle{Learning Hedging Strategies}
-    Observe how our previous optimzation problem
-    \[
-        \pi (-Z) := \inf_{\delta \in \H} \rho (
-        -Z + (\delta \cdot S)_T - C_T (\delta)
-        )
-    \]
-    becomes, for $\delta^\theta \in \H$,
-    \[
+    \only<1>{
+        Observe how our previous optimization problem
+        \begin{equation*}
+            \pi (-Z) := \inf_{\delta \in \H} \rho (
+            -Z + (\delta \cdot S)_T - C_T (\delta)
+            )
+        \end{equation*}
+        becomes, for $\delta^\theta \in \H$,
+    }
+    \begin{equation*}
         \pi (-Z) := \inf_{\theta \in \Theta} \rho (
         -Z + (\delta^\theta \cdot S)_T - C_T (\delta^\theta)
         )
-    \]
-    % TODO: For OCE risk measures
+    \end{equation*}
+    \only<1>{
+        just the problem of finding the best parameters $\theta$ for our
+        neural network.
+    }
+    \only<2>{
+        Further, if $\rho$ and $c_t$ are differentiable, we can compute
+        $$\nabla_\theta
+            \rho (
+            -Z + (\delta^\theta \cdot S)_T - C_T (\delta^\theta)
+            )
+        $$
+        in order to update our parameters $\theta$.
+    }
 \end{frame}
 
-% TODO: Gradient Descent
-% TODO: Randomness in the Gradient
+\begin{frame}
+    \frametitle{The case for OCE Risk Measures}
+    If $\rho = \rho_l$ is an OCE risk measure, then the problem
+    becomes:
+    \begin{align}
+        \pi (-Z) & = \inf_{\theta \in \Theta} \inf_{w \in \R}
+        w + \E [ l (
+            Z - (\delta^\theta \cdot S)_T + C_T (\delta^\theta)
+            -w
+        ) ]                                                                      \\
+                 & = \inf_{\tilde{\theta} \in \tilde{\Theta}}
+        w + \E [ l (
+            Z - (\delta^\theta \cdot S)_T + C_T (\delta^\theta)
+            -w
+        ) ]                                                                      \\
+                 & = \inf_{\tilde{\theta} \in \tilde{\Theta}} J (\tilde{\theta})
+    \end{align}
+    \only<1>{
+        For $\tilde{\Theta} := \Theta \x \R$
+        and of course $\tilde{\theta} := (\theta, w)$.
+    }
+    \only<2>{
+        We can now compute the gradient of $J$ with respect to $\tilde{\theta}$
+        and use stochastic gradient descent to find the optimal parameters $\hat{\theta}$.
+    }
+    \only<3>{
+        Specifically, we sample
+        $\omega_1, \ldots, \omega_{N_{\text{batch}}} \in \O$,
+        estimate
+        \[
+            \tilde{J} (\tilde{\theta}) = w +
+            \sum_m^{N_{\text{batch}}} l (
+            Z(\omega_m) - (\delta^{\theta} \cdot S)_T (\omega_m)
+            + C_T (\delta^{\theta}) (\omega_m)
+            - w
+            ) \frac{N \cdot
+                \P (\{ \omega_m \})
+            }{N_{\text{batch}}}
+        \]
+        from which we immediately get
+        $\nabla_{\tilde{\theta}} \tilde{J} (\tilde{\theta})$
+        using autodiff.
+    }
+\end{frame}
 
-\subsection{Pricing using Deep Hedging}
-\subsection{Why Use Neural Networks?}
+\subsection{Numerical Results from the Paper}
+
+\begin{frame}
+    \frametitle{<title>}
+\end{frame}
+
+\subsection{Wrapping Up}
+
+\begin{frame}
+    \frametitle{Key Takeaways}
+    \begin{itemize}
+        \item Deep hedging is a \textbf{model-independent} approach to hedging
+              which can be applied to any market model.
+        \item It is \textbf{computationally efficient} and can be used to
+              hedge in \textbf{high-dimensional} (i.e. multi-asset) markets.
+        \item It is \textbf{flexible} in the sense that we can choose
+              \begin{itemize}
+                  \item the risk measure we want to optimize for,
+                  \item transaction cost and trading restrictions,
+                  \item the information set we provide to the agent and
+                  \item the hedging instruments we allow trading in.
+              \end{itemize}
+        \item The approach is \textbf{easy to adapt} to more sophisticated
+              derivatives or to the hedging of multiple liabilities
+              simultaneously.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Criticism of the Paper}
+    \begin{itemize}
+        \item Optimization via
+              $\nabla_{\tilde{\theta}} (\tilde{J}) (\tilde{\theta})$
+              directly is actually really hard and rather primitive
+              compared to more modern reinforcement learning approaches.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \centering
+    \Large{
+        Thank you for your attention!
+    }
+\end{frame}
 
 % And make the references slide using bibtex
 \section{References}
