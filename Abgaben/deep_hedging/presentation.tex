@@ -31,6 +31,7 @@
 \def\O{{\Omega}}
 
 \def\cF{{\mathcal F}}
+\def\x{{\times}}
 
 \def\cNN{{\mathcal N \mathcal N}}
 \def\cB{{\mathcal B}}
@@ -62,7 +63,7 @@
 \begin{frame}
     \titlepage
     \footnote{
-        Original Paper: \cite[Deep Hedging]{bühler2018deep}
+        Original Paper: \cite[Deep Hedging]{buehler2018deep}
     }
 \end{frame}
 
@@ -81,26 +82,26 @@
 % 4.3 Choosing risk measures to optimize for
 
 \section{Table of Contents}
+
 \begin{frame}
+    \frametitle{Table of Contents}
     \tableofcontents
 \end{frame}
 
-\section{Hedging a Portfolio of Derivatives}
+\section{Hedging}
 
 \subsection{Recap from the Lecture}
 \begin{frame}
-    \frametitle{Notation}
+    \frametitle{Notation and Setup}
     \begin{itemize}
         \only<1>{
         \item $\O := \{ \omega_1, \omega_2, \dots, \omega_N \}$ is our \textbf{discrete} set of outcomes.
         \item $\cF := 2^\O$ the $\sigma$-algebra of all subsets of $\O$, so that is
               $\fm$ our financial market.
-              }
-              \only<1-2>{
         \item $\cX := \{X: \O \to \R\}$ is the set of all real-valued random variables.
         \item $\rho: \cX \to \R$ is a risk measure.
               }
-              \only<2-3>{
+              \only<2>{
         \item $l: \R \to \R$ \textbf{continuous, convex and non-decreasing} is called a loss function.
         \item $\rho_l: \cX \to \R$, where $\rho_l (X) := \inf_{w \in \R} \{ w + \E [ l (-X -w) ] \}$ defines
               a convex risk measure, a so-called \textbf{Optimized Certainty Equivalent} (OCE) risk measure
@@ -110,9 +111,14 @@
               at time $t$
               for $0 \leq t \leq T$ and $0 \leq i \leq d$.
               }
+              \only<3>{
         \item $\Hu := \{ \phi : \O \to \R^{d+1} \; | \; \forall 0 \leq t \leq T:
                   \phi_{t+1} \text{ is } \cF_t \text{-measurable and } \phi_{-1} = \phi_T = 0 \} $ is the set of
               unconstrained hedging strategies.
+        \item $\H \subset \Hu$ is the set of \textbf{admissible} hedging strategies which
+              are constrained by e.g. market hours or emittance of certain hedging instruments.
+        \item For simplicity, let $r=0$.
+              }
     \end{itemize}
 \end{frame}
 
@@ -120,7 +126,7 @@
 
 \begin{frame}[t]
     \frametitle{Trading with Transaction Costs}
-    For $\delta$ a trading strategy, we define
+    Let $\delta \in \H$ be a hedging strategy, then we define
     $$C_T (\delta) := \sum_{t=0}^T c_t (\delta_t - \delta_{t-1})$$
     as the \textbf{cumulative transaction cost} of
     trading using $\delta$ up to time $T$.
@@ -173,7 +179,7 @@
 
 \begin{frame}
     \frametitle{Fundamental Problem}
-    At time $T$, the agent's wealth is then given by
+    At time $T$, the agent's terminal wealth is then given by
     $$p_0 - Z + (\delta \cdot S)_T - C_T (\delta)$$
     where $p_0$ is the amount she received for selling $Z$ in the first place. \\
     \vs
@@ -190,7 +196,7 @@
     is defined as
     $$\text{CVaR}_\alpha (X) := \frac{1}{\alpha} \int_0^\alpha VaR_u (X) du$$
     where $VaR_\lambda (X)$ is the \textbf{Value at Risk} at level $\lambda$ defined as
-    $$VaR_\lambda (X) := \inf \{ x \in \R \; | \; \P (X \leq x) \geq \lambda \}.$$
+    $$VaR_\lambda (X) := - \inf \{ x \in \R \; | \; \P (X \leq x) \geq \lambda \}.$$
 \end{frame}
 
 \begin{frame}
@@ -201,7 +207,7 @@
     \end{figure}
 \end{frame}
 
-\section{Introduction to Neural Networks}
+\section{Neural Networks}
 
 \begin{frame}
     \frametitle{Feed Forward Networks}
@@ -238,12 +244,12 @@
     be the set of FFNs with arbitrary hidden layer size.
     Then we have: \\ \vs
     \begin{enumerate}
-        \only<1-2>{
-        \item For any finite measure $\mu$ on $(\R^{d}, \cB(\R^{d}))$,
-              $p \in [1, \infty)$ the set $\cNN_\infty$ is dense in
+        \only<1->{
+        \item For any finite measure $\mu$ on $(\R^{d}, \cB(\R^{d}))$
+              and $p \in [1, \infty)$, the set $\cNN_\infty$ is dense in
               $L^p (\R^{d}, \mu)$.
               }
-              \only<2>{
+              \only<2->{
         \item If further $\sigma$ is continuous
               then $\cNN_\infty$ is dense in $C(\R^{d})$ in the sense that
               for any $f \in C(\R^{d})$ there exists a sequence of
@@ -251,6 +257,14 @@
               uniformly on any compact set $K \subset \R^{d}$ to $f$.
               }
     \end{enumerate}
+    \only<2>{
+        \vs The Universal Approximation Theorem goes back to
+        \cite{nn_function_approximators}.
+    }
+    \only<3>{
+        \vs Therefore, we may approximate any $\delta \in \H$
+        arbitrarily well using a FFN.
+    }
 \end{frame}
 
 \section{Deep Hedging}
@@ -259,25 +273,25 @@
 
 \begin{frame}
     \frametitle{Heston Model}
-    \only<1>{
-        In a Heston model, the dynamics of the underlying risky asset $S$ are given
-        by
-    }
-    \only<1-2>{
+    \begin{definition}[Heston Model]
+        \only<1>{
+            In a Heston model, the dynamics of the underlying risky asset $S$ are given
+            by
+        }
         \begin{align*}
-            dS_t & = \sqrt{V_t} S_t dB_t                          \\
+            dS_t & = \mu S_t dt + \sqrt{V_t} S_t dB_t             \\
             dV_t & = \alpha (b - V_t) dt + \sigma \sqrt{V_t} dW_t
         \end{align*}
-    }
-    \only<1>{
-        where $B, W$ are two correlated Brownian motions with
-        correlation $\rho \in [-1, 1]$.
-    }
-    \only<2>{
-        \\ \vs
-        In our case, we are modeling a `typical equity market' using
-        $$S_0 = 100, \alpha = 1, b = V_0 = 0.04, \rho = -0.7 \text{ and } \sigma = 2.$$
-    }
+        \only<1>{
+            where $B, W$ are two correlated Brownian motions with
+            correlation $\rho \in [-1, 1]$.
+        }
+        \only<2>{
+            \vs
+            In our case, we are modeling a `typical equity market' using
+            $$S_0 = 100, \alpha = 1, b = V_0 = 0.04, \rho = -0.7, \mu = 0 \text{ and } \sigma = 2.$$
+        }
+    \end{definition}
 \end{frame}
 
 \begin{frame}[t]
@@ -305,9 +319,11 @@
                       \int_0^T V_s \; ds \; \Big | \; \cF_t
                   \Big ]                                \\
                             & = \int_0^t V_s \; ds
-                  + \frac{V_t - b}{\alpha} (
-                  1 - e^{-\alpha(T-t)}
-                  ) + b(T-t).
+                  + \underbrace{
+                      \frac{V_t - b}{\alpha} (
+                      1 - e^{-\alpha(T-t)}
+                      ) + b(T-t)
+                  }_{:= L(t, V_t)}.
               \end{align*}
     \end{itemize}
 \end{frame}
@@ -317,7 +333,8 @@
     \begin{figure}
         \includegraphics[width=0.7\textwidth]{./images/vol_swap_payoff.png}
         \caption{
-            Histograms from $10^7$ trajectories of $S_t$ and $V_t$ in the Heston model
+            Histograms from $10^7$ simulations
+            of $S^{(1)}_T$ and $S^{(2)}_T$ in the Heston model
             for $T=30$
             and parameters as in the paper
         }
@@ -351,7 +368,7 @@
     \begin{figure}
         \includegraphics[width=0.7\textwidth]{./images/var_swap_price1.png}
         \caption{
-            Price of a variance swap throughout the hedging period
+            Price of a variance swap throughout a hedging period
         }
     \end{figure}
 \end{frame}
@@ -361,7 +378,7 @@
     \begin{figure}
         \includegraphics[width=0.7\textwidth]{./images/var_swap_price.png}
         \caption{
-            Price of a variance swap throughout the hedging period
+            Price of a variance swap throughout a hedging period
         }
     \end{figure}
 \end{frame}
@@ -369,8 +386,70 @@
 \subsection{Hedging using Deep Neural Networks}
 
 \begin{frame}
-    \frametitle{Approach}
+    \frametitle{Learning Hedging Strategies}
+    \begin{definition}[Information Set]
+        Let $I_t$ be the $\F$-adapted information
+        set with all the information we want to provide our
+        hedging agent with. \\ \vs
+        In our case, let
+        \[
+            I_t := (S^{(1)}_t, S^{(2)}_t)
+        \]
+        since our market model is \emph{markovian}.
+    \end{definition}
+    \only<2>{
+        We may also allow additional information to be included
+        in $I_{t-1}$, like upcoming earnings or market sentiment
+        if such information can be built into our model somehow.
+    }
+    \only<3>{
+        When hedging in a \emph{non-markovian} market, we might want to define
+        \[
+            \tilde{I}_t := (
+            S^{(1)}_t, S^{(2)}_t, S^{(1)}_{t-1}, S^{(2)}_{t-1}, \dots, S^{(1)}_0, S^{(2)}_0
+            ).
+        \]
+    }
 \end{frame}
+
+\begin{frame}
+    \frametitle{Learning Hedging Strategies}
+    \begin{definition}[Deep Hedging Strategy]
+        For $L \in \N, d \in \N$, $\sigma: \R \to \R$
+        an activation function,
+        $I_t$ our information set at time $t$ and
+        $\text{FFN}_\theta^{d+k, L, d} : \R^{d+k} \to \R^d$,
+        a feed forward neural network, we define
+        our \textbf{deep hedging strategy} as
+        \begin{align*}
+            \delta^\theta_t:
+            \;\; & \R^{d+k} \to \R^d                                   \\
+            I_{t-1} \mapsto \delta^\theta_t (I_{t-1})
+                 & := \text{FFN}_\theta^{d+k, L, d} (I_{t-1})          \\
+                 & = W_2 \cdot \sigma (W_1 \cdot I_{t-1} + b_1) + b_2.
+        \end{align*}
+    \end{definition}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Learning Hedging Strategies}
+    Observe how our previous optimzation problem
+    \[
+        \pi (-Z) := \inf_{\delta \in \H} \rho (
+        -Z + (\delta \cdot S)_T - C_T (\delta)
+        )
+    \]
+    becomes, for $\delta^\theta \in \H$,
+    \[
+        \pi (-Z) := \inf_{\theta \in \Theta} \rho (
+        -Z + (\delta^\theta \cdot S)_T - C_T (\delta^\theta)
+        )
+    \]
+    % TODO: For OCE risk measures
+\end{frame}
+
+% TODO: Gradient Descent
+% TODO: Randomness in the Gradient
 
 \subsection{Pricing using Deep Hedging}
 \subsection{Why Use Neural Networks?}
