@@ -179,7 +179,7 @@
 
 \begin{frame}
     \frametitle{Fundamental Problem}
-    At time $T$, the agent's terminal wealth is then given by
+    At time $T$, the agent's terminal wealth is given by
     $$p_0 - Z + (\delta \cdot S)_T - C_T (\delta)$$
     where $p_0$ is the amount she received for selling $Z$ in the first place. \\
     \vs
@@ -191,12 +191,14 @@
 
 \begin{frame}
     \frametitle{Conditional Value at Risk}
-    For any $X \in \L^1 (\O, \cF, \P)$ and $\alpha \in (0,1)$,
-    the \textbf{Conditional Value at Risk}
-    is defined as
-    $$\text{CVaR}_\alpha (X) := \frac{1}{\alpha} \int_0^\alpha VaR_u (X) du$$
-    where $VaR_\lambda (X)$ is the \textbf{Value at Risk} at level $\lambda$ defined as
-    $$VaR_\lambda (X) := - \inf \{ x \in \R \; | \; \P (X \leq x) \geq \lambda \}.$$
+    \begin{definition}[CVaR and VaR]
+        For any $X \in \L^1 (\O, \cF, \P)$ and $\alpha \in (0,1)$,
+        the \textbf{Conditional Value at Risk} (CVaR)
+        is defined as
+        $$\text{CVaR}_\alpha (X) := \frac{1}{\alpha} \int_0^\alpha VaR_u (X) du$$
+        where $VaR_\lambda (X)$ is the \textbf{Value at Risk} at level $\lambda$ defined as
+        $$VaR_\lambda (X) := - \inf \{ x \in \R \; | \; \P (X \leq x) \geq \lambda \}.$$
+    \end{definition}
 \end{frame}
 
 \begin{frame}
@@ -513,7 +515,25 @@
 \subsection{Numerical Results from the Paper}
 
 \begin{frame}
-    \frametitle{<title>}
+    \frametitle{Neural Network Architecture in the Paper}
+    \begin{figure}
+        \includegraphics[height=0.7\textheight]{./images/neural_net_screenshot.png}
+        \caption{
+            (Recurrent) Neural Network Architecture used in the paper
+        }
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Learned and Model Delta}
+    \begin{figure}
+        \includegraphics[width=0.8\textwidth]{./images/model_delta_screenshot.png}
+        \caption{
+            Learned $\delta^{\theta, 1}$ (the position in the underlying)
+            and Heston model delta $\delta$
+            as a function of $(S^{(1)}_t, V_t)$ for $t=15$ days.
+        }
+    \end{figure}
 \end{frame}
 
 \subsection{Wrapping Up}
