@@ -1,0 +1,113 @@
+\documentclass[serif]{beamer}
+
+% Information to be included in the title page:
+
+\title{Transformers}
+
+\author{Bent Müller}
+\institute{University of Hamburg, Department of Mathematics}
+\date{14.12.2023}
+
+% Standard beamer class setup, configure as needed
+
+\usepackage{tikz}
+\usetikzlibrary{automata, positioning}
+
+\setbeamertemplate{headline}[default]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+\mode<beamer>{\setbeamertemplate{blocks}[rounded][shadow=true]}
+\setbeamercovered{transparent}
+\setbeamercolor{block body example}{fg=blue, bg=black!20}
+
+\useoutertheme[subsection=true]{miniframes}
+\usetheme{Frankfurt}
+
+% Definition of new commands
+\def\R{{\mathbb{R}}}
+\def\P{{\mathbb{P}}}
+\def\E{{\mathbb{E}}}
+\def\N{{\mathbb{N}}}
+\def\O{{\Omega}}
+
+\def\cF{{\mathcal{F}}}
+\def\x{{\times}}
+
+% \def\cNN{{\mathcal N \mathcal N}}
+\def\cB{{\mathcal{B}}}
+\def\cP{{\mathcal{P}}}
+\def\cG{{\mathcal{G}}}
+\def\cX{{\mathcal{X}}}
+\def\cY{{\mathcal{Y}}}
+
+\def\BM{{\text{BM}}}
+\def\RN{{\text{RN}}}
+\def\Var{{\text{Var}}}
+\def\Cov{{\text{Cov}}}
+\def\riskNeutralQ{{\mathbb{Q}}}
+\def\F{{\mathbb{F}}}
+
+\def\vs{{\vspace{0.5cm}}}
+
+% These are specifically for deep hedging
+% \def\Hu{{\mathcal H^u}}
+\def\H{{\mathcal{H}}}
+\def\L{{\mathcal{L}}}
+
+% New additions for complete market model
+\def\ps{{(\O, \cF, \P)}}
+\def\fm{{(\O, \cF, \P, \F, S)}}
+
+\begin{document}
+
+\section{Table of Contents}
+
+\begin{frame}
+    \frametitle{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+% \section{Neural Networks}
+% Great way to visually understand neural networks
+% playground.tensorflow.org
+
+\section{Introduction}
+
+\begin{frame}
+    \frametitle{Fundamental Problem of NLP}
+    
+    % tikzpicture
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+        thick,main node/.style={circle,draw,font=\sffamily\Large\bfseries}]
+
+        \node[main node] (1) {Input};
+        \node[main node] (2) [right of=1] {Output};
+
+        \path[every node/.style={font=\sffamily\small}]
+        (1) edge node [above] {Language Model} (2);
+    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+    \frametitle{How was language modeling done before Transformers?}
+    \begin{itemize}
+        \item Representation Learning (vie e.g. Word2Vec)
+        \item Recurrent Neural Networks (RNNs)
+        \item Long Short-Term Memory (LSTM)
+        \item Convolutional Neural Networks (CNNs)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Why have these approaches failed?}
+    \begin{itemize}
+        \item No efficiently scalable training, e.g. sequential dependencies in recurrent architectures
+        \item 
+    \end{itemize}
+\end{frame}
+
+\section{What are Transformers?}
+\section{Why are they so popular?}
+\section{What exactly can they learn?}
+
+\end{document}
