@@ -1,0 +1,51 @@
+\documentclass[a4paper]{article}
+
+\usepackage[landscape, margin=0.1in]{geometry} % Set minimal margins
+\usepackage{amsmath,amsthm,amssymb,graphicx,multicol,array}
+
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+
+% \usepackage{helvet} % Helvetica font
+% \renewcommand{\familydefault}{\sfdefault} % Set default font to sans-serif
+
+\usepackage{sectsty} % Section font size
+\sectionfont{\fontsize{10}{12}\selectfont}
+
+\usepackage{titlesec} % Adjusting section spacing
+\titlespacing*{\section}{0pt}{4pt}{2pt}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Define macro for heading with subitems
+\usepackage{enumitem} % Add this package to your preamble
+
+% Redefine macro for heading with subitems
+\newcommand{\headingwithsubitems}[2]{%
+        {\Large \textbf{#1}}
+        \begin{itemize}[leftmargin=*] % Use enumitem to control list formatting
+            #2
+        \end{itemize}
+}
+
+% Macro for heading with enumerated (numbered) items
+\newcommand{\headingwithnumbereditems}[2]{%
+    {\Large \textbf{#1}}
+    \begin{enumerate}[leftmargin=*, label=\arabic*.] % Use enumitem to control list formatting
+        #2
+    \end{enumerate}
+}
+
+\theoremstyle{definition}
+
+\begin{document}
+
+\begin{multicols*}{4}
+    \section*{
+        Dynamic Optimization Cheat Sheet
+    }
+\end{multicols*}
+
+\end{document}
