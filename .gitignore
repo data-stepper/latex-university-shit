@@ -17,3 +17,5 @@ venv
 *.snm
 *.dvi
 *-checkpoint.ipynb
+*.xml
+*.idea/

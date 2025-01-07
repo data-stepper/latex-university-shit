@@ -1,7 +1,7 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 10pt]{article}
 
 \usepackage[landscape, margin=0.1in]{geometry} % Set minimal margins
-\usepackage{amsmath,amsthm,amssymb,graphicx,multicol,array}
+\usepackage{amsmath,amsthm,amssymb,graphicx,multicol,array,xcolor} % Standard packages
 
 \pdfminorversion=7
 \pdfsuppresswarningpagegroup=1
@@ -11,6 +11,7 @@
 
 \usepackage{sectsty} % Section font size
 \sectionfont{\fontsize{10}{12}\selectfont}
+\fontsize{8}{10}\selectfont
 
 \usepackage{titlesec} % Adjusting section spacing
 \titlespacing*{\section}{0pt}{4pt}{2pt}
@@ -18,34 +19,54 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
-
-% Define macro for heading with subitems
-\usepackage{enumitem} % Add this package to your preamble
-
-% Redefine macro for heading with subitems
-\newcommand{\headingwithsubitems}[2]{%
-        {\Large \textbf{#1}}
-        \begin{itemize}[leftmargin=*] % Use enumitem to control list formatting
-            #2
-        \end{itemize}
-}
-
-% Macro for heading with enumerated (numbered) items
-\newcommand{\headingwithnumbereditems}[2]{%
-    {\Large \textbf{#1}}
-    \begin{enumerate}[leftmargin=*, label=\arabic*.] % Use enumitem to control list formatting
-        #2
-    \end{enumerate}
-}
+\renewcommand{\bold}[1]{\textbf{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\bigred}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
 
 \theoremstyle{definition}
 
 \begin{document}
-
 \begin{multicols*}{4}
-    \section*{
-        Dynamic Optimization Cheat Sheet
-    }
-\end{multicols*}
 
+    % Control problems
+
+    \section*{Solving Control Problems}
+    Unrestricted control variable:
+    \[
+        \max_u \int_{t_0}^{t_1} f(t, x(t), u(t)) \, dt
+        \;, u(t) \in (-\infty, \infty)
+    \]
+    \[
+        \red{\dot{x} (t) = g(t, x(t), u(t))},
+        \; x(t_0) = x_0, x(t_1) \text{ free}
+    \]
+    our \blue{control $u(t)$} influences the \blue{state} $x(t)$.
+    \begin{enumerate}
+        \item Define \bigred{Hamiltonian} $\forall t \in [t_0, t_1]$:
+        \[
+            H(t, x, u, \lambda) = f(t, x, u) + \lambda g(t, x, u)
+        \]
+        with $\lambda := \lambda(t)$ the \blue{adjoint function} or 
+        \blue{co-state variable}.
+        \item Obtain \bigred{maximum principle} (necessary conditions for optimality):
+        \begin{align}
+            \frac{\partial H}{\partial u} &= 0 \quad \text{ (optimal control)} \\
+            - \frac{\partial H}{\partial x} &= \dot{\lambda} \quad \text{ (adjoint equation)} \\
+            \frac{\partial H}{\partial \lambda} &= \dot{x} \quad \text{ (problem def.)}
+        \end{align}
+        and simplify for $u$.
+        \item Use \bigred{transversality conditions}:
+        \begin{enumerate}
+            \item[(a)] $x(t_1) = x_1 \implies \lambda(t_1)$ free
+            \item[(b)] $x(t_1) \text{ free } \implies \lambda(t_1) = 0$
+            \item[(c)] $x(t_1) \ge x_1 \implies \lambda(t_1) \ge 0$ 
+            with $\lambda(t_1) = 0$ if $x^*(t_1) > x_1$
+        \end{enumerate}
+        \item \red{Solve} for $x$ (and $\lambda$), therefore obtaining $u^*(t)$.
+    \end{enumerate}
+    These conditions are \bigred{sufficient if $H$ is concave in $(x, u)$} 
+    $\forall t \in [t_0, t_1]$.
+
+\end{multicols*}
 \end{document}
