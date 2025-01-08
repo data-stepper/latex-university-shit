@@ -117,6 +117,9 @@
         the Hessian matrix $\nabla^2 f(x_k) \in \mathbb{R}^{n \times n}$
         and solve a linear system of equations
         in every iteration.
+
+        \vspace{0.5em}
+        Also, the true Hessian might not always be positive definite.
     }
 
     \only<2> {
@@ -155,10 +158,59 @@
             \texttt{end (repeat)}
         \end{block}
     }
+
+    \only<4> {
+        The true Hessian has the property
+        \begin{align*}
+            \nabla^2 f(x_{k}) \underbrace{
+                (x_{k + 1} - x_k)
+            }_{t p_k} =
+            \underbrace{
+                \nabla f(x_{k + 1}) - \nabla f(x_k)
+            }_{y_k},
+        \end{align*}
+        by the Taylor expansion of $\nabla f$ at $x_k$,
+        which results in the secant equation since
+        $H_{k + 1} \approx (\nabla^2 f(x_k))^{\mathbf{-1}}$.
+    }
+
+    % Clarify a number of things from the algorithm
+    \only<5> {
+        The BFGS algorithm updates the inverse Hessian using:
+        \begin{align*}
+            H_{k + 1} & = V_k H_k V_k^T + t_k \frac{
+                p_k p_k^T
+            }{p_k^T p_k}                                   \\
+            V_k       & = I - \frac{p_k y_k^T}{p_k^T y_k}.
+        \end{align*}
+    }
 \end{frame}
 
 \begin{frame}{Non-smooth Optimization}
     % Illustrate Problem of GD in non-smooth optimization, e.g. Abs value
+    \only<1> {
+        \begin{figure}
+            % Abs value plot
+            \begin{figure}
+                \centering
+                \includegraphics[width=0.7\textwidth]{plots/abs_val_func.pdf}
+                \caption{The absolute value function and Gradient Descent
+                    with $x_0 = \frac{1}{2}$ and $t_k = 1$.}
+                \label{fig:abs_value_function}
+            \end{figure}
+        \end{figure}
+    }
+
+    \only<2> {
+        The problem is that the gradient does not smoothly change
+        near the minimum, but jumps from $-1$ to $1$.
+        The gradient is not continuous at the minimum.
+    }
+
+    \only<3> {
+        In fact, with \textbf{any constant step size} $t_k$,
+        Gradient Descent will oscillate forever on this problem.
+    }
 \end{frame}
 
 \subsection{Line Search}
