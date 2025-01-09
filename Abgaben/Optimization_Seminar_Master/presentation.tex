@@ -229,13 +229,55 @@
 
 \section{Numerical Experiments}
 \begin{frame}{Optimization Example on Euclidean Norm Function}
-    % Euclidean norm plot
-    \begin{figure}
-        \centering
-        \includegraphics[width=1.0\textwidth]{plots/euclidean_norm.pdf}
-        \caption{The (skewed) Euclidean norm function}
-        \label{fig:euclidean_norm_function}
-    \end{figure}
+    \only<1> {
+        % Euclidean norm plot
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{plots/euclidean_norm.pdf}
+            \caption{The (skewed) Euclidean norm function}
+            \label{fig:euclidean_norm_function}
+        \end{figure}
+    }
+    \only<2> {
+        % Standard GD
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{plots/gd_steps.pdf}
+            \caption{Gradient Descent with and without
+                step size decay}
+            \label{fig:gd_steps}
+        \end{figure}
+    }
+    \only<3> {
+        % GD & Newton with line search
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{plots/exact_line_search_newton_vs_gd.pdf}
+            \caption{Newton and Gradient Descent
+                with exact line search}
+            \label{fig:newton_gd_exact_line_search}
+        \end{figure}
+    }
+    \only<4> {
+        % Newton Gradient Surface
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{plots/3d_newton_and_gradient_surface.pdf}
+            \caption{First and second order Taylor approximations
+                of $f$}
+            \label{fig:3d_newton_gradient_surface}
+        \end{figure}
+    }
+    \only<5> {
+        % Newton Gradient Contour Plot
+        \begin{figure}
+            \centering
+            \includegraphics[width=1.0\textwidth]{plots/contour_newton_and_gradient_surface.pdf}
+            \caption{Contour plot of the first and second order
+                Taylor approximations of $f$}
+            \label{fig:contour_newton_gradient_surface}
+        \end{figure}
+    }
 \end{frame}
 
 \section{Conclusion}
