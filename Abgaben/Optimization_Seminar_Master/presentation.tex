@@ -130,7 +130,7 @@
     }
 
     \only<3> {
-        \begin{block}{Algorithm 2.1 (quasi-Newton method)}
+        \begin{block}{Algorithm 1 (quasi-Newton method)}
             Choose $x_0$ with $f$ differentiable at $x_0$,
             set $H_0$ to a positive definite matrix and
             $k \leftarrow 0$
@@ -213,20 +213,6 @@
     }
 \end{frame}
 
-\subsection{Line Search}
-\begin{frame}{Exact Line Search}
-    % Define exact line search
-\end{frame}
-
-\begin{frame}{Armijo-Wolfe Conditions}
-    % Define Armijo-Wolfe Conditions
-    % Illustrate with plot
-\end{frame}
-
-\begin{frame}{Inexact Line Search}
-    % Define Armijo-Wolfe Conditions
-\end{frame}
-
 \section{Numerical Experiments}
 \begin{frame}{Optimization Example on Euclidean Norm Function}
     \only<1> {
@@ -280,9 +266,147 @@
     }
 \end{frame}
 
+\subsection{Line Search}
+\begin{frame}{Exact Line Search}
+    % Define exact line search
+    Given a search direction $p_k$ and a starting point $x_k$,
+    \textbf{exact line search} solves:
+    \begin{align*}
+        t_k = \arg \min_{t > 0} f(x_k + t p_k).
+    \end{align*}
+    \\
+
+    \only<2> {
+        \vspace{0.5em}
+        In (quasi-)Newton methods, we search $t \in [0, 1]$
+        since we don't want to take steps larger
+        than true newton would.
+    }
+    \only<3> {
+        In non-smooth problems, exact line search could
+        find an $x_{k + 1}$ where $f$ is not differentiable
+        that \textbf{is not a minimizer}.
+        \\
+        \vspace{0.5em}
+
+        E.g. for $f(x, y) = |x| + |y|$ and $x_k = (1, 0)$,
+    }
+\end{frame}
+
+\begin{frame}{Armijo-Wolfe Conditions}
+    % Define Armijo-Wolfe Conditions
+    \only<1> {
+        The \textbf{Armijo condition} ensures that
+        the step size $t_k$ decreases the objective function
+        sufficiently:
+        \begin{align*}
+            f(x_k + t_k p_k) \le f(x_k) + c_1 t_k \nabla f(x_k)^T p_k,
+        \end{align*}
+        where $0 < c_1 < 1$ is a constant.
+    }
+    \only<2> {
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.7\textwidth]{plots/armijo_condition.png}
+            \caption{Armijo condition ensuring sufficient decrease;
+                Source: Numerical Optimization by Nocedal and Wright,
+                Figure 3.3
+            }
+            \label{fig:armijo_condition}
+        \end{figure}
+    }
+    \only<3> {
+        However, the Armijo condition works for any sufficiently
+        small step size $t_k$.
+    }
+    \only<4> {
+        The \textbf{Wolfe condition} ensures that
+        the step size $t_k$ is not too small:
+        \begin{align*}
+            \underbrace{
+            \frac{\partial}{\partial t_k} (
+            f(x_k + t_k p_k)
+            )
+            }_{
+            \text{Slope of the LS objective}
+            }
+            =
+            \nabla f(x_k + t_k p_k)^T p_k \ge c_2 \nabla f(x_k)^T p_k,
+        \end{align*}
+        where $c_1 < c_2 < 1$ is a constant.
+    }
+
+    \only<5> {
+        The intuition here is that:
+        if line search would still improve the objective,
+        then we should keep going
+    }
+
+    \only<6> {
+        \begin{figure}
+            \centering
+            \includegraphics[width=0.8\textwidth]{plots/wolfe_condition.png}
+            \caption{The Wolfe/Curvature condition;
+                Source: Numerical Optimization by Nocedal and Wright,
+                Figure 3.4}
+            \label{fig:wolfe_condition}
+        \end{figure}
+    }
+\end{frame}
+
+\begin{frame}{Inexact Line Search}
+    % Define Armijo-Wolfe Conditions
+    \only<1-2> {
+        Using these conditions,
+        we can define an \textbf{inexact line search}:
+        \begin{block}{Algorithm 2 (inexact line search)}
+            $\alpha \gets 0 \qquad \beta \gets +\infty \qquad t \gets 1$
+
+            \textbf{repeat}
+
+            $\quad \textbf{if } A(t) \textbf{ fails } \beta \gets t$
+
+            $\quad \textbf{elseif } W(t) \textbf{ fails } \alpha \gets t$
+
+            $\quad \textbf{else  stop}$
+
+            $\quad \textbf{if } \beta < +\infty \quad t \gets (\alpha + \beta)/2$
+
+            $\quad \textbf{else }  t \gets 2\alpha$
+
+            \textbf{end(repeat)}
+        \end{block}
+    }
+    \only<2> {
+        Here, the Wolfe condition $W(t)$ implicitly
+        checks differentiability of $f$ at $x_k + t p_k$.
+    }
+    \only<3> {
+        Inexact line search is great because we can apply
+        quasi-Newton methods to non-smooth problems.
+    }
+\end{frame}
+
 \section{Conclusion}
 \begin{frame}{Conclusion}
-    % Summarize the paper
+    In Summary:
+    \begin{itemize}
+        \item (quasi-)Newton gives us the best search direction
+              and hence faster convergence,
+              but comes at additional $n^2$ cost for the Hessian.
+        \item With inexact line search, this works well
+              for non-smooth problems where exact line search
+              can fail
+        \item If function evaluation and gradient computation
+              are cheap, Gradient Descent is likely the best choice,
+              but line search is always crucial!
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+    \begin{center}
+        Thank you for your attention!
+    \end{center}
 \end{frame}
 
 \end{document}
