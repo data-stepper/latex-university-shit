@@ -302,39 +302,33 @@ taking many small
 
 % TODO: FINISH FROM HERE
 \subsection{Armijo-Wolfe Conditions}
-% Introduce the concept of "sufficient decrease" (Armijo) and "curvature"
+% TODO: Introduce the concept of "sufficient decrease" (Armijo) and "curvature"
 % (Wolfe) as a more efficient alternative
 Instead of searching for exactly the best step size, a `good enough'
 step size may suffice as the search direction likely changes in
 the next step anyways.
-
 \begin{align}
     f\bigl(x_k + t_k\,p_k\bigr)              & \le f(x_k)
     + c_1\, t_k \,\nabla f(x_k)^T p_k, \tag{Armijo}                                       \\[6pt]
     \nabla f\bigl(x_k + t_k\,p_k\bigr)^T p_k & \ge c_2 \,\nabla f(x_k)^T p_k. \tag{Wolfe}
 \end{align}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{plots/armijo_condition.png}
+    \caption{Armijo condition ensuring sufficient decrease;
+        Source: Numerical Optimization by Nocedal and Wright,
+        Figure 3.3
+    }
+    \label{fig:armijo_condition}
+\end{figure}
+
+% TODO: Add images for Armijo and Wolfe conditions from the presentation as well
+
 \subsection{Inexact Line Search Algorithm}
-% Present a simple pseudo-code for inexact line search using Armijo-Wolfe
-\begin{algorithm}[H]
-    \caption{Inexact Line Search (Armijo-Wolfe)}
-    \SetAlgoLined \KwIn{Current point $x_k$, direction $p_k$, constants $0< c_1
-            < c_2 < 1$, initial step $\alpha_{\text{max}}>0$.} \KwOut{Step size $t_k >
-            0$.} Set $t \gets \alpha_{\text{max}}$ \; \While{Armijo or Wolfe condition
-        is not satisfied}{ reduce $t$ by a factor, e.g., $t \gets \beta\, t$ (for
-        some $\beta < 1$)\; } \textbf{return} $t$ as $t_k$.
-\end{algorithm}
+% TODO: Present a simple pseudo-code for inexact line search using Armijo-Wolfe
+% TODO: Write the same algorithm as in the presentation
 
-\subsection{Why These Methods Work for Non-smooth Functions}
-% Non-smooth "corners" cause oscillations for constant step sizes but line
-% search can adapt step size to maintain progress
-Line search methods adaptively adjust the step size so that gradient-based
-methods avoid large oscillations near non-differentiable \emph{corners} (such as
-$|x|$ at $x=0$) and still make progress toward minimizing $f$ [1]. Precisely
-because they do not rely on a fixed learning rate, they can sidestep the
-pitfalls of constant-step approaches, helping the algorithm locate or
-approximate subgradients more reliably and converge even when the function is
-not strictly differentiable at certain points.
-
+% TODO: Elaborate why inexact line search works for non-smooth functions
 
 \end{document}
