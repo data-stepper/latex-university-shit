@@ -107,7 +107,7 @@
 \usepackage{algorithm2e}
 
 \title{Nonsmooth Optimization via Quasi-Newton Methods}
-\author{Gauss, Carl Friedrich}
+\author{Bent M\"uller}
 
 \begin{document}
 
@@ -124,8 +124,8 @@ where $f: \mathbb{R}^n \to \mathbb{R}$ is a twice-differentiable
 real-valued function.
 % Now show the first-order Taylor approximation to motivate
 % Gradient Descent
-Since $f$ is differentiable,
-the first-order Taylor approximation of $f$ around $x_k$ yields:
+The first-order Taylor approximation of $f$ around
+some value $x_k$ yields:
 \begin{align}
     f(x) & \approx f(x_k) + \nabla f(x_k)^T (x - x_k).
 \end{align}
@@ -157,7 +157,7 @@ As usual, a necessary condition for a local minimizer $x_k$ is that
 $\nabla f(x_k) = \mathbf{0}$.
 
 % Also from Taylor Approximation
-Under the assumption that a locally quadratic approximation to $f$
+Under the assumption that the locally quadratic approximation to $f$
 around the current iterate $x_k$ is accurate, we can
 `jump' to the minimizer of this quadratic approximation.
 This yields the update rule for Newton's Method:
@@ -194,7 +194,7 @@ The true Hessian has the property
     }_{y_k},
 \end{align*}
 by the Taylor expansion of $\nabla f$ at $x_k$.
-This identity, known as the \emph{secant equation}:
+This \emph{secant equation}
 \begin{align}
     H_{k + 1} y_k = p_k,
     \label{eq:secant_equation}
@@ -213,9 +213,11 @@ updates the inverse Hessian using:
     }{p_k^T p_k}                                   \\
     V_k       & = I - \frac{p_k y_k^T}{p_k^T y_k}.
 \end{align*}
+Algorithm~\ref{alg:quasi_newton} shows the general structure of
+quasi-Newton methods for optimization.
 
 % Add algorithm from screenshot with \ref to secant equation
-\begin{algorithm}[H]
+\begin{algorithm}[htbp]
     \caption{quasi-Newton method}
     \SetAlgoLined
     Choose $x_0$ with $f$ differentiable at $x_0$, set $H_0$ to a
@@ -238,16 +240,17 @@ updates the inverse Hessian using:
 
 \section{Non-smooth Optimization}
 
-% Illustrate Problem of GD in non-smooth optimization, e.g. Abs value
-\subsection{What are Non-Smooth Functions?}
-
-A non-smooth function is a function that is not differentiable
-at one or more points in its domain.
-In other words, its gradient is theoretically not defined at these points.
+For smooth optimization problems, the above mentioned algorithms
+work fantastically well.
+However, many real-world problems involve non-smooth functions
+often imposed via constraints or regularization terms.
+Simple examples are an optimization over a maximum value
+or the absolute value function, shown in
+Figure~\ref{fig:abs_value_function}.
+These functions are not differentiable at certain points,
+at which the gradient $\nabla f$ is not defined.
 In practice however, a finite difference method can for example always compute
 a gradient approximation as long as $f$ is continuous.
-An example is the absolute value function, shown in
-Figure~\ref{fig:abs_value_function}.
 
 \begin{figure}[htbp]
     % Abs value plot
@@ -260,13 +263,20 @@ Figure~\ref{fig:abs_value_function}.
     \label{fig:abs_value_function}
 \end{figure}
 
-With \emph{any constant step size} $t_k$,
-Gradient Descent will oscillate forever on this problem.
+In the example of the absolute value function $f(x) = |x|$,
+Gradient Descent will oscillate forever,
+with \emph{any constant step size} $t_k$.
+The reason for the failure is that the gradient $\nabla f$
+does not smoothly change at $x = 0$ but jumps from $-1$ to $1$
+no matter how close the algorithm gets to the minimum $x = 0$.
+This violates the condition that $\nabla f = 0$ at the minimum,
+since $f$ is not differentiable
+at $x = 0$.
 One possible solution is to \emph{decay} the step size
 $t_k$ during the optimization process.
 However, the nature of this decay must be carefully chosen
 as it can lead to the method getting stuck before
-reaching the global minimum.
+reaching the minimum.
 
 \subsection{Line Search}
 
@@ -287,31 +297,50 @@ we would quickly find the global minimum at $x = 0$.
 
 % Explain that exact line search tries to find the global minimizer of f in the
 % given search direction, potentially requiring many function evaluations
-In an \emph{exact line search}, we attempt to solve the one-dimensional
+With an \emph{exact line search}, we attempt to solve the one-dimensional
 subproblem
 \begin{equation}
     t_k = \underset{t > 0}{\arg\min} \; f\bigl(x_k + t\, p_k\bigr),
 \end{equation}
-which can cost many function evaluations.
+and use the resulting $t_k$ to update $x_{k+1} = x_k + t_k\, p_k$.
 In Gradient Descent, an exact line search results in the
 next gradient being orthogonal to the current gradient.
-Often, this method quickly approaches the global minimum
+Often, this method quickly approaches a neighbourhood of the minimum
 taking very large steps initially, but can end up
 taking many small
-`zig-zag' steps once the method is near the minimum.
+`zig-zag' steps once near the minimum.
+As search directions likely change in the next step anyways,
+searching for the exact best step size may be unnecessary.
+This motivates the use of an \emph{inexact line search},
+which just searches for some `good enough' step size.
 
-% TODO: FINISH FROM HERE
+The greater problem faces by exact line search is that
+non-smooth functions may have many local minima
+along the search direction.
+Jumping to this non-differentiable point is problematic
+since we (theoretically) cannot compute the gradient at
+the next point $x_{k+1}$.
+
 \subsection{Armijo-Wolfe Conditions}
-% TODO: Introduce the concept of "sufficient decrease" (Armijo) and "curvature"
-% (Wolfe) as a more efficient alternative
-Instead of searching for exactly the best step size, a `good enough'
-step size may suffice as the search direction likely changes in
-the next step anyways.
+To quantify what a `good enough' step size is, we may use
+the following two conditions:
 \begin{align}
     f\bigl(x_k + t_k\,p_k\bigr)              & \le f(x_k)
     + c_1\, t_k \,\nabla f(x_k)^T p_k, \tag{Armijo}                                       \\[6pt]
     \nabla f\bigl(x_k + t_k\,p_k\bigr)^T p_k & \ge c_2 \,\nabla f(x_k)^T p_k. \tag{Wolfe}
 \end{align}
+
+Here $0 < c_1 < c_2 < 1$ are the Armijo and Wolfe parameters,
+and $t_k$ is the step size.
+The Armijo condition ensures that the step size $t_k$ results in
+a sufficient decrease in the objective function $f$.
+It is often convenient to evaluate as it only requires function
+evaluations and the current (already computed) gradient $\nabla f(x_k)$.
+However, the Armijo condition allows for arbitrarily small step sizes
+which may result in the algorithm taking many very small steps
+and thus converging slowly.
+Figure~\ref{fig:armijo_condition} illustrates the Armijo condition
+together with intervals of step sizes that satisfy it.
 
 \begin{figure}
     \centering
@@ -323,12 +352,69 @@ the next step anyways.
     \label{fig:armijo_condition}
 \end{figure}
 
-% TODO: Add images for Armijo and Wolfe conditions from the presentation as well
+The Wolfe condition, sometimes known as the curvature condition
+ensures that line search does not take too small steps.
+Specifically, the left hand side
+\begin{align*}
+    \nabla f\bigl(x_k + t_k\,p_k\bigr)^T p_k
+    = h'(t_k),
+\end{align*}
+is the derivative of the line search objective
+$h(t) = f(x_k + t\,p_k)$
+with respect to the step size $t_k$.
+We can thus interpret this condition as ensuring that if
+line search would still decrease the objective function
+at $t_k$, then we should not stop yet.
+It counters the problem faced by the Armijo condition,
+but requires the computation of the gradient
+$\nabla f\bigl(x_k + t_k\,p_k\bigr)$
+at every new
+point in the line search objective and is thus
+costly to evaluate.
+Other inexact line search algorithms often only rely on the
+Armijo condition for this reason.
+Figure~\ref{fig:wolfe_condition} illustrates the Wolfe condition.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{plots/wolfe_condition.png}
+    \caption{The Wolfe/Curvature condition;
+        Source: Numerical Optimization by Nocedal and Wright,
+        Figure 3.4}
+    \label{fig:wolfe_condition}
+\end{figure}
 
 \subsection{Inexact Line Search Algorithm}
-% TODO: Present a simple pseudo-code for inexact line search using Armijo-Wolfe
-% TODO: Write the same algorithm as in the presentation
 
-% TODO: Elaborate why inexact line search works for non-smooth functions
+Using these two conditions, we can construct an inexact line search algorithm
+known as the \emph{Armijo-Wolfe line search} as follows.
+An important result is that the inexact ``Armijo-Wolfe'' line search
+when used with the BFGS algorithm, shows better scaling of the
+convergence rate when increasing the dimensionality $n$ in the
+non-smooth problem of minimizing the euclidean norm
+\begin{align*}
+    \min_{x \in \mathbb{R}^n}
+    \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2}.
+\end{align*}
+
+\begin{algorithm}[htbp]
+    \caption{Inexact ``Armijo-Wolfe'' line search}
+    \SetAlgoLined
+    Choose $0 < c_1 < c_2 < 1$, $t = 1$ \\
+    $\alpha \gets 0$, $\beta \gets +\infty$ \\
+    \Repeat{}{
+        \textbf{if} $A(t)$ fails, \\
+        \qquad $\beta \gets t$ \\
+        \textbf{else if} $W(t)$ fails, \\
+        \qquad $\alpha \gets t$ \\
+        \textbf{else}, \\
+        \qquad stop \\
+        \textbf{if} $\beta < +\infty$, \\
+        \qquad $t \gets (\alpha + \beta)/2$ \\
+        \textbf{else}, \\
+        \qquad $t \gets 2\alpha$
+    }
+    \label{alg:inexact_line_search}
+\end{algorithm}
 
 \end{document}
