@@ -1,0 +1,14 @@
+[project]
+name = "empirical-evaluation-of-market-outcomes"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "statsmodels",
+    "matplotlib",
+    "notebook",
+    "polars",
+    "numpy",
+    "pyarrow"
+]
