@@ -10,5 +10,6 @@ dependencies = [
     "notebook",
     "polars",
     "numpy",
-    "pyarrow"
+    "pyarrow",
+    "pyreadr"
 ]
